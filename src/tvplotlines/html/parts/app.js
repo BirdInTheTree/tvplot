@@ -219,21 +219,18 @@ function _setupDropZone() {
   zone.addEventListener('drop', (e) => {
     e.preventDefault();
     zone.classList.remove('drop-zone-active');
-    const file = e.dataTransfer.files[0];
-    if (file && file.name.endsWith('.json')) {
-      _importJSON(file);
-      _hideDropZone();
-    }
+    const files = [...e.dataTransfer.files];
+    _handleDroppedFiles(files);
+    _hideDropZone();
   });
 
   if (fileUpload) {
     fileUpload.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        _importJSON(file);
+      const files = [...e.target.files];
+      if (files.length > 0) {
+        _handleDroppedFiles(files);
         _hideDropZone();
       }
-      // Reset so the same file can be re-selected
       fileUpload.value = '';
     });
   }
@@ -247,6 +244,73 @@ function _showDropZone() {
 function _hideDropZone() {
   const zone = document.getElementById('drop-zone');
   if (zone) zone.classList.add('hidden');
+}
+
+// --- File handling (JSON or TXT synopses) ---
+
+function _handleDroppedFiles(files) {
+  if (files.length === 1 && files[0].name.endsWith('.json')) {
+    _importJSON(files[0]);
+    return;
+  }
+
+  // Treat as synopsis .txt files — run through pipeline
+  const txtFiles = files.filter(f => f.name.endsWith('.txt'));
+  if (txtFiles.length > 0) {
+    Store.markOnboardingSeen();
+    _handleSynopsisUpload(txtFiles);
+    return;
+  }
+
+  // Single JSON or unknown
+  if (files.length === 1) {
+    _importJSON(files[0]);
+  } else {
+    alert('Drop .json (plotlines result) or .txt files (synopses with SxxExx in filename).');
+  }
+}
+
+// --- LLM Settings dialog ---
+
+function _showLLMSettings() {
+  const modalOverlay = document.getElementById('modal-overlay');
+  const modalBody = document.getElementById('modal-body');
+  if (!modalOverlay || !modalBody) return;
+
+  const provider = Store.getProvider() || 'anthropic';
+  const apiKey = Store.getKey() || '';
+
+  modalBody.innerHTML = `
+    <h3 style="margin-top:0">LLM Settings</h3>
+    <div style="margin-bottom:12px">
+      <label for="llm-provider" style="display:block;margin-bottom:4px;font-weight:600">Provider</label>
+      <select id="llm-provider" style="width:100%;padding:6px;border-radius:4px;border:1px solid var(--border, #ccc)">
+        <option value="anthropic" ${provider === 'anthropic' ? 'selected' : ''}>Anthropic (Claude)</option>
+        <option value="openai" ${provider === 'openai' ? 'selected' : ''}>OpenAI (GPT-4o)</option>
+      </select>
+    </div>
+    <div style="margin-bottom:16px">
+      <label for="llm-api-key" style="display:block;margin-bottom:4px;font-weight:600">API Key</label>
+      <input id="llm-api-key" type="password" value="${apiKey.replace(/"/g, '&quot;')}"
+        placeholder="sk-... or sk-ant-..."
+        style="width:100%;padding:6px;border-radius:4px;border:1px solid var(--border, #ccc);box-sizing:border-box">
+    </div>
+    <button id="llm-save-btn" style="padding:6px 16px;border-radius:4px;cursor:pointer">Save</button>
+    <span id="llm-save-status" style="margin-left:8px;color:green;display:none">Saved!</span>
+  `;
+
+  document.getElementById('llm-save-btn').addEventListener('click', () => {
+    const p = document.getElementById('llm-provider').value;
+    const k = document.getElementById('llm-api-key').value.trim();
+    Store.setKey(p, k);
+    const status = document.getElementById('llm-save-status');
+    if (status) {
+      status.style.display = 'inline';
+      setTimeout(() => { status.style.display = 'none'; }, 2000);
+    }
+  });
+
+  modalOverlay.classList.remove('hidden');
 }
 
 // --- Init ---
@@ -268,6 +332,13 @@ function _initApp() {
 
   // Drop zone
   _setupDropZone();
+  const dropZoneClose = document.getElementById('drop-zone-close');
+  if (dropZoneClose) dropZoneClose.addEventListener('click', _hideDropZone);
+  // Close drop zone on click outside the box
+  const dropZone = document.getElementById('drop-zone');
+  if (dropZone) dropZone.addEventListener('click', (e) => {
+    if (e.target === dropZone) _hideDropZone();
+  });
 
   // Toolbar buttons
   const btnDark = document.getElementById('btn-dark');
@@ -294,9 +365,7 @@ function _initApp() {
     if (btn === btnExport) return; // Already wired above
     btn.addEventListener('click', () => _toggleExportMenu(btn));
   });
-  if (btnLLM) btnLLM.addEventListener('click', () => {
-    alert('LLM Settings coming soon');
-  });
+  if (btnLLM) btnLLM.addEventListener('click', _showLLMSettings);
   if (btnOnboarding) btnOnboarding.addEventListener('click', () => {
     showScreen('welcome');
   });
@@ -333,11 +402,8 @@ function _initApp() {
   const savedResults = Store.getResults();
   const hasSavedData = Object.keys(savedResults).length > 0;
 
-  if (!hasSeenOnboarding && !window.location.hash) {
-    // First visit — show welcome
-    showScreen('welcome');
-    return;
-  }
+  // Welcome screen will be implemented in Task 11.
+  // For now, always go straight to grid with demo data.
 
   // Determine which series to load
   let seriesName = settings.lastSeries || null;

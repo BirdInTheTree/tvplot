@@ -69,11 +69,11 @@
 <div id="drop-zone" class="drop-zone-overlay hidden">
   <div class="drop-zone-box">
     <div class="drop-zone-icon">&#128194;</div>
-    <p>Drop a tvplotlines JSON file here</p>
+    <p>Drop a JSON result or .txt synopses here</p>
     <p class="drop-zone-hint">or</p>
-    <label class="btn" for="file-upload">Choose file</label>
-    <input type="file" id="file-upload" accept=".json" hidden>
-    <button class="drop-zone-close" onclick="_hideDropZone()">&times;</button>
+    <label class="btn" for="file-upload">Choose files</label>
+    <input type="file" id="file-upload" accept=".json,.txt" multiple hidden>
+    <button id="drop-zone-close" class="drop-zone-close">&times;</button>
   </div>
 </div>
 
