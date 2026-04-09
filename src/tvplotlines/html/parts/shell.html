@@ -17,8 +17,8 @@
     <p>Upload a plotlines JSON file or explore the demo data.</p>
     <div class="welcome-actions">
       <button id="btn-demo">Load Demo</button>
-      <label class="upload-label" for="file-upload">Upload JSON</label>
-      <input type="file" id="file-upload" accept=".json" hidden>
+      <label class="upload-label" for="welcome-file-upload">Upload JSON</label>
+      <input type="file" id="welcome-file-upload" accept=".json" hidden>
     </div>
   </div>
 </section>
@@ -26,9 +26,21 @@
 <!-- Grid screen -->
 <section id="screen-grid" class="screen">
   <nav class="toolbar">
-    <button id="btn-back-welcome" class="btn-nav">&larr; Home</button>
-    <span id="grid-title" class="toolbar-title"></span>
-    <button id="btn-analytics" class="btn-nav">Analytics &rarr;</button>
+    <div class="toolbar-left">
+      <select id="series-select" class="toolbar-select"></select>
+      <span id="grid-title" class="toolbar-title"></span>
+    </div>
+    <div class="toolbar-center">
+      <button id="btn-tab-grid" class="btn-nav btn-nav-active">Grid</button>
+      <button id="btn-tab-analytics" class="btn-nav">Analytics</button>
+    </div>
+    <div class="toolbar-right">
+      <button id="btn-load" class="btn-nav" title="Load synopses">+ Load</button>
+      <button id="btn-export" class="btn-nav" title="Export">Export</button>
+      <button id="btn-llm-settings" class="btn-nav" title="LLM Settings">LLM</button>
+      <button id="btn-onboarding" class="btn-nav" title="Show welcome screen">?</button>
+      <button id="btn-dark" class="btn-nav" title="Toggle dark mode">&#9790;</button>
+    </div>
   </nav>
   <div id="grid-container"></div>
 </section>
@@ -36,11 +48,34 @@
 <!-- Analytics screen -->
 <section id="screen-analytics" class="screen">
   <nav class="toolbar">
-    <button id="btn-back-grid" class="btn-nav">&larr; Grid</button>
-    <span class="toolbar-title">Analytics</span>
+    <div class="toolbar-left">
+      <select class="toolbar-select" disabled style="visibility:hidden"></select>
+      <span class="toolbar-title">Analytics</span>
+    </div>
+    <div class="toolbar-center">
+      <button class="btn-nav" onclick="_setTab('grid')">Grid</button>
+      <button class="btn-nav btn-nav-active">Analytics</button>
+    </div>
+    <div class="toolbar-right">
+      <button class="btn-nav" onclick="_showDropZone()" title="Load synopses">+ Load</button>
+      <button class="btn-nav" onclick="alert('Export coming in Task 6')" title="Export">Export</button>
+      <button class="btn-nav" onclick="toggleDark()" title="Toggle dark mode">&#9790;</button>
+    </div>
   </nav>
   <div id="analytics-container"></div>
 </section>
+
+<!-- Drop zone overlay for JSON import -->
+<div id="drop-zone" class="drop-zone-overlay hidden">
+  <div class="drop-zone-box">
+    <div class="drop-zone-icon">&#128194;</div>
+    <p>Drop a tvplotlines JSON file here</p>
+    <p class="drop-zone-hint">or</p>
+    <label class="btn" for="file-upload">Choose file</label>
+    <input type="file" id="file-upload" accept=".json" hidden>
+    <button class="drop-zone-close" onclick="_hideDropZone()">&times;</button>
+  </div>
+</div>
 
 <!-- Modal -->
 <div id="modal-overlay" class="modal-overlay hidden">

@@ -38,15 +38,41 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; b
 /* ── Toolbar / navigation ── */
 .toolbar {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 0.75rem 1rem; background: white; border-radius: 8px;
+  padding: 0.5rem 1rem; background: white; border-radius: 8px;
   margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  gap: 0.5rem;
 }
-.toolbar-title { font-size: 1.1rem; font-weight: 600; }
+.toolbar-left, .toolbar-center, .toolbar-right { display: flex; align-items: center; gap: 0.5rem; }
+.toolbar-left { flex: 1; min-width: 0; }
+.toolbar-center { flex-shrink: 0; }
+.toolbar-right { flex: 1; justify-content: flex-end; }
+.toolbar-title { font-size: 1.1rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.toolbar-select { padding: 0.375rem 0.5rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.8rem; max-width: 200px; background: white; }
 .btn-nav {
   padding: 0.375rem 0.75rem; border: 1px solid #ddd; border-radius: 6px;
-  background: white; cursor: pointer; font-size: 0.8rem;
+  background: white; cursor: pointer; font-size: 0.8rem; white-space: nowrap;
 }
 .btn-nav:hover { background: #f0f0f0; }
+.btn-nav-active { background: #2563eb; color: white; border-color: #2563eb; }
+.btn-nav-active:hover { background: #1d4ed8; }
+
+/* ── Drop zone overlay ── */
+.drop-zone-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 150;
+  display: flex; align-items: center; justify-content: center;
+}
+.drop-zone-box {
+  background: white; border-radius: 12px; padding: 3rem;
+  text-align: center; max-width: 420px; width: 90%;
+  border: 2px dashed #ccc; position: relative;
+}
+.drop-zone-active .drop-zone-box { border-color: #2563eb; background: #eff6ff; }
+.drop-zone-icon { font-size: 3rem; margin-bottom: 1rem; }
+.drop-zone-hint { color: #999; font-size: 0.85rem; margin: 0.75rem 0; }
+.drop-zone-close {
+  position: absolute; top: 0.5rem; right: 0.75rem; font-size: 1.5rem;
+  border: none; background: none; cursor: pointer; color: #999;
+}
 
 /* ── Buttons ── */
 .btn { padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 6px; background: white; cursor: pointer; font-size: 0.875rem; }
@@ -170,6 +196,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; b
 :root.dark .toolbar-title { color: #cba6f7; }
 :root.dark .btn-nav { background: #313244; color: #cdd6f4; border-color: #45475a; }
 :root.dark .btn-nav:hover { background: #45475a; }
+:root.dark .btn-nav-active { background: #89b4fa; color: #1e1e2e; border-color: #89b4fa; }
+:root.dark .btn-nav-active:hover { background: #74c7ec; }
+:root.dark .toolbar-select { background: #313244; color: #cdd6f4; border-color: #45475a; }
+:root.dark .drop-zone-box { background: #181825; border-color: #45475a; color: #cdd6f4; }
+:root.dark .drop-zone-active .drop-zone-box { border-color: #89b4fa; background: #1e1e2e; }
+:root.dark .drop-zone-close { color: #6c7086; }
+:root.dark .drop-zone-hint { color: #6c7086; }
 
 :root.dark .grid-container,
 :root.dark .side-panel { background: #181825; box-shadow: 0 1px 3px rgba(0,0,0,0.5); }
