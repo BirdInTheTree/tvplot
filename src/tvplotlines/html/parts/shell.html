@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TV Plotlines Viewer</title>
+<style>
+/* {{STYLE}} */
+</style>
+</head>
+<body>
+
+<!-- Welcome screen -->
+<section id="screen-welcome" class="screen active">
+  <div class="welcome-container">
+    <h1>TV Plotlines Viewer</h1>
+    <p>Upload a plotlines JSON file or explore the demo data.</p>
+    <div class="welcome-actions">
+      <button id="btn-demo">Load Demo</button>
+      <label class="upload-label" for="file-upload">Upload JSON</label>
+      <input type="file" id="file-upload" accept=".json" hidden>
+    </div>
+  </div>
+</section>
+
+<!-- Grid screen -->
+<section id="screen-grid" class="screen">
+  <nav class="toolbar">
+    <button id="btn-back-welcome" class="btn-nav">&larr; Home</button>
+    <span id="grid-title" class="toolbar-title"></span>
+    <button id="btn-analytics" class="btn-nav">Analytics &rarr;</button>
+  </nav>
+  <div id="grid-container"></div>
+</section>
+
+<!-- Analytics screen -->
+<section id="screen-analytics" class="screen">
+  <nav class="toolbar">
+    <button id="btn-back-grid" class="btn-nav">&larr; Grid</button>
+    <span class="toolbar-title">Analytics</span>
+  </nav>
+  <div id="analytics-container"></div>
+</section>
+
+<!-- Modal -->
+<div id="modal-overlay" class="modal-overlay hidden">
+  <div id="modal-content" class="modal-content">
+    <button id="modal-close" class="modal-close">&times;</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- Demo data (injected by build.py) -->
+<script id="demo-data" type="application/json">
+/* {{DEMO_DATA}} */
+</script>
+
+<script>
+/* {{APP_JS}} */
+</script>
+
+</body>
+</html>
