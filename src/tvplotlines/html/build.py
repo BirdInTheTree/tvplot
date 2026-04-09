@@ -42,7 +42,14 @@ def build_html(data_path: Path | None = None) -> str:
 
     # Load parts (CSS and JS files may not exist yet — that's fine)
     style = load_part("style.css")
-    app_js = load_part("app.js")
+
+    js_files = ["grid.js", "analytics.js", "export.js", "pipeline.js", "app.js"]
+    js_parts = []
+    for name in js_files:
+        content = load_part(name)
+        if content:
+            js_parts.append(f"// --- {name} ---\n{content}")
+    app_js = "\n\n".join(js_parts)
 
     # Load demo data
     demo_path = data_path or _DEFAULT_DEMO
