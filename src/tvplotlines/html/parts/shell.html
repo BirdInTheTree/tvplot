@@ -36,7 +36,7 @@
     </div>
     <div class="toolbar-right">
       <button id="btn-load" class="btn-nav" title="Load synopses">+ Load</button>
-      <button id="btn-export" class="btn-nav" title="Export">Export</button>
+      <button id="btn-export" class="btn-nav btn-export-trigger" title="Export">Export</button>
       <button id="btn-llm-settings" class="btn-nav" title="LLM Settings">LLM</button>
       <button id="btn-onboarding" class="btn-nav" title="Show welcome screen">?</button>
       <button id="btn-dark" class="btn-nav" title="Toggle dark mode">&#9790;</button>
@@ -58,7 +58,7 @@
     </div>
     <div class="toolbar-right">
       <button class="btn-nav" onclick="_showDropZone()" title="Load synopses">+ Load</button>
-      <button class="btn-nav" onclick="alert('Export coming in Task 6')" title="Export">Export</button>
+      <button class="btn-nav btn-export-trigger" title="Export">Export</button>
       <button class="btn-nav" onclick="toggleDark()" title="Toggle dark mode">&#9790;</button>
     </div>
   </nav>
@@ -83,6 +83,14 @@
     <button id="modal-close" class="modal-close">&times;</button>
     <div id="modal-body"></div>
   </div>
+</div>
+
+<!-- Export dropdown menu (positioned dynamically near the clicked button) -->
+<div id="export-menu" class="export-menu hidden">
+  <button onclick="_handleExport('json')">JSON</button>
+  <button onclick="_handleExport('txt')">TXT</button>
+  <button onclick="_handleExport('csv')">CSV</button>
+  <button onclick="_handleExport('fdx')">Final Draft (.fdx)</button>
 </div>
 
 <!-- Demo data (injected by build.py) -->

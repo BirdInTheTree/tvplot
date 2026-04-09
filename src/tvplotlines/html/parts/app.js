@@ -288,9 +288,11 @@ function _initApp() {
     seriesSelect.addEventListener('change', () => _switchSeries(seriesSelect.value));
   }
 
-  // Placeholders — buttons exist but no action yet
-  if (btnExport) btnExport.addEventListener('click', () => {
-    alert('Export coming in Task 6');
+  // Export dropdown — all .btn-export-trigger buttons open the shared menu
+  if (btnExport) btnExport.addEventListener('click', () => _toggleExportMenu(btnExport));
+  document.querySelectorAll('.btn-export-trigger').forEach(btn => {
+    if (btn === btnExport) return; // Already wired above
+    btn.addEventListener('click', () => _toggleExportMenu(btn));
   });
   if (btnLLM) btnLLM.addEventListener('click', () => {
     alert('LLM Settings coming soon');
