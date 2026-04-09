@@ -56,8 +56,12 @@ function _initApp() {
   const fileUpload = document.getElementById('file-upload');
   const gridTitle = document.getElementById('grid-title');
 
+  // Track loaded data for analytics navigation
+  let _currentData = null;
+
   function loadData(data, title) {
     if (!container) return;
+    _currentData = data;
     renderGrid(data, container);
     if (gridTitle) gridTitle.textContent = title || 'Plotlines';
     showScreen('grid');
@@ -93,7 +97,13 @@ function _initApp() {
     btnBackGrid.addEventListener('click', () => showScreen('grid'));
   }
   if (btnAnalytics) {
-    btnAnalytics.addEventListener('click', () => showScreen('analytics'));
+    btnAnalytics.addEventListener('click', () => {
+      if (_currentData) {
+        const analyticsContainer = document.getElementById('analytics-container');
+        if (analyticsContainer) renderAnalytics(_currentData, analyticsContainer);
+      }
+      showScreen('analytics');
+    });
   }
 
   // Auto-load demo if data is present and URL has #demo
