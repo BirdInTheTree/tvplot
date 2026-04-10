@@ -1,11 +1,13 @@
-/* Reset & base */
+/* Reset & base — force our color scheme, override browser dark mode */
+:root { color-scheme: light; }
+:root.dark { color-scheme: dark; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f5f5f5; color: #1a1a1a; }
 
 /* ── Screen routing ── */
 .screen { display: none; }
 .screen.active { display: block; }
-.hidden { display: none; }
+.hidden { display: none !important; }
 
 /* ── Welcome screen ── */
 .welcome-container {
@@ -156,7 +158,9 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 /* ── Function colors ── */
 .fn-setup { background: #f3f4f6; }
 .fn-escalation { background: #fef9c3; }
+.fn-inciting_incident { background: transparent; color: #16a34a; font-weight: 600; }
 .fn-turning_point { background: #fed7aa; }
+.fn-crisis { background: #fecaca; }
 .fn-seed { background: #dbeafe; }
 .fn-climax { background: #fecaca; }
 .fn-resolution { background: #d1fae5; }
@@ -250,14 +254,17 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 :root.dark .chart-title { color: #cba6f7; }
 :root.dark .chart-description { color: #a6adc8; }
 
-/* ── Dark function colors — warm muted tones ── */
-:root.dark .fn-setup { background: #313244; color: #bac2de; }
-:root.dark .fn-escalation { background: #433a2a; color: #f9e2af; }
-:root.dark .fn-turning_point { background: #3d2f24; color: #fab387; }
-:root.dark .fn-seed { background: #243347; color: #89b4fa; }
-:root.dark .fn-climax { background: #3d2332; color: #f38ba8; }
-:root.dark .fn-resolution { background: #1e3d2e; color: #a6e3a1; }
-:root.dark .fn-cliffhanger { background: #302040; color: #cba6f7; }
+/* ── Dark function colors — single text color, background varies ── */
+:root.dark .event-card { color: #cdd6f4; }
+:root.dark .fn-setup { background: #313244; }
+:root.dark .fn-escalation { background: #433a2a; }
+:root.dark .fn-inciting_incident { background: transparent; color: #a6e3a1; font-weight: 600; }
+:root.dark .fn-turning_point { background: #3d2f24; }
+:root.dark .fn-crisis { background: #3d2332; }
+:root.dark .fn-seed { background: #243347; }
+:root.dark .fn-climax { background: #3d2332; }
+:root.dark .fn-resolution { background: #1e3d2e; }
+:root.dark .fn-cliffhanger { background: #302040; }
 
 /* ── Dark rank badges ── */
 :root.dark .rank-a { background: #243347; color: #89b4fa; }
@@ -267,6 +274,12 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 
 /* ── Analytics ── */
 :root { --ana-tension-0: #f0f0f0; --ana-tension-1: #bae6d1; --ana-tension-2: #f0e68c; --ana-tension-3: #f5b87a; --ana-tension-4: #e87c7c; --ana-tension-5: #d44a7a; }
+
+.ana-series-header { margin-bottom: 1.5rem; max-width: 1200px; }
+.ana-series-name { font-size: 1.5rem; font-weight: 300; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
+.ana-logline { font-size: 0.95rem; color: #555; line-height: 1.5; font-style: italic; }
+:root.dark .ana-series-name { color: #cba6f7; }
+:root.dark .ana-logline { color: #a6adc8; }
 
 .ana-section { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); max-width: 1200px; }
 .ana-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
@@ -279,6 +292,10 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 .ana-scorecard tr:last-child td { border-bottom: none; }
 .ana-plotline-name { font-weight: 500; }
 .ana-arc-summary { color: #666; font-size: 0.8rem; }
+.ana-scorecard-ep-row th { border-bottom: none; padding-top: 0; }
+.ana-span-labels { display: flex; gap: 2px; margin-bottom: 2px; }
+.ana-span-label { width: 14px; text-align: center; font-size: 0.55rem; color: #999; }
+:root.dark .ana-span-label { color: #6c7086; }
 .ana-span-bar { display: flex; gap: 2px; }
 .ana-span-dot { width: 14px; height: 14px; border-radius: 3px; }
 .ana-span-dot.active { background: #2563eb; opacity: 0.7; }
@@ -317,7 +334,10 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 .ana-pulse-bar:nth-child(5) { background: #8b5cf6; color: white; }
 .ana-pulse-bar:nth-child(6) { background: #10b981; }
 .ana-pulse-total { font-size: 0.8rem; color: #666; width: 30px; text-align: right; flex-shrink: 0; }
-.ana-pulse-theme { font-size: 0.75rem; color: #999; width: 220px; flex-shrink: 0; font-style: italic; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ana-pulse-theme { display: none; }
+.ana-pulse-legend { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem; font-size: 0.8rem; }
+.ana-pulse-legend-item { display: flex; align-items: center; gap: 4px; }
+:root.dark .ana-pulse-legend-item { color: #cdd6f4; }
 
 /* Convergence */
 .ana-conv-timeline { position: relative; padding-left: 40px; }
@@ -392,7 +412,7 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
   background: rgba(0,0,0,0.5); display: flex;
   align-items: center; justify-content: center;
 }
-.pipeline-progress-overlay.hidden { display: none; }
+.pipeline-progress-overlay.hidden { display: none !important; }
 .pipeline-progress-box {
   background: #fff; border-radius: 12px; padding: 2rem 2.5rem;
   min-width: 360px; max-width: 480px; box-shadow: 0 8px 32px rgba(0,0,0,0.2);

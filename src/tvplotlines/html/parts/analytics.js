@@ -250,28 +250,61 @@ function renderAnalytics(data, container) {
 
   container.innerHTML = '';
 
-  container.appendChild(_renderScorecard(scorecard, storyEngine));
+  // Series header: name + story engine (logline) before all sections
+  const seriesName = (data.context || {}).show_name || (typeof _currentSeriesName !== 'undefined' ? _currentSeriesName : '') || '';
+  if (seriesName || storyEngine) {
+    const header = document.createElement('div');
+    header.className = 'ana-series-header';
+    if (seriesName) {
+      const h1 = document.createElement('h1');
+      h1.className = 'ana-series-name';
+      h1.textContent = seriesName;
+      header.appendChild(h1);
+    }
+    if (storyEngine) {
+      const logline = document.createElement('p');
+      logline.className = 'ana-logline';
+      logline.textContent = storyEngine;
+      header.appendChild(logline);
+    }
+    container.appendChild(header);
+  }
+
+  container.appendChild(_renderScorecard(scorecard));
   container.appendChild(_renderArcMap(arcMap));
   container.appendChild(_renderPulse(pulse));
   container.appendChild(_renderConvergence(convergence));
   container.appendChild(_renderCharacters(characters));
 }
 
-function _renderScorecard(scorecard, storyEngine) {
+function _renderScorecard(scorecard) {
   const section = _section('Season Scorecard');
-
-  if (storyEngine) {
-    const engine = document.createElement('div');
-    engine.className = 'ana-engine';
-    engine.textContent = storyEngine;
-    section.appendChild(engine);
-  }
 
   const table = document.createElement('table');
   table.className = 'ana-scorecard';
 
   const thead = document.createElement('thead');
-  thead.innerHTML = '<tr><th>Rank</th><th>Plotline</th><th>Span</th><th>Events</th><th>Arc</th></tr>';
+  // Header row with episode numbers under Span
+  const headerRow = document.createElement('tr');
+  headerRow.innerHTML = '<th>Rank</th><th>Plotline</th><th>Span</th><th>Events</th><th>Arc</th>';
+  thead.appendChild(headerRow);
+
+  // Episode numbers row
+  const epRow = document.createElement('tr');
+  epRow.className = 'ana-scorecard-ep-row';
+  epRow.innerHTML = '<th></th><th></th><th></th><th></th><th></th>';
+  const epCell = epRow.children[2];
+  const epLabels = document.createElement('div');
+  epLabels.className = 'ana-span-labels';
+  for (const ep of scorecard.episode_codes) {
+    const lbl = document.createElement('span');
+    lbl.className = 'ana-span-label';
+    lbl.textContent = ep.split('E').pop();
+    epLabels.appendChild(lbl);
+  }
+  epCell.appendChild(epLabels);
+  thead.appendChild(epRow);
+
   table.appendChild(thead);
 
   const tbody = document.createElement('tbody');
@@ -292,13 +325,14 @@ function _renderScorecard(scorecard, storyEngine) {
     tdName.textContent = pl.name;
     tr.appendChild(tdName);
 
-    // Span dots
+    // Span dots (labels are in thead)
     const tdSpan = document.createElement('td');
     const spanBar = document.createElement('div');
     spanBar.className = 'ana-span-bar';
     for (const ep of scorecard.episode_codes) {
       const dot = document.createElement('div');
       dot.className = 'ana-span-dot ' + (pl.span.includes(ep) ? 'active' : 'inactive');
+      dot.title = ep;
       spanBar.appendChild(dot);
     }
     tdSpan.appendChild(spanBar);
@@ -455,13 +489,41 @@ function _renderPulse(pulse) {
     totalDiv.textContent = ep.total;
     row.appendChild(totalDiv);
 
-    const themeDiv = document.createElement('div');
-    themeDiv.className = 'ana-pulse-theme';
-    themeDiv.textContent = ep.theme;
-    row.appendChild(themeDiv);
-
     section.appendChild(row);
   }
+
+  // Legend: which color = which plotline
+  const legend = document.createElement('div');
+  legend.className = 'ana-pulse-legend';
+  const allPlotlines = [];
+  const seen = new Set();
+  for (const ep of pulse) {
+    for (const seg of ep.segments) {
+      if (!seen.has(seg.plotline_name)) {
+        seen.add(seg.plotline_name);
+        allPlotlines.push(seg.plotline_name);
+      }
+    }
+  }
+  for (let i = 0; i < allPlotlines.length; i++) {
+    const item = document.createElement('span');
+    item.className = 'ana-pulse-legend-item';
+    const swatch = document.createElement('span');
+    swatch.className = 'ana-pulse-bar';
+    swatch.style.display = 'inline-block';
+    swatch.style.width = '12px';
+    swatch.style.height = '12px';
+    swatch.style.borderRadius = '2px';
+    swatch.style.verticalAlign = 'middle';
+    swatch.style.marginRight = '4px';
+    // Use nth-child color by applying the index via a CSS variable
+    swatch.style.background = _pulseColor(i);
+    item.appendChild(swatch);
+    item.appendChild(document.createTextNode(allPlotlines[i]));
+    legend.appendChild(item);
+  }
+  section.appendChild(legend);
+
   return section;
 }
 
@@ -550,6 +612,14 @@ function _renderCharacters(characters) {
 }
 
 // --- Helpers ---
+
+const _PULSE_COLORS_LIGHT = ['#2563eb', '#f59e0b', '#ef4444', '#6b7280', '#8b5cf6', '#10b981'];
+const _PULSE_COLORS_DARK = ['#89b4fa', '#f9e2af', '#f38ba8', '#a6adc8', '#cba6f7', '#a6e3a1'];
+function _pulseColor(i) {
+  const isDark = document.documentElement.classList.contains('dark');
+  const palette = isDark ? _PULSE_COLORS_DARK : _PULSE_COLORS_LIGHT;
+  return palette[i % palette.length];
+}
 
 function _section(title) {
   const section = document.createElement('section');
