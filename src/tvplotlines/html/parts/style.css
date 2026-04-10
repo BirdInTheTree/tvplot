@@ -418,6 +418,75 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 :root.dark .ana-char-bar { background: #89b4fa; color: #1e1e2e; }
 :root.dark .ana-char-dot { background: #89b4fa; }
 
+/* ── Onboarding subtitles ── */
+.onboarding-subtitle {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.85); color: #fff; padding: 0.75rem 1.5rem;
+  border-radius: 8px; font-size: 0.9rem; max-width: 600px; text-align: center;
+  z-index: 10000; line-height: 1.5;
+  animation: subtitleFadeIn 0.3s ease-out;
+}
+.onboarding-subtitle.fade-out {
+  opacity: 0; transition: opacity 0.3s ease-in;
+}
+@keyframes subtitleFadeIn { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+:root.dark .onboarding-subtitle { background: rgba(30,30,46,0.95); color: #cdd6f4; }
+
+/* ── Onboarding highlight pulse ── */
+.onboarding-highlight {
+  outline: 3px solid #2563eb; outline-offset: 3px;
+  border-radius: 6px;
+  animation: highlightPulse 1.2s ease-in-out;
+}
+@keyframes highlightPulse {
+  0% { outline-color: transparent; }
+  20% { outline-color: #2563eb; }
+  80% { outline-color: #2563eb; }
+  100% { outline-color: transparent; }
+}
+:root.dark .onboarding-highlight { outline-color: #89b4fa; }
+:root.dark .onboarding-highlight { animation-name: highlightPulseDark; }
+@keyframes highlightPulseDark {
+  0% { outline-color: transparent; }
+  20% { outline-color: #89b4fa; }
+  80% { outline-color: #89b4fa; }
+  100% { outline-color: transparent; }
+}
+
+/* ── Onboarding grid cell reveal ── */
+.onboarding-cell-hidden { opacity: 0; }
+.onboarding-cell-reveal {
+  animation: cellReveal 0.3s ease-out forwards;
+}
+@keyframes cellReveal { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+/* ── Onboarding fake cursor ── */
+.onboarding-cursor {
+  position: fixed; z-index: 10001; pointer-events: none;
+  width: 20px; height: 20px;
+  transition: left 0.6s cubic-bezier(0.4,0,0.2,1), top 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.onboarding-cursor::before {
+  content: '';
+  display: block; width: 0; height: 0;
+  border-left: 8px solid #2563eb;
+  border-right: 8px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-top: 0;
+  filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
+}
+:root.dark .onboarding-cursor::before { border-left-color: #89b4fa; }
+
+/* Fake file chip in drop zone during onboarding */
+.onboarding-file-chip {
+  display: inline-block; background: #eff6ff; border: 1px solid #93c5fd;
+  border-radius: 6px; padding: 0.25rem 0.75rem; margin: 0.25rem;
+  font-size: 0.8rem; color: #1e40af;
+  animation: chipDrop 0.4s ease-out;
+}
+@keyframes chipDrop { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+:root.dark .onboarding-file-chip { background: #243347; border-color: #89b4fa; color: #89b4fa; }
+
 /* ── Pipeline progress overlay ── */
 .pipeline-progress-overlay {
   position: fixed; inset: 0; z-index: 9999;

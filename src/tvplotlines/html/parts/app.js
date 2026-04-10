@@ -313,6 +313,330 @@ function _showLLMSettings() {
   modalOverlay.classList.remove('hidden');
 }
 
+// --- Onboarding animation ---
+
+// Onboarding state — lets us cancel a running animation
+let _onboardingAbort = null;
+
+function _delay(ms) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(resolve, ms);
+    // Attach cancel hook so abort can reject immediately
+    if (_onboardingAbort) {
+      const prev = _onboardingAbort.onAbort;
+      _onboardingAbort.onAbort = () => {
+        clearTimeout(timer);
+        if (prev) prev();
+        reject(new Error('aborted'));
+      };
+    }
+  });
+}
+
+function _showSubtitle(text) {
+  _hideSubtitle();
+  const el = document.createElement('div');
+  el.className = 'onboarding-subtitle';
+  el.id = 'onboarding-subtitle';
+  el.textContent = text;
+  document.body.appendChild(el);
+}
+
+function _hideSubtitle() {
+  const el = document.getElementById('onboarding-subtitle');
+  if (el) el.remove();
+}
+
+async function _animateTyping(element, text, speedMs) {
+  element.value = '';
+  for (const ch of text) {
+    element.value += ch;
+    await _delay(speedMs);
+  }
+}
+
+function _highlightElement(selector) {
+  const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+  if (!el) return;
+  el.classList.add('onboarding-highlight');
+  setTimeout(() => el.classList.remove('onboarding-highlight'), 1200);
+}
+
+function _createCursor() {
+  const cursor = document.createElement('div');
+  cursor.className = 'onboarding-cursor';
+  cursor.id = 'onboarding-cursor';
+  // Start offscreen
+  cursor.style.left = '-40px';
+  cursor.style.top = '-40px';
+  document.body.appendChild(cursor);
+  return cursor;
+}
+
+function _removeCursor() {
+  const el = document.getElementById('onboarding-cursor');
+  if (el) el.remove();
+}
+
+async function _moveCursorTo(cursor, target) {
+  const el = typeof target === 'string' ? document.querySelector(target) : target;
+  if (!el) return;
+  const rect = el.getBoundingClientRect();
+  cursor.style.left = (rect.left + rect.width / 2) + 'px';
+  cursor.style.top = (rect.top + rect.height / 2) + 'px';
+  await _delay(700);
+}
+
+async function _simulateClick(cursor, target) {
+  await _moveCursorTo(cursor, target);
+  const el = typeof target === 'string' ? document.querySelector(target) : target;
+  if (el) {
+    _highlightElement(el);
+    await _delay(300);
+  }
+}
+
+/**
+ * Gradually reveal grid cells with animation.
+ * Hides all event cards, then reveals them one by one.
+ */
+async function _revealGridGradually() {
+  const cards = document.querySelectorAll('#grid-container .event-card');
+  // Hide all first
+  cards.forEach(card => {
+    card.classList.add('onboarding-cell-hidden');
+  });
+  await _delay(200);
+
+  // Reveal in batches of 3 for speed
+  const batchSize = 3;
+  for (let i = 0; i < cards.length; i += batchSize) {
+    for (let j = i; j < Math.min(i + batchSize, cards.length); j++) {
+      cards[j].classList.remove('onboarding-cell-hidden');
+      cards[j].classList.add('onboarding-cell-reveal');
+    }
+    await _delay(60);
+  }
+}
+
+/**
+ * Main onboarding sequence.
+ * Drives real UI components to demonstrate the full workflow.
+ */
+async function runOnboarding() {
+  // Set up abort controller for skip-during-animation
+  _onboardingAbort = { onAbort: null };
+
+  const cursor = _createCursor();
+
+  try {
+    // Step 1: Welcome screen — show subtitle, then "click" Skip
+    _showSubtitle('This is the welcome screen. Let\'s walk through the full workflow.');
+    await _delay(2500);
+
+    _showSubtitle('First, let\'s configure the LLM connection.');
+    await _simulateClick(cursor, '#btn-skip');
+    await _delay(600);
+
+    // Transition to grid screen (we need it for the toolbar)
+    const demoData = _loadDemoData();
+    if (demoData) _switchSeries('__demo__');
+    _setTab('grid');
+    await _delay(400);
+
+    // Step 2: LLM settings modal
+    _showSubtitle('Click "LLM" to open settings and choose your provider.');
+    await _simulateClick(cursor, '#btn-llm-settings');
+    _showLLMSettings();
+    await _delay(1000);
+
+    // Animate provider selection
+    _showSubtitle('Select Claude as your LLM provider...');
+    const providerSelect = document.getElementById('llm-provider');
+    if (providerSelect) {
+      await _moveCursorTo(cursor, providerSelect);
+      providerSelect.value = 'anthropic';
+      _highlightElement(providerSelect);
+    }
+    await _delay(1200);
+
+    // Animate API key typing
+    _showSubtitle('Type your API key (this is a demo — no real key needed).');
+    const apiKeyInput = document.getElementById('llm-api-key');
+    if (apiKeyInput) {
+      await _moveCursorTo(cursor, apiKeyInput);
+      apiKeyInput.type = 'text';
+      await _animateTyping(apiKeyInput, 'sk-ant-api03-demo...', 50);
+      apiKeyInput.type = 'password';
+    }
+    await _delay(800);
+
+    // Click save
+    _showSubtitle('Save your settings.');
+    await _simulateClick(cursor, '#llm-save-btn');
+    const saveBtn = document.getElementById('llm-save-btn');
+    if (saveBtn) saveBtn.click();
+    await _delay(1200);
+
+    // Close modal
+    const modalOverlay = document.getElementById('modal-overlay');
+    if (modalOverlay) modalOverlay.classList.add('hidden');
+    await _delay(500);
+
+    // Step 3: File upload zone
+    _showSubtitle('Now upload your synopsis files. Click "+ Load" to open the drop zone.');
+    await _simulateClick(cursor, '#btn-load');
+    _showDropZone();
+    await _delay(1000);
+
+    // Simulate file appearing via button
+    _showSubtitle('Choose files — one via the button...');
+    const dropBox = document.querySelector('.drop-zone-box');
+    if (dropBox) {
+      await _moveCursorTo(cursor, '.drop-zone-box label.btn');
+      const chip1 = document.createElement('div');
+      chip1.className = 'onboarding-file-chip';
+      chip1.textContent = 'S01E01.txt';
+      dropBox.appendChild(chip1);
+    }
+    await _delay(1200);
+
+    // Simulate drag-drop file appearing
+    _showSubtitle('...and more via drag & drop.');
+    if (dropBox) {
+      const fileNames = ['S01E02.txt', 'S01E03.txt', 'S01E04.txt', 'S01E05.txt', 'S01E06.txt', 'S01E07.txt'];
+      for (const name of fileNames) {
+        const chip = document.createElement('div');
+        chip.className = 'onboarding-file-chip';
+        chip.textContent = name;
+        dropBox.appendChild(chip);
+        await _delay(150);
+      }
+    }
+    await _delay(1000);
+
+    // Close drop zone
+    _hideDropZone();
+    await _delay(400);
+
+    // Step 4: Pipeline runs — simulate progress
+    _showSubtitle('The pipeline analyzes your synopses in 5 passes.');
+    _showPipelineProgress();
+    await _delay(800);
+
+    const passLabels = [
+      'Pass 1/5: detecting format and story engine...',
+      'Pass 2/5: identifying cast and plotlines...',
+      'Pass 3/5: breaking down episodes...',
+      'Pass 4/5: reviewing structure...',
+      'Pass 5/5: assigning arc functions...',
+    ];
+    for (let i = 0; i < passLabels.length; i++) {
+      _updatePipelineProgress(passLabels[i], i + 1, 5);
+      _showSubtitle(passLabels[i]);
+      await _delay(1200);
+    }
+    _updatePipelineProgress('Done!', 5, 5);
+    await _delay(600);
+    _hidePipelineProgress();
+    await _delay(400);
+
+    // Step 5: Show grid result with gradual reveal
+    _showSubtitle('The grid shows plotlines vs episodes with color-coded events.');
+    _setTab('grid');
+    await _delay(400);
+    await _revealGridGradually();
+    await _delay(2000);
+
+    // Highlight some grid features
+    _showSubtitle('Click any event card to see details. Use filters to focus on specific characters or functions.');
+    _highlightElement('.sticky-top');
+    await _delay(2500);
+
+    // Step 5b: Switch to analytics
+    _showSubtitle('Switch to Analytics for deeper insights.');
+    await _simulateClick(cursor, '#btn-tab-analytics');
+    _setTab('analytics');
+    await _delay(1500);
+
+    // Scroll through analytics sections
+    const sections = document.querySelectorAll('#analytics-container .ana-section');
+    const sectionLabels = [
+      'Season Scorecard — plotline ranks, spans, and arc shapes.',
+      'Arc Map — tension levels across episodes.',
+      'Episode Pulse — event distribution per episode.',
+      'Convergence Moments — where plotlines intersect.',
+      'Character Weight — who drives the story.',
+    ];
+    for (let i = 0; i < Math.min(sections.length, sectionLabels.length); i++) {
+      _showSubtitle(sectionLabels[i]);
+      sections[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      _highlightElement(sections[i]);
+      await _delay(2500);
+    }
+
+    // Step 6: Export buttons
+    _showSubtitle('Export your results as JSON, TXT, CSV, or Final Draft.');
+    // Scroll back to top to see toolbar
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    await _delay(600);
+
+    // Find an export button on analytics screen
+    const exportBtn = document.querySelector('#screen-analytics .btn-export-trigger');
+    if (exportBtn) {
+      await _simulateClick(cursor, exportBtn);
+      _toggleExportMenu(exportBtn);
+      await _delay(2000);
+      // Close the menu
+      const menu = document.getElementById('export-menu');
+      if (menu) menu.classList.add('hidden');
+    }
+    await _delay(500);
+
+    // Step 7: End — switch to grid, show real LLM modal
+    _showSubtitle('That\'s it! Now connect your own LLM to start analyzing.');
+    _setTab('grid');
+    await _delay(1500);
+    _hideSubtitle();
+    _removeCursor();
+
+    Store.markOnboardingSeen();
+    // Show real LLM settings modal so user can enter their key
+    _showLLMSettings();
+
+  } catch (e) {
+    if (e.message === 'aborted') {
+      // User skipped during animation — clean up silently
+    } else {
+      console.error('Onboarding error:', e);
+    }
+  } finally {
+    _hideSubtitle();
+    _removeCursor();
+    _onboardingAbort = null;
+    // Remove any leftover file chips
+    document.querySelectorAll('.onboarding-file-chip').forEach(el => el.remove());
+  }
+}
+
+function _skipOnboarding() {
+  // Abort running onboarding if any
+  if (_onboardingAbort && _onboardingAbort.onAbort) {
+    _onboardingAbort.onAbort();
+  }
+  _hideSubtitle();
+  _removeCursor();
+  _hidePipelineProgress();
+  _hideDropZone();
+  // Close modal if open
+  const modal = document.getElementById('modal-overlay');
+  if (modal) modal.classList.add('hidden');
+
+  Store.markOnboardingSeen();
+  _switchSeries('__demo__');
+  _setTab('grid');
+}
+
 // --- Init ---
 
 function _initApp() {
@@ -368,28 +692,18 @@ function _initApp() {
   if (btnLLM) btnLLM.addEventListener('click', _showLLMSettings);
   if (btnOnboarding) btnOnboarding.addEventListener('click', () => {
     showScreen('welcome');
+    // After showing welcome, let user click Play/Skip again
   });
 
   // Welcome screen buttons
   const btnPlay = document.getElementById('btn-play');
   const btnSkip = document.getElementById('btn-skip');
 
-  function _leaveWelcome() {
-    Store.markOnboardingSeen();
-    const container = document.querySelector('.welcome-container');
-    if (container) container.classList.add('fade-out');
-    // Transition to grid after fade completes
-    setTimeout(() => {
-      _switchSeries('__demo__');
-      _setTab('grid');
-    }, 400);
-  }
-
-  if (btnPlay) btnPlay.addEventListener('click', _leaveWelcome);
+  if (btnPlay) btnPlay.addEventListener('click', runOnboarding);
   if (btnSkip) {
     btnSkip.addEventListener('click', (e) => {
       e.preventDefault();
-      _leaveWelcome();
+      _skipOnboarding();
     });
   }
 
