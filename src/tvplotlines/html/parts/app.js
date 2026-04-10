@@ -371,25 +371,25 @@ function _initApp() {
   });
 
   // Welcome screen buttons
-  const btnDemo = document.getElementById('btn-demo');
-  if (btnDemo) {
-    btnDemo.addEventListener('click', () => {
-      Store.markOnboardingSeen();
+  const btnPlay = document.getElementById('btn-play');
+  const btnSkip = document.getElementById('btn-skip');
+
+  function _leaveWelcome() {
+    Store.markOnboardingSeen();
+    const container = document.querySelector('.welcome-container');
+    if (container) container.classList.add('fade-out');
+    // Transition to grid after fade completes
+    setTimeout(() => {
       _switchSeries('__demo__');
       _setTab('grid');
-    });
+    }, 400);
   }
 
-  // Welcome file upload also uses _importJSON
-  const welcomeUpload = document.getElementById('welcome-file-upload');
-  if (welcomeUpload) {
-    welcomeUpload.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        Store.markOnboardingSeen();
-        _importJSON(file);
-      }
-      welcomeUpload.value = '';
+  if (btnPlay) btnPlay.addEventListener('click', _leaveWelcome);
+  if (btnSkip) {
+    btnSkip.addEventListener('click', (e) => {
+      e.preventDefault();
+      _leaveWelcome();
     });
   }
 
@@ -402,10 +402,21 @@ function _initApp() {
   const savedResults = Store.getResults();
   const hasSavedData = Object.keys(savedResults).length > 0;
 
-  // Welcome screen will be implemented in Task 11.
-  // For now, always go straight to grid with demo data.
+  // Handle #demo URL hash — always go to grid
+  if (demoData && window.location.hash === '#demo') {
+    Store.markOnboardingSeen();
+    _switchSeries('__demo__');
+    _setTab('grid');
+    return;
+  }
 
-  // Determine which series to load
+  // First visit — show welcome screen
+  if (!hasSeenOnboarding) {
+    showScreen('welcome');
+    return;
+  }
+
+  // Returning visit — go straight to grid
   let seriesName = settings.lastSeries || null;
 
   // Validate that lastSeries still exists
@@ -429,12 +440,6 @@ function _initApp() {
     _setTab('grid');
   } else {
     showScreen('welcome');
-  }
-
-  // Handle #demo URL hash
-  if (demoData && window.location.hash === '#demo') {
-    _switchSeries('__demo__');
-    _setTab('grid');
   }
 }
 

@@ -13,23 +13,34 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; b
 .welcome-container {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   min-height: 100vh; padding: 2rem; text-align: center;
+  background: #fafafa;
+  opacity: 1; transition: opacity 0.4s ease;
 }
-.welcome-container h1 {
-  font-size: 2rem; font-weight: 300; letter-spacing: 0.05em;
-  margin-bottom: 0.5rem; color: #1a1a1a;
+.welcome-container.fade-out { opacity: 0; }
+.welcome-title {
+  font-size: 2.25rem; font-weight: 200; letter-spacing: 0.12em;
+  color: #1a1a1a; margin-bottom: 0.75rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-.welcome-container p {
-  font-size: 0.95rem; color: #666; margin-bottom: 2rem;
+.welcome-tagline {
+  font-size: 0.9rem; font-weight: 300; color: #999;
+  letter-spacing: 0.06em; margin-bottom: 4rem;
 }
-.welcome-actions { display: flex; gap: 1rem; }
-.welcome-actions button,
-.welcome-actions .upload-label {
-  padding: 0.625rem 1.5rem; border: 1px solid #ddd; border-radius: 6px;
-  background: white; cursor: pointer; font-size: 0.875rem;
-  transition: background 0.15s, border-color 0.15s;
+.welcome-play {
+  padding: 0.65rem 2.5rem; border: 1px solid #ccc; border-radius: 24px;
+  background: transparent; cursor: pointer; font-size: 0.85rem;
+  font-weight: 400; letter-spacing: 0.08em; color: #333;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
-.welcome-actions button:hover,
-.welcome-actions .upload-label:hover { background: #f0f0f0; }
+.welcome-play:hover {
+  border-color: #888; color: #111; background: rgba(0,0,0,0.02);
+}
+.welcome-skip {
+  display: inline-block; margin-top: 1.5rem;
+  font-size: 0.75rem; color: #bbb; text-decoration: none;
+  letter-spacing: 0.05em; transition: color 0.2s;
+}
+.welcome-skip:hover { color: #888; }
 
 /* ── Page layout ── */
 .page { max-width: 100%; padding: 1rem; }
@@ -204,12 +215,13 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 :root.dark body { background: #1e1e2e; color: #cdd6f4; }
 :root.dark .sticky-top { background: #1e1e2e; }
 
-:root.dark .welcome-container h1 { color: #cdd6f4; }
-:root.dark .welcome-container p { color: #a6adc8; }
-:root.dark .welcome-actions button,
-:root.dark .welcome-actions .upload-label { background: #313244; color: #cdd6f4; border-color: #45475a; }
-:root.dark .welcome-actions button:hover,
-:root.dark .welcome-actions .upload-label:hover { background: #45475a; }
+:root.dark .welcome-container { background: #11111b; }
+:root.dark .welcome-title { color: #cdd6f4; }
+:root.dark .welcome-tagline { color: #585b70; }
+:root.dark .welcome-play { color: #a6adc8; border-color: #45475a; background: transparent; }
+:root.dark .welcome-play:hover { color: #cdd6f4; border-color: #6c7086; background: rgba(255,255,255,0.03); }
+:root.dark .welcome-skip { color: #45475a; }
+:root.dark .welcome-skip:hover { color: #6c7086; }
 
 :root.dark .toolbar { background: #181825; box-shadow: 0 1px 3px rgba(0,0,0,0.5); }
 :root.dark .toolbar-title { color: #cba6f7; }
