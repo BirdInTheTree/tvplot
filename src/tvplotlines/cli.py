@@ -227,6 +227,15 @@ def _run(args: argparse.Namespace) -> None:
         ts_path.write_text(result_json, encoding="utf-8")
         print(f"Copy saved to {ts_path}")
 
+    # Generate standalone HTML viewer if requested
+    if args.html or args.html_output:
+        from tvplotlines.html.build import build_html
+
+        html_path = args.html_output or output.with_suffix(".html")
+        html_content = build_html(data_path=output)
+        html_path.write_text(html_content, encoding="utf-8")
+        print(f"HTML viewer saved to {html_path}")
+
     # Print summary
     print(f"Context: {result.context.format} | {result.context.story_engine}")
     if result.context.is_ensemble:
@@ -330,6 +339,14 @@ def main() -> None:
     run_parser.add_argument(
         "--output-dir", type=Path, metavar="DIR",
         help="Save timestamped result to this directory (e.g. runs/)",
+    )
+    run_parser.add_argument(
+        "--html", action="store_true",
+        help="Generate a standalone HTML viewer alongside the result JSON",
+    )
+    run_parser.add_argument(
+        "--html-output", type=Path, metavar="PATH",
+        help="Custom path for HTML viewer (implies --html)",
     )
 
     # tvplotlines write-synopses
