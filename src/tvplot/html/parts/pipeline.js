@@ -1021,6 +1021,97 @@ async function _resumeFromDraft() {
 
 // Preview & edit modal for the generated synopses. Returns the edited synopses
 // array or null if the user cancels.
+// Inline ZIP builder (STORED method, no compression). We ship a single-file
+// HTML viewer, so pulling in JSZip isn't an option. STORED is fine here —
+// synopses are small text files and Finder/unzip open them natively.
+// Spec reference: PKWARE APPNOTE.TXT sections 4.3.7 (Local File Header),
+// 4.3.12 (Central Directory) and 4.3.16 (End of Central Directory Record).
+
+let _CRC_TABLE = null;
+function _crc32(bytes) {
+  if (!_CRC_TABLE) {
+    _CRC_TABLE = new Uint32Array(256);
+    for (let i = 0; i < 256; i++) {
+      let c = i;
+      for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+      _CRC_TABLE[i] = c >>> 0;
+    }
+  }
+  let crc = 0xFFFFFFFF;
+  for (let i = 0; i < bytes.length; i++) crc = _CRC_TABLE[(crc ^ bytes[i]) & 0xFF] ^ (crc >>> 8);
+  return (crc ^ 0xFFFFFFFF) >>> 0;
+}
+
+function _makeZip(entries) {
+  const enc = new TextEncoder();
+  const files = entries.map(e => ({ nameBytes: enc.encode(e.name), dataBytes: enc.encode(e.text), crc: 0, offset: 0 }));
+  for (const f of files) f.crc = _crc32(f.dataBytes);
+
+  // Size the output up front so we can write with a single Uint8Array.
+  let localSize = 0;
+  let centralSize = 0;
+  for (const f of files) {
+    localSize += 30 + f.nameBytes.length + f.dataBytes.length;  // LFH + name + payload
+    centralSize += 46 + f.nameBytes.length;                     // CDH + name
+  }
+  const total = localSize + centralSize + 22;                   // +EOCD
+  const out = new Uint8Array(total);
+  const view = new DataView(out.buffer);
+
+  let pos = 0;
+  for (const f of files) {
+    f.offset = pos;
+    // Local File Header: little-endian u32 signature PK\x03\x04 at offset 0.
+    view.setUint32(pos, 0x04034B50, true); pos += 4;
+    view.setUint16(pos, 20, true); pos += 2;                    // version needed
+    view.setUint16(pos, 0, true); pos += 2;                     // flags
+    view.setUint16(pos, 0, true); pos += 2;                     // method 0 = STORED
+    view.setUint16(pos, 0, true); pos += 2;                     // mod time
+    view.setUint16(pos, 0x21, true); pos += 2;                  // mod date (1980-01-01, valid minimum)
+    view.setUint32(pos, f.crc, true); pos += 4;
+    view.setUint32(pos, f.dataBytes.length, true); pos += 4;    // compressed size = uncompressed
+    view.setUint32(pos, f.dataBytes.length, true); pos += 4;
+    view.setUint16(pos, f.nameBytes.length, true); pos += 2;
+    view.setUint16(pos, 0, true); pos += 2;                     // extra length
+    out.set(f.nameBytes, pos); pos += f.nameBytes.length;
+    out.set(f.dataBytes, pos); pos += f.dataBytes.length;
+  }
+
+  const centralStart = pos;
+  for (const f of files) {
+    view.setUint32(pos, 0x02014B50, true); pos += 4;            // Central Directory Header signature
+    view.setUint16(pos, 20, true); pos += 2;                    // version made by
+    view.setUint16(pos, 20, true); pos += 2;                    // version needed
+    view.setUint16(pos, 0, true); pos += 2;                     // flags
+    view.setUint16(pos, 0, true); pos += 2;                     // method
+    view.setUint16(pos, 0, true); pos += 2;                     // mod time
+    view.setUint16(pos, 0x21, true); pos += 2;                  // mod date
+    view.setUint32(pos, f.crc, true); pos += 4;
+    view.setUint32(pos, f.dataBytes.length, true); pos += 4;
+    view.setUint32(pos, f.dataBytes.length, true); pos += 4;
+    view.setUint16(pos, f.nameBytes.length, true); pos += 2;
+    view.setUint16(pos, 0, true); pos += 2;                     // extra length
+    view.setUint16(pos, 0, true); pos += 2;                     // comment length
+    view.setUint16(pos, 0, true); pos += 2;                     // disk number
+    view.setUint16(pos, 0, true); pos += 2;                     // internal attrs
+    view.setUint32(pos, 0, true); pos += 4;                     // external attrs
+    view.setUint32(pos, f.offset, true); pos += 4;              // LFH offset
+    out.set(f.nameBytes, pos); pos += f.nameBytes.length;
+  }
+
+  // End of Central Directory Record.
+  view.setUint32(pos, 0x06054B50, true); pos += 4;
+  view.setUint16(pos, 0, true); pos += 2;                       // disk number
+  view.setUint16(pos, 0, true); pos += 2;                       // disk with CD
+  view.setUint16(pos, files.length, true); pos += 2;
+  view.setUint16(pos, files.length, true); pos += 2;
+  view.setUint32(pos, centralSize, true); pos += 4;
+  view.setUint32(pos, centralStart, true); pos += 4;
+  view.setUint16(pos, 0, true); pos += 2;                       // comment length
+
+  return out;
+}
+
 function _confirmSynopses(show, season, synopses) {
   return new Promise((resolve) => {
     const overlay = document.getElementById('modal-overlay');
@@ -1034,15 +1125,28 @@ function _confirmSynopses(show, season, synopses) {
       </details>
     `).join('');
 
+    const currentSystem = (typeof Store !== 'undefined' && Store.getSystem) ? Store.getSystem() : 'hollywood';
+    const analysisTitle = 'Hollywood: screenwriting (story DNA, Freytag). Narratology: structuralist (Bal, Todorov, Greimas, Bremond).';
+
     body.innerHTML = `
       <h3 style="margin-top:0">Review synopses — ${show} S${String(season).padStart(2, '0')}</h3>
       <p style="color:#666;font-size:0.85em;margin-bottom:12px">
         Generated ${synopses.length} synopses. Edit anything that looks wrong, then run the pipeline.
       </p>
       <div style="max-height:55vh;overflow-y:auto;padding-right:4px">${rows}</div>
-      <div style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end">
-        <button id="analyze-cancel" style="padding:6px 14px;border-radius:4px;cursor:pointer">Cancel</button>
-        <button id="analyze-run" style="padding:6px 14px;border-radius:4px;cursor:pointer;background:#1a1a1a;color:#fff;border:none">Run pipeline →</button>
+      <div style="margin-top:16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:space-between">
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.9em" title="${analysisTitle}">
+          Analysis:
+          <select id="analyze-system" style="padding:5px 8px;border-radius:4px;border:1px solid var(--border,#ccc);background:transparent;color:inherit;font:inherit">
+            <option value="hollywood" ${currentSystem === 'hollywood' ? 'selected' : ''}>Hollywood</option>
+            <option value="narratology" ${currentSystem === 'narratology' ? 'selected' : ''}>Narratology</option>
+          </select>
+        </label>
+        <div style="display:flex;gap:8px">
+          <button id="analyze-cancel" class="btn">Cancel</button>
+          <button id="analyze-save-zip" class="btn">Save .zip</button>
+          <button id="analyze-run" class="btn btn-save">Run pipeline →</button>
+        </div>
       </div>
     `;
     overlay.classList.remove('hidden');
@@ -1067,6 +1171,20 @@ function _confirmSynopses(show, season, synopses) {
           Store.saveSynopsesDraft(show, season, readEdited());
         }, 500);
       });
+    });
+
+    document.getElementById('analyze-system').addEventListener('change', (e) => {
+      Store.setSystem(e.target.value);
+    });
+
+    document.getElementById('analyze-save-zip').addEventListener('click', () => {
+      const edited = readEdited();
+      if (!edited.length) return;
+      const entries = edited.map(s => ({ name: `${show} ${s.episode}.txt`, text: s.text }));
+      const zipBytes = _makeZip(entries);
+      const blob = new Blob([zipBytes], { type: 'application/zip' });
+      const zipName = `${show.replace(/\s+/g, '_')}_S${String(season).padStart(2, '0')}_synopses.zip`;
+      _downloadBlob(blob, zipName);
     });
 
     document.getElementById('analyze-cancel').addEventListener('click', () => {
