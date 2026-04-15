@@ -53,7 +53,12 @@ function _extractChunkText(parsed) {
 
 // --- API calls ---
 
-async function callAnthropic(systemPrompt, userMessage, apiKey, onChunk) {
+// Default output ceilings. Individual calls may override via `options.maxTokens`.
+// Anthropic sonnet-4 supports up to 64000; OpenAI gpt-4o caps at 16384.
+const _DEFAULT_MAX_TOKENS_ANTHROPIC = 16384;
+const _DEFAULT_MAX_TOKENS_OPENAI = 16384;
+
+async function callAnthropic(systemPrompt, userMessage, apiKey, onChunk, maxTokens) {
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -64,7 +69,7 @@ async function callAnthropic(systemPrompt, userMessage, apiKey, onChunk) {
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 16384,
+      max_tokens: maxTokens || _DEFAULT_MAX_TOKENS_ANTHROPIC,
       stream: true,
       system: systemPrompt,
       messages: [{ role: 'user', content: userMessage }],
@@ -79,7 +84,7 @@ async function callAnthropic(systemPrompt, userMessage, apiKey, onChunk) {
   return _readSSE(response, onChunk);
 }
 
-async function callOpenAI(systemPrompt, userMessage, apiKey, onChunk) {
+async function callOpenAI(systemPrompt, userMessage, apiKey, onChunk, maxTokens) {
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -88,7 +93,7 @@ async function callOpenAI(systemPrompt, userMessage, apiKey, onChunk) {
     },
     body: JSON.stringify({
       model: 'gpt-4o',
-      max_tokens: 16384,
+      max_tokens: maxTokens || _DEFAULT_MAX_TOKENS_OPENAI,
       stream: true,
       messages: [
         { role: 'system', content: systemPrompt },
@@ -105,23 +110,155 @@ async function callOpenAI(systemPrompt, userMessage, apiKey, onChunk) {
   return _readSSE(response, onChunk);
 }
 
-async function callLLM(systemPrompt, userMessage, provider, apiKey, onChunk) {
+// `options.maxTokens` overrides the provider default. Keeping it as a
+// trailing object means existing callers (positional onChunk only) still work.
+async function callLLM(systemPrompt, userMessage, provider, apiKey, onChunk, options) {
+  const maxTokens = options && options.maxTokens;
   if (provider === 'anthropic') {
-    return callAnthropic(systemPrompt, userMessage, apiKey, onChunk);
+    return callAnthropic(systemPrompt, userMessage, apiKey, onChunk, maxTokens);
   }
-  return callOpenAI(systemPrompt, userMessage, apiKey, onChunk);
+  return callOpenAI(systemPrompt, userMessage, apiKey, onChunk, maxTokens);
 }
 
 // --- JSON parsing from LLM responses ---
+//
+// Failure modes this function is designed to survive (examples collected from
+// real paid responses that blew up before the repair ladder existed):
+//
+//   1. Markdown fences with trailing commentary:
+//        ```json\n{"episodes":[...]}\n```\n\nI hope this helps!
+//   2. Unescaped newline inside a string value:
+//        {"episode":"S01E01","text":"A line.\nAnother line."}
+//   3. Unescaped tab inside a string value:
+//        {"text":"col1\tcol2"}
+//   4. Truncation at max_tokens (partial final episode, broken closing braces).
+//      In that case the outer object won't parse; per-episode salvage recovers
+//      the N episodes that did finish.
+//   5. Trailing prose without fences:
+//        {"episodes":[...]}\n\nNote: episode 7 is a clip show.
+
+function _extractOutermostObject(text) {
+  // Walk the text char-by-char, tracking string context so braces inside
+  // strings don't affect nesting depth. Returns the balanced {...} substring
+  // or null if no balanced object is found.
+  const start = text.indexOf('{');
+  if (start < 0) return null;
+
+  let depth = 0;
+  let inString = false;
+  let escape = false;
+
+  for (let i = start; i < text.length; i++) {
+    const ch = text[i];
+    if (escape) { escape = false; continue; }
+    if (inString) {
+      if (ch === '\\') { escape = true; continue; }
+      if (ch === '"') { inString = false; }
+      continue;
+    }
+    if (ch === '"') { inString = true; continue; }
+    if (ch === '{') depth++;
+    else if (ch === '}') {
+      depth--;
+      if (depth === 0) return text.slice(start, i + 1);
+    }
+  }
+  return null;
+}
+
+function _escapeControlCharsInStrings(text) {
+  // Walk chars, escape raw newlines/tabs/CRs that appear *inside* string
+  // literals. Structural whitespace (between tokens) is left alone.
+  let out = '';
+  let inString = false;
+  let escape = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (escape) {
+      out += ch;
+      escape = false;
+      continue;
+    }
+    if (inString) {
+      if (ch === '\\') { out += ch; escape = true; continue; }
+      if (ch === '"') { inString = false; out += ch; continue; }
+      if (ch === '\n') { out += '\\n'; continue; }
+      if (ch === '\r') { out += '\\r'; continue; }
+      if (ch === '\t') { out += '\\t'; continue; }
+      out += ch;
+      continue;
+    }
+    if (ch === '"') { inString = true; out += ch; continue; }
+    out += ch;
+  }
+  return out;
+}
+
+function _salvageEpisodes(text) {
+  // Last-ditch: find individual episode objects and parse each in isolation.
+  // Better to give the user 8 of 10 episodes than zero.
+  const pattern = /\{\s*"episode"\s*:\s*"S\d+E\d+"[\s\S]*?\}/g;
+  const matches = text.match(pattern) || [];
+  const episodes = [];
+  for (const chunk of matches) {
+    try {
+      const ep = JSON.parse(chunk);
+      if (ep && ep.episode) episodes.push(ep);
+    } catch (_) {
+      // Try escaping control chars inside this one object
+      try {
+        const ep = JSON.parse(_escapeControlCharsInStrings(chunk));
+        if (ep && ep.episode) episodes.push(ep);
+      } catch (_) { /* skip unrecoverable chunk */ }
+    }
+  }
+  return episodes.length > 0 ? { episodes } : null;
+}
 
 function _parseJSONResponse(text) {
-  // Strip markdown code fences if present
+  // Strip markdown fences.
   let cleaned = text.trim();
   const fenceMatch = cleaned.match(/```(?:json)?\s*\n?([\s\S]*?)\n?\s*```/);
-  if (fenceMatch) {
-    cleaned = fenceMatch[1].trim();
+  if (fenceMatch) cleaned = fenceMatch[1].trim();
+
+  // Stage 1: fast path.
+  try { return JSON.parse(cleaned); } catch (_) { /* fall through */ }
+
+  // Stage 2: outermost balanced {...} — handles trailing commentary.
+  const balanced = _extractOutermostObject(cleaned);
+  if (balanced) {
+    try {
+      const parsed = JSON.parse(balanced);
+      console.warn('[_parseJSONResponse] recovered via outermost-object extraction');
+      return parsed;
+    } catch (_) { /* fall through */ }
+
+    // Stage 3: escape unescaped control chars inside strings.
+    try {
+      const parsed = JSON.parse(_escapeControlCharsInStrings(balanced));
+      console.warn('[_parseJSONResponse] recovered via control-char escaping');
+      return parsed;
+    } catch (_) { /* fall through */ }
   }
-  return JSON.parse(cleaned);
+
+  // Same stage 3 but over the full cleaned text (no balanced object found).
+  try {
+    const parsed = JSON.parse(_escapeControlCharsInStrings(cleaned));
+    console.warn('[_parseJSONResponse] recovered via control-char escaping (no balanced object)');
+    return parsed;
+  } catch (_) { /* fall through */ }
+
+  // Stage 4: salvage individual episode objects from {"episodes":[...]}.
+  const salvaged = _salvageEpisodes(cleaned);
+  if (salvaged) {
+    console.warn(`[_parseJSONResponse] recovered ${salvaged.episodes.length} episode(s) via per-episode salvage`);
+    return salvaged;
+  }
+
+  // Nothing worked — rethrow a useful error. Caller is responsible for having
+  // preserved the raw text before calling us (see _generateSynopses).
+  throw new SyntaxError('Could not parse LLM response as JSON after repair attempts');
 }
 
 // --- Embedded prompts (inlined by build.py from prompts/{system}/*.md) ---
@@ -692,14 +829,31 @@ RULES:
 - If you don't know this show well enough to produce accurate synopses, return {"error": "unknown show"}
 
 OUTPUT: strict JSON with shape
-{"episodes": [{"episode": "S01E01", "text": "..."}, ...]}`;
+{"episodes": [{"episode": "S01E01", "text": "..."}, ...]}
+
+JSON HYGIENE: emit the JSON object and nothing else — no prose, no commentary, no markdown fences before or after. Inside string values, escape every double-quote as \\" and every newline as \\n; do not emit raw control characters inside strings.`;
 
 async function _generateSynopses(show, season, provider, apiKey, onProgress) {
   const userMessage = JSON.stringify({ show, season });
   onProgress(`Asking ${provider === 'anthropic' ? 'Claude' : 'GPT'} for synopses of ${show} S${String(season).padStart(2, '0')}...`);
+  // Anthropic sonnet-4 supports 64k output tokens; 32k gives generous headroom
+  // for 10+ synopses (≈5k tokens typical) without risking truncation. OpenAI
+  // gpt-4o is still capped at 16384 (the provider default).
+  const maxTokens = provider === 'anthropic' ? 32000 : undefined;
   const response = await callLLM(
     _ANALYZE_SYSTEM_PROMPT, userMessage, provider, apiKey, null,
+    { maxTokens },
   );
+
+  // Persist the raw response BEFORE attempting to parse. Parse failures must
+  // not silently destroy a response the user paid for — they can recover it
+  // from DevTools → Application → Local Storage if we fail downstream.
+  try {
+    localStorage.setItem('tvplot_last_raw_synopses', JSON.stringify({
+      show, season, rawText: response, timestamp: Date.now(), provider,
+    }));
+  } catch (_) { /* localStorage full or disabled — non-fatal */ }
+
   const parsed = _parseJSONResponse(response);
   if (parsed.error) {
     throw new Error(
@@ -746,23 +900,45 @@ async function _analyzeSeries(show, season) {
   _showPipelineProgress();
   _updatePipelineProgress('Generating synopses from the model…', 0, 6);
 
+  // One automatic retry: parse failures sometimes clear on a second sampling
+  // from the model. More than one retry would silently burn the user's credits.
   let synopses;
-  try {
-    const episodes = await _generateSynopses(show, season, provider, apiKey, (msg) => {
-      _updatePipelineProgress(msg, 0, 6);
-    });
-    synopses = episodes.map(e => ({ episode: e.episode, text: String(e.text || '').trim() }));
-    synopses = synopses.filter(s => s.episode && s.text);
-    if (synopses.length === 0) throw new Error('All returned synopses were empty.');
-  } catch (err) {
-    _hidePipelineProgress();
-    // Return to welcome so the user isn't stranded on an empty grid with a
-    // dropdown whose only option is "+ Analyze another…" (which, being the
-    // current value, no longer fires a `change` event on re-selection).
-    showScreen('welcome');
-    _renderResumeBanner && _renderResumeBanner();
-    alert(`Couldn't fetch synopses: ${err.message}`);
-    return;
+  let attempt = 0;
+  while (true) {
+    try {
+      const episodes = await _generateSynopses(show, season, provider, apiKey, (msg) => {
+        _updatePipelineProgress(msg, 0, 6);
+      });
+      synopses = episodes.map(e => ({ episode: e.episode, text: String(e.text || '').trim() }));
+      synopses = synopses.filter(s => s.episode && s.text);
+      if (synopses.length === 0) throw new Error('All returned synopses were empty.');
+      break;
+    } catch (err) {
+      _hidePipelineProgress();
+      // Raw response is in localStorage (saved inside _generateSynopses before
+      // parse). Surface that key in the message so the user can recover.
+      const recovery =
+        'Raw response saved to localStorage key `tvplot_last_raw_synopses` — ' +
+        'contact support or open DevTools → Application → Local Storage to recover.';
+      if (attempt === 0) {
+        const retry = window.confirm(
+          `Couldn't fetch synopses: ${err.message}\n\n${recovery}\n\n` +
+          `Retry with another paid call to ${provider === 'anthropic' ? 'Claude' : 'GPT'}?`,
+        );
+        if (retry) {
+          attempt++;
+          _showPipelineProgress();
+          _updatePipelineProgress('Retrying synopsis generation…', 0, 6);
+          continue;
+        }
+      } else {
+        alert(`Couldn't fetch synopses on retry either: ${err.message}\n\n${recovery}`);
+      }
+      // Route back to welcome so the user isn't stranded on an empty grid.
+      showScreen('welcome');
+      _renderResumeBanner && _renderResumeBanner();
+      return;
+    }
   }
 
   // Persist the draft BEFORE opening the review modal. This is the whole
