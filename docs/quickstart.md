@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-pip install tvplotlines
+pip install tvplot
 export ANTHROPIC_API_KEY=sk-ant-...   # Anthropic (default)
 # or
 export OPENAI_API_KEY=sk-...          # OpenAI, DeepSeek, Groq, any OpenAI-compatible
@@ -23,26 +23,26 @@ breaking-bad/
 ## CLI — analyze a folder
 
 ```bash
-tvplotlines run breaking-bad/
+tvplot run breaking-bad/
 ```
 
 The show name is taken from the folder name. Override with `--show` if needed:
 
 ```bash
-tvplotlines run got/ --show "Game of Thrones"
+tvplot run got/ --show "Game of Thrones"
 ```
 
 Pick the analysis system — `hollywood` (default, screenwriting model) or `narratology` (structuralist):
 
 ```bash
-tvplotlines run breaking-bad/ --system narratology
+tvplot run breaking-bad/ --system narratology
 ```
 
 Produce a standalone HTML viewer alongside the JSON (opens in any browser, no server needed):
 
 ```bash
-tvplotlines run breaking-bad/ --html                       # writes …/breaking-bad.html
-tvplotlines run breaking-bad/ --html-output viewer.html    # custom path
+tvplot run breaking-bad/ --html                       # writes …/breaking-bad.html
+tvplot run breaking-bad/ --html-output viewer.html    # custom path
 ```
 
 ## Standalone viewer — analyze from the browser
@@ -50,8 +50,8 @@ tvplotlines run breaking-bad/ --html-output viewer.html    # custom path
 Build the viewer once, then ship the `.html` file anywhere:
 
 ```bash
-python -m tvplotlines.html.build --output tvplotlines.html
-open tvplotlines.html
+python -m tvplot.html.build --output tvplot.html
+open tvplot.html
 ```
 
 In the viewer:
@@ -66,7 +66,7 @@ If the model doesn't know the show, drop your own `.txt` files via **+ Load**.
 ## Python
 
 ```python
-from tvplotlines import load_synopses_dir, get_plotlines
+from tvplot import load_synopses_dir, get_plotlines
 
 show, season, episodes = load_synopses_dir("breaking-bad/")
 result = get_plotlines(show, season, episodes)

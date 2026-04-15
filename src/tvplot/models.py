@@ -1,7 +1,7 @@
-"""Data models for tvplotlines pipeline.
+"""Data models for tvplot pipeline.
 
 These dataclasses mirror the JSON output of Pass 0, Pass 1, and Pass 2 prompts.
-Glossary (tvplotlines-glossary.md) is the source of truth for definitions.
+Glossary (tvplot-glossary.md) is the source of truth for definitions.
 """
 
 from __future__ import annotations
@@ -98,7 +98,7 @@ class Verdict:
 
 @dataclass
 class TVPlotlinesResult:
-    """Complete output of the tvplotlines pipeline."""
+    """Complete output of the tvplot pipeline."""
 
     context: SeriesContext
     cast: list[CastMember] = field(default_factory=list)

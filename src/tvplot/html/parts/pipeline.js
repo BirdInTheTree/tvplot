@@ -779,7 +779,7 @@ function _confirmSynopses(show, season, synopses) {
 }
 
 // ══════════════════════════════════════════════════════════════════
-// Narratology pipeline — mirrors src/tvplotlines/narratology.py.
+// Narratology pipeline — mirrors src/tvplot/narratology.py.
 // Result shape is hollywood-compatible: actant fields are mapped onto
 // hero/goal/obstacle/stakes so the grid + analytics render unchanged.
 // ══════════════════════════════════════════════════════════════════

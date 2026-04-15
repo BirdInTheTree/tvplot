@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from collections import Counter
 
-from tvplotlines.models import EpisodeBreakdown
+from tvplot.models import EpisodeBreakdown
 
 
 def compute_coverage(episodes: list[EpisodeBreakdown]) -> float:

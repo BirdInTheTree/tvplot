@@ -1,13 +1,13 @@
-"""Example: run tvplotlines pipeline on synopsis files and save result.
+"""Example: run tvplot pipeline on synopsis files and save result.
 
 Equivalent CLI command:
-    tvplotlines run synopses/BB_S01E*.txt --show "Breaking Bad" --season 1 -o result.json
+    tvplot run synopses/BB_S01E*.txt --show "Breaking Bad" --season 1 -o result.json
 """
 
 import json
 from pathlib import Path
 
-from tvplotlines import get_plotlines
+from tvplot import get_plotlines
 
 SYNOPSES_DIR = Path("synopses")
 

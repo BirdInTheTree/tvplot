@@ -3,8 +3,8 @@
 ## Setup
 
 ```bash
-git clone https://github.com/BirdInTheTree/tvplotlines.git
-cd tvplotlines
+git clone https://github.com/BirdInTheTree/tvplot.git
+cd tvplot
 pip install -e ".[dev]"
 ```
 
@@ -21,7 +21,7 @@ Tests use mocked LLM responses — no API key needed.
 - Python 3.11+
 - Type hints on public functions
 - `verb_noun` naming: `extract_plotlines`, `detect_context`
-- Prompts live in `src/tvplotlines/prompts_en/` as markdown files
+- Prompts live in `src/tvplot/prompts_en/` as markdown files
 
 ## Pull requests
 

@@ -5,7 +5,7 @@
 Main entry point. Extracts plotlines from a season of TV synopses via an LLM pipeline.
 
 ```python
-from tvplotlines import get_plotlines
+from tvplot import get_plotlines
 
 result = get_plotlines(
     show="House",
@@ -135,32 +135,32 @@ Narratology runs its per-episode passes (fabula, story) in `parallel` mode uncon
 
 ## LLM providers
 
-tvplotlines works with Anthropic (default) and any OpenAI-compatible API.
+tvplot works with Anthropic (default) and any OpenAI-compatible API.
 
 ```bash
 # Anthropic (default)
 export ANTHROPIC_API_KEY=sk-ant-...
-tvplotlines run house/
+tvplot run house/
 
 # OpenAI
 export OPENAI_API_KEY=sk-...
-tvplotlines run house/ --provider openai
+tvplot run house/ --provider openai
 
 # Ollama (local, free)
 ollama pull qwen2.5:14b
-tvplotlines run house/ --provider ollama
+tvplot run house/ --provider ollama
 
 # DeepSeek
 export DEEPSEEK_API_KEY=sk-...
-tvplotlines run house/ --provider deepseek
+tvplot run house/ --provider deepseek
 
 # Any OpenAI-compatible endpoint
-tvplotlines run house/ --provider openai \
+tvplot run house/ --provider openai \
     --base-url https://api.together.xyz/v1 \
     --model meta-llama/Llama-3-70b
 
 # Pick the analysis system
-tvplotlines run house/ --system narratology
+tvplot run house/ --system narratology
 ```
 
 In Python:
@@ -179,7 +179,7 @@ result = get_plotlines(
 ## CLI flags
 
 ```
-tvplotlines run <files|dir> [options]
+tvplot run <files|dir> [options]
 
   --show NAME               Override inferred show title
   --season N                Override inferred season
@@ -198,7 +198,7 @@ tvplotlines run <files|dir> [options]
 ```
 
 ```
-tvplotlines write-synopses SHOW [options]
+tvplot write-synopses SHOW [options]
 
   --season N                Season number (default: 1)
   --system hollywood|narratology   Which synopsis-writer prompt to use
@@ -214,7 +214,7 @@ tvplotlines write-synopses SHOW [options]
 
 ## Format
 
-tvplotlines classifies shows into four structural formats that determine how plotlines are extracted:
+tvplot classifies shows into four structural formats that determine how plotlines are extracted:
 
 - **Procedural** — self-contained episode stories (House, CSI)
 - **Serial** — continuous arcs across episodes (Breaking Bad, The Wire)

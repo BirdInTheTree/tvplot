@@ -27,7 +27,7 @@ function _exportFilename(data) {
   const ctx = data.context || {};
   if (ctx.series && ctx.season) return ctx.series.replace(/\s+/g, '_') + '_' + ctx.season;
   if (ctx.series) return ctx.series.replace(/\s+/g, '_');
-  return 'tvplotlines_export';
+  return 'tvplot_export';
 }
 
 function _resolveCharName(charId, cast) {
@@ -274,7 +274,7 @@ function _buildPDF(data) {
   let y = margin;
 
   const ctx = data.context || {};
-  const seriesLabel = [ctx.series, ctx.season].filter(Boolean).join(' · ') || 'tvplotlines';
+  const seriesLabel = [ctx.series, ctx.season].filter(Boolean).join(' · ') || 'tvplot';
 
   const line = (text, size, weight = 'normal', indent = 0, color = [30, 30, 30]) => {
     doc.setFont('helvetica', weight);

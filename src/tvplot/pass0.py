@@ -8,9 +8,9 @@ from __future__ import annotations
 
 import json
 
-from tvplotlines.llm import LLMConfig, call_llm
-from tvplotlines.models import SeriesContext
-from tvplotlines.prompts import load_prompt
+from tvplot.llm import LLMConfig, call_llm
+from tvplot.models import SeriesContext
+from tvplot.prompts import load_prompt
 
 _VALID_FORMATS = {"procedural", "serial", "hybrid", "ensemble"}
 

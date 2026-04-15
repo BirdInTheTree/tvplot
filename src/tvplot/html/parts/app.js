@@ -3,35 +3,35 @@
 // --- localStorage manager ---
 
 const Store = {
-  getKey: () => localStorage.getItem('tvplotlines_api_key'),
-  getProvider: () => localStorage.getItem('tvplotlines_provider'),
-  getSystem: () => localStorage.getItem('tvplotlines_system') || 'hollywood',
-  setSystem: (system) => localStorage.setItem('tvplotlines_system', system),
+  getKey: () => localStorage.getItem('tvplot_api_key'),
+  getProvider: () => localStorage.getItem('tvplot_provider'),
+  getSystem: () => localStorage.getItem('tvplot_system') || 'hollywood',
+  setSystem: (system) => localStorage.setItem('tvplot_system', system),
   setKey: (provider, key) => {
-    localStorage.setItem('tvplotlines_provider', provider);
-    localStorage.setItem('tvplotlines_api_key', key);
+    localStorage.setItem('tvplot_provider', provider);
+    localStorage.setItem('tvplot_api_key', key);
   },
-  getResults: () => JSON.parse(localStorage.getItem('tvplotlines_results') || '{}'),
+  getResults: () => JSON.parse(localStorage.getItem('tvplot_results') || '{}'),
   saveResult: (name, data) => {
     const results = Store.getResults();
     results[name] = data;
-    localStorage.setItem('tvplotlines_results', JSON.stringify(results));
+    localStorage.setItem('tvplot_results', JSON.stringify(results));
   },
   removeResult: (name) => {
     const results = Store.getResults();
     delete results[name];
-    localStorage.setItem('tvplotlines_results', JSON.stringify(results));
+    localStorage.setItem('tvplot_results', JSON.stringify(results));
   },
-  getSettings: () => JSON.parse(localStorage.getItem('tvplotlines_settings') || '{}'),
+  getSettings: () => JSON.parse(localStorage.getItem('tvplot_settings') || '{}'),
   saveSetting: (key, val) => {
     const s = Store.getSettings();
     s[key] = val;
-    localStorage.setItem('tvplotlines_settings', JSON.stringify(s));
+    localStorage.setItem('tvplot_settings', JSON.stringify(s));
   },
-  hasSeenOnboarding: () => localStorage.getItem('tvplotlines_onboarding_seen') === 'true',
-  markOnboardingSeen: () => localStorage.setItem('tvplotlines_onboarding_seen', 'true'),
-  aiFooterDismissed: () => localStorage.getItem('tvplotlines_ai_footer_dismissed') === 'true',
-  dismissAIFooter: () => localStorage.setItem('tvplotlines_ai_footer_dismissed', 'true'),
+  hasSeenOnboarding: () => localStorage.getItem('tvplot_onboarding_seen') === 'true',
+  markOnboardingSeen: () => localStorage.setItem('tvplot_onboarding_seen', 'true'),
+  aiFooterDismissed: () => localStorage.getItem('tvplot_ai_footer_dismissed') === 'true',
+  dismissAIFooter: () => localStorage.setItem('tvplot_ai_footer_dismissed', 'true'),
 };
 
 // --- Screen routing ---

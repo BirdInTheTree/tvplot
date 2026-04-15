@@ -6,7 +6,7 @@ import json
 
 import pytest
 
-from tvplotlines.synopses_writer import (
+from tvplot.synopses_writer import (
     fetch_season_page,
     parse_episode_table,
     rewrite_synopses,
@@ -87,7 +87,7 @@ def _make_error_response() -> MagicMock:
 
 
 class TestFetchSeasonPage:
-    @patch("tvplotlines.synopses_writer.httpx.get")
+    @patch("tvplot.synopses_writer.httpx.get")
     def test_title_construction(self, mock_get):
         """Verify URL params for standard show names."""
         mock_get.return_value = _make_success_response("<html>content</html>")
@@ -99,7 +99,7 @@ class TestFetchSeasonPage:
         params = call_args.kwargs.get("params") or call_args[1].get("params")
         assert params["page"] == "House_(season_1)"
 
-    @patch("tvplotlines.synopses_writer.httpx.get")
+    @patch("tvplot.synopses_writer.httpx.get")
     def test_title_construction_multi_word(self, mock_get):
         """Spaces in show name become underscores."""
         mock_get.return_value = _make_success_response()
@@ -110,7 +110,7 @@ class TestFetchSeasonPage:
         params = call_args.kwargs.get("params") or call_args[1].get("params")
         assert params["page"] == "Breaking_Bad_(season_2)"
 
-    @patch("tvplotlines.synopses_writer.httpx.get")
+    @patch("tvplot.synopses_writer.httpx.get")
     def test_wiki_title_override(self, mock_get):
         """Explicit wiki_title skips automatic construction."""
         mock_get.return_value = _make_success_response()
@@ -121,10 +121,10 @@ class TestFetchSeasonPage:
         params = call_args.kwargs.get("params") or call_args[1].get("params")
         assert params["page"] == "House_season_1"
 
-    @patch("tvplotlines.synopses_writer._search_wikipedia",
+    @patch("tvplot.synopses_writer._search_wikipedia",
            return_value=["House_(season_1)", "House_season_1"])
-    @patch("tvplotlines.synopses_writer.httpx.get")
-    @patch("tvplotlines.synopses_writer.time.sleep")
+    @patch("tvplot.synopses_writer.httpx.get")
+    @patch("tvplot.synopses_writer.time.sleep")
     def test_fallback_on_missing_page(self, _mock_sleep, mock_get, _mock_search):
         """First title 404 → tries second naming convention."""
         mock_get.side_effect = [
@@ -141,10 +141,10 @@ class TestFetchSeasonPage:
             mock_get.call_args_list[1][1].get("params")
         assert second_call_params["page"] == "House_season_1"
 
-    @patch("tvplotlines.synopses_writer._search_wikipedia",
+    @patch("tvplot.synopses_writer._search_wikipedia",
            return_value=["House_(season_1)", "House_season_1"])
-    @patch("tvplotlines.synopses_writer.httpx.get")
-    @patch("tvplotlines.synopses_writer.time.sleep")
+    @patch("tvplot.synopses_writer.httpx.get")
+    @patch("tvplot.synopses_writer.time.sleep")
     def test_all_titles_missing_raises(self, _mock_sleep, mock_get, _mock_search):
         """Both naming conventions fail → raise with helpful message."""
         mock_get.return_value = _make_error_response()
@@ -163,8 +163,8 @@ _SAMPLE_EPISODES = [
 
 
 class TestRewriteSynopses:
-    @patch("tvplotlines.llm.call_llm_parallel")
-    @patch("tvplotlines.prompts.load_prompt", return_value="system prompt")
+    @patch("tvplot.llm.call_llm_parallel")
+    @patch("tvplot.prompts.load_prompt", return_value="system prompt")
     def test_rewrite_returns_synopsis_texts(self, _mock_prompt, mock_parallel):
         """Returns list of synopsis strings from LLM JSON responses."""
         mock_parallel.return_value = [
@@ -172,7 +172,7 @@ class TestRewriteSynopses:
             {"synopsis": "Full synopsis for episode 2..."},
         ]
 
-        from tvplotlines.llm import LLMConfig
+        from tvplot.llm import LLMConfig
         config = LLMConfig()
 
         result = rewrite_synopses(_SAMPLE_EPISODES, "House", 1, config, mode="parallel")
@@ -181,13 +181,13 @@ class TestRewriteSynopses:
         assert result[0] == "Full synopsis for episode 1..."
         assert result[1] == "Full synopsis for episode 2..."
 
-    @patch("tvplotlines.llm.call_llm_parallel")
-    @patch("tvplotlines.prompts.load_prompt", return_value="system prompt")
+    @patch("tvplot.llm.call_llm_parallel")
+    @patch("tvplot.prompts.load_prompt", return_value="system prompt")
     def test_rewrite_user_messages_contain_episode_info(self, _mock_prompt, mock_parallel):
         """User messages include show, season, episode number, description."""
         mock_parallel.return_value = [{"synopsis": "x"}, {"synopsis": "y"}]
 
-        from tvplotlines.llm import LLMConfig
+        from tvplot.llm import LLMConfig
         config = LLMConfig()
 
         rewrite_synopses(
@@ -201,13 +201,13 @@ class TestRewriteSynopses:
         assert "A teacher collapses." in user_messages[0]
         assert "procedural" in user_messages[0]
 
-    @patch("tvplotlines.llm.call_llm_parallel")
-    @patch("tvplotlines.prompts.load_prompt", return_value="system prompt")
+    @patch("tvplot.llm.call_llm_parallel")
+    @patch("tvplot.prompts.load_prompt", return_value="system prompt")
     def test_rewrite_caches_system_prompt(self, _mock_prompt, mock_parallel):
         """System prompt is cached for efficiency."""
         mock_parallel.return_value = [{"synopsis": "x"}]
 
-        from tvplotlines.llm import LLMConfig
+        from tvplot.llm import LLMConfig
         result = rewrite_synopses(
             [_SAMPLE_EPISODES[0]], "House", 1, LLMConfig(), mode="parallel",
         )

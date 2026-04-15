@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "tvplotlines"
-version = "0.1.0"
+name = "tvplot"
+version = "0.2.0"
 description = "Extract plotlines from TV series synopses using LLM"
 readme = "README.md"
 license = "MIT"
@@ -38,8 +38,8 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/BirdInTheTree/tvplotlines"
-Documentation = "https://github.com/BirdInTheTree/tvplotlines/tree/main/docs"
+Repository = "https://github.com/BirdInTheTree/tvplot"
+Documentation = "https://github.com/BirdInTheTree/tvplot/tree/main/docs"
 
 [project.optional-dependencies]
 dotenv = ["python-dotenv>=1.0"]
@@ -56,13 +56,13 @@ dev = [
 ]
 
 [project.scripts]
-tvplotlines = "tvplotlines.cli:main"
+tvplot = "tvplot.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/tvplotlines"]
+packages = ["src/tvplot"]
 artifacts = [
-    "src/tvplotlines/prompts/hollywood/*.md",
-    "src/tvplotlines/prompts/narratology/*.md",
+    "src/tvplot/prompts/hollywood/*.md",
+    "src/tvplot/prompts/narratology/*.md",
 ]
 
 [tool.pytest.ini_options]

@@ -1,4 +1,4 @@
-# tvplotlines
+# tvplot
 
 A Python library — and a standalone HTML viewer — that extracts plotlines from a season of TV synopses using LLMs.
 
@@ -8,8 +8,8 @@ Feed episode synopses → get structured plotlines, character arcs, and per-epis
 
 Three ways to run it:
 
-- **Python library** — `from tvplotlines import get_plotlines`
-- **CLI** — `tvplotlines run my-show/ [--system narratology] [--html]`
+- **Python library** — `from tvplot import get_plotlines`
+- **CLI** — `tvplot run my-show/ [--system narratology] [--html]`
 - **Standalone HTML viewer** — one self-contained file that runs the whole pipeline in the browser, takes a show name + season, fetches synopses from the LLM, and renders the grid
 
 ## Quick links

@@ -153,11 +153,11 @@ Pass 3 emits actants with plain-English keys; `prompts/narratology/glossary.md` 
 }
 ```
 
-Enums: see `src/tvplotlines/prompts/narratology/glossary.md` for `function` (8 values), `direction` (3), `kind` (2).
+Enums: see `src/tvplot/prompts/narratology/glossary.md` for `function` (8 values), `direction` (3), `kind` (2).
 
 **episodes**: map from episode id → {theme}
 
-### `hollywood` (for backward compatibility with tvplotlines)
+### `hollywood` (for backward compatibility with tvplot)
 
 Version 1.0.
 
@@ -187,9 +187,9 @@ No plotlines-specific fields — kishōtenketsu does not analyze plotlines as se
 - **Graceful degradation**: the viewer shows whatever layer is selected. If a layer lacks a field the viewer expects, the viewer shows a placeholder.
 - **Multiple layers per file**: a single file can contain many layers. Useful for comparative study.
 
-## Converting old tvplotlines output
+## Converting old tvplot output
 
-Old `tvplotlines` JSON has a flat structure with Hollywood-only fields. Converter:
+Old `tvplot` JSON has a flat structure with Hollywood-only fields. Converter:
 
 1. Extract `context`, `cast`, `episodes`, events (flatten per-episode `events` lists), plotlines, and assignments → `base`.
 2. Extract Hollywood fields (hero/goal/obstacle/stakes, function, interactions, rank, etc.) → `layers[hollywood]`.

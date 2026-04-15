@@ -26,9 +26,9 @@ import logging
 import re
 from collections import defaultdict
 
-from tvplotlines.callbacks import PipelineCallback
-from tvplotlines.llm import LLMConfig, call_llm, call_llm_parallel
-from tvplotlines.models import (
+from tvplot.callbacks import PipelineCallback
+from tvplot.llm import LLMConfig, call_llm, call_llm_parallel
+from tvplot.models import (
     CastMember,
     EpisodeBreakdown,
     Event,
@@ -38,12 +38,12 @@ from tvplotlines.models import (
     TVPlotlinesResult,
     Verdict,
 )
-from tvplotlines.postprocess import (
+from tvplot.postprocess import (
     assign_orphan_events,
     compute_ranks,
     compute_span,
 )
-from tvplotlines.prompts import load_prompt
+from tvplot.prompts import load_prompt
 
 logger = logging.getLogger(__name__)
 

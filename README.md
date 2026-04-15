@@ -1,55 +1,55 @@
-# tvplotlines
+# tvplot
 
-[![PyPI](https://img.shields.io/pypi/v/tvplotlines?cacheSeconds=3600)](https://pypi.org/project/tvplotlines/)
+[![PyPI](https://img.shields.io/pypi/v/tvplot?cacheSeconds=3600)](https://pypi.org/project/tvplot/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/pypi/pyversions/tvplotlines?cacheSeconds=3600)](https://pypi.org/project/tvplotlines/)
+[![Python](https://img.shields.io/pypi/pyversions/tvplot?cacheSeconds=3600)](https://pypi.org/project/tvplot/)
 
-Turn episode synopses into a writers' room corkboard — story engine, plotlines with their *story DNA* and *arcs* (see [glossary](src/tvplotlines/prompts/hollywood/glossary.md)) — in one function call.
+Turn episode synopses into a writers' room corkboard — story engine, plotlines with their *story DNA* and *arcs* (see [glossary](src/tvplot/prompts/hollywood/glossary.md)) — in one function call.
 
 For TV researchers, screenwriters, and anyone building narrative analysis tools or a tv series.
 
 <p align="center">
   <a href="https://birdinthetree.github.io/plotter-app/">
-    <img src="docs/images/app-screenshot-1.png" alt="tvplotlines output — plotline×episode grid for Breaking Bad S01">
+    <img src="docs/images/app-screenshot-1.png" alt="tvplot output — plotline×episode grid for Breaking Bad S01">
   </a>
   <br>
   <strong><a href="https://birdinthetree.github.io/plotter-app/">Try the interactive demo →</a></strong>
 </p>
 
-A naive LLM prompt covers 5–12% of a season's source material. tvplotlines covers **78–91%** — by separating *what* the model looks for (narrative theory) from *how* it calculates the results (code).
+A naive LLM prompt covers 5–12% of a season's source material. tvplot covers **78–91%** — by separating *what* the model looks for (narrative theory) from *how* it calculates the results (code).
 
 ## Two ways to use it
 
-**Library / CLI** — `pip install tvplotlines`, point it at synopsis files, get JSON.
+**Library / CLI** — `pip install tvplot`, point it at synopsis files, get JSON.
 
 **Standalone HTML viewer** — one self-contained `.html` file that runs the whole pipeline in your browser. Type a show name, the viewer asks the LLM for synopses, runs the analysis, and renders the grid. No server, no dependencies — download the file and it works.
 
 ## Quick start (CLI)
 
 ```bash
-pip install tvplotlines
+pip install tvplot
 export ANTHROPIC_API_KEY=sk-ant-…
 ```
 
 Working on your own series? Point it at your synopses — one `.txt` file per episode (see [Input format](#input-format)):
 
 ```bash
-tvplotlines run my-series/
+tvplot run my-series/
 ```
 
 Want to analyze an existing show? The optional `writer` extension generates synopses from online sources:
 
 ```bash
-pip install 'tvplotlines[writer]'
-tvplotlines write-synopses "Mad Men" --season 1
-tvplotlines run mad-men/
+pip install 'tvplot[writer]'
+tvplot write-synopses "Mad Men" --season 1
+tvplot run mad-men/
 ```
 
 Generate a standalone HTML viewer alongside the JSON:
 
 ```bash
-tvplotlines run mad-men/ --html              # writes mad-men.json + mad-men.html
-tvplotlines run mad-men/ --html-output viewer.html
+tvplot run mad-men/ --html              # writes mad-men.json + mad-men.html
+tvplot run mad-men/ --html-output viewer.html
 ```
 
 Multiple seasons are supported — plotline continuity is tracked across seasons (see [Python API](#python-api)).
@@ -59,8 +59,8 @@ Pre-computed results are in [`examples/results/`](examples/results/) — explore
 ## Quick start (standalone viewer)
 
 ```bash
-python -m tvplotlines.html.build --output tvplotlines.html
-open tvplotlines.html
+python -m tvplot.html.build --output tvplot.html
+open tvplot.html
 ```
 
 Then in the browser:
@@ -180,13 +180,13 @@ breaking-bad/
 The folder name becomes the show title. Override with `--show`:
 
 ```bash
-tvplotlines run got/ --show "Game of Thrones"
+tvplot run got/ --show "Game of Thrones"
 ```
 
 ## Python API
 
 ```python
-from tvplotlines import get_plotlines
+from tvplot import get_plotlines
 
 s01 = get_plotlines("Breaking Bad", season=1, episodes=season_1_synopses)
 s02 = get_plotlines("Breaking Bad", season=2, episodes=season_2_synopses, prior=s01)
@@ -202,10 +202,10 @@ Pass `prior` to track plotline continuity across seasons.
 ## LLM providers
 
 ```bash
-tvplotlines run breaking-bad/                          # Anthropic (default)
-tvplotlines run breaking-bad/ --provider openai        # OpenAI
-tvplotlines run breaking-bad/ --provider ollama        # Ollama (local, free)
-tvplotlines run breaking-bad/ --system narratology     # narratology pipeline
+tvplot run breaking-bad/                          # Anthropic (default)
+tvplot run breaking-bad/ --provider openai        # OpenAI
+tvplot run breaking-bad/ --provider ollama        # Ollama (local, free)
+tvplot run breaking-bad/ --system narratology     # narratology pipeline
 ```
 
 See [docs/api.md](docs/api.md) for full API reference.
@@ -222,7 +222,7 @@ See [docs/api.md](docs/api.md) for full API reference.
 
 ## How this uses AI
 
-`tvplotlines` calls either Claude (Anthropic) or GPT (OpenAI) — you pick one per run — to produce its analyses. If your application surfaces this library's output to end users, you're responsible for disclosing the AI involvement to them (EU AI Act Art. 50; Anthropic AUP; OpenAI Usage Policies). The standalone HTML viewer shipped here carries that notice in its footer.
+`tvplot` calls either Claude (Anthropic) or GPT (OpenAI) — you pick one per run — to produce its analyses. If your application surfaces this library's output to end users, you're responsible for disclosing the AI involvement to them (EU AI Act Art. 50; Anthropic AUP; OpenAI Usage Policies). The standalone HTML viewer shipped here carries that notice in its footer.
 
 - [`docs/ai-disclosure.md`](docs/ai-disclosure.md) — what gets sent where, and to whom. Alpine Animation (Switzerland) publishes the library and collects **no** data; your API key and inputs travel directly from your machine to the LLM vendor you pick.
 - [`docs/methodology.md`](docs/methodology.md) — plain-language description of how the pipeline decides, what it can't do, and where to find the code for each step.
@@ -232,11 +232,11 @@ Outputs are AI-generated and can contain hallucinations. Treat them as a startin
 ## Citation
 
 ```bibtex
-@software{tvplotlines2026,
+@software{tvplot2026,
   author = {Vashko, N.},
-  title = {tvplotlines: LLM-Driven Plotline Extraction from Episode Synopses},
+  title = {tvplot: LLM-Driven Plotline Extraction from Episode Synopses},
   year = {2026},
-  url = {https://github.com/BirdInTheTree/tvplotlines}
+  url = {https://github.com/BirdInTheTree/tvplot}
 }
 ```
 

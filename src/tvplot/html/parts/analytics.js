@@ -1,5 +1,5 @@
 // Analytics — computation and rendering for 5 analytics sections.
-// Ported from tvplotlines-app analytics.py + analytics.html.
+// Ported from tvplot-app analytics.py + analytics.html.
 
 const FUNCTION_TENSION = {
   setup: 1, seed: 1, inciting_incident: 1.5,
@@ -237,7 +237,7 @@ function _tensionLevel(t) {
  * Render all 5 analytics sections into the given container.
  *
  * Args:
- *   data: tvplotlines result JSON object.
+ *   data: tvplot result JSON object.
  *   container: DOM element to render into.
  */
 function renderAnalytics(data, container) {

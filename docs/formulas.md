@@ -5,7 +5,7 @@ If you're reading a rule in the code or a prompt and wondering why it's there, t
 **LLM** = the LLM follows this rule from the prompt.
 **Code** = deterministic computation.
 
-Code paths relative to `src/tvplotlines/`.
+Code paths relative to `src/tvplot/`.
 
 The sections below cover the **hollywood** system (5 passes). The **narratology** system is documented in the "Narratology pipeline" section at the end — it reuses the same prompt-loader and model shapes, but has its own six-pass flow.
 
@@ -254,7 +254,7 @@ A six-pass alternative to the five-pass hollywood flow. Prompts live under `prom
 
 ### Glossary
 
-See `src/tvplotlines/prompts/narratology/glossary.md` for `function` (8 values including `recognition`), `direction` (3), `kind` (2), and the full actant mapping.
+See `src/tvplot/prompts/narratology/glossary.md` for `function` (8 values including `recognition`), `direction` (3), `kind` (2), and the full actant mapping.
 
 ### Result shape
 

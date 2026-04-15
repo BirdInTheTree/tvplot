@@ -24,7 +24,7 @@ def _package_for(system: str) -> str:
         raise ValueError(
             f"Unsupported system: {system!r}. Expected one of {list(SYSTEMS)}"
         )
-    return f"tvplotlines.prompts.{system}"
+    return f"tvplot.prompts.{system}"
 
 
 def _load_glossary(system: str) -> str:

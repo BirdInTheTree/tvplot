@@ -26,7 +26,7 @@ try:
 except ImportError:
     httpx = None  # type: ignore[assignment]
 
-_USER_AGENT = "tvplotlines/0.1.0 (https://github.com/BirdInTheTree/tvplotlines)"
+_USER_AGENT = "tvplot/0.1.0 (https://github.com/BirdInTheTree/tvplot)"
 _MAX_RETRIES = 3
 _MIN_DESCRIPTION_LENGTH = 50
 # Fandom recap sections use varying header names across wikis
@@ -45,8 +45,8 @@ def fetch_season_page(
     Tries {Show}_(season_{N}), then {Show}_season_{N} if 404.
     Use wiki_title to override automatic title construction.
 
-    Requires httpx (pip install tvplotlines[writer]).
-    User-Agent: tvplotlines/0.1.0
+    Requires httpx (pip install tvplot[writer]).
+    User-Agent: tvplot/0.1.0
 
     Args:
         show: Show name, e.g. "House" or "Breaking Bad".
@@ -60,7 +60,7 @@ def fetch_season_page(
     if httpx is None:
         raise ImportError(
             "httpx is required for fetching Wikipedia pages. "
-            "Install with: pip install tvplotlines[writer]"
+            "Install with: pip install tvplot[writer]"
         )
 
     endpoint = f"https://{lang}.wikipedia.org/w/api.php"
@@ -381,7 +381,7 @@ def fetch_fandom_episodes(
     if httpx is None:
         raise ImportError(
             "httpx is required for fetching Fandom pages. "
-            "Install with: pip install tvplotlines[writer]"
+            "Install with: pip install tvplot[writer]"
         )
 
     resolved_wiki = wiki_name or _guess_wiki_name(show)
@@ -561,13 +561,13 @@ def _validate_plotlines(plotlines: list) -> list[dict]:
 
 def _build_system_prompt(*, use_glossary: bool, system: str = "hollywood") -> str:
     """Load the synopses_writer prompt for a given system, optionally with glossary."""
-    from tvplotlines.prompts import load_prompt
+    from tvplot.prompts import load_prompt
 
     if use_glossary:
         return load_prompt("synopses_writer", system=system)
 
     from importlib import resources
-    text = resources.files(f"tvplotlines.prompts.{system}").joinpath(
+    text = resources.files(f"tvplot.prompts.{system}").joinpath(
         "synopses_writer.md"
     ).read_text(encoding="utf-8")
     return text.replace("{GLOSSARY}", "")
@@ -695,7 +695,7 @@ def _rewrite_parallel(
     fandom_map=None,
 ) -> tuple[list[str], list[list[dict]]]:
     """Each episode in a separate parallel LLM call."""
-    from tvplotlines.llm import call_llm_parallel
+    from tvplot.llm import call_llm_parallel
 
     fandom = fandom_map or {}
     user_messages = [
@@ -713,7 +713,7 @@ def _rewrite_batch(
     fandom_map=None,
 ) -> tuple[list[str], list[list[dict]]]:
     """Each episode in a separate call, sent as Anthropic batch."""
-    from tvplotlines.llm import call_llm_batch
+    from tvplot.llm import call_llm_batch
 
     fandom = fandom_map or {}
     user_messages = [
@@ -731,7 +731,7 @@ def _rewrite_sequential(
     fandom_map=None,
 ) -> tuple[list[str], list[list[dict]]]:
     """Episodes one by one; each call includes all previous synopses as context."""
-    from tvplotlines.llm import call_llm
+    from tvplot.llm import call_llm
 
     fandom = fandom_map or {}
     synopses: list[str] = []
@@ -798,7 +798,7 @@ def _rewrite_single_one_call(
     fandom_map=None,
 ) -> tuple[list[str], list[list[dict]]]:
     """All episodes in one LLM call."""
-    from tvplotlines.llm import call_llm
+    from tvplot.llm import call_llm
 
     fandom = fandom_map or {}
     episode_blocks = []
@@ -1084,7 +1084,7 @@ def write_synopses(
             print(f"Fandom recaps available for {fandom_count}/{len(episodes)} episodes")
         return
 
-    from tvplotlines.llm import LLMConfig, usage
+    from tvplot.llm import LLMConfig, usage
 
     config = LLMConfig(provider=provider, model=model, base_url=base_url, system=system)
     usage.__init__()  # Reset usage tracker

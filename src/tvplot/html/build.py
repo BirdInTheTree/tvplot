@@ -3,7 +3,7 @@
 Reads shell.html and replaces placeholders with CSS, JS, and demo data
 to produce a single self-contained HTML file.
 
-Prompts from ``src/tvplotlines/prompts/{hollywood,narratology}/*.md`` are
+Prompts from ``src/tvplot/prompts/{hollywood,narratology}/*.md`` are
 inlined into the HTML so the viewer runs either pipeline in the browser
 without fetching files at runtime.
 """

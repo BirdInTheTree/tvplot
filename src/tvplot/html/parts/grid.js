@@ -344,7 +344,7 @@ function _showEventModal(ev, cast) {
  * Render the plotline x episode grid into a container element.
  *
  * Args:
- *   data: tvplotlines result JSON object.
+ *   data: tvplot result JSON object.
  *   container: DOM element to render into.
  */
 function renderGrid(data, container) {

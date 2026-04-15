@@ -2,7 +2,7 @@
 
 import pytest
 
-from tvplotlines.models import (
+from tvplot.models import (
     CastMember,
     Plotline,
     TVPlotlinesResult,
@@ -36,7 +36,7 @@ class TestPriorContextReuse:
         """If prior is given and context is not, pipeline should use prior.context
         and NOT call detect_context (Pass 0)."""
         from unittest.mock import MagicMock
-        import tvplotlines.pipeline as pipeline_mod
+        import tvplot.pipeline as pipeline_mod
 
         prior = _make_prior()
         mock_detect = MagicMock(side_effect=AssertionError("Pass 0 should be skipped"))
@@ -58,7 +58,7 @@ class TestPriorContextReuse:
     def test_prior_ignored_when_cast_and_plotlines_provided(self, monkeypatch):
         """When cast+plotlines are provided (Pass 1 skip), prior only affects context."""
         from unittest.mock import MagicMock
-        import tvplotlines.pipeline as pipeline_mod
+        import tvplot.pipeline as pipeline_mod
 
         prior = _make_prior()
         explicit_cast = [CastMember(id="custom", name="Custom")]
@@ -85,7 +85,7 @@ class TestPriorContextReuse:
 
     def test_anthology_raises_with_prior(self):
         """Anthology format + prior is contradictory."""
-        from tvplotlines.pipeline import get_plotlines
+        from tvplot.pipeline import get_plotlines
 
         prior = _make_prior()
         prior.context.is_anthology = True

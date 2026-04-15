@@ -2,12 +2,14 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+_REPO = Path(__file__).resolve().parent.parent
+
 
 def test_build_produces_html():
     result = subprocess.run(
-        ["python", "src/tvplotlines/html/build.py", "--output", "/tmp/test_viewer.html"],
+        ["python", "src/tvplot/html/build.py", "--output", "/tmp/test_viewer.html"],
         capture_output=True, text=True,
-        cwd="/Users/nvashko/Projects/1-projects/tvplotlines",
+        cwd=_REPO,
     )
     assert result.returncode == 0, f"Build failed: {result.stderr}"
     html = Path("/tmp/test_viewer.html").read_text()
@@ -20,9 +22,9 @@ def test_build_produces_html():
 def test_build_embeds_demo_data():
     """Demo data from bb_s01.json should be embedded in the output."""
     result = subprocess.run(
-        ["python", "src/tvplotlines/html/build.py", "--output", "/tmp/test_viewer.html"],
+        ["python", "src/tvplot/html/build.py", "--output", "/tmp/test_viewer.html"],
         capture_output=True, text=True,
-        cwd="/Users/nvashko/Projects/1-projects/tvplotlines",
+        cwd=_REPO,
     )
     assert result.returncode == 0
     html = Path("/tmp/test_viewer.html").read_text()
@@ -38,12 +40,12 @@ def test_build_with_custom_data():
 
     result = subprocess.run(
         [
-            "python", "src/tvplotlines/html/build.py",
+            "python", "src/tvplot/html/build.py",
             "--output", "/tmp/test_viewer_custom.html",
             "--data", tmp_path,
         ],
         capture_output=True, text=True,
-        cwd="/Users/nvashko/Projects/1-projects/tvplotlines",
+        cwd=_REPO,
     )
     assert result.returncode == 0
     html = Path("/tmp/test_viewer_custom.html").read_text()

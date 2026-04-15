@@ -8,16 +8,16 @@ from __future__ import annotations
 
 import json
 
-from tvplotlines.llm import LLMConfig, call_llm
-from tvplotlines.models import (
+from tvplot.llm import LLMConfig, call_llm
+from tvplot.models import (
     CastMember,
     EpisodeBreakdown,
     Plotline,
     SeriesContext,
     Verdict,
 )
-from tvplotlines.postprocess import compute_weight
-from tvplotlines.prompts import load_prompt
+from tvplot.postprocess import compute_weight
+from tvplot.prompts import load_prompt
 
 _VALID_ACTIONS = {"MERGE", "REASSIGN", "CREATE", "DROP", "REFUNCTION"}
 _VALID_FUNCTIONS = {
