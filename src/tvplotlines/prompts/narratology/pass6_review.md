@@ -27,15 +27,13 @@ Show context, the full plotline list (with actant structure and MRE), all events
     },
     {
       "kind": "REASSIGN",
-      "event_episode": "S01E04",
-      "event_description": "Walt lies to Skyler about where he was",
+      "event_id": "S01E04#12",
       "to_plotline": "family",
       "rationale": "Was assigned to 'empire' but it advances the Family plotline — Walt building a wall of lies"
     },
     {
       "kind": "REFUNCTION",
-      "event_episode": "S01E07",
-      "event_description": "Walt and Tuco's first deal",
+      "event_id": "S01E07#08",
       "new_function": "turning_point",
       "rationale": "Was labeled `escalation` but it changes the trajectory — Walt enters the criminal world for real"
     }
@@ -56,8 +54,8 @@ Show context, the full plotline list (with actant structure and MRE), all events
 - `MERGE` two plotlines when they have the same chase by the same character. `targets` lists the plotline IDs to combine
 - `DROP` a plotline that doesn't hold up — too few events, no inciting incident, no real chase. `targets` lists the one plotline to drop
 - `CREATE` a new plotline when you find a group of orphaned events (`plotline_id: null`) that together form one. Provide a tentative `id` and `name`, list the event references
-- `REASSIGN` a single event when it was put in the wrong plotline. Provide `event_episode`, `event_description`, and the correct `to_plotline`
-- `REFUNCTION` an event when its function label is wrong. Provide `event_episode`, `event_description`, and the `new_function`
+- `REASSIGN` a single event when it was put in the wrong plotline. Provide `event_id` (from Pass 2) and the correct `to_plotline`
+- `REFUNCTION` an event when its function label is wrong. Provide `event_id` and the `new_function`
 
 **Ranks** — assign every plotline an `A`, `B`, or `C`:
 

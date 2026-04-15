@@ -19,37 +19,32 @@ The plotline's actant structure (from Pass 3) and all its events in episode orde
   "plotline_id": "empire",
   "events": [
     {
-      "episode": "S01E01",
-      "description": "Walt receives lung cancer diagnosis",
+      "id": "S01E01#02",
       "arc_function": "inciting_incident",
       "arc_direction": "deterioration",
       "kind": "drive"
     },
     {
-      "episode": "S01E01",
-      "description": "Walt asks Jesse to partner up on cooking meth",
+      "id": "S01E01#07",
       "arc_function": "recognition",
       "arc_direction": "improvement",
       "kind": "drive"
     },
     {
-      "episode": "S01E03",
-      "description": "Walt strangles Krazy-8",
+      "id": "S01E03#04",
       "arc_function": "escalation",
       "arc_direction": "deterioration",
       "kind": "drive"
     },
     {
-      "episode": "S01E03",
-      "description": "A Native girl brings a strange mask to the DEA office",
+      "id": "S01E03#07",
       "arc_function": null,
       "arc_direction": "neutral",
       "kind": "texture"
     }
   ],
   "mre": {
-    "episode": "S01E03",
-    "description": "Walt strangles Krazy-8",
+    "event_id": "S01E03#04",
     "why": "The first time Walt kills with his own hands. He crosses a line he can't uncross."
   }
 }
@@ -63,8 +58,8 @@ The plotline's actant structure (from Pass 3) and all its events in episode orde
 - `recognition` is optional — only use it when a separate event captures the character deciding to act after the inciting incident. Skip when disruption and decision are the same event
 - `arc_direction` is from the perspective of `who_chases`. The same event can be `improvement` in its episode and `deterioration` in the season (Walt killing Krazy-8: episode-improvement, season-deterioration)
 - `kind` — now you see the whole plotline, decide: if you removed this event, would the outcome change? Yes → `drive`. No → `texture`. Texture events get `arc_function: null` (they don't sit in the dramatic shape)
-- Every event from the input must appear in the output
-- `mre` is the one event that makes the plotline worth telling. Often the climax — but not always. Walt's first cook isn't more reportable than the moment he kills. Pick the moment that answers "so what". MRE must be a `drive` event
+- Every event from the input must appear in the output — referenced by `id` (from Pass 2), not by description
+- `mre` is the one event that makes the plotline worth telling. Often the climax — but not always. Walt's first cook isn't more reportable than the moment he kills. Pick the moment that answers "so what". MRE must be a `drive` event. Reference it by `event_id`
 
 # OUTPUT
 

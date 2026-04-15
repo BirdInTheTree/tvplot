@@ -11,14 +11,16 @@ Label every event with its kind:
 
 Someone wants something and chases it. The chain of events that come from the chase is the plotline.
 
-For each plotline, identify:
+For each plotline, identify six slots. These are Greimas's actant model restated in plain English — use the plain names in prompt output; the canonical Greimas term is given for reference.
 
-- **who chases** — the character driving the plotline
-- **what they chase** — what they want. Can be a thing (a person, money), a state (independence, safety), or knowledge (who killed her)
-- **what stands in the way** — usually people who block them
-- **who helps them** — anyone who supports the chase
-- **what makes it possible or impossible** — the bigger force behind it all. Often abstract: an institution, a deadline, the character's own flaw, fate. Sometimes nothing identifiable
-- **who wins if it works** — usually the same person who chases, but not always
+| slot in output         | Greimas term | what it is                                                                                                                                                 |
+| ---------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **who_chases**         | subject      | the character driving the plotline                                                                                                                         |
+| **what_they_chase**    | object       | what they want — a thing (a person, money), a state (independence, safety), or knowledge (who killed her)                                                  |
+| **stands_in_the_way**  | opponents    | usually people who block them; empty list if no specific person                                                                                            |
+| **helpers**            | helpers      | anyone who supports the chase                                                                                                                              |
+| **bigger_force**       | power        | the abstract force enabling or blocking the whole chase (institution, deadline, character flaw, fate). Can be null                                         |
+| **who_wins_if_it_works** | receiver   | usually the same character as `who_chases`, but not always — e.g. the subject dies in their own plotline but a descendant receives the object              |
 
 **A separate plotline rule**: if a character has their own thing they're chasing — not just blocking the main character but going after their own goal — they get their own plotline. Test: if you removed the main character from the show, would this person still be doing things? If yes, separate plotline.
 

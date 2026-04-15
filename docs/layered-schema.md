@@ -114,23 +114,25 @@ Version 1.0.
 
 **plotlines**: map from id → {actants, type, nature, confidence, rank, mre}
 
+Pass 3 emits actants with plain-English keys; `prompts/narratology/glossary.md` maps each one to its Greimas term (who_chases↔subject, what_they_chase↔object, stands_in_the_way↔opponents, helpers↔helpers, bigger_force↔power, who_wins_if_it_works↔receiver).
+
 ```json
 {
   "empire": {
     "actants": {
-      "subject": "walt",
-      "object": "cook and sell meth",
-      "power": "Walt's pride and cancer deadline",
-      "receiver": "walt",
+      "who_chases": "walt",
+      "what_they_chase": "cook and sell meth",
+      "stands_in_the_way": ["krazy-8", "emilio", "tuco"],
       "helpers": ["jesse"],
-      "opponents": ["krazy-8", "emilio", "tuco"]
+      "bigger_force": "Walt's pride and cancer deadline",
+      "who_wins_if_it_works": "walt"
     },
     "type": "serialized",
     "nature": "character-led",
     "confidence": "solid",
     "rank": "A",
     "mre": {
-      "event_id": "S01E03#19",
+      "event_id": "S01E03#04",
       "why": "The first time Walt kills with his own hands..."
     }
   }
@@ -141,7 +143,7 @@ Version 1.0.
 
 ```json
 {
-  "S01E03#19": {
+  "S01E03#04": {
     "function": "climax",
     "direction": "improvement",
     "arc_function": "turning_point",
@@ -151,7 +153,7 @@ Version 1.0.
 }
 ```
 
-Enums: see `prompts_en/glossary.md` for `function` (8 values), `direction` (3), `kind` (2).
+Enums: see `src/tvplotlines/prompts/narratology/glossary.md` for `function` (8 values), `direction` (3), `kind` (2).
 
 **episodes**: map from episode id → {theme}
 
