@@ -65,5 +65,8 @@ artifacts = [
     "src/tvplot/prompts/narratology/*.md",
 ]
 
+[tool.hatch.build.targets.sdist]
+exclude = [".claude", "docs/images/*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -57,3 +57,6 @@ runs/
 
 # Worktrees
 .worktrees/
+
+# Claude Code harness (local)
+.claude/

@@ -10,7 +10,7 @@ For TV researchers, screenwriters, and anyone building narrative analysis tools 
 
 <p align="center">
   <a href="https://birdinthetree.github.io/plotter-app/">
-    <img src="docs/images/app-screenshot-1.png" alt="tvplot output — plotline×episode grid for Breaking Bad S01">
+    <img src="https://raw.githubusercontent.com/BirdInTheTree/tvplot/main/docs/images/app-screenshot-1.png" alt="tvplot output — plotline×episode grid for Breaking Bad S01">
   </a>
   <br>
   <strong><a href="https://birdinthetree.github.io/plotter-app/">Try the interactive demo →</a></strong>
