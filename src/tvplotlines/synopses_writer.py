@@ -559,17 +559,15 @@ def _validate_plotlines(plotlines: list) -> list[dict]:
     return valid
 
 
-def _build_system_prompt(*, use_glossary: bool) -> str:
-    """Load the synopses_writer prompt, optionally with glossary injected."""
-    from tvplotlines.prompts_en import load_prompt
+def _build_system_prompt(*, use_glossary: bool, system: str = "hollywood") -> str:
+    """Load the synopses_writer prompt for a given system, optionally with glossary."""
+    from tvplotlines.prompts import load_prompt
 
     if use_glossary:
-        # load_prompt already replaces {GLOSSARY} with glossary content
-        return load_prompt("synopses_writer")
+        return load_prompt("synopses_writer", system=system)
 
-    # Load raw prompt and strip the {GLOSSARY} placeholder
     from importlib import resources
-    text = resources.files("tvplotlines.prompts_en").joinpath(
+    text = resources.files(f"tvplotlines.prompts.{system}").joinpath(
         "synopses_writer.md"
     ).read_text(encoding="utf-8")
     return text.replace("{GLOSSARY}", "")
@@ -647,7 +645,7 @@ def rewrite_synopses(
         list[str] when suggest_plotlines=False (backward compat).
         dict with "synopses" and "suggested_plotlines" when suggest_plotlines=True.
     """
-    system_prompt = _build_system_prompt(use_glossary=use_glossary)
+    system_prompt = _build_system_prompt(use_glossary=use_glossary, system=config.system)
     format_hint = (
         f"Format: {show_format}"
         if show_format
@@ -1028,6 +1026,7 @@ def write_synopses(
     base_url: str | None = None,
     mode: Mode | None = None,
     use_glossary: bool = True,
+    system: str = "hollywood",
 ) -> None:
     """Generate episode synopses and save to files.
 
@@ -1087,7 +1086,7 @@ def write_synopses(
 
     from tvplotlines.llm import LLMConfig, usage
 
-    config = LLMConfig(provider=provider, model=model, base_url=base_url)
+    config = LLMConfig(provider=provider, model=model, base_url=base_url, system=system)
     usage.__init__()  # Reset usage tracker
     result = rewrite_synopses(
         episodes, show, season, config,

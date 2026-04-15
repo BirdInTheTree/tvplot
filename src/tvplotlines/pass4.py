@@ -16,7 +16,7 @@ from tvplotlines.models import (
     Plotline,
     SeriesContext,
 )
-from tvplotlines.prompts_en import load_prompt
+from tvplotlines.prompts import load_prompt
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +43,7 @@ def assign_arc_functions(
     if config is None:
         config = LLMConfig()
 
-    system_prompt = load_prompt("pass4", lang=config.lang)
+    system_prompt = load_prompt("pass4", system=config.system)
     plotline_ids = {p.id for p in plotlines}
     name_to_id = {p.name: p.id for p in plotlines}
     name_to_id.update({p.id: p.id for p in plotlines})

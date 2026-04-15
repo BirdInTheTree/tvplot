@@ -109,7 +109,7 @@ def _run(args: argparse.Namespace) -> None:
 
         config = LLMConfig(
             provider=args.provider, model=args.model,
-            base_url=args.base_url, lang=args.lang,
+            base_url=args.base_url, system=args.system,
         )
         episode_pairs = [(eid, episodes[eid]) for eid in sorted(episodes)]
 
@@ -191,7 +191,7 @@ def _run(args: argparse.Namespace) -> None:
         show=show,
         season=season,
         episodes=episodes,
-        lang=args.lang,
+        system=args.system,
         llm_provider=args.provider,
         model=args.model,
         base_url=args.base_url,
@@ -302,6 +302,7 @@ def _write_synopses(args: argparse.Namespace) -> None:
         base_url=args.base_url,
         mode=args.mode,
         use_glossary=not args.no_glossary,
+        system=args.system,
     )
 
 
@@ -320,7 +321,10 @@ def main() -> None:
     )
     run_parser.add_argument("--show", default=None, help="Series title (auto-detected from directory name)")
     run_parser.add_argument("--season", type=int, default=None, help="Season number (auto-detected from filenames)")
-    run_parser.add_argument("--lang", default="en", help="Language: en or ru (default: en)")
+    run_parser.add_argument(
+        "--system", default="hollywood", choices=["hollywood", "narratology"],
+        help="Analysis system: hollywood (default) or narratology",
+    )
     run_parser.add_argument("--output", "-o", type=Path, help="Output JSON path")
     run_parser.add_argument("--provider", default="anthropic",
                             help="LLM provider: anthropic, openai, ollama, deepseek, groq, or any OpenAI-compatible")
@@ -366,6 +370,10 @@ def main() -> None:
                            choices=["procedural", "serial", "hybrid", "ensemble"],
                            help="Show format hint for beat counts (auto-detected if omitted)")
     ws_parser.add_argument("--lang", default="en", help="Wikipedia language (default: en)")
+    ws_parser.add_argument(
+        "--system", default="hollywood", choices=["hollywood", "narratology"],
+        help="Analysis system whose synopses prompt to use (default: hollywood)",
+    )
     ws_parser.add_argument("--dry-run", action="store_true",
                            help="Fetch and parse only, show episodes without calling LLM")
     ws_parser.add_argument("--provider", default="anthropic",

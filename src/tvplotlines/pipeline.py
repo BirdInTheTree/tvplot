@@ -61,7 +61,7 @@ def get_plotlines(
     llm_provider: str = "anthropic",
     model: str | None = None,
     base_url: str | None = None,
-    lang: str = "en",
+    system: str = "hollywood",
     skip_review: bool = False,
     pass2_mode: str = "batch",
     batch_id: str | None = None,
@@ -97,7 +97,13 @@ def get_plotlines(
     Returns:
         TVPlotlinesResult with context, cast, plotlines, and episode breakdowns.
     """
-    config = LLMConfig(provider=llm_provider, model=model, base_url=base_url, lang=lang)
+    if system == "narratology":
+        raise NotImplementedError(
+            "Narratology pipeline is not yet runnable — prompts are in place at "
+            "src/tvplotlines/prompts/narratology/ and will be wired in v2. "
+            "Use system='hollywood' for now."
+        )
+    config = LLMConfig(provider=llm_provider, model=model, base_url=base_url, system=system)
 
     # Validate episode keys and convert to sorted (id, text) pairs
     season_prefix = f"S{season:02d}"

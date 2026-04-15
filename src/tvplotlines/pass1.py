@@ -12,7 +12,7 @@ from collections import Counter
 
 from tvplotlines.llm import LLMConfig, call_llm, call_llm_parallel
 from tvplotlines.models import CastMember, Plotline, SeriesContext
-from tvplotlines.prompts_en import load_prompt
+from tvplotlines.prompts import load_prompt
 
 logger = logging.getLogger(__name__)
 
@@ -124,7 +124,7 @@ def extract_plotlines(
         suggested_plotlines=suggested_plotlines,
     )
 
-    system_prompt = load_prompt("pass1", lang=config.lang)
+    system_prompt = load_prompt("pass1", system=config.system)
 
     def _full_validate(data: dict) -> None:
         """Parse and validate in one step for retry support."""

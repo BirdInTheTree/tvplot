@@ -17,7 +17,7 @@ from tvplotlines.models import (
     Plotline,
     SeriesContext,
 )
-from tvplotlines.prompts_en import load_prompt
+from tvplotlines.prompts import load_prompt
 
 _VALID_FUNCTIONS = {
     "setup", "inciting_incident", "escalation", "turning_point",
@@ -85,7 +85,7 @@ def assign_events(
         ensure_ascii=False,
     )
 
-    system_prompt = load_prompt("pass2", lang=config.lang)
+    system_prompt = load_prompt("pass2", system=config.system)
 
     def _full_validate(data: dict) -> None:
         bd = _parse_breakdown(data, episode_id)
@@ -109,7 +109,7 @@ def _prepare_bulk(
     config: LLMConfig,
 ) -> tuple[str, list[str], list[str], list]:
     """Prepare shared data for parallel/batch Pass 2 calls."""
-    system_prompt = load_prompt("pass2", lang=config.lang)
+    system_prompt = load_prompt("pass2", system=config.system)
 
     user_messages = []
     episode_ids = []

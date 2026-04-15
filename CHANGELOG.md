@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Changed
+- **Prompt layout**: `prompts_en/` → `prompts/hollywood/`. Added `prompts/narratology/` from the former sister project, bundling eight structuralist prompts (context, fabula, actants, story, arc, review, synopses_writer, glossary). `docs/layered-schema.md` documents the shared `base + layers` JSON.
+- **Library API**: `get_plotlines(..., lang=)` replaced by `get_plotlines(..., system=)` (values: `"hollywood"` default, `"narratology"`). `LLMConfig.lang` → `LLMConfig.system`. CLI: `tvplotlines run --lang` → `--system`; `write-synopses --system` added.
+- Narratology pipeline is not yet runnable — `system="narratology"` raises `NotImplementedError` with a clear message. Prompts are in place; runners come in v2.
+
+### Removed
+- **Russian prompts** (`prompts_ru/`) — out of scope. Will be reintroduced once both analysis systems stabilise in English.
+- Sister repo `tvplotlines_narratology/` merged into this repo under `src/tvplotlines/prompts/narratology/`.
+
 ### Added
 - **Pass 4: arc functions** (`plot_fn`) — each event gets a season-arc role alongside its episode function. Pass 4 runs per-plotline, sees episode functions as context.
 - **Reviewed rank**: Pass 3 assigns its own ranks. When they differ from `computed_rank`, stored as `reviewed_rank` — user sees both.

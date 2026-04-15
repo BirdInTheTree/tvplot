@@ -10,7 +10,7 @@ import json
 
 from tvplotlines.llm import LLMConfig, call_llm
 from tvplotlines.models import SeriesContext
-from tvplotlines.prompts_en import load_prompt
+from tvplotlines.prompts import load_prompt
 
 _VALID_FORMATS = {"procedural", "serial", "hybrid", "ensemble"}
 
@@ -50,7 +50,7 @@ def detect_context(
         data["suggested_plotlines"] = suggested_plotlines
     user_message = json.dumps(data, ensure_ascii=False)
 
-    system_prompt = load_prompt("pass0", lang=config.lang)
+    system_prompt = load_prompt("pass0", system=config.system)
     data = call_llm(system_prompt, user_message, config, validator=_validate)
 
     # Backward compat: old LLM output may have is_ensemble as separate flag

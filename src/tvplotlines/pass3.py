@@ -17,7 +17,7 @@ from tvplotlines.models import (
     Verdict,
 )
 from tvplotlines.postprocess import compute_weight
-from tvplotlines.prompts_en import load_prompt
+from tvplotlines.prompts import load_prompt
 
 _VALID_ACTIONS = {"MERGE", "REASSIGN", "CREATE", "DROP", "REFUNCTION"}
 _VALID_FUNCTIONS = {
@@ -116,7 +116,7 @@ def review_plotlines(
 
     user_message = json.dumps(payload, ensure_ascii=False)
 
-    system_prompt = load_prompt("pass3", lang=config.lang)
+    system_prompt = load_prompt("pass3", system=config.system)
 
     plotline_ids = {p.id for p in plotlines}
 

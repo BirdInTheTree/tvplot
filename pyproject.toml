@@ -60,7 +60,10 @@ tvplotlines = "tvplotlines.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/tvplotlines"]
-artifacts = ["src/tvplotlines/prompts_en/*.md"]
+artifacts = [
+    "src/tvplotlines/prompts/hollywood/*.md",
+    "src/tvplotlines/prompts/narratology/*.md",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
