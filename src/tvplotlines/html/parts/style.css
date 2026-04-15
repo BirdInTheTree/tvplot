@@ -42,6 +42,69 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; b
 }
 .welcome-skip:hover { color: #888; }
 
+/* ── Welcome entry form ── */
+.analyze-form {
+  display: flex; gap: 0.5rem; margin-bottom: 2rem;
+  align-items: stretch; width: min(440px, 90vw);
+}
+.analyze-input {
+  font: inherit; padding: 0.65rem 0.9rem;
+  border: 1px solid #ddd; border-radius: 8px;
+  background: #fff; color: #1a1a1a;
+  transition: border-color 0.15s;
+}
+.analyze-input:focus { outline: none; border-color: #888; }
+.analyze-input-show { flex: 1 1 auto; }
+.analyze-input-season { width: 5.5rem; text-align: center; }
+.analyze-submit {
+  padding: 0.65rem 1.5rem; border: 1px solid #1a1a1a; border-radius: 8px;
+  background: #1a1a1a; color: #fafafa; cursor: pointer; font-weight: 500;
+  letter-spacing: 0.04em; transition: background 0.15s, border-color 0.15s;
+}
+.analyze-submit:hover { background: #000; }
+.analyze-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.welcome-secondary {
+  font-size: 0.8rem; color: #888; letter-spacing: 0.04em;
+}
+.welcome-link {
+  display: inline; background: none; border: none; padding: 0;
+  color: #888; text-decoration: none; cursor: pointer;
+  font: inherit; transition: color 0.15s;
+}
+.welcome-link:hover { color: #333; }
+.welcome-sep { margin: 0 0.5rem; color: #ddd; }
+
+/* Dark mode overrides for the entry form */
+:root.dark .analyze-input {
+  background: #1e1e2e; color: #cdd6f4; border-color: #313244;
+}
+:root.dark .analyze-input:focus { border-color: #585b70; }
+:root.dark .analyze-input::placeholder { color: #585b70; }
+:root.dark .analyze-submit {
+  background: #cdd6f4; color: #11111b; border-color: #cdd6f4;
+}
+:root.dark .analyze-submit:hover { background: #fff; border-color: #fff; }
+:root.dark .welcome-secondary { color: #585b70; }
+:root.dark .welcome-link { color: #585b70; }
+:root.dark .welcome-link:hover { color: #cdd6f4; }
+:root.dark .welcome-sep { color: #313244; }
+
+/* ── Print (used by the "PDF (via print)" export) ── */
+@media print {
+  @page { size: landscape; margin: 10mm; }
+  body { background: #fff !important; color: #000 !important; }
+  .toolbar, .drop-zone-overlay, .export-menu, .modal-overlay,
+  #pipeline-progress, .welcome-container, #btn-dark, #btn-load,
+  #btn-export, #btn-llm-settings, #btn-onboarding, #series-select,
+  .btn-nav { display: none !important; }
+  .screen { display: block !important; }
+  #grid-container, #analytics-container {
+    page-break-inside: avoid; box-shadow: none !important;
+  }
+  .event-card { break-inside: avoid; }
+}
+
 /* ── Page layout ── */
 .page { max-width: 100%; padding: 1rem; }
 

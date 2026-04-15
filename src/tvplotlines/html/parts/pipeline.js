@@ -1431,3 +1431,150 @@ function _hidePipelineProgress() {
   const overlay = document.getElementById('pipeline-progress');
   if (overlay) overlay.classList.add('hidden');
 }
+
+// ──────────────────────────────────────────────────────────────
+// End-to-end "Analyze a series" flow — user types show + season,
+// LLM generates episode synopses from training memory, user previews
+// and edits, pipeline runs on those synopses.
+// ──────────────────────────────────────────────────────────────
+
+const _ANALYZE_SYSTEM_PROMPT = `You generate detailed synopses for a TV series' season, one per aired episode, from your training knowledge.
+
+RULES:
+- Cover every episode that aired in the requested season, in order
+- Use zero-padded episode ids: S01E01, S01E02, …
+- 200–400 words per synopsis
+- Every sentence is a transition: something changes. Skip description of states, atmosphere, style
+- No interpretation, no inner monologue. Report what happened
+- No literary metaphors. Literal actions only
+- At least three plotlines per episode (A-story plus at least two more — personal arcs, institutional dynamics, runners)
+- Preserve screen order — don't sort events by plotline
+- Use only what aired. Don't invent scenes
+- If you don't know this show well enough to produce accurate synopses, return {"error": "unknown show"}
+
+OUTPUT: strict JSON with shape
+{"episodes": [{"episode": "S01E01", "text": "..."}, ...]}`;
+
+async function _generateSynopses(show, season, provider, apiKey, onProgress) {
+  const userMessage = JSON.stringify({ show, season });
+  onProgress(`Asking ${provider === 'anthropic' ? 'Claude' : 'GPT'} for synopses of ${show} S${String(season).padStart(2, '0')}...`);
+  const response = await callLLM(
+    _ANALYZE_SYSTEM_PROMPT, userMessage, provider, apiKey, null,
+  );
+  const parsed = _parseJSONResponse(response);
+  if (parsed.error) {
+    throw new Error(
+      `The model doesn't know "${show}" well enough to produce synopses. ` +
+      `Either try a more common title/season, or drag & drop .txt files via + Load.`
+    );
+  }
+  if (!Array.isArray(parsed.episodes) || parsed.episodes.length === 0) {
+    throw new Error('Model returned no episodes. Try again or upload synopses manually.');
+  }
+  return parsed.episodes;
+}
+
+async function _analyzeSeries(show, season) {
+  const provider = Store.getProvider();
+  const apiKey = Store.getKey();
+
+  if (!provider || !apiKey) {
+    alert('Set your LLM provider and API key first — click "LLM" in the toolbar after this message.');
+    // Bring user straight into settings
+    _skipOnboarding();
+    setTimeout(_showLLMSettings, 100);
+    return;
+  }
+
+  // Move from welcome screen into the viewer shell so the progress overlay fits the normal layout
+  _skipOnboarding();
+  _showPipelineProgress();
+  _updatePipelineProgress('Generating synopses from the model…', 0, 6);
+
+  let synopses;
+  try {
+    const episodes = await _generateSynopses(show, season, provider, apiKey, (msg) => {
+      _updatePipelineProgress(msg, 0, 6);
+    });
+    synopses = episodes.map(e => ({ episode: e.episode, text: String(e.text || '').trim() }));
+    synopses = synopses.filter(s => s.episode && s.text);
+    if (synopses.length === 0) throw new Error('All returned synopses were empty.');
+  } catch (err) {
+    _hidePipelineProgress();
+    alert(`Couldn't fetch synopses: ${err.message}`);
+    return;
+  }
+
+  // Give user a chance to review/edit synopses before committing to the pipeline
+  const confirmed = await _confirmSynopses(show, season, synopses);
+  if (!confirmed) {
+    _hidePipelineProgress();
+    return;
+  }
+  synopses = confirmed;
+
+  // Kick off the normal pipeline — reuse the 5-pass flow
+  try {
+    const result = await runPipeline(synopses, show, provider, apiKey, (message, pass, total) => {
+      // Shift progress by 1 so synopsis-generation counts as pass 0/6
+      _updatePipelineProgress(message, pass + 1, total + 1);
+    });
+
+    const name = `${show} S${String(season).padStart(2, '0')}`;
+    Store.saveResult(name, result);
+    _populateSeriesDropdown();
+    const select = document.getElementById('series-select');
+    if (select) select.value = name;
+    _switchSeries(name);
+    _setTab('grid');
+    _hidePipelineProgress();
+  } catch (err) {
+    _hidePipelineProgress();
+    console.error('Pipeline error:', err);
+    alert(`Pipeline failed: ${err.message}`);
+  }
+}
+
+// Preview & edit modal for the generated synopses. Returns the edited synopses
+// array or null if the user cancels.
+function _confirmSynopses(show, season, synopses) {
+  return new Promise((resolve) => {
+    const overlay = document.getElementById('modal-overlay');
+    const body = document.getElementById('modal-body');
+    if (!overlay || !body) { resolve(synopses); return; }
+
+    const rows = synopses.map((s, i) => `
+      <details ${i < 2 ? 'open' : ''} style="margin-bottom:10px;border:1px solid var(--border,#ddd);border-radius:6px">
+        <summary style="padding:8px 12px;cursor:pointer;font-weight:600">${s.episode} — ${s.text.slice(0, 80).replace(/</g, '&lt;')}…</summary>
+        <textarea data-episode="${s.episode}" style="width:100%;min-height:160px;padding:8px;border:none;border-top:1px solid var(--border,#eee);background:transparent;color:inherit;font:inherit;resize:vertical">${s.text.replace(/</g, '&lt;')}</textarea>
+      </details>
+    `).join('');
+
+    body.innerHTML = `
+      <h3 style="margin-top:0">Review synopses — ${show} S${String(season).padStart(2, '0')}</h3>
+      <p style="color:#666;font-size:0.85em;margin-bottom:12px">
+        Generated ${synopses.length} synopses. Edit anything that looks wrong, then run the pipeline.
+      </p>
+      <div style="max-height:55vh;overflow-y:auto;padding-right:4px">${rows}</div>
+      <div style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end">
+        <button id="analyze-cancel" style="padding:6px 14px;border-radius:4px;cursor:pointer">Cancel</button>
+        <button id="analyze-run" style="padding:6px 14px;border-radius:4px;cursor:pointer;background:#1a1a1a;color:#fff;border:none">Run pipeline →</button>
+      </div>
+    `;
+    overlay.classList.remove('hidden');
+
+    const close = (value) => {
+      overlay.classList.add('hidden');
+      resolve(value);
+    };
+
+    document.getElementById('analyze-cancel').addEventListener('click', () => close(null));
+    document.getElementById('analyze-run').addEventListener('click', () => {
+      const edited = Array.from(body.querySelectorAll('textarea[data-episode]')).map(ta => ({
+        episode: ta.dataset.episode,
+        text: ta.value.trim(),
+      })).filter(s => s.text);
+      close(edited);
+    });
+  });
+}

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Added
+- **"Analyze a series" entry flow** in the HTML viewer. Welcome screen now takes a show name + season; the viewer asks the configured LLM for episode synopses, shows them in an editable preview, then runs the normal pipeline. Download the single HTML and you have an end-to-end app. Fallback — drag-and-drop `.txt` synopses — still works.
+- **LLM settings** modal has an "Analysis system" selector (hollywood is live, narratology is disabled with "coming soon" until its pipeline lands in v2).
+- **PDF export** via the browser print stack — "PDF (via print)" menu item calls `window.print()`, and a print stylesheet hides the toolbar and lays the grid out on landscape pages, so Cmd+P → "Save as PDF" produces a usable document.
+
 ### Changed
 - **Prompt layout**: `prompts_en/` → `prompts/hollywood/`. Added `prompts/narratology/` from the former sister project, bundling eight structuralist prompts (context, fabula, actants, story, arc, review, synopses_writer, glossary). `docs/layered-schema.md` documents the shared `base + layers` JSON.
 - **Library API**: `get_plotlines(..., lang=)` replaced by `get_plotlines(..., system=)` (values: `"hollywood"` default, `"narratology"`). `LLMConfig.lang` → `LLMConfig.system`. CLI: `tvplotlines run --lang` → `--system`; `write-synopses --system` added.

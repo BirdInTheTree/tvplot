@@ -16,8 +16,20 @@
   <div class="welcome-container">
     <h1 class="welcome-title">tvplotlines</h1>
     <p class="welcome-tagline">see the structure of any TV series</p>
-    <button id="btn-play" class="welcome-play">Play me</button>
-    <a id="btn-skip" class="welcome-skip" href="#">Skip &#8594;</a>
+
+    <form id="analyze-form" class="analyze-form" autocomplete="off">
+      <input id="analyze-show" type="text" class="analyze-input analyze-input-show"
+             placeholder="Series, e.g. Breaking Bad" required>
+      <input id="analyze-season" type="number" class="analyze-input analyze-input-season"
+             placeholder="Season" min="1" value="1" required>
+      <button type="submit" class="analyze-submit">Analyze</button>
+    </form>
+
+    <div class="welcome-secondary">
+      <button id="btn-play" class="welcome-link">Watch demo</button>
+      <span class="welcome-sep">·</span>
+      <a id="btn-skip" class="welcome-link" href="#">Skip to upload &#8594;</a>
+    </div>
   </div>
 </section>
 
@@ -89,6 +101,7 @@
   <button onclick="_handleExport('txt')">TXT</button>
   <button onclick="_handleExport('csv')">CSV</button>
   <button onclick="_handleExport('fdx')">Final Draft (.fdx)</button>
+  <button onclick="_handleExport('pdf')">PDF (via print)</button>
 </div>
 
 <!-- Demo data (injected by build.py) -->

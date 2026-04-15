@@ -5,6 +5,8 @@
 const Store = {
   getKey: () => localStorage.getItem('tvplotlines_api_key'),
   getProvider: () => localStorage.getItem('tvplotlines_provider'),
+  getSystem: () => localStorage.getItem('tvplotlines_system') || 'hollywood',
+  setSystem: (system) => localStorage.setItem('tvplotlines_system', system),
   setKey: (provider, key) => {
     localStorage.setItem('tvplotlines_provider', provider);
     localStorage.setItem('tvplotlines_api_key', key);
@@ -279,6 +281,7 @@ function _showLLMSettings() {
 
   const provider = Store.getProvider() || 'anthropic';
   const apiKey = Store.getKey() || '';
+  const system = Store.getSystem();
 
   modalBody.innerHTML = `
     <h3 style="margin-top:0">LLM Settings</h3>
@@ -289,11 +292,19 @@ function _showLLMSettings() {
         <option value="openai" ${provider === 'openai' ? 'selected' : ''}>OpenAI (GPT-4o)</option>
       </select>
     </div>
-    <div style="margin-bottom:16px">
+    <div style="margin-bottom:12px">
       <label for="llm-api-key" style="display:block;margin-bottom:4px;font-weight:600">API Key</label>
       <input id="llm-api-key" type="password" value="${apiKey.replace(/"/g, '&quot;')}"
         placeholder="sk-... or sk-ant-..."
         style="width:100%;padding:6px;border-radius:4px;border:1px solid var(--border, #ccc);box-sizing:border-box">
+    </div>
+    <div style="margin-bottom:16px">
+      <label for="llm-system" style="display:block;margin-bottom:4px;font-weight:600">Analysis system</label>
+      <select id="llm-system" style="width:100%;padding:6px;border-radius:4px;border:1px solid var(--border, #ccc)">
+        <option value="hollywood" ${system === 'hollywood' ? 'selected' : ''}>Hollywood — screenwriting (story DNA, Freytag)</option>
+        <option value="narratology" disabled>Narratology — structuralist (coming soon)</option>
+      </select>
+      <div style="font-size:0.8em;color:#888;margin-top:4px">Narratology prompts are in place; the runtime is coming in v2.</div>
     </div>
     <button id="llm-save-btn" style="padding:6px 16px;border-radius:4px;cursor:pointer">Save</button>
     <span id="llm-save-status" style="margin-left:8px;color:green;display:none">Saved!</span>
@@ -302,7 +313,9 @@ function _showLLMSettings() {
   document.getElementById('llm-save-btn').addEventListener('click', () => {
     const p = document.getElementById('llm-provider').value;
     const k = document.getElementById('llm-api-key').value.trim();
+    const s = document.getElementById('llm-system').value;
     Store.setKey(p, k);
+    Store.setSystem(s);
     const status = document.getElementById('llm-save-status');
     if (status) {
       status.style.display = 'inline';
@@ -698,12 +711,22 @@ function _initApp() {
   // Welcome screen buttons
   const btnPlay = document.getElementById('btn-play');
   const btnSkip = document.getElementById('btn-skip');
+  const analyzeForm = document.getElementById('analyze-form');
 
   if (btnPlay) btnPlay.addEventListener('click', runOnboarding);
   if (btnSkip) {
     btnSkip.addEventListener('click', (e) => {
       e.preventDefault();
       _skipOnboarding();
+    });
+  }
+  if (analyzeForm) {
+    analyzeForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const show = document.getElementById('analyze-show').value.trim();
+      const season = parseInt(document.getElementById('analyze-season').value, 10);
+      if (!show || !season) return;
+      _analyzeSeries(show, season);
     });
   }
 

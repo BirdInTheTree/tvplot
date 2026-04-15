@@ -229,5 +229,12 @@ function _handleExport(format) {
     case 'txt': exportTXT(_currentData); break;
     case 'csv': exportCSV(_currentData); break;
     case 'fdx': exportFDX(_currentData); break;
+    case 'pdf': exportPDF(); break;
   }
+}
+
+// PDF: leverage the browser's print stack. Print CSS below lays the grid out
+// on landscape pages so a Cmd+P → "Save as PDF" yields a usable document.
+function exportPDF() {
+  window.print();
 }
