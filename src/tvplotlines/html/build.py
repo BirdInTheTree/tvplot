@@ -2,6 +2,10 @@
 
 Reads shell.html and replaces placeholders with CSS, JS, and demo data
 to produce a single self-contained HTML file.
+
+Prompts from ``src/tvplotlines/prompts/{hollywood,narratology}/*.md`` are
+inlined into the HTML so the viewer runs either pipeline in the browser
+without fetching files at runtime.
 """
 
 import argparse
@@ -11,7 +15,30 @@ from pathlib import Path
 
 _PARTS_DIR = Path(__file__).parent / "parts"
 _SHELL_PATH = _PARTS_DIR / "shell.html"
+_PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
 _DEFAULT_DEMO = Path(__file__).parent.parent.parent.parent / "examples" / "results" / "bb_s01.json"
+
+
+def _load_prompts() -> dict[str, dict[str, str]]:
+    """Load every prompt for every system, substituting {GLOSSARY}.
+
+    Returns ``{system: {pass_name: prompt_text}}``.
+    """
+    prompts: dict[str, dict[str, str]] = {}
+    for system_dir in sorted(_PROMPTS_DIR.iterdir()):
+        if not system_dir.is_dir() or system_dir.name.startswith("_"):
+            continue
+        system = system_dir.name
+        glossary_path = system_dir / "glossary.md"
+        glossary = glossary_path.read_text(encoding="utf-8") if glossary_path.exists() else ""
+        prompts[system] = {}
+        for md_file in sorted(system_dir.glob("*.md")):
+            name = md_file.stem
+            text = md_file.read_text(encoding="utf-8")
+            if "{GLOSSARY}" in text:
+                text = text.replace("{GLOSSARY}", glossary)
+            prompts[system][name] = text
+    return prompts
 
 
 def load_part(name: str) -> str:
@@ -61,9 +88,12 @@ def build_html(data_path: Path | None = None) -> str:
         # Validate JSON
         json.loads(demo_data)
 
+    prompts_blob = json.dumps(_load_prompts(), ensure_ascii=False)
+    prompts_js = f"const _PROMPTS = {prompts_blob};"
+
     html = shell
     html = html.replace("/* {{STYLE}} */", style)
-    html = html.replace("/* {{APP_JS}} */", app_js)
+    html = html.replace("/* {{APP_JS}} */", prompts_js + "\n\n" + app_js)
     html = html.replace("/* {{DEMO_DATA}} */", demo_data)
 
     return html

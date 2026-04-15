@@ -1,0 +1,1813 @@
+{
+  "context": {
+    "franchise_type": "serial",
+    "story_engine": "A high school teacher builds a drug empire, testing how far he'll go for family and control",
+    "genre": "drama",
+    "format": "ongoing"
+  },
+  "cast": [
+    {
+      "id": "walt",
+      "name": "Walter White",
+      "aliases": [
+        "Walt",
+        "Heisenberg",
+        "Mr. White",
+        "Walter"
+      ]
+    },
+    {
+      "id": "jesse",
+      "name": "Jesse Pinkman",
+      "aliases": [
+        "Jesse"
+      ]
+    },
+    {
+      "id": "skyler",
+      "name": "Skyler White",
+      "aliases": [
+        "Skyler"
+      ]
+    },
+    {
+      "id": "hank",
+      "name": "Hank Schrader",
+      "aliases": [
+        "Hank"
+      ]
+    },
+    {
+      "id": "tuco",
+      "name": "Tuco Salamanca",
+      "aliases": [
+        "Tuco"
+      ]
+    },
+    {
+      "id": "walter_jr",
+      "name": "Walter White Jr.",
+      "aliases": [
+        "Walter Jr."
+      ]
+    },
+    {
+      "id": "marie",
+      "name": "Marie Schrader",
+      "aliases": [
+        "Marie"
+      ]
+    }
+  ],
+  "plotlines": [
+    {
+      "id": "empire",
+      "name": "Walt: Empire",
+      "driver": "walt",
+      "goal": "build a drug business to secure his family's financial future",
+      "obstacle": "inexperience in criminal world, dangerous partners like Tuco, moral boundaries",
+      "stakes": "death, loss of family, imprisonment",
+      "type": "serialized",
+      "rank": "A",
+      "nature": "plot-led",
+      "confidence": "solid",
+      "devices": [
+        "dramatic_irony"
+      ],
+      "span": [
+        "S01E01",
+        "S01E02",
+        "S01E03",
+        "S01E04",
+        "S01E05",
+        "S01E06",
+        "S01E07"
+      ]
+    },
+    {
+      "id": "family",
+      "name": "Walt: Family",
+      "driver": "walt",
+      "goal": "keep his family together while hiding his criminal activities",
+      "obstacle": "Skyler's growing suspicions, cancer treatment demands, maintaining double life",
+      "stakes": "family breakdown, exposure of criminal activities",
+      "type": "serialized",
+      "rank": "B",
+      "nature": "character-led",
+      "confidence": "solid",
+      "devices": [
+        "dramatic_irony"
+      ],
+      "span": [
+        "S01E01",
+        "S01E02",
+        "S01E03",
+        "S01E04",
+        "S01E05",
+        "S01E06",
+        "S01E07"
+      ]
+    },
+    {
+      "id": "investigation",
+      "name": "Hank: Investigation",
+      "driver": "hank",
+      "goal": "find the source of the high-purity blue methamphetamine",
+      "obstacle": "no direct leads, sophisticated chemistry suggests educated cook",
+      "stakes": "dangerous drugs flooding the streets, career advancement",
+      "type": "serialized",
+      "rank": "C",
+      "nature": "plot-led",
+      "confidence": "solid",
+      "devices": [
+        "dramatic_irony"
+      ],
+      "span": [
+        "S01E01",
+        "S01E02",
+        "S01E04",
+        "S01E05",
+        "S01E06",
+        "S01E07"
+      ]
+    },
+    {
+      "id": "survival",
+      "name": "Jesse: Survival",
+      "driver": "jesse",
+      "goal": "survive as Walt's partner in the dangerous drug trade",
+      "obstacle": "inexperience with violence, dangerous dealers like Tuco, Walt's demands",
+      "stakes": "death, imprisonment, continued beatings",
+      "type": "serialized",
+      "rank": "B",
+      "nature": "character-led",
+      "confidence": "solid",
+      "devices": [],
+      "span": [
+        "S01E01",
+        "S01E02",
+        "S01E03",
+        "S01E04",
+        "S01E06",
+        "S01E07"
+      ]
+    }
+  ],
+  "episodes": [
+    {
+      "episode": "S01E01",
+      "events": [
+        {
+          "event": "Walt works at the car wash to support his pregnant wife and disabled son",
+          "storyline": "family",
+          "function": "setup",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank shows off his gun at Walt's 50th birthday party and invites him on a DEA ride-along",
+          "storyline": "investigation",
+          "function": "setup",
+          "characters": [
+            "hank",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt spots Jesse escaping through a window during the meth lab bust",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt collapses at the car wash and is diagnosed with Stage III lung cancer",
+          "storyline": "family",
+          "function": "setup",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt proposes a meth cooking partnership to Jesse, threatening to turn him in to Hank",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse agrees to the partnership and purchases an old RV for a mobile lab",
+          "storyline": "survival",
+          "function": "setup",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt and Jesse cook their first batch, producing 99.1 percent pure methamphetamine",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Krazy-8 and Emilio arrive at the cook site, having followed Jesse",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "guest:krazy8",
+            "guest:emilio",
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Emilio recognizes Walt from the DEA ride-along and accuses Jesse of working with police",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "guest:emilio",
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Krazy-8 and Emilio force Walt and Jesse into the RV at gunpoint",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "guest:krazy8",
+            "guest:emilio",
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt creates phosphine gas to kill Emilio and incapacitate Krazy-8",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt drives the RV away with both bodies inside and crashes it into a ditch",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt records a video confession and farewell message to his family",
+          "storyline": "family",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt raises a gun toward approaching vehicles that turn out to be fire trucks",
+          "storyline": "empire",
+          "function": "cliffhanger",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "transformation through desperation",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "family",
+            "survival"
+          ],
+          "description": "all storylines explore how desperation transforms ordinary people into criminals",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "investigation"
+          ],
+          "description": "Hank unknowingly enables Walt's criminal career by taking him on the ride-along",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "survival"
+          ],
+          "description": "Walt's entry into the drug trade immediately puts both him and Jesse in mortal danger",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S01E02",
+      "events": [
+        {
+          "event": "Walt and Jesse return from the desert with the RV containing Emilio's body and unconscious Krazy-8",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse panics and blames Walt for the catastrophe",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt takes charge and assigns tasks for body disposal",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt and Jesse lock Krazy-8 in Jesse's basement with a bicycle lock",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt goes home and lies next to Skyler, hiding evidence",
+          "storyline": "family",
+          "function": "setup",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Skyler notices Walt's strange behavior and presses him for answers",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt brings food and water to Krazy-8 and they have cautious conversations",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Krazy-8 tells Walt about his family's furniture business and how he fell into dealing",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt begins to feel sympathy for Krazy-8 and considers releasing him",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse dissolves Emilio's body in acid in a regular bathtub, ignoring Walt's instructions",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "The acid eats through the tub and floor, sending dissolved remains crashing through the ceiling",
+          "storyline": "survival",
+          "function": "climax",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt arrives at Jesse's house and is horrified by the destruction",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt makes Jesse clean up the gruesome mess",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt reconstructs a broken plate and discovers a large shard is missing",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt realizes Krazy-8 has concealed the plate shard as a weapon",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt confronts the agonizing knowledge that Krazy-8 will kill him if freed",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Krazy-8 lunges at Walt with the plate shard and Walt strangles him with the bicycle lock",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt sits on the floor weeping after killing Krazy-8",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt and Jesse bury the bodies in the desert",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Skyler grows more suspicious of Walt's absences",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt deflects Skyler's suspicions by claiming he takes long walks to process stress",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Hank mentions the DEA is investigating new high-purity meth on the streets",
+          "storyline": "investigation",
+          "function": "seed",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        }
+      ],
+      "theme": "the cost of crossing moral lines",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "survival",
+            "family"
+          ],
+          "description": "all storylines explore the moral compromises required to protect what matters most",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "family",
+            "investigation"
+          ],
+          "description": "the audience knows Walt is the source of the meth Hank is investigating and the reason for his strange behavior that worries Skyler",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S01E03",
+      "events": [
+        {
+          "event": "Walt tells Skyler about his lung cancer diagnosis",
+          "storyline": "family",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler researches treatment options and insists they fight aggressively",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt resists treatment, saying it will bankrupt the family",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Skyler tells Marie about Walt's diagnosis",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "marie"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank tries to offer Walt support but Walt shuts down emotional conversation",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Family holds intervention meeting urging Walt to pursue treatment",
+          "storyline": "family",
+          "function": "turning_point",
+          "characters": [
+            "skyler",
+            "hank",
+            "marie",
+            "walter_jr",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walter Jr. passionately argues his father must fight",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walter_jr"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt agrees to chemotherapy due to family pressure",
+          "storyline": "family",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse tries to sell remaining meth without Krazy-8 as distributor",
+          "storyline": "survival",
+          "function": "setup",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse nearly gets robbed at biker bar while selling",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse realizes he cannot distribute alone and needs new connection",
+          "storyline": "survival",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt and Jesse meet to discuss distribution problems",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse suggests they need to establish territory with other dealers",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt learns chemotherapy costs thousands per session",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "family"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt calculates financial burden and hardens resolve to continue cooking",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler creates online fundraising page for Walt's treatment",
+          "storyline": "family",
+          "function": "resolution",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Marie shoplifts tiara and gives it to Skyler as baby shower gift",
+          "storyline": "family",
+          "function": "seed",
+          "characters": [
+            "marie"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the cost of survival",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "family",
+            "survival"
+          ],
+          "description": "all storylines explore different costs of survival — financial, emotional, and physical",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "family"
+          ],
+          "description": "Walt's cancer treatment costs directly motivate his continued drug cooking",
+          "subtype": null
+        }
+      ],
+      "patches": [
+        {
+          "action": "ADD_LINE",
+          "target": "marie_kleptomania",
+          "reason": "Marie's shoplifting behavior appears to be a recurring character trait that doesn't fit existing storylines",
+          "episodes": [
+            "S01E03"
+          ]
+        }
+      ]
+    },
+    {
+      "episode": "S01E04",
+      "events": [
+        {
+          "event": "Walt begins chemotherapy and hides the severe side effects from Skyler",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt snaps at a student at school due to chemo fatigue",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt's hair falls out and he decides to shave his head completely",
+          "storyline": "family",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walter Jr. shaves his own head in solidarity with Walt",
+          "storyline": "family",
+          "function": "climax",
+          "characters": [
+            "walter_jr",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank and Gomez investigate the new blue methamphetamine in Albuquerque",
+          "storyline": "investigation",
+          "function": "setup",
+          "characters": [
+            "hank",
+            "guest:gomez"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "DEA traces the blue meth to a low-level dealer and discovers its high purity",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse reconnects with Badger and recruits him to sell meth on the street",
+          "storyline": "survival",
+          "function": "setup",
+          "characters": [
+            "jesse",
+            "guest:badger"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse confronts a rival dealer in a territorial standoff and wins by bluffing",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler discovers Marie's baby shower tiara was shoplifted",
+          "storyline": "family",
+          "function": "setup",
+          "characters": [
+            "skyler",
+            "marie"
+          ],
+          "also_affects": [
+            "family"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Skyler confronts Marie who denies shoplifting, fracturing their relationship",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "marie"
+          ],
+          "also_affects": [
+            "family"
+          ],
+          "devices": []
+        },
+        {
+          "event": "The sisters' conflict pulls Hank into the middle, straining both marriages",
+          "storyline": "family",
+          "function": "climax",
+          "characters": [
+            "hank",
+            "marie",
+            "skyler"
+          ],
+          "also_affects": [
+            "family"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt and Jesse cook a second batch in the desert RV",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse starts selling through Badger but the amounts are small with thin margins",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt calculates they need larger quantities and tells Jesse they need a real distributor",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the cost of deception",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "family",
+            "empire"
+          ],
+          "description": "both storylines explore the physical and emotional toll of Walt's choices - chemo weakening his body while his lies strengthen his criminal resolve",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "investigation",
+            "empire"
+          ],
+          "description": "Hank investigates the blue meth that Walt and Jesse are producing, unaware his brother-in-law is the chemist he's seeking",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "survival",
+            "empire"
+          ],
+          "description": "Jesse's street-level distribution efforts directly serve Walt's empire-building goals",
+          "subtype": null
+        }
+      ],
+      "patches": [
+        {
+          "action": "ADD_LINE",
+          "target": "marie_kleptomania",
+          "reason": "Marie's shoplifting subplot doesn't fit existing storylines - it's about her compulsive behavior affecting family dynamics",
+          "episodes": [
+            "S01E04"
+          ]
+        }
+      ]
+    },
+    {
+      "episode": "S01E05",
+      "events": [
+        {
+          "event": "Skyler organizes a family gathering and invites Ted Beneke",
+          "storyline": "family",
+          "function": "setup",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt becomes uncomfortable and jealous of Ted's presence",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt overcompensates by drinking too much at the party",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt forces Walter Jr. to drink tequila until he vomits",
+          "storyline": "family",
+          "function": "turning_point",
+          "characters": [
+            "walt",
+            "walter_jr"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank confronts Walt and takes the bottle away",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler demands to know what is wrong with Walt beyond cancer",
+          "storyline": "family",
+          "function": "climax",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt offers no explanation to Skyler's questions",
+          "storyline": "family",
+          "function": "resolution",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse approaches Skinny Pete for introduction to Tuco",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Skinny Pete warns Jesse that Tuco is dangerously unpredictable",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse meets Tuco and presents Walt's blue meth sample",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Tuco tests the meth and is impressed by the quality",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "guest:tuco"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Tuco beats Jesse severely and steals the meth without paying",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "guest:tuco",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse calls Walt from the hospital, battered and humiliated",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt visits Jesse in the hospital and sees his injuries",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank and Gomez process Jesse's beating as drug-related assault",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse refuses to cooperate with police investigation",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt realizes they cannot be victims in the drug world",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt resolves to confront Tuco himself",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt takes remaining meth and prepares for meeting with Tuco",
+          "storyline": "empire",
+          "function": "cliffhanger",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the cost of respect and control",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "family"
+          ],
+          "description": "both storylines explore Walt's need to assert dominance and control when feeling emasculated or disrespected",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "family",
+            "investigation"
+          ],
+          "description": "Hank processes Jesse's beating as a drug crime while being unaware that Walt is connected to it",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "investigation"
+          ],
+          "description": "Jesse's beating brings Walt's criminal world into contact with Hank's law enforcement world",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S01E06",
+      "events": [
+        {
+          "event": "Walt synthesizes mercury fulminate explosive disguised as meth",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt drives alone to Tuco's headquarters",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt introduces himself as Heisenberg to Tuco",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt",
+            "tuco"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Tuco laughs and threatens Walt over payment demands",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "tuco",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt throws mercury fulminate crystal, causing explosion",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Tuco agrees to pay for stolen meth and buy future batches",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "tuco",
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt returns home with cash and has aggressive sex with Skyler",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "DEA identifies blue meth as extremely pure with advanced chemistry signature",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Hank presents findings suggesting cook has advanced chemistry training",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "DEA investigation focuses on known drug operations but finds no match",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Skyler notices Walt carrying extra cash and behaving erratically",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt fabricates poker game story to explain cash and behavior",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse learns Walt made deal with Tuco and is unnerved by transformation",
+          "storyline": "survival",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt and Jesse agree to cook Tuco's order immediately",
+          "storyline": "empire",
+          "function": "seed",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the intoxication of power",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "family"
+          ],
+          "description": "Walt's newfound power in the drug world transforms his behavior at home, showing how criminal success bleeds into personal relationships",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "investigation"
+          ],
+          "description": "Hank correctly deduces the cook has advanced chemistry training while Walt sits at his dinner table",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "family",
+            "empire"
+          ],
+          "description": "Skyler senses something is wrong but doesn't know Walt just confronted a violent drug dealer",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S01E07",
+      "events": [
+        {
+          "event": "Walt and Jesse cook Tuco's two-pound order in the RV, working through the night",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt refuses to cut corners despite Jesse's urge to rush, yielding their purest batch yet",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Tuco tests the product, declares it excellent, and pays fifty thousand dollars",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse",
+            "tuco"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Tuco demands double the quantity for the next delivery on a tighter schedule",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "tuco",
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt hesitates but agrees, recognizing refusing Tuco is not realistic",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Skyler discovers a second cell phone hidden in Walt's belongings",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler confronts Walt about the phone, Walt claims it was a forgotten replacement",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Skyler begins quietly investigating Walt, checking phone records and tracking absences",
+          "storyline": "family",
+          "function": "turning_point",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank celebrates his DEA promotion at family dinner",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "walt",
+            "skyler",
+            "walter_jr",
+            "marie"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank describes the blue meth case disrupting the local drug economy",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt asks casual questions about the investigation that Hank answers without suspicion",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "hank"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt processes that the DEA is hunting his product and Hank is leading the effort",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire",
+            "family"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse tells Walt they should find another buyer after witnessing Tuco's volatility",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt argues that Tuco's volume and cash make him irreplaceable for now",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Tuco beats his own associate nearly to death over a minor slight",
+          "storyline": "survival",
+          "function": "climax",
+          "characters": [
+            "tuco",
+            "walt",
+            "jesse",
+            "guest:associate"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt and Jesse stand frozen, unable to intervene in the beating",
+          "storyline": "survival",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt and Jesse realize they are trapped with a man who could kill them on impulse",
+          "storyline": "survival",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt sits in his driveway staring at his house, family unaware of the danger",
+          "storyline": "family",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire",
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        }
+      ],
+      "theme": "the price of success",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "survival",
+            "family"
+          ],
+          "description": "all storylines explore how success brings new dangers — business growth traps Walt with Tuco, investigation success puts Hank closer to Walt, family suspicions grow with Walt's lies",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "investigation",
+            "empire",
+            "family"
+          ],
+          "description": "Walt sits at dinner listening to Hank describe hunting him while Skyler grows suspicious and the family celebrates Hank's promotion",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "survival"
+          ],
+          "description": "Tuco's demands merge Walt's business ambitions with immediate survival concerns",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    }
+  ],
+  "usage": "12 requests, 37,588 input + 13,008 output tokens, ~$0.322"
+}

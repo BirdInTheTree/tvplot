@@ -98,10 +98,13 @@ def get_plotlines(
         TVPlotlinesResult with context, cast, plotlines, and episode breakdowns.
     """
     if system == "narratology":
-        raise NotImplementedError(
-            "Narratology pipeline is not yet runnable — prompts are in place at "
-            "src/tvplotlines/prompts/narratology/ and will be wired in v2. "
-            "Use system='hollywood' for now."
+        from tvplotlines.narratology import run_narratology
+        nconfig = LLMConfig(
+            provider=llm_provider, model=model, base_url=base_url, system=system,
+        )
+        return run_narratology(
+            show=show, season=season, episodes=episodes,
+            config=nconfig, callback=callback, skip_review=skip_review,
         )
     config = LLMConfig(provider=llm_provider, model=model, base_url=base_url, system=system)
 

@@ -1,0 +1,3249 @@
+{
+  "context": {
+    "franchise_type": "serial",
+    "story_engine": "A high school teacher builds a drug empire, testing how far he'll go for family and control",
+    "genre": "drama",
+    "format": "ongoing"
+  },
+  "cast": [
+    {
+      "id": "walt",
+      "name": "Walter White",
+      "aliases": [
+        "Walt",
+        "Walter",
+        "Heisenberg",
+        "Mr. White"
+      ]
+    },
+    {
+      "id": "jesse",
+      "name": "Jesse Pinkman",
+      "aliases": [
+        "Jesse"
+      ]
+    },
+    {
+      "id": "skyler",
+      "name": "Skyler White",
+      "aliases": [
+        "Skyler"
+      ]
+    },
+    {
+      "id": "hank",
+      "name": "Hank Schrader",
+      "aliases": [
+        "Hank"
+      ]
+    },
+    {
+      "id": "walter_jr",
+      "name": "Walter White Jr.",
+      "aliases": [
+        "Walter Jr.",
+        "Flynn",
+        "Walt Jr."
+      ]
+    },
+    {
+      "id": "marie",
+      "name": "Marie Schrader",
+      "aliases": [
+        "Marie"
+      ]
+    },
+    {
+      "id": "saul",
+      "name": "Saul Goodman",
+      "aliases": [
+        "Saul"
+      ]
+    },
+    {
+      "id": "gus",
+      "name": "Gustavo Fring",
+      "aliases": [
+        "Gus",
+        "Gus Fring"
+      ]
+    },
+    {
+      "id": "gale",
+      "name": "Gale Boetticher",
+      "aliases": [
+        "Gale"
+      ]
+    },
+    {
+      "id": "mike",
+      "name": "Mike Ehrmantraut",
+      "aliases": [
+        "Mike"
+      ]
+    },
+    {
+      "id": "ted",
+      "name": "Ted Beneke",
+      "aliases": [
+        "Ted"
+      ]
+    },
+    {
+      "id": "andrea",
+      "name": "Andrea Cantillo",
+      "aliases": [
+        "Andrea"
+      ]
+    },
+    {
+      "id": "tomas",
+      "name": "Tomas Cantillo",
+      "aliases": [
+        "Tomas"
+      ]
+    },
+    {
+      "id": "leonel",
+      "name": "Leonel Salamanca",
+      "aliases": [
+        "Leonel"
+      ]
+    },
+    {
+      "id": "marco",
+      "name": "Marco Salamanca",
+      "aliases": [
+        "Marco"
+      ]
+    },
+    {
+      "id": "hector",
+      "name": "Hector Salamanca",
+      "aliases": [
+        "Hector"
+      ]
+    }
+  ],
+  "plotlines": [
+    {
+      "id": "empire",
+      "name": "Walt: Empire",
+      "driver": "walt",
+      "goal": "establish himself as Gus's lead chemist and secure his position in the superlab operation",
+      "obstacle": "Gus's manipulation and control, the threat of being replaced by Gale, cartel violence",
+      "stakes": "death, loss of financial security, family exposure",
+      "type": "serialized",
+      "rank": "A",
+      "nature": "plot-led",
+      "confidence": "solid",
+      "devices": [
+        "dramatic_irony"
+      ],
+      "span": [
+        "S03E02",
+        "S03E03",
+        "S03E04",
+        "S03E05",
+        "S03E06",
+        "S03E07",
+        "S03E08",
+        "S03E09",
+        "S03E10",
+        "S03E11",
+        "S03E12",
+        "S03E13"
+      ]
+    },
+    {
+      "id": "family",
+      "name": "Walt: Family",
+      "driver": "walt",
+      "goal": "maintain control over his family despite Skyler's knowledge of his crimes",
+      "obstacle": "Skyler's affair with Ted, divorce proceedings, restraining order",
+      "stakes": "complete family breakdown, loss of children, isolation",
+      "type": "serialized",
+      "rank": "B",
+      "nature": "character-led",
+      "confidence": "solid",
+      "devices": [
+        "dramatic_irony"
+      ],
+      "span": [
+        "S03E01",
+        "S03E02",
+        "S03E03",
+        "S03E04",
+        "S03E08",
+        "S03E09",
+        "S03E11",
+        "S03E13"
+      ]
+    },
+    {
+      "id": "survival",
+      "name": "Jesse: Survival",
+      "driver": "jesse",
+      "goal": "survive and profit in the drug trade while navigating his partnership with Walt",
+      "obstacle": "homelessness, inferior product quality, violent dealers, Gus's suspicion",
+      "stakes": "death, imprisonment, complete destruction",
+      "type": "serialized",
+      "rank": "B",
+      "nature": "plot-led",
+      "confidence": "solid",
+      "devices": [],
+      "span": [
+        "S03E01",
+        "S03E02",
+        "S03E03",
+        "S03E04",
+        "S03E05",
+        "S03E06",
+        "S03E07",
+        "S03E08",
+        "S03E09",
+        "S03E10",
+        "S03E11",
+        "S03E13"
+      ]
+    },
+    {
+      "id": "investigation",
+      "name": "Hank: Investigation",
+      "driver": "hank",
+      "goal": "track down the blue meth operation and its creators",
+      "obstacle": "panic attacks, career suspension, physical injuries from cartel attack",
+      "stakes": "career destruction, death, family safety",
+      "type": "serialized",
+      "rank": "B",
+      "nature": "plot-led",
+      "confidence": "solid",
+      "devices": [
+        "dramatic_irony"
+      ],
+      "span": [
+        "S03E01",
+        "S03E02",
+        "S03E03",
+        "S03E04",
+        "S03E05",
+        "S03E06",
+        "S03E07",
+        "S03E08",
+        "S03E09",
+        "S03E11"
+      ]
+    },
+    {
+      "id": "love",
+      "name": "Jesse: Love",
+      "driver": "jesse",
+      "goal": "build a genuine relationship with Andrea and protect her family",
+      "obstacle": "his criminal life, Andrea's brother's involvement with dealers, his own deception",
+      "stakes": "loss of love, Andrea's safety, moral corruption",
+      "type": "serialized",
+      "rank": "C",
+      "nature": "character-led",
+      "confidence": "solid",
+      "devices": [],
+      "span": [
+        "S03E09",
+        "S03E11",
+        "S03E12"
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Gus: Control",
+      "driver": "gus",
+      "goal": "maintain absolute control over his drug operation and eliminate threats",
+      "obstacle": "Walt's unpredictability, cartel pressure, DEA investigation",
+      "stakes": "empire destruction, death, exposure",
+      "type": "serialized",
+      "rank": "B",
+      "nature": "plot-led",
+      "confidence": "solid",
+      "devices": [
+        "flashback"
+      ],
+      "span": [
+        "S03E01",
+        "S03E02",
+        "S03E03",
+        "S03E04",
+        "S03E05",
+        "S03E06",
+        "S03E07",
+        "S03E08",
+        "S03E09",
+        "S03E11",
+        "S03E12",
+        "S03E13"
+      ]
+    },
+    {
+      "id": "vengeance",
+      "name": "Salamanca Twins: Vengeance",
+      "driver": "leonel",
+      "goal": "kill Walter White to avenge Tuco's death",
+      "obstacle": "Gus's interference and redirection toward Hank",
+      "stakes": "family honor, their own lives",
+      "type": "serialized",
+      "rank": "C",
+      "nature": "plot-led",
+      "confidence": "solid",
+      "devices": [],
+      "span": [
+        "S03E01",
+        "S03E02",
+        "S03E03",
+        "S03E04",
+        "S03E07",
+        "S03E08"
+      ]
+    }
+  ],
+  "episodes": [
+    {
+      "episode": "S03E01",
+      "events": [
+        {
+          "event": "Leonel and Marco Salamanca pin Walt's sketch to a shrine and head north from Mexico",
+          "storyline": "vengeance",
+          "function": "setup",
+          "characters": [
+            "leonel",
+            "marco"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashback"
+          ]
+        },
+        {
+          "event": "People crawl on their bellies toward the shrine in the Mexican village",
+          "storyline": "vengeance",
+          "function": "setup",
+          "characters": [
+            "guest:villagers"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashback"
+          ]
+        },
+        {
+          "event": "Walt gives a tone-deaf statistical speech at the school assembly about the plane crash",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler demands a divorce from Walt after discovering his meth cooking",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt refuses to move out and insists he did everything for the family",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse is released from rehab and discovers his parents sold his aunt's house",
+          "storyline": "survival",
+          "function": "setup",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse checks into a motel with diminished cash and calls Walt who doesn't answer",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank receives a promotion to DEA's El Paso field office near the cartel border",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank publicly celebrates but privately shows anxiety from his Tuco encounter",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt throws pizza on the roof when Skyler locks him out, then enters through back door",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler takes the children and leaves for the night",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gus monitors the situation from a distance through his network",
+          "storyline": "control",
+          "function": "setup",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "The Salamanca twins cross the border and execute immigrants who recognize them",
+          "storyline": "vengeance",
+          "function": "escalation",
+          "characters": [
+            "leonel",
+            "marco"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt sits alone in the empty house, convinced he can hold his family together",
+          "storyline": "family",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        }
+      ],
+      "theme": "the illusion of control and consequences",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "family",
+            "vengeance",
+            "control"
+          ],
+          "description": "all storylines explore how characters attempt to control situations that are spiraling beyond their grasp",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "family",
+            "vengeance"
+          ],
+          "description": "Walt believes he can control his family situation while deadly assassins hunt him",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "vengeance",
+            "empire"
+          ],
+          "description": "the twins' hunt for Walt will intersect with his drug operation",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E02",
+      "events": [
+        {
+          "event": "The Salamanca twins enter Walt's house with an axe and wait on his bed while he showers",
+          "storyline": "vengeance",
+          "function": "escalation",
+          "characters": [
+            "leonel",
+            "marco"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Gus calls the twins away before they can kill Walt",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": [
+            "vengeance",
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt continues his morning routine, oblivious to the near-death experience",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Skyler hires a divorce attorney",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt refuses to sign divorce papers and tells Walt Jr. that Skyler is breaking up the family",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "walter_jr"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt Jr. turns against Skyler after Walt's manipulation",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walter_jr",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler reveals she knows everything about Walt's meth operation and threatens to tell Hank",
+          "storyline": "family",
+          "function": "turning_point",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt calls Skyler's bluff, betting she won't destroy the family's reputation",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse, broke and homeless, gets help from Saul to find a new duplex",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "saul"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse visits his old neighborhood and sees strangers in his aunt's former house",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank suffers a panic attack in the DEA elevator before his El Paso transfer",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank forces himself back to composure and tells no one about the panic attack",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "The Salamanca twins visit their paralyzed uncle Hector in the nursing home",
+          "storyline": "vengeance",
+          "function": "escalation",
+          "characters": [
+            "leonel",
+            "marco",
+            "hector"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hector's rage confirms the twins' mission to kill Walt for Tuco's death",
+          "storyline": "vengeance",
+          "function": "escalation",
+          "characters": [
+            "hector",
+            "leonel",
+            "marco"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gus meets with the twins through his intermediary and counsels patience",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": [
+            "vengeance"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt attempts a family dinner with takeout, acting as if nothing has changed",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "walter_jr"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler returns home disgusted but sits down powerless to explain the truth",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt smiles, believing he is winning the standoff through attrition",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        }
+      ],
+      "theme": "the illusion of control",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "family",
+            "control",
+            "vengeance"
+          ],
+          "description": "all storylines explore different forms of control — Walt's manipulation of his family, Gus's orchestration of violence, and the twins' single-minded pursuit of revenge",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "vengeance"
+          ],
+          "description": "Walt is oblivious to how close he came to death while the audience witnessed the twins' near-attack",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "family",
+            "investigation"
+          ],
+          "description": "Skyler threatens to tell Hank the truth while the audience knows Hank is psychologically unraveling",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "control",
+            "vengeance"
+          ],
+          "description": "Gus directly intervenes in the twins' mission, showing his power over their revenge plot",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E03",
+      "events": [
+        {
+          "event": "Walt sleeps in the master bedroom while Skyler takes the couch, each refusing to yield ground",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler meets with her divorce attorney who explains Walt will likely get shared custody without admissible evidence",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler begins an affair with Ted Beneke at Beneke Fabricators",
+          "storyline": "family",
+          "function": "turning_point",
+          "characters": [
+            "skyler",
+            "ted"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler tells Walt 'I fucked Ted' when he comes home",
+          "storyline": "family",
+          "function": "climax",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse tries to cook meth alone using Walt's formula but produces inferior product",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse sells low-quality meth through Skinny Pete, drawing complaints",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "guest:skinny_pete"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Saul approaches Walt with Gus's offer of three million for three months in the superlab",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "saul",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt declines Gus's offer, insisting he is done with the drug business",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank investigates a tip connecting the blue meth to local market, noting lower quality suggests copycat",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "The Salamanca twins acquire chrome axes, preparing to strike",
+          "storyline": "vengeance",
+          "function": "escalation",
+          "characters": [
+            "leonel",
+            "marco"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gus meets with the twins and persuades them to wait, promising to deliver Tuco's killer on his timeline",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "gus",
+            "leonel",
+            "marco"
+          ],
+          "also_affects": [
+            "vengeance"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt drives recklessly after Skyler's confession, nearly causing an accident, then sits gripping the steering wheel",
+          "storyline": "family",
+          "function": "resolution",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the illusion of control",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "family",
+            "empire",
+            "control",
+            "vengeance"
+          ],
+          "description": "all storylines explore control slipping away — Skyler takes control from Walt, Walt refuses control of the empire, Gus controls the twins' vengeance",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "investigation",
+            "empire"
+          ],
+          "description": "Hank investigates the blue meth without knowing Walt created the formula Jesse is copying",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "control",
+            "vengeance"
+          ],
+          "description": "Gus directly intervenes to control the twins' timeline for killing Walt",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E04",
+      "events": [
+        {
+          "event": "Walt confronts Ted Beneke at his office and makes a veiled threat",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "ted"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Security escorts Walt out of Ted's office",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt smashes a glass table in frustration at home",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt Jr. blames Skyler for provoking his father",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walter_jr",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler files a restraining order against Walt",
+          "storyline": "family",
+          "function": "turning_point",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Police arrive to remove Walt from the house",
+          "storyline": "family",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt moves into a small condo apartment",
+          "storyline": "family",
+          "function": "resolution",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse sells his substandard meth and grows frustrated with the quality",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse visits Saul asking for new distribution contacts",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "saul"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Saul tells Jesse that Gus wants Walt and there's a place for Jesse if he brings Walt back",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "saul",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse dismisses the idea, insisting he can build his own business",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank picks a bar fight with two strangers to feel a rush of control",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "A bouncer pulls Hank off the strangers",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Marie notices Hank's behavioral changes and presses him",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "marie",
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank deflects Marie's concerns with jokes",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gus invites Walt to tour the superlab",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "gus",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt sees the state-of-the-art equipment worth millions",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gus appeals to Walt's pride, saying he should not hide from his gifts",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "gus",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt declines Gus's offer again but is visibly tempted",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gus accepts the refusal calmly but tells Walt the offer stands",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "The Salamanca twins surveil Walt from a distance",
+          "storyline": "vengeance",
+          "function": "escalation",
+          "characters": [
+            "leonel",
+            "marco"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gus's associate redirects the twins' vengeance toward Hank instead of Walt",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": [
+            "vengeance"
+          ],
+          "devices": []
+        },
+        {
+          "event": "The twins accept Hank as their new target",
+          "storyline": "vengeance",
+          "function": "turning_point",
+          "characters": [
+            "leonel",
+            "marco"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt sits alone in his bare apartment, staring at the three-million-dollar napkin",
+          "storyline": "empire",
+          "function": "cliffhanger",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the cost of pride and isolation",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "family",
+            "survival",
+            "investigation"
+          ],
+          "description": "all storylines explore characters isolated by their pride and choices — Walt alone in his apartment, Jesse insisting on independence, Hank hiding his trauma",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "vengeance",
+            "investigation"
+          ],
+          "description": "the audience knows the twins now target Hank, but Hank remains unaware of the threat",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "control",
+            "vengeance"
+          ],
+          "description": "Gus manipulates the twins' vengeance to serve his control, redirecting them from Walt to Hank",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E05",
+      "events": [
+        {
+          "event": "Gus and Max pitch their blue meth to Don Eladio at his poolside estate",
+          "storyline": "control",
+          "function": "setup",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashback"
+          ]
+        },
+        {
+          "event": "Don Eladio orders Hector to execute Max as punishment for cooking without permission",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashback"
+          ]
+        },
+        {
+          "event": "Gus is forced to watch his partner die beside the pool",
+          "storyline": "control",
+          "function": "turning_point",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashback"
+          ]
+        },
+        {
+          "event": "Don Eladio spares Gus because of unexplained connections in Chile",
+          "storyline": "control",
+          "function": "seed",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashback"
+          ]
+        },
+        {
+          "event": "Gus invites Walt to dinner at his modest home and cooks a meal himself",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "gus",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gus shares his philosophy that a man provides for his family even when not appreciated",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "gus",
+            "walt"
+          ],
+          "also_affects": [
+            "family"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt accepts Gus's offer of three months cooking for $15 million total",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt calls Jesse to inform him of the deal, but Jesse is angry and feels betrayed",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt visits the superlab for the first time as lead chemist and meets Gale",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "gale"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gale admires Walt's work, calling the blue meth the purest he has ever analyzed",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "gale"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt and Gale cook together and achieve 99.1 percent purity",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "gale"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank discovers the blue meth has returned at original purity, meaning the original cook is active",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse cooks his own batch in his duplex and begins selling through his crew",
+          "storyline": "survival",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the cost of providing",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "control",
+            "survival"
+          ],
+          "description": "all three storylines explore different aspects of providing and sacrifice — Walt providing for family through crime, Gus's decades-long quest for vengeance as providing justice for Max, Jesse providing for himself by going independent",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "investigation"
+          ],
+          "description": "Hank realizes the original cook is back just as Walt officially becomes Gus's lead chemist",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "survival"
+          ],
+          "description": "Walt's acceptance of Gus's offer directly creates Jesse's independent operation, setting up territorial conflict",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E06",
+      "events": [
+        {
+          "event": "Walt and Gale work together in the superlab, producing large quantities of blue meth with consistent purity",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "gale"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt notices Gale is logging every step of the process in a personal notebook, learning to replicate the cook independently",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "gale"
+          ],
+          "also_affects": [
+            "control"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt realizes that once Gale masters the formula, Gus will no longer need Walt and could dispose of him",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "control"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt manufactures a complaint about Gale's performance, telling Gus that Gale is not up to standard and demands Jesse as his assistant",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "gus"
+          ],
+          "also_affects": [
+            "control",
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Gus, skeptical of Jesse's reliability, reluctantly agrees and reassigns Gale to another facility",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse accepts the offer and joins Walt in the superlab",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank's investigation leads him to the RV through records checks, tracing it to Jesse Pinkman",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank confronts Jesse at his duplex about the RV",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse calls Walt in a panic about Hank finding the RV",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt races to the junkyard where the RV is stored with Old Joe",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank follows Jesse's phone GPS to the junkyard and arrives as Walt hides inside the RV",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Old Joe blocks Hank from entering the RV by citing it as a domicile, requiring a warrant",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "guest:old_joe",
+            "hank"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt has Saul's secretary call Hank with a fake emergency about Marie being in a car accident",
+          "storyline": "survival",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank abandons the warrant and races to the hospital, giving Old Joe time to crush the RV",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Old Joe crushes the RV into a cube of scrap metal",
+          "storyline": "survival",
+          "function": "climax",
+          "characters": [
+            "guest:old_joe"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank arrives at the hospital, finds Marie perfectly fine, and realizes he has been tricked",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank",
+            "marie"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Enraged Hank drives to Jesse's duplex, pounds on the door, and beats Jesse severely when he opens it",
+          "storyline": "investigation",
+          "function": "resolution",
+          "characters": [
+            "hank",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse calls 911 after being beaten by Hank",
+          "storyline": "survival",
+          "function": "resolution",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the price of survival",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "survival",
+            "investigation"
+          ],
+          "description": "all three storylines explore survival tactics — Walt manipulates to survive Gus's control, Jesse survives by partnering with Walt, Hank's investigation threatens everyone's survival",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "investigation",
+            "survival"
+          ],
+          "description": "the audience knows Walt is hiding in the RV while Hank searches for evidence just feet away",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "survival"
+          ],
+          "description": "Walt's manipulation to get Jesse as his partner serves both his empire goals and survival needs",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E07",
+      "events": [
+        {
+          "event": "Flashback shows young Hank receiving his first major bust commendation and calling Marie to celebrate",
+          "storyline": "investigation",
+          "function": "setup",
+          "characters": [
+            "hank",
+            "marie"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashback"
+          ]
+        },
+        {
+          "event": "Jesse lies in hospital with shattered face and tells his attorney he will press full charges against Hank",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank is suspended from DEA and forced to surrender gun and badge",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Marie pleads with Jesse through Saul to drop charges but Jesse refuses",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "marie",
+            "saul"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt visits Jesse and persuades him to settle for 50-50 partnership in superlab cook",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse agrees to drop charges in exchange for equal partnership with Walt",
+          "storyline": "survival",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire",
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank sinks into depression at home without work",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "ASAC Merkert warns Hank the assault charge could end his career permanently",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "guest:merkert"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Marie tries to support Hank but he pushes her away",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "marie"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gus recognizes disgraced DEA agent is less dangerous and does nothing to intervene",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Salamanca twins acquire chrome-plated fire axes and plan attack on Hank",
+          "storyline": "vengeance",
+          "function": "escalation",
+          "characters": [
+            "leonel",
+            "marco"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gus anonymously tips off Hank with one-minute warning about the twins",
+          "storyline": "control",
+          "function": "turning_point",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": [
+            "investigation",
+            "vengeance"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Twins arrive and open fire on unarmed Hank in parking lot",
+          "storyline": "vengeance",
+          "function": "climax",
+          "characters": [
+            "leonel",
+            "marco",
+            "hank"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank uses SUV to ram Leonel, crushing his legs",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": [
+            "vengeance"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Marco buries axe in Hank's back",
+          "storyline": "vengeance",
+          "function": "climax",
+          "characters": [
+            "marco",
+            "hank"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank finds Leonel's gun, loads hollow-point bullet, and shoots Marco through the head",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": [
+            "vengeance"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Paramedics arrive to find Hank collapsed beside two cartel assassins",
+          "storyline": "investigation",
+          "function": "resolution",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": [
+            "vengeance"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "consequences and survival",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "investigation",
+            "vengeance",
+            "survival"
+          ],
+          "description": "all storylines explore how violence begets violence and the price of survival in a dangerous world",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "control",
+            "investigation",
+            "vengeance"
+          ],
+          "description": "Gus orchestrates events while Hank remains unaware of who is manipulating his fate",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "investigation",
+            "vengeance"
+          ],
+          "description": "the twins' quest for revenge directly collides with Hank's survival, creating the episode's climactic showdown",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E08",
+      "events": [
+        {
+          "event": "Walt, Jesse, Skyler, Walt Jr., and Marie rush to the hospital after learning Hank has been shot",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse",
+            "skyler",
+            "walter_jr",
+            "marie"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank undergoes surgery for multiple gunshot wounds and severe spinal injury",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": [
+            "family"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Marie alternates between grief and rage, demanding answers from the DEA about the cartel hitmen",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "marie"
+          ],
+          "also_affects": [
+            "family"
+          ],
+          "devices": []
+        },
+        {
+          "event": "ASAC Merkert and the DEA team flood the hospital, launching a full investigation",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "guest:merkert"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt realizes the twins were hunting him and someone redirected them to Hank",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "control",
+            "vengeance"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt confronts Gus in the hospital parking lot about orchestrating the scenario",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt",
+            "gus"
+          ],
+          "also_affects": [
+            "control"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Gus confirms he pointed the twins at Hank, then tipped Hank off to neutralize the cartel threat",
+          "storyline": "control",
+          "function": "climax",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": [
+            "empire",
+            "vengeance"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt realizes he is deeply in Gus's debt despite being horrified at using Hank as bait",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "control"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse cooks a batch alone at the superlab, achieving 96 percent purity",
+          "storyline": "survival",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse realizes he is more capable than he believed",
+          "storyline": "survival",
+          "function": "resolution",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Leonel Salamanca survives surgery but loses both legs",
+          "storyline": "vengeance",
+          "function": "resolution",
+          "characters": [
+            "leonel"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "DEA agents guard Leonel's room, hoping he will identify who sent him",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "guest:dea_agents"
+          ],
+          "also_affects": [
+            "control"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Gus visits Leonel posing as a Los Pollos Hermanos community representative",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike injects Leonel with a lethal substance when guards step away, killing him",
+          "storyline": "control",
+          "function": "resolution",
+          "characters": [
+            "mike",
+            "gus"
+          ],
+          "also_affects": [
+            "vengeance"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank wakes from surgery and learns he may never walk again",
+          "storyline": "investigation",
+          "function": "resolution",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": [
+            "family"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Marie holds Hank's hand as he stares at the ceiling",
+          "storyline": "family",
+          "function": "resolution",
+          "characters": [
+            "marie",
+            "hank"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt returns home alone, understanding the full scope of Gus's ruthlessness",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "control"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the price of power and protection",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "control",
+            "investigation",
+            "family"
+          ],
+          "description": "all storylines explore how protection comes at a devastating cost — Gus protects Walt by sacrificing Hank, Walt's family pays for his empire, Hank's investigation costs him his mobility",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "investigation",
+            "family"
+          ],
+          "description": "the family grieves for Hank not knowing Walt's crimes caused the attack",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "control",
+            "vengeance",
+            "empire"
+          ],
+          "description": "Gus's manipulation eliminates the Salamanca threat while binding Walt deeper into his operation",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E09",
+      "events": [
+        {
+          "event": "Hank lies conscious but paralyzed in his hospital bed, beginning physical rehabilitation",
+          "storyline": "investigation",
+          "function": "setup",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Marie pushes doctors for aggressive treatment and learns about expensive Colorado spinal therapy facility",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "marie"
+          ],
+          "also_affects": [
+            "family"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Marie brings the financial problem to Skyler about Hank's treatment costs",
+          "storyline": "family",
+          "function": "setup",
+          "characters": [
+            "marie",
+            "skyler"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Skyler proposes using Walt's drug money for Hank's treatment with gambling cover story",
+          "storyline": "family",
+          "function": "turning_point",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt agrees to fund Hank's recovery to keep family obligated and explain future cash",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Skyler crafts detailed gambling narrative and rehearses Walt on specifics",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse and Walt cook together in the superlab but Jesse grows restless with routine",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse skims meth from each cook and hides it in his locker before weighing",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse sells stolen meth through Badger and Skinny Pete for independent revenue",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gus's distribution manager notices blue meth appearing outside controlled channels",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "guest:distribution_manager"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Distribution manager reports unauthorized blue meth sales to Gus",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "guest:distribution_manager",
+            "gus"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse meets Andrea Cantillo at Narcotics Anonymous and begins spending time with her",
+          "storyline": "survival",
+          "function": "setup",
+          "characters": [
+            "jesse",
+            "andrea"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse learns Andrea has a young son named Brock and develops genuine feelings",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "andrea"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Andrea reveals her brother Tomas works as corner boy for dealers who killed Combo",
+          "storyline": "love",
+          "function": "turning_point",
+          "characters": [
+            "andrea",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse confronts reality that his drug profits destroy children in his community",
+          "storyline": "love",
+          "function": "climax",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the cost of choices",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "family",
+            "love",
+            "survival"
+          ],
+          "description": "all storylines explore how characters use others to justify their choices — Walt uses family obligation, Jesse uses profit motive, but both face the human cost",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "family",
+            "investigation"
+          ],
+          "description": "Skyler and Walt use drug money to help the DEA agent hunting them",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "survival",
+            "control"
+          ],
+          "description": "Jesse's independent operation threatens Gus's control, setting up future conflict",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E10",
+      "events": [
+        {
+          "event": "Walt becomes obsessed with a fly in the superlab and refuses to cook until it's eliminated",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse considers Walt's fly concern absurd but goes along with the hunt",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "They spend hours chasing the fly with makeshift tools and equipment",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse climbs equipment and nearly falls while hunting the fly",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt, exhausted and sleep-deprived, begins talking about the night Jane died",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt tells Jesse there's a moment when a person has gone too far",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse listens but doesn't understand the full weight of Walt's words",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse slips a sleeping pill into Walt's coffee to end the obsession",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt drowses on the lab floor while Jesse kills the fly",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse shows Walt the dead fly and they resume cooking",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "The batch is completed and meets purity standards",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt notices a discrepancy in the yield and suspects theft",
+          "storyline": "empire",
+          "function": "seed",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt watches Jesse with new suspicion but says nothing",
+          "storyline": "empire",
+          "function": "seed",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse drives home with stolen meth in his glove compartment",
+          "storyline": "survival",
+          "function": "seed",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt lies in bed staring at the ceiling where another fly lands",
+          "storyline": "empire",
+          "function": "seed",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "contamination and guilt",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "survival"
+          ],
+          "description": "both storylines explore contamination — Walt's obsession with the fly mirrors his guilt contaminating everything, while Jesse's theft contaminates their partnership",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "survival"
+          ],
+          "description": "the audience knows Walt let Jane die and that Jesse is stealing, while each character is unaware of what the other has done",
+          "subtype": null
+        },
+        {
+          "type": "meta",
+          "lines": [
+            "empire"
+          ],
+          "description": "the fly serves as a metaphor for Walt's guilt and the contamination of his moral boundaries",
+          "subtype": "metaphorical_device"
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E11",
+      "events": [
+        {
+          "event": "Jesse attends Narcotics Anonymous meetings to identify potential customers for stolen meth",
+          "storyline": "love",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse meets Andrea Cantillo at NA and initially targets her as a buyer",
+          "storyline": "survival",
+          "function": "setup",
+          "characters": [
+            "jesse",
+            "andrea"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse spends time with Andrea and her son Brock, developing genuine feelings",
+          "storyline": "love",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "andrea"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Andrea reveals her brother Tomas has been recruited as a corner boy by local dealers",
+          "storyline": "love",
+          "function": "turning_point",
+          "characters": [
+            "andrea",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse realizes Tomas is the child who killed Combo on the dealers' orders",
+          "storyline": "love",
+          "function": "climax",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt reviews lab logs and calculates someone has been skimming product",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt confronts Jesse about stealing meth to sell through Skinny Pete and Badger",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse admits to the theft and dismisses Walt's warnings about Gus",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Gus and Mike are already aware of the missing product but haven't acted",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "gus",
+            "mike"
+          ],
+          "also_affects": [
+            "empire",
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Skyler coaches Walt on gambling cover story details for his drug money",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler presents gambling story to Hank and Marie to justify paying for therapy",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "hank",
+            "marie"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Hank accepts the gambling explanation without scrutiny due to his depression",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": [
+            "family"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse sees Tomas outside Andrea's apartment, confronting the reality of the child's situation",
+          "storyline": "love",
+          "function": "resolution",
+          "characters": [
+            "jesse",
+            "guest:tomas"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse sits in his car with his gun, contemplating action against the dealers",
+          "storyline": "survival",
+          "function": "cliffhanger",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "love"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the corruption of innocence",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "love",
+            "survival",
+            "family"
+          ],
+          "description": "all three storylines explore how criminal activity destroys innocent relationships and family bonds",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "control",
+            "empire",
+            "survival"
+          ],
+          "description": "Gus knows about Jesse's theft while Walt and Jesse remain unaware of being watched",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "family",
+            "investigation"
+          ],
+          "description": "Hank unknowingly accepts money from the criminal he's hunting to pay for his own recovery",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "love",
+            "survival"
+          ],
+          "description": "Jesse's romantic feelings for Andrea collide with the violent reality of his criminal world through Tomas",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E12",
+      "events": [
+        {
+          "event": "Mike tells Walt the story of the domestic violence call and the half measures",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "mike",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashback"
+          ]
+        },
+        {
+          "event": "Jesse buys a pistol and tells Walt he's going to kill the dealers",
+          "storyline": "love",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt pleads with Jesse to stand down and goes to Gus for a meeting",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "love"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Gus arranges a desert meeting with the dealers, Walt, Jesse, and Mike",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "gus",
+            "walt",
+            "jesse",
+            "mike"
+          ],
+          "also_affects": [
+            "empire",
+            "love"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt demands justice for Tomas but Gus sides with his dealers",
+          "storyline": "control",
+          "function": "turning_point",
+          "characters": [
+            "gus",
+            "walt"
+          ],
+          "also_affects": [
+            "empire",
+            "love"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse agrees to the truce under duress",
+          "storyline": "love",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "control"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse drives to the dealers' corner with his gun drawn",
+          "storyline": "love",
+          "function": "climax",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt's car slams into both dealers at full speed",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "love",
+            "control"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt shoots the surviving dealer in the head at point-blank range",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "love",
+            "control"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt tells Jesse to run and Jesse flees the scene",
+          "storyline": "love",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Gus receives word of the killings and realizes Walt is now an enemy",
+          "storyline": "control",
+          "function": "climax",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Mike drives to the scene to assess the damage",
+          "storyline": "control",
+          "function": "resolution",
+          "characters": [
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the cost of loyalty",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "love",
+            "control"
+          ],
+          "description": "all three storylines explore the consequences of choosing loyalty over pragmatism — Walt chooses Jesse over Gus, Jesse chooses vengeance for Tomas over survival, Gus must choose between his dealers and his operation",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "love",
+            "control"
+          ],
+          "description": "all storylines physically converge in the street confrontation where Walt's choice to save Jesse destroys his relationship with Gus",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "control"
+          ],
+          "description": "the audience understands that Walt's heroic gesture has actually doomed his position with Gus, while Walt believes he's solved the problem",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S03E13",
+      "events": [
+        {
+          "event": "Flashback shows Walt and Skyler touring their future house when Walt was still a Gray Matter partner",
+          "storyline": "family",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashback"
+          ]
+        },
+        {
+          "event": "Gus reinstates Gale in the superlab to learn Walt's cooking process",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "gus",
+            "gale"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt recognizes that Gale's presence means his death sentence",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt confronts Gus directly, arguing he and Jesse are indispensable",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "gus"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike begins following Walt and Jesse on Gus's orders",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "mike",
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "empire",
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt meets with Saul to discuss escape options via disappearer",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "saul"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt calculates the cost against family obligations and rejects escape",
+          "storyline": "family",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt concludes Gale must die to ensure his survival",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt approaches Jesse with the plan to kill Gale",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse recoils at killing innocent Gale, Walt argues it's them or Gale",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike picks up Walt at gunpoint and drives him to the superlab",
+          "storyline": "control",
+          "function": "escalation",
+          "characters": [
+            "mike",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Gus decides to kill Walt tonight and have Gale take over the lab",
+          "storyline": "control",
+          "function": "climax",
+          "characters": [
+            "gus"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt pleads for one phone call to say goodbye to his family",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt calls Jesse and gives him Gale's address in coded language",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse drives across Albuquerque to Gale's apartment",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Gale opens the door, recognizes something is wrong, and begs Jesse not to do this",
+          "storyline": "survival",
+          "function": "climax",
+          "characters": [
+            "jesse",
+            "gale"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse, crying, raises his gun and pulls the trigger",
+          "storyline": "survival",
+          "function": "cliffhanger",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire",
+            "control"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the corruption of innocence",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "family",
+            "survival",
+            "control"
+          ],
+          "description": "all storylines explore how far characters will go to protect what they value, corrupting their moral foundations",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "control"
+          ],
+          "description": "Mike and Victor believe Walt is calling his family, but the audience knows he's orchestrating Gale's murder",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "survival",
+            "control"
+          ],
+          "description": "all three storylines converge in the final moments as Jesse's action simultaneously saves Walt, destroys Gus's plan, and forces Jesse to cross a moral line",
+          "subtype": null
+        },
+        {
+          "type": "meta",
+          "lines": [
+            "family"
+          ],
+          "description": "the flashback serves as emotional counterpoint, showing Walt's lost innocence and potential",
+          "subtype": "flashback"
+        }
+      ],
+      "patches": []
+    }
+  ],
+  "usage": "17 requests, 63,748 input + 23,901 output tokens, ~$0.453"
+}

@@ -124,815 +124,14 @@ function _parseJSONResponse(text) {
   return JSON.parse(cleaned);
 }
 
-// --- Embedded prompts ---
-// Glossary is inlined into each pass prompt where {GLOSSARY} appears.
+// --- Embedded prompts (inlined by build.py from prompts/{system}/*.md) ---
+// _PROMPTS is defined above the APP_JS block.
+const _PROMPT_PASS0 = _PROMPTS.hollywood.pass0;
+const _PROMPT_PASS1 = _PROMPTS.hollywood.pass1;
+const _PROMPT_PASS2 = _PROMPTS.hollywood.pass2;
+const _PROMPT_PASS3 = _PROMPTS.hollywood.pass3;
+const _PROMPT_PASS4 = _PROMPTS.hollywood.pass4;
 
-const _GLOSSARY = `## story DNA
-
-Every plotline has four parts: **hero** (who drives it), **goal** (what they want), **obstacle** (what blocks them), **stakes** (what happens if they fail). Missing any component—not a plotline, but an event within another plotline.
-
-Some plotlines have no obvious single hero—typically theme-led ones (see plotline:nature), where the problem comes from an institution or system rather than a character. Examples: "MI5 vs Slough House" in Slow Horses, "Professional life at Sterling Cooper" in Mad Men. In such cases, use your judgment to assign the most fitting character as hero—the one most affected, or driving the dynamic, or whose POV dominates.
-
-## plotline
-
-A story with complete Story DNA. Has a three-act structure, conflict, and a causal chain of events. A plotline is tied to a main cast character or an institution, not a guest.
-
-TV episodes typically feature two or more parallel plotlines, denoted by letters A, B, C: a main A plot that dominates screen time and secondary B plots that may offer thematic parallels or counterpoint.
-
-### granularity
-
-The key is GOAL, not character.
-Different plotlines: different heroes, OR one hero with different goals and obstacles and stakes.
-
-Test: if you can't write a logline—"[hero] wants [goal], but [obstacle], and if they fail [stakes]"—it's not a plotline.
-
-For theme-led plotlines, the logline test becomes: "[institution/system] [problem]; [hero] [role in it], stakes: [stakes]." Example: "MI5 covers up its role in the kidnapping; Taverner drives the cover-up, stakes: exposure and careers."
-
-### what is not a plotline
-
-| example                            | what it is                                             |
-| ---------------------------------- | ------------------------------------------------------ |
-| "John has lunch"                   | Background—no goal/conflict                            |
-| "Everyone goes to a party"         | Setting—no hero/stakes                                 |
-| "John is sad"                      | State—no goal/obstacle                                 |
-| "John and Mike's friendship"       | Context—no conflict                                    |
-| "Investigation" (procedural, ep.5) | Part of the case_of_the_week plotline, not a separate one |
-
-## plotline:type
-
-How long does this plotline last?
-
-- **case_of_the_week**—opens and closes within one episode. The show's story engine describes the repeating formula. Story DNA is templated (repeating goal/obstacle/stakes), specific content—filled in per episode.
-- **serialized**—spans multiple episodes or the entire season. Conflicts carry over.
-- **runner**—minor recurring thread. Incomplete Story DNA—no obstacle or resolution, logline is descriptive. Everything else—a full plotline.
-
-## plotline:nature
-
-Where does the main problem come from? This matters because nature tells you what kind of obstacle to look for: an outside enemy (plot-led), the hero's own flaw (character-led), or a system nobody can fix alone (theme-led).
-
-- **plot-led**—from outside the hero. External goal vs antagonist. Stranger Things, CSI.
-- **character-led**—from inside the hero. Internal conflict, the hero IS the problem. Breaking Bad, Fleabag.
-- **theme-led**—from society. Systemic, no single solution. The Wire, Succession.
-
-## plotline:confidence
-
-How complete is the conflict structure?
-
-- **solid**—hero, goal, obstacle, stakes all clear.
-- **partial**—hero and goal clear, obstacle or stakes unclear.
-- **inferred**—plotline implied, conflict structure incomplete.
-
-This matters because inferred plotlines are expected to have incomplete structure—they won't be flagged for missing functions or low event count. Solid plotlines will be.
-
-## format
-
-- **procedural**—each episode has a standalone story (case, patient, mission) that opens and closes within the episode. Even though each episode's case is different, we treat them as one recurring plotline called "Case of the Week"—same structural slot, different content each time. Other plotlines are secondary. CSI, House, Law & Order.
-- **hybrid**—each episode has a case-of-the-week AND serialized plotlines, and they actively intertwine. Both matter. X-Files, Buffy, Good Wife, Grey's Anatomy.
-- **serial**—episodes continue each other. Conflicts don't close within an episode. No case-of-the-week. One clear protagonist. Breaking Bad, Sopranos.
-- **ensemble**—like serial, but no single protagonist. Multiple characters drive their own plotlines with roughly equal screen time. Diagnostic: can you name THE main character? If not—ensemble. Game of Thrones, Succession, The Wire, The Crown.
-
-Base classification on the synopses, not on prior knowledge of the show. The same show can change format between seasons.
-
-Don't default to serial just because character plotlines are present—hybrid means BOTH case-of-the-week AND serialized arcs are significant.
-
-Diagnostic:
-- if E01 and E02 have different cases—procedural or hybrid
-- if E02 continues E01's conflict without closing it—serial or ensemble
-- serial vs ensemble: can you name THE main character? If not—ensemble
-
-## is_anthology
-
-Seasons are independent—new cast, new story, no continuity between seasons. Within a single season, an anthology show has normal structure (serial, procedural, etc.). This matters because prior season data is not passed forward. True Detective, Fargo.
-
-## story_engine
-
-The show's repeating dramatic mechanism in one sentence. Focus on the verbs—what are characters doing each week?
-
-Write the story engine as a one-sentence logline. Two common structures:
-- "[Who] [does what] in order to [goal], but [obstacle]."
-- "When [situation], [who] must [do what], or else [stakes]."
-
-Use whichever fits the show.
-
-Examples from real shows (none follow the formulas exactly—that's fine, the formulas are a starting point):
-- "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future." (Breaking Bad)
-- "Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia." (Game of Thrones)
-- "An antisocial maverick doctor does whatever it takes to solve puzzling cases that come his way." (House)
-
-## genre
-
-Free text—drama, thriller, comedy, sci-fi, etc.
-
-## event
-
-One action by one character (or group) that changes the situation. Two actions by different characters = two events. Two actions at the same moment where the second is an immediate consequence of the first = one event.
-
-Write event descriptions that are specific and concrete. Include character names, what specifically happens, and the dramatic consequence. Bad: "The team works on the case." Good: "House orders a lumbar puncture over Cameron's objection, risking paralysis to test his sarcoidosis theory."
-
-## function
-
-Each event carries a function—its position in the dramatic structure:
-
-| function | what it does |
-|----------|-------------|
-| \`setup\` | Introduces the plotline. Status quo. |
-| \`inciting_incident\` | The event that starts the plotline. One per plotline, does not repeat. |
-| \`escalation\` | Raises the stakes. Can repeat. |
-| \`turning_point\` | Changes direction. False peak or false collapse. |
-| \`crisis\` | Lowest point. Hero faces what they feared most. True dilemma. |
-| \`climax\` | Peak of the conflict. Outcome is irreversible. |
-| \`resolution\` | Conflict resolved. Aftermath. |
-
-Functions are checked downstream for arc completeness and monotonicity—if a plotline has only setup and escalation across the whole season, that's a flag.
-
-## interaction
-
-How plotlines connect within an episode:
-
-- **thematic_rhyme**—plotlines explore the same theme from different angles.
-- **dramatic_irony**—the audience knows what a character in another plotline doesn't.
-- **convergence**—plotlines merge (characters/conflicts intersect).
-
-## verdict
-
-A structural correction applied after reviewing the full season:
-
-| action | what it does |
-|--------|-------------|
-| \`MERGE\` | Merge two plotlines into one |
-| \`REASSIGN\` | Move an event to a different plotline |
-| \`CREATE\` | Create a new plotline from orphaned events |
-| \`DROP\` | Remove a plotline, redistribute its events |
-| \`REFUNCTION\` | Change an event's function (e.g. escalation → crisis) |`;
-
-const _PROMPT_PASS0 = `# ROLE
-You are a story editor evaluating a show's structure from its synopses.
-
-# CONTEXT
-You receive: show title, season number, and up to 3 first synopses. Your output goes to the next step as context for plotline extraction.
-
-# GLOSSARY
-
-${_GLOSSARY}
-
-# TASK
-
-If \`suggested_plotlines\` is present in the input, use it as additional context — it contains preliminary plotline suggestions from the synopsis writer. These can help with format and ensemble detection, but verify against the synopses.
-
-Read the synopses and determine, in this order:
-### Step 1: Determine format
-What's the episode structure? Use the definitions and diagnostic in Glossary.
-### Step 2: Check anthology
-Are seasons independent?
-### Step 3: Write the story engine
-Write a one-sentence logline. See story_engine in Glossary for structure and examples.
-### Step 4: Determine genre
-
-# OUTPUT
-
-Think through before writing the JSON. You will need to explain your choices in the \`reasoning\` field — it is reviewed by a human.
-
-Response—strictly JSON, no markdown wrapping, no comments outside JSON.
-
-\`\`\`json
-{
-  "show": "Breaking Bad",
-  "season": 1,
-  "format": "serial",
-  "is_anthology": false,
-  "story_engine": "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future",
-  "genre": "drama",
-  "reasoning": "Episodes continue each other: E01's conflict (first cook) flows into E02 (consequences), no self-contained stories within episodes."
-}
-\`\`\`
-
-Field types:
-
-- \`show\`: string
-- \`season\`: integer
-- \`format\`: enum—\`"procedural"\` | \`"serial"\` | \`"hybrid"\` | \`"ensemble"\`
-- \`is_anthology\`: boolean
-- \`story_engine\`: string—one sentence logline
-- \`genre\`: string
-- \`reasoning\`: string—why you chose this format (1–2 sentences)
-
-# VALIDATION
-
-Code will check:
-
-- JSON schema: all required fields present
-- \`format\` is one of: procedural, serial, hybrid, ensemble
-- \`is_anthology\` is a boolean
-- \`story_engine\` is a non-empty string
-
-Code cannot check: whether your format classification actually matches the synopses, whether story_engine captures the real mechanism—that's your job.`;
-
-const _PROMPT_PASS1 = `# ROLE
-
-You are a story editor who's read the entire season's synopses. Map out the plotlines: who drives each one, what they want, what are the obstacles, what's at stake.
-
-# CONTEXT
-
-You receive: show title, season number, format, story engine, and all episode synopses. If prior season data is provided, you also receive the previous season's cast and plotlines.
-
-Your output—cast list and plotlines with Story DNA—goes to the next step, where events from each episode will be assigned to these plotlines.
-
-# GLOSSARY
-
-${_GLOSSARY}
-
-# TASK
-
-### Step 1: Process prior season (if provided)
-
-If \`prior_season\` is present in the input, process it BEFORE analyzing new synopses.
-
-For each plotline in \`prior_season.plotlines\`, decide based on the NEW season's synopses:
-- **CONTINUES**—present this season. Keep \`id\`, update goal/obstacle/stakes. Example: "Walt: Empire" S1→S2—same goal, but Gus is the obstacle instead of Tuco.
-- **TRANSFORMED**—same hero, goal fundamentally changed. Keep \`id\`, rewrite Story DNA. Example: "Walt: Empire" S4→S5—no longer building, now hiding from consequences.
-- **ENDED**—resolved or disappeared. Don't include.
-
-For each character in \`prior_season.cast\`:
-- If the character appears in this season's synopses—reuse the same \`id\` and \`name\`.
-- If the character does not appear—don't include them.
-
-Only after processing all prior plotlines, identify NEW plotlines not present before.
-
-### Step 2: Read all synopses and suggested plotlines
-Read ALL season synopses. If \`suggested_plotlines\` is present in the input, use them as a starting point — they come from an earlier analysis of the same synopses. Verify each suggestion against the text: keep what you find evidence for, drop what you don't, add what was missed. Story DNA is reconstructed from the aggregate of mentions across the season. Don't invent—mark confidence.
-
-### Step 3: Identify the main cast
-Recurring characters who drive plotlines. One character per cast entry. Guests are not cast.
-
-### Step 4: Extract plotlines
-For each plotline, fill in:
-- Story DNA: hero, goal, obstacle, stakes
-- type: case_of_the_week, serialized, or runner
-- nature: plot-led, character-led, or theme-led
-- confidence: solid, partial, or inferred
-
-# RULES
-### Naming
-Name and id = ONE abstract word by GOAL, not by event or outcome. Examples: "belonging", "leadership", "love", "redemption". Do NOT use compound names like "gang_survival" or "family_destruction"—use "survival" or "family". The \`id\` must be a single snake_case word matching the \`name\`.
-
- Use \`Hero: Theme\` format for plotline names (e.g. "House: Authority", "Cameron: Ethics", "Jon: Honor"). This makes it clear who drives each plotline and prevents confusion during event assignment.
-
-Case_of_the_week plotline: name it by the franchise formula—"Case of the Week", "Crime of the Week", "Mission", etc.—so it is immediately clear this is a recurring structure.
-
-For theme-led plotlines, name by the institutional dynamic or conflict rather than by hero (e.g. "MI5 vs Slough House", "Lab Politics", "Professional Life at Sterling Cooper").
-
-### Seed and Wraparound
-
-Seed—an event function at the next step. Wraparound—a narrative device at the next step. Do not create plotlines of these types.
-
-### Format and Resolution
-
-- **serial/ensemble**: plotlines may extend beyond the season, cliffhanger in the finale is acceptable.
-- **is_anthology=true**: each season is independent, don't reference other seasons.
-
-### Quantity Expectations
-
-- Procedural: 1 case_of_the_week + 1–3 serialized arcs. Max 5 total.
-- Hybrid: 1 case_of_the_week + 2–4 serialized. Max 5 total.
-- Serial (≤8 episodes): max 5 plotlines. Serial (9+ episodes): max 7. Runners must span 3+ episodes.
-- Ensemble (≤8 episodes): max 7 plotlines. Ensemble (9+ episodes): max 9. Runners must span 3+ episodes.
-
-### General
-
-- When in doubt—do NOT create a plotline.
-- For procedural/hybrid format: create exactly 1 plotline with type case_of_the_week.
-- Nature of a plotline and nature of individual events can differ—plot-led action serving a character-led plotline is normal.
-- Don't invent missing Story DNA components—mark confidence as partial or inferred instead.
-- Goal language: same language as the synopses.
-
-# OUTPUT
-
-Think through your choices before writing the JSON. Each plotline must pass the logline test, and your work is reviewed by a human.
-
-Response—strictly JSON, no markdown wrapping, no comments outside JSON.
-
-\`\`\`json
-{
-  "show": "Breaking Bad",
-  "season": 1,
-  "cast": [
-    {"id": "walt", "name": "Walter White", "aliases": ["Walt", "Heisenberg", "Mr. White"]},
-    {"id": "jesse", "name": "Jesse Pinkman", "aliases": ["Jesse", "Cap'n Cook"]},
-    {"id": "hank", "name": "Hank Schrader", "aliases": ["Hank"]},
-    {"id": "skyler", "name": "Skyler White", "aliases": ["Skyler"]},
-    {"id": "tuco", "name": "Tuco Salamanca", "aliases": ["Tuco"]}
-  ],
-  "plotlines": [
-    {
-      "id": "empire",
-      "name": "Walt: Empire",
-      "hero": "walt",
-      "goal": "build a drug business",
-      "obstacle": "moral choices, escalating danger, unpredictable partners",
-      "stakes": "death, loss of humanity",
-      "type": "serialized",
-      "nature": "character-led",
-      "confidence": "solid"
-    },
-    {
-      "id": "family",
-      "name": "Walt: Family",
-      "hero": "walt",
-      "goal": "keep the family together and hide the truth",
-      "obstacle": "cancer, family pressure for treatment, escalating lies",
-      "stakes": "family breakdown, exposure",
-      "type": "serialized",
-      "nature": "character-led",
-      "confidence": "solid"
-    },
-    {
-      "id": "investigation",
-      "name": "Hank: Investigation",
-      "hero": "hank",
-      "goal": "find the new meth producer",
-      "obstacle": "no direct evidence, only circumstantial traces",
-      "stakes": "criminal at large, public threat",
-      "type": "serialized",
-      "nature": "plot-led",
-      "confidence": "solid"
-    },
-    {
-      "id": "partnership",
-      "name": "Jesse: Partnership",
-      "hero": "jesse",
-      "goal": "survive as Walt's drug business partner",
-      "obstacle": "incompetence, fear, conflict with Walt",
-      "stakes": "prison or death",
-      "type": "serialized",
-      "nature": "character-led",
-      "confidence": "solid"
-    },
-    {
-      "id": "cancer",
-      "name": "Walt: Cancer",
-      "hero": "walt",
-      "goal": "deal with the diagnosis",
-      "obstacle": null,
-      "stakes": null,
-      "type": "runner",
-      "nature": "character-led",
-      "confidence": "partial"
-    }
-  ]
-}
-\`\`\`
-
-Field types:
-
-**cast[]:**
-
-- \`id\`: string—unique snake_case identifier, used in \`hero\` field and in event \`characters\` at the next step
-- \`name\`: string—full name as in credits
-- \`aliases\`: array of strings—name variants found in synopses
-
-**plotlines[]:**
-
-- \`id\`: string—unique snake_case identifier (stable, doesn't change on rename)
-- \`name\`: string—display name (see naming convention)
-- \`hero\`: string—\`id\` of a character from cast
-- \`goal\`: string—in synopsis language
-- \`obstacle\`: string | null—in synopsis language (null for runners)
-- \`stakes\`: string | null—in synopsis language (null for runners)
-- \`type\`: enum—\`"case_of_the_week"\` | \`"serialized"\` | \`"runner"\`
-- \`nature\`: enum—\`"plot-led"\` | \`"character-led"\` | \`"theme-led"\`
-- \`confidence\`: enum—\`"solid"\` | \`"partial"\` | \`"inferred"\`
-
-Language of \`goal\`, \`obstacle\`, \`stakes\` fields—in the language of the synopsis.
-
-The \`span\` field (which episodes the plotline appears in) is computed by code from the next step's results—not included here.
-
-# VALIDATION
-
-Code will check:
-
-- JSON schema: all required fields present, enum values valid
-- Each \`hero\` references an existing \`id\` in \`cast\`
-- For procedural/hybrid format: exactly 1 plotline with type case_of_the_week
-
-Code cannot check: whether Story DNA makes narrative sense, whether you found all the plotlines—that's your job. Rank (A/B/C) is computed by code after the next step, not by you.`;
-
-const _PROMPT_PASS2 = `# ROLE
-You are a story editor breaking down a single episode: what happens, which plotline does it serve, what function does it play.
-
-# CONTEXT
-You receive: show title, season number, format, story engine, cast (with IDs), plotlines (with IDs and Story DNA), and one episode synopsis. Your output is one episode's worth of events and interactions.
-
-# GLOSSARY
-
-${_GLOSSARY}
-
-# TASK
-
-### Step 1: Break the synopsis into events
-Go through the synopsis sentence by sentence. Each sentence should result in at least one event.
-
-### Step 2: Assign each event to a plotline
-For each event, decide which plotline it belongs to. Use the assignment rules below.
-
-### Step 3: Assign functions
-For each event, assign its dramatic function. These are two separate tasks — which plotline an event belongs to and what function it plays are independent decisions.
-
-Assign functions based on what happens **within this episode**, not across the season. An event that is the climax of this episode's story might turn out to be an escalation in the season-long arc — but you only see this episode, so assign based on what you see here.
-
-### Step 4: Identify interactions between plotlines
-Check each pair of plotlines active in this episode. If they connect — through shared theme, dramatic irony, or converging characters — record the interaction. See interaction types in Glossary.
-
-### Step 5: Determine the episode theme
-One sentence. What idea ties the plotlines together? Look at what the climax/resolution of the A-story says.
-
-# RULES
-
-### Assigning events to plotlines
-
-Each event belongs to the plotline whose goal it advances. When multiple characters are in a scene, ask: whose goal moves forward here? That character's plotline owns the event.
-
-Guest characters don't have their own plotlines. A guest's action belongs to the main cast member whose plotline it serves.
-
-When one event advances two plotlines, assign it to the primary one and list the secondary in \`also_affects\`.
-
-### Checking your work
-
-Every sentence of the synopsis must produce at least one event. If you can't map a sentence to an event, you missed something.
-
-Every episode has at least 2-3 active plotlines. If all events ended up in one plotline — re-read the synopsis and look for events that belong to other plotlines, especially serialized ones that continue across episodes. In procedural and hybrid shows, don't assign everything to the case — character arcs and institutional dynamics have events too.
-
-If all plotlines in the episode have only escalation functions, or all have only crisis/resolution — you probably misassigned some functions. A well-written episode takes its main plotline through a full arc: setup → escalation → turning point → climax → resolution. Other plotlines may cover fewer stages, but the A-story typically has all of them.
-
-# OUTPUT
-
-Think through before writing the JSON. Your assignments are reviewed by a human and checked by code.
-
-Response—strictly JSON, no markdown wrapping, no comments outside JSON.
-
-
-\`\`\`json
-{
-  "show": "Breaking Bad",
-  "season": 1,
-  "episode": "S01E03",
-  "events": [
-    {
-      "event": "Walt and Jesse clean up Emilio's remains",
-      "plotline_id": "empire",
-      "function": "escalation",
-      "characters": ["walt", "jesse"],
-      "also_affects": null
-    },
-    {
-      "event": "Krazy-8 talks about his childhood, Walt about cancer",
-      "plotline_id": "empire",
-      "function": "escalation",
-      "characters": ["walt"],
-      "also_affects": ["family"]
-    },
-    {
-      "event": "Walt makes a pros and cons list for killing",
-      "plotline_id": "empire",
-      "function": "turning_point",
-      "characters": ["walt"],
-      "also_affects": null
-    },
-    {
-      "event": "Skyler organizes a family intervention",
-      "plotline_id": "family",
-      "function": "setup",
-      "characters": ["skyler", "walt"],
-      "also_affects": null
-    },
-    {
-      "event": "Family votes for chemo, Walt wants to refuse",
-      "plotline_id": "family",
-      "function": "escalation",
-      "characters": ["walt", "skyler"],
-      "also_affects": null
-    },
-    {
-      "event": "Hank finds the desert cooking site",
-      "plotline_id": "investigation",
-      "function": "escalation",
-      "characters": ["hank"],
-      "also_affects": null
-    },
-    {
-      "event": "DEA finds Krazy-8's car with meth",
-      "plotline_id": "investigation",
-      "function": "escalation",
-      "characters": ["hank"],
-      "also_affects": null
-    },
-    {
-      "event": "Native girl brings a mask to the DEA office",
-      "plotline_id": "investigation",
-      "function": "setup",
-      "characters": ["guest:native_girl"],
-      "also_affects": null
-    },
-    {
-      "event": "Walt decides to release Krazy-8",
-      "plotline_id": "empire",
-      "function": "turning_point",
-      "characters": ["walt"],
-      "also_affects": null
-    },
-    {
-      "event": "Walt notices the missing plate shard",
-      "plotline_id": "empire",
-      "function": "crisis",
-      "characters": ["walt"],
-      "also_affects": null
-    },
-    {
-      "event": "Walt strangles Krazy-8",
-      "plotline_id": "empire",
-      "function": "climax",
-      "characters": ["walt"],
-      "also_affects": null
-    },
-    {
-      "event": "Walt decides to tell Skyler about the cancer",
-      "plotline_id": "family",
-      "function": "turning_point",
-      "characters": ["walt"],
-      "also_affects": null
-    }
-  ],
-  "theme": "the illusion of control",
-  "interactions": [
-    {
-      "type": "thematic_rhyme",
-      "lines": ["empire", "family", "investigation"],
-      "description": "all three plotlines are about control—over another's life, one's own death, the law"
-    },
-    {
-      "type": "dramatic_irony",
-      "lines": ["empire", "investigation"],
-      "description": "the audience knows Walt = Heisenberg, Hank doesn't"
-    }
-  ]
-}
-\`\`\`
-
-### Field Types
-
-**events[]:**
-- \`event\`: string—one sentence
-- \`plotline_id\`: string | null—\`id\` of a plotline from the previous step, or \`null\` if the event doesn't fit any plotline
-- \`function\`: enum—\`"setup"\` | \`"inciting_incident"\` | \`"escalation"\` | \`"turning_point"\` | \`"crisis"\` | \`"climax"\` | \`"resolution"\`
-- \`characters\`: array of strings—\`id\` of characters from cast. For guest characters use \`"guest:short_name"\` (e.g. \`"guest:native_girl"\`)
-- \`also_affects\`: array of strings | null—\`id\` of secondarily affected plotlines
-
-**interactions[]:**
-- \`type\`: enum—\`"thematic_rhyme"\` | \`"dramatic_irony"\` | \`"convergence"\`
-- \`lines\`: array of strings—plotline \`id\`s
-- \`description\`: string
-
-# VALIDATION
-
-Code will check:
-- JSON schema: all required fields, enum values
-- Each \`plotline_id\` references an existing \`id\` from the previous step or is \`null\`
-- Each \`characters\` element references an existing \`id\` from cast or has the \`guest:\` prefix
-- \`theme\` is not empty
-
-Code cannot check: whether events cover the full synopsis, whether function assignments are correct, whether interactions are real—that's your job.`;
-
-const _PROMPT_PASS3 = `# ROLE
-
-You are a story editor with all episodes laid out in front of you. Check the full picture: are plotlines identified correctly, are events assigned right, does the structure hold up? Fix what's wrong.
-
-# CONTEXT
-
-You receive:
-- **show**, **season**, **format**, **story_engine** (series context)
-- **cast**: character list with \`id\`, \`name\`
-- **plotlines**: plotline list with \`id\`, \`name\`, \`hero\`, \`goal\`, \`obstacle\`, \`stakes\`, \`type\`, \`computed_rank\`, \`nature\`, \`confidence\`, \`span\`
-- **episodes**: for each episode—\`events\` (with plotline assignments), \`theme\`, \`interactions\`
-- **diagnostics** (optional): automated flags from post-processing. Each flag has \`plotline\`, \`flag\`, and \`reason\`. Possible flags:
-  - \`low_completeness\`—plotline has fewer arc functions than expected for its confidence (e.g. solid plotline with 3/7)
-  - \`monotonicity_violation\`—function sequence goes backwards past a milestone (e.g. crisis after climax)
-  - \`dominant\`—plotline has more than 50% of all season events
-  These are computed facts—use them in your analysis.
-
-Your output—verdicts (structural corrections)—is applied by code to produce the final result.
-
-# GLOSSARY
-
-${_GLOSSARY}
-
-# TASK
-
-### Step 1: Check each plotline for Story DNA
-
-Complete Story DNA: **hero → goal → obstacle → stakes**.
-
-**Logline test:** if you can write a logline with conflict (hero wants X, but Y stands in the way, Z is at stake)—it's a solid plotline.
-
-But shows can be poorly written. A plotline may exist without a clear goal, with nominal conflict, or be abandoned halfway. That doesn't mean it doesn't exist—it means it's weak. Don't discard weak plotlines—mark confidence instead.
-
-### Step 2: Spot-check event assignments
-
-Scan events across episodes. For each plotline, read its events and check: does this event advance THIS plotline's goal, or would it fit better elsewhere? Common errors:
-
-- Event assigned to hero's A-plotline but actually advances their B-plotline (wrong goal)
-- Event describes a character reacting to another plotline's conflict (should be \`also_affects\`, not primary assignment)
-- Multiple events in a row assigned to the same plotline but describing different conflicts
-
-If you find misassigned events → REASSIGN.
-
-### Step 3: Check plotline arcs
-
-Note: event functions from the previous step reflect each event's role within its episode, not within the season-long arc. Keep this in mind when checking arc progression — a "climax" in episode 3 may be an escalation in the season arc.
-
-If diagnostics include \`low_completeness\` — check if events of this plotline are misassigned to other plotlines (→ REASSIGN them back), or if the plotline is genuinely weak (→ note in your review, don't invent events).
-
-### Step 4: Look for duplication
-
-Two plotlines with the same hero and adjacent goals—most likely one plotline with phases. Signs:
-
-- Same hero, goals are causally linked (goal B is a consequence of goal A)
-- Events of two plotlines alternate in the same episodes
-- No conflict between the two plotlines—they don't contradict each other
-
-If confirmed → MERGE.
-
-If diagnostics include \`dominant\` — a plotline has more than half of all season events. Check if it's actually two plotlines collapsed into one (→ CREATE a second plotline + REASSIGN events to it).
-
-### Step 5: Check orphaned events
-
-Events with \`plotline_id: null\`—the previous step couldn't assign them. For each:
-
-- Event belongs to an existing plotline (assignment error) → REASSIGN
-- Multiple orphaned events form a pattern (one hero, one goal) → CREATE a new plotline
-
-### Step 6: Check format consistency
-
-The plotline structure should match the format:
-
-- **Procedural**: exactly one case_of_the_week plotline. Max 5 total.
-- **Hybrid**: one case_of_the_week + the rest serialized. Max 5 total.
-- **Serial**: max 5 plotlines. Runners must span 3+ episodes.
-- **Ensemble**: max 8 plotlines. Runners must span 3+ episodes.
-
-If the structure doesn't match—either the format was determined incorrectly, or the plotlines need adjustment.
-
-### Step 7: Assign ranks
-
-Each plotline has a \`computed_rank\` assigned by code from event counts. Review it. For each plotline, assign your own rank (A, B, C, or null for runners) based on narrative importance — what the show is about, not how many events a plotline has.
-
-Return your ranks in the \`ranks\` field — a mapping of plotline ID to rank.
-
-# RULES
-
-1. **If everything is fine—empty \`verdicts\` array.** Don't invent problems.
-2. **Each verdict must be justified by theory** (Story DNA, format, arc) or data (span, diagnostics).
-3. **REASSIGN references the exact event text** from input data. Do not rephrase.
-4. **MERGE: source events are automatically moved to target.** No need to list each one.
-5. **DROP: must specify where to move ALL events.** Code rejects DROP if any event remains unredistributed. Events are never removed or set to null.
-6. **CREATE: must specify complete Story DNA** (hero, goal, obstacle, stakes) and which events belong to it.
-7. **REFUNCTION: specify event text, episode, old function, new function.**
-8. **Don't flag inferred plotlines** for missing functions or low event count—incomplete structure is expected for them. Flag solid plotlines with incomplete structure.
-9. **DROP only phantoms.** DROP a plotline only if it has no events and doesn't exist in the series. A weak plotline in a bad script—that's data, not an error.
-
-# OUTPUT
-
-Think through each verdict before writing the JSON. Each verdict must be justified by data or theory — your review is checked by a human.
-
-Response—strictly JSON, no markdown wrapping, no comments outside JSON.
-
-\`\`\`json
-{
-  "verdicts": [
-    {
-      "action": "MERGE",
-      "source": "plotline_x",
-      "target": "plotline_y",
-      "reason": "one sentence—why"
-    },
-    {
-      "action": "REASSIGN",
-      "event": "exact event text",
-      "episode": "S01E06",
-      "from": null,
-      "to": "plotline_z",
-      "reason": "one sentence"
-    },
-    {
-      "action": "CREATE",
-      "plotline": {
-        "id": "new_plotline_id",
-        "name": "Hero: Theme",
-        "hero": "cast_id",
-        "goal": "...",
-        "obstacle": "...",
-        "stakes": "...",
-        "type": "serialized",
-        "nature": "character-led"
-      },
-      "reassign_events": [
-        {"event": "exact event text", "episode": "S01E03"},
-        {"event": "exact event text", "episode": "S01E06"}
-      ],
-      "reason": "one sentence"
-    },
-    {
-      "action": "DROP",
-      "target": "plotline_id",
-      "redistribute": [
-        {"event": "exact event text", "episode": "S01E02", "to": "other_plotline_id"}
-      ],
-      "reason": "one sentence"
-    },
-    {
-      "action": "REFUNCTION",
-      "event": "exact event text",
-      "episode": "S01E05",
-      "old_function": "escalation",
-      "new_function": "crisis",
-      "reason": "one sentence"
-    }
-  ],
-  "ranks": {
-    "empire": "A",
-    "family": "B",
-    "investigation": "C"
-  },
-  "notes": "brief comment on the quality of the original analysis (1–2 sentences)"
-}
-\`\`\`
-
-### Verdict Types
-
-| action | required fields |
-|--------|-----------------|
-| \`MERGE\` | \`source\`, \`target\`, \`reason\` |
-| \`REASSIGN\` | \`event\`, \`episode\`, \`from\`, \`to\`, \`reason\` |
-| \`CREATE\` | \`plotline\`, \`reassign_events\`, \`reason\` |
-| \`DROP\` | \`target\`, \`redistribute\`, \`reason\` |
-| \`REFUNCTION\` | \`event\`, \`episode\`, \`old_function\`, \`new_function\`, \`reason\` |
-
-# VALIDATION
-
-Code will check:
-- JSON schema: all required fields for each verdict type
-- \`target\`/\`source\` reference existing plotline ids
-- \`to\` in REASSIGN references an existing id (or an id from CREATE in the same verdict set)
-- \`event\` in REASSIGN/DROP/CREATE/REFUNCTION exactly matches event text in input data
-- \`new_function\`—valid function enum
-- \`plotline\` in CREATE contains all required fields
-
-Code cannot check: whether your verdicts improve the analysis, whether merges are justified, whether refunctions are correct—that's your job.`;
-
-const _PROMPT_PASS4 = `# ROLE
-You are a story editor looking at the complete season. All events have been identified and assigned to plotlines. Your job is to determine each event's role in the plotline's season-long arc.
-
-# CONTEXT
-
-You receive: show title, season, plotlines with Story DNA, and all events grouped by plotline in episode order. Each event already has a \`function\` — its role within its episode. You assign \`plot_fn\` — its role in the season arc.
-
-# GLOSSARY
-
-${_GLOSSARY}
-
-# TASK
-
-For each plotline, read its events in episode order. Assign \`plot_fn\` to every event — what role does this event play in the plotline's arc across the entire season?
-
-The episode's arc function may differ from the episode function. An event that was the climax of episode 3 might be an escalation in the season arc — the plotline is still building at that point.
-
-\`inciting_incident\` occurs once per plotline across the season — the event that sets the plotline in motion.
-
-Assign \`plot_fn\` to EVERY event. Do not skip any.
-
-# OUTPUT
-
-Think through the arc of each plotline before writing. You are assigning functions to a season-long story — consider where each event falls in the beginning, middle, and end of that story. Your assignments are reviewed by a human.
-
-Response — strictly JSON, no markdown wrapping.
-
-\`\`\`json
-{
-  "arc_functions": [
-    {"plotline": "empire", "episode": "S01E01", "event": "exact event text from input", "plot_fn": "setup"},
-    {"plotline": "empire", "episode": "S01E01", "event": "exact event text from input", "plot_fn": "inciting_incident"},
-    {"plotline": "empire", "episode": "S01E02", "event": "exact event text from input", "plot_fn": "escalation"}
-  ]
-}
-\`\`\`
-
-One entry per event. Use exact event text from the input — do not rephrase. Include the plotline ID so code can match events correctly.
-
-# VALIDATION
-
-Code will check:
-- Every event from the input has a corresponding entry in arc_functions
-- Each \`plot_fn\` is a valid function: setup, inciting_incident, escalation, turning_point, crisis, climax, resolution
-- Each \`event\` text exactly matches an event from the input
-- Each \`plotline\` references an existing plotline ID`;
 
 // --- Post-processing helpers (simplified browser versions) ---
 
@@ -1578,3 +777,341 @@ function _confirmSynopses(show, season, synopses) {
     });
   });
 }
+
+// ══════════════════════════════════════════════════════════════════
+// Narratology pipeline — mirrors src/tvplotlines/narratology.py.
+// Result shape is hollywood-compatible: actant fields are mapped onto
+// hero/goal/obstacle/stakes so the grid + analytics render unchanged.
+// ══════════════════════════════════════════════════════════════════
+
+const _VALID_FUNCTIONS_NAR = new Set([
+  'setup', 'inciting_incident', 'escalation', 'turning_point',
+  'crisis', 'climax', 'resolution', 'recognition',
+]);
+
+function _plotlinesSummaryForNar(plotlines) {
+  return plotlines.map(p => ({
+    id: p.id, name: p.name,
+    who_chases: p.hero, what_they_chase: p.goal,
+  }));
+}
+
+async function _runNarPass1Context(show, season, synopses, provider, apiKey) {
+  const payload = {
+    show, season,
+    sample_synopses: synopses.slice(0, 3).map(s => ({ episode: s.episode, text: s.text })),
+  };
+  const text = await callLLM(_PROMPTS.narratology.pass1_context, JSON.stringify(payload), provider, apiKey);
+  return _parseJSONResponse(text);
+}
+
+async function _runNarPass2Fabula(show, season, context, synopsis, provider, apiKey) {
+  const payload = {
+    show, season, episode: synopsis.episode,
+    context: { format: context.format, story_schema: context.story_engine, genre: context.genre },
+    synopsis: synopsis.text,
+  };
+  const text = await callLLM(_PROMPTS.narratology.pass2_fabula, JSON.stringify(payload), provider, apiKey);
+  return _parseJSONResponse(text);
+}
+
+async function _runNarPass3Actants(show, season, context, castIds, flatEvents, provider, apiKey) {
+  const payload = {
+    show, season,
+    context: {
+      format: context.format, story_schema: context.story_engine,
+      genre: context.genre, is_anthology: !!context.is_anthology,
+    },
+    cast: castIds.slice().sort(),
+    events: flatEvents,
+  };
+  const text = await callLLM(_PROMPTS.narratology.pass3_actants, JSON.stringify(payload), provider, apiKey);
+  return _parseJSONResponse(text);
+}
+
+async function _runNarPass4Story(show, season, context, plotlines, episode, events, provider, apiKey) {
+  const payload = {
+    show, season, episode,
+    context: { format: context.format, story_schema: context.story_engine },
+    plotlines: _plotlinesSummaryForNar(plotlines),
+    events,
+  };
+  const text = await callLLM(_PROMPTS.narratology.pass4_story, JSON.stringify(payload), provider, apiKey);
+  return _parseJSONResponse(text);
+}
+
+async function _runNarPass5Arc(show, season, plotline, events, provider, apiKey) {
+  const payload = {
+    show, season,
+    plotline: { id: plotline.id, name: plotline.name, who_chases: plotline.hero, what_they_chase: plotline.goal },
+    events,
+  };
+  const text = await callLLM(_PROMPTS.narratology.pass5_arc, JSON.stringify(payload), provider, apiKey);
+  return _parseJSONResponse(text);
+}
+
+async function _runNarPass6Review(show, season, context, plotlineSummary, eventsFlat, provider, apiKey) {
+  const payload = {
+    show, season,
+    context: { format: context.format, story_schema: context.story_engine },
+    plotlines: plotlineSummary,
+    events: eventsFlat,
+  };
+  const text = await callLLM(_PROMPTS.narratology.pass6_review, JSON.stringify(payload), provider, apiKey);
+  return _parseJSONResponse(text);
+}
+
+function _applyNarratologyVerdicts(verdicts, plotlines, episodes) {
+  const byId = new Map(plotlines.map(p => [p.id, p]));
+  const dropped = new Set();
+  for (const v of verdicts) {
+    const kind = v.kind;
+    if (kind === 'MERGE') {
+      const targets = v.targets || [];
+      if (targets.length < 2) continue;
+      const [keep, ...rest] = targets;
+      for (const other of rest) {
+        if (other === keep || !byId.has(other)) continue;
+        for (const ep of episodes) for (const ev of ep.events) {
+          if (ev.plotline_id === other) ev.plotline_id = keep;
+        }
+        dropped.add(other);
+      }
+    } else if (kind === 'DROP') {
+      for (const t of (v.targets || [])) {
+        for (const ep of episodes) for (const ev of ep.events) {
+          if (ev.plotline_id === t) ev.plotline_id = null;
+        }
+        dropped.add(t);
+      }
+    } else if (kind === 'REASSIGN') {
+      const eid = v.event_id || '';
+      if (!eid.includes('#')) continue;
+      const [targetEp, idxStr] = eid.split('#');
+      const idx = parseInt(idxStr, 10) - 1;
+      for (const ep of episodes) {
+        if (ep.episode !== targetEp) continue;
+        if (idx >= 0 && idx < ep.events.length && v.to_plotline) {
+          ep.events[idx].plotline_id = v.to_plotline;
+        }
+      }
+    } else if (kind === 'REFUNCTION') {
+      const eid = v.event_id || '';
+      if (!eid.includes('#') || !v.new_function) continue;
+      const [targetEp, idxStr] = eid.split('#');
+      const idx = parseInt(idxStr, 10) - 1;
+      for (const ep of episodes) {
+        if (ep.episode !== targetEp) continue;
+        if (idx >= 0 && idx < ep.events.length) ep.events[idx].function = v.new_function;
+      }
+    }
+  }
+  return plotlines.filter(p => !dropped.has(p.id));
+}
+
+async function runPipelineNarratology(synopses, seriesName, provider, apiKey, onProgress) {
+  const totalPasses = 6;
+  const season = parseInt(synopses[0].episode.slice(1, 3), 10);
+
+  // Pass 1 — context
+  onProgress('Pass 1/6: narratology context (breach, story schema)…', 1, totalPasses);
+  const p1 = await _runNarPass1Context(seriesName, season, synopses, provider, apiKey);
+  const context = {
+    format: p1.format,
+    story_engine: p1.breach
+      ? `${p1.story_schema} Breach: ${p1.breach}`
+      : p1.story_schema,
+    genre: p1.genre || '',
+    is_anthology: !!p1.is_anthology,
+  };
+  const protagonists = Array.isArray(p1.protagonists) ? p1.protagonists : [];
+
+  // Pass 2 — fabula (parallel per episode)
+  onProgress('Pass 2/6: fabula (events, cast)…', 2, totalPasses);
+  const p2Results = await Promise.all(
+    synopses.map(s => _runNarPass2Fabula(seriesName, season, context, s, provider, apiKey))
+  );
+  const eventsByEp = {};
+  const castIds = new Set();
+  for (let i = 0; i < synopses.length; i++) {
+    const ep = synopses[i].episode;
+    eventsByEp[ep] = (p2Results[i].events || []).map((e, idx) => ({
+      id: e.id || `${ep}#${String(idx + 1).padStart(2, '0')}`,
+      description: e.description,
+      characters: e.characters || [],
+    }));
+    for (const cid of (p2Results[i].cast_appearances || [])) castIds.add(cid);
+    for (const ev of eventsByEp[ep]) for (const cid of ev.characters) castIds.add(cid);
+  }
+
+  const cast = [];
+  const seenCast = new Set();
+  for (const cid of Array.from(castIds).sort()) {
+    if (cid.startsWith('guest:')) continue;
+    const name = cid.replace(/[_-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    cast.push({ id: cid, name, aliases: [] });
+    seenCast.add(cid);
+  }
+  for (const prot of protagonists) {
+    const pid = prot.toLowerCase().replace(/\s+/g, '_');
+    if (!seenCast.has(pid)) cast.push({ id: pid, name: prot, aliases: [] });
+  }
+
+  // Pass 3 — actants
+  onProgress('Pass 3/6: actants (who chases what)…', 3, totalPasses);
+  const flatEvents = [];
+  for (const ep of Object.keys(eventsByEp)) {
+    for (const e of eventsByEp[ep]) flatEvents.push({ ...e, episode: ep });
+  }
+  const p3 = await _runNarPass3Actants(
+    seriesName, season, context, cast.map(c => c.id), flatEvents, provider, apiKey,
+  );
+  const plotlines = (p3.plotlines || []).map(p => {
+    const stands = p.stands_in_the_way || [];
+    const obstacle = stands.length ? stands.join(', ') : (p.bigger_force || '');
+    const winner = p.who_wins_if_it_works || p.who_chases || '';
+    return {
+      id: p.id, name: p.name,
+      hero: p.who_chases || '',
+      goal: p.what_they_chase || '',
+      obstacle,
+      stakes: `If wins: ${winner}`,
+      type: p.type || 'serialized',
+      nature: p.nature || 'character-led',
+      confidence: p.confidence || 'partial',
+      span: [], computed_rank: null, reviewed_rank: null, rank: null,
+    };
+  });
+
+  // Pass 4 — story (parallel per episode)
+  onProgress('Pass 4/6: story functions per episode…', 4, totalPasses);
+  const sortedEps = Object.keys(eventsByEp).sort();
+  const p4Results = await Promise.all(
+    sortedEps.map(ep => _runNarPass4Story(seriesName, season, context, plotlines, ep, eventsByEp[ep], provider, apiKey))
+  );
+  const episodes = [];
+  const eventsById = new Map();
+  for (const ep of sortedEps) for (const e of eventsByEp[ep]) eventsById.set(e.id, { ...e, episode: ep });
+
+  for (let i = 0; i < sortedEps.length; i++) {
+    const ep = sortedEps[i];
+    const data = p4Results[i];
+    const eventsOut = [];
+    for (const e of (data.events || [])) {
+      const src = eventsById.get(e.id);
+      if (!src) continue;
+      let fn = e.function || 'setup';
+      if (!_VALID_FUNCTIONS_NAR.has(fn)) fn = 'setup';
+      eventsOut.push({
+        event: src.description,
+        plotline_id: e.plotline_id || null,
+        function: fn,
+        characters: src.characters || [],
+        also_affects: (e.also_affects && e.also_affects.length) ? e.also_affects : null,
+        plot_fn: null,
+      });
+    }
+    const interactions = (data.interactions || []).map(it => ({
+      type: it.kind || 'thematic_rhyme',
+      lines: it.plotlines || [],
+      description: it.description || '',
+    }));
+    episodes.push({ episode: ep, theme: data.theme || '', events: eventsOut, interactions });
+  }
+
+  _computeSpan(plotlines, episodes);
+  _computeRanks(plotlines, episodes, context);
+
+  // Pass 5 — arc (parallel per plotline)
+  onProgress('Pass 5/6: season-level arc functions…', 5, totalPasses);
+  const plotEvents = new Map();
+  for (const ep of episodes) for (const ev of ep.events) {
+    if (!ev.plotline_id) continue;
+    if (!plotEvents.has(ev.plotline_id)) plotEvents.set(ev.plotline_id, []);
+    plotEvents.get(ev.plotline_id).push({ ep, ev });
+  }
+  const activePlotlines = plotlines.filter(p => plotEvents.has(p.id));
+  const p5Inputs = activePlotlines.map(p => {
+    const events = plotEvents.get(p.id).map(({ ep, ev }, i) => ({
+      id: `${ep.episode}#${String(i + 1).padStart(2, '0')}`,
+      episode: ep.episode,
+      description: ev.event,
+      function: ev.function,
+    }));
+    return { plotline: p, events };
+  });
+  const p5Results = await Promise.all(
+    p5Inputs.map(input => _runNarPass5Arc(seriesName, season, input.plotline, input.events, provider, apiKey))
+  );
+  for (let i = 0; i < activePlotlines.length; i++) {
+    const events = p5Results[i].events || [];
+    const refs = plotEvents.get(activePlotlines[i].id);
+    for (const item of events) {
+      if (!item.id || !item.id.includes('#')) continue;
+      const [, idxStr] = item.id.split('#');
+      const idx = parseInt(idxStr, 10) - 1;
+      if (idx < 0 || idx >= refs.length) continue;
+      const { ev } = refs[idx];
+      ev.plot_fn = (item.kind === 'texture') ? null : (item.arc_function || null);
+    }
+  }
+
+  // Pass 6 — review
+  onProgress('Pass 6/6: structural review + ranks…', 6, totalPasses);
+  const plotlineSummary = plotlines.map(p => ({
+    id: p.id, name: p.name,
+    who_chases: p.hero, what_they_chase: p.goal,
+    event_count: episodes.reduce((n, ep) => n + ep.events.filter(e => e.plotline_id === p.id).length, 0),
+  }));
+  const eventsFlat6 = [];
+  for (const ep of episodes) {
+    ep.events.forEach((ev, i) => {
+      eventsFlat6.push({
+        id: `${ep.episode}#${String(i + 1).padStart(2, '0')}`,
+        episode: ep.episode, description: ev.event,
+        plotline_id: ev.plotline_id, function: ev.function,
+        arc_function: ev.plot_fn,
+      });
+    });
+  }
+  const p6 = await _runNarPass6Review(seriesName, season, context, plotlineSummary, eventsFlat6, provider, apiKey);
+  const verdicts = p6.verdicts || [];
+  const keptPlotlines = _applyNarratologyVerdicts(verdicts, plotlines, episodes);
+  for (const r of (p6.ranks || [])) {
+    const pl = keptPlotlines.find(p => p.id === r.plotline_id);
+    if (pl && ['A', 'B', 'C'].includes(r.rank)) {
+      pl.reviewed_rank = r.rank;
+      pl.rank = r.rank;
+    }
+  }
+  _computeSpan(keptPlotlines, episodes);
+  _computeRanks(keptPlotlines, episodes, context);
+  for (const p of keptPlotlines) p.rank = p.reviewed_rank || p.computed_rank;
+
+  onProgress('Done!', totalPasses, totalPasses);
+
+  return {
+    context: {
+      series: seriesName,
+      season: `S${String(season).padStart(2, '0')}`,
+      format: context.format,
+      story_engine: context.story_engine,
+      genre: context.genre,
+      is_anthology: context.is_anthology,
+      system: 'narratology',
+    },
+    cast,
+    plotlines: keptPlotlines,
+    episodes,
+  };
+}
+
+// Dispatcher — picks between the two pipelines based on Store.getSystem().
+const _originalRunPipeline = runPipeline;
+runPipeline = function (synopses, seriesName, provider, apiKey, onProgress) {
+  const system = (typeof Store !== 'undefined' && Store.getSystem) ? Store.getSystem() : 'hollywood';
+  if (system === 'narratology') {
+    return runPipelineNarratology(synopses, seriesName, provider, apiKey, onProgress);
+  }
+  return _originalRunPipeline(synopses, seriesName, provider, apiKey, onProgress);
+};

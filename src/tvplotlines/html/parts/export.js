@@ -233,8 +233,119 @@ function _handleExport(format) {
   }
 }
 
-// PDF: leverage the browser's print stack. Print CSS below lays the grid out
-// on landscape pages so a Cmd+P → "Save as PDF" yields a usable document.
-function exportPDF() {
-  window.print();
+// PDF: generate a data-driven vector PDF via jsPDF, lazily loaded from CDN.
+// Falls back to the browser print stack if the library can't be fetched
+// (e.g. offline). Either way the user gets a PDF.
+async function exportPDF() {
+  if (!_currentData) { alert('No data loaded'); return; }
+  try {
+    await _loadJsPDF();
+  } catch (err) {
+    console.warn('jsPDF load failed, falling back to print:', err);
+    window.print();
+    return;
+  }
+  try {
+    _buildPDF(_currentData);
+  } catch (err) {
+    console.error('PDF build failed:', err);
+    alert(`Couldn't build PDF: ${err.message}. Falling back to print.`);
+    window.print();
+  }
+}
+
+function _loadJsPDF() {
+  if (window.jspdf && window.jspdf.jsPDF) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';
+    s.onload = () => (window.jspdf && window.jspdf.jsPDF) ? resolve() : reject(new Error('jsPDF not attached'));
+    s.onerror = () => reject(new Error('network error fetching jsPDF'));
+    document.head.appendChild(s);
+  });
+}
+
+function _buildPDF(data) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+  const margin = 12;
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  let y = margin;
+
+  const ctx = data.context || {};
+  const seriesLabel = [ctx.series, ctx.season].filter(Boolean).join(' · ') || 'tvplotlines';
+
+  const line = (text, size, weight = 'normal', indent = 0, color = [30, 30, 30]) => {
+    doc.setFont('helvetica', weight);
+    doc.setFontSize(size);
+    doc.setTextColor(color[0], color[1], color[2]);
+    const wrapped = doc.splitTextToSize(text, pageW - margin * 2 - indent);
+    for (const ln of wrapped) {
+      if (y > pageH - margin - size / 2) { doc.addPage(); y = margin; }
+      doc.text(ln, margin + indent, y);
+      y += size * 0.45 + 0.8;
+    }
+  };
+  const gap = (mm) => { y += mm; if (y > pageH - margin) { doc.addPage(); y = margin; } };
+
+  // Title
+  line(seriesLabel, 22, 'bold');
+  if (ctx.format || ctx.genre || ctx.system) {
+    line([ctx.format, ctx.genre, ctx.system && `system: ${ctx.system}`]
+      .filter(Boolean).join('  ·  '), 10, 'normal', 0, [110, 110, 110]);
+  }
+  if (ctx.story_engine) { gap(2); line(ctx.story_engine, 11, 'italic', 0, [70, 70, 70]); }
+  gap(6);
+
+  // Plotlines
+  const plotlines = data.plotlines || [];
+  for (const p of plotlines) {
+    if (y > pageH - 30) { doc.addPage(); y = margin; }
+    const rank = p.rank ? `[${p.rank}] ` : '';
+    line(`${rank}${p.name}`, 14, 'bold');
+    const meta = [p.type, p.nature, p.confidence].filter(Boolean).join('  ·  ');
+    if (meta) line(meta, 9, 'normal', 0, [130, 130, 130]);
+    if (p.hero) line(`Hero: ${p.hero}`, 10, 'normal', 4);
+    if (p.goal) line(`Goal: ${p.goal}`, 10, 'normal', 4);
+    if (p.obstacle) line(`Obstacle: ${p.obstacle}`, 10, 'normal', 4);
+    if (p.stakes) line(`Stakes: ${p.stakes}`, 10, 'normal', 4);
+
+    // Events for this plotline
+    const events = [];
+    for (const ep of (data.episodes || [])) {
+      for (const ev of (ep.events || [])) {
+        if (ev.plotline_id === p.id) events.push({ ep: ep.episode, fn: ev.function, text: ev.event, arc: ev.plot_fn });
+      }
+    }
+    if (events.length) {
+      gap(1);
+      for (const e of events) {
+        const arcTag = e.arc ? ` / ${e.arc}` : '';
+        line(`• [${e.ep}] (${e.fn}${arcTag}) ${e.text}`, 9, 'normal', 6, [50, 50, 50]);
+      }
+    }
+    gap(4);
+  }
+
+  // Episodes section
+  const episodes = data.episodes || [];
+  if (episodes.length) {
+    doc.addPage(); y = margin;
+    line('Episodes', 18, 'bold');
+    gap(2);
+    for (const ep of episodes) {
+      if (y > pageH - 20) { doc.addPage(); y = margin; }
+      const head = ep.theme ? `${ep.episode} — ${ep.theme}` : ep.episode;
+      line(head, 12, 'bold');
+      for (const ev of (ep.events || [])) {
+        const pl = ev.plotline_id ? `[${ev.plotline_id}]` : '[orphan]';
+        line(`• ${pl} (${ev.function}) ${ev.event}`, 9, 'normal', 4, [60, 60, 60]);
+      }
+      gap(2);
+    }
+  }
+
+  const filename = _exportFilename(data) + '.pdf';
+  doc.save(filename);
 }

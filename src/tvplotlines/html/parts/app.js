@@ -302,9 +302,11 @@ function _showLLMSettings() {
       <label for="llm-system" style="display:block;margin-bottom:4px;font-weight:600">Analysis system</label>
       <select id="llm-system" style="width:100%;padding:6px;border-radius:4px;border:1px solid var(--border, #ccc)">
         <option value="hollywood" ${system === 'hollywood' ? 'selected' : ''}>Hollywood — screenwriting (story DNA, Freytag)</option>
-        <option value="narratology" disabled>Narratology — structuralist (coming soon)</option>
+        <option value="narratology" ${system === 'narratology' ? 'selected' : ''}>Narratology — structuralist (Bal, Todorov, Greimas, Bremond)</option>
       </select>
-      <div style="font-size:0.8em;color:#888;margin-top:4px">Narratology prompts are in place; the runtime is coming in v2.</div>
+      <div style="font-size:0.8em;color:#888;margin-top:4px">
+        Hollywood extracts plotlines as hero/goal/obstacle/stakes. Narratology frames them as actant programs (who chases what, who helps, who opposes). The grid renders both.
+      </div>
     </div>
     <button id="llm-save-btn" style="padding:6px 16px;border-radius:4px;cursor:pointer">Save</button>
     <span id="llm-save-status" style="margin-left:8px;color:green;display:none">Saved!</span>

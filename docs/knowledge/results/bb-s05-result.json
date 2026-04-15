@@ -1,0 +1,4017 @@
+{
+  "context": {
+    "franchise_type": "serial",
+    "story_engine": "A high school teacher builds a drug empire, testing how far he'll go for family and control",
+    "genre": "drama",
+    "format": "ongoing"
+  },
+  "cast": [
+    {
+      "id": "walt",
+      "name": "Walter White",
+      "aliases": [
+        "Walt",
+        "Walter",
+        "Heisenberg",
+        "Mr. White"
+      ]
+    },
+    {
+      "id": "jesse",
+      "name": "Jesse Pinkman",
+      "aliases": [
+        "Jesse"
+      ]
+    },
+    {
+      "id": "skyler",
+      "name": "Skyler White",
+      "aliases": [
+        "Skyler"
+      ]
+    },
+    {
+      "id": "hank",
+      "name": "Hank Schrader",
+      "aliases": [
+        "Hank"
+      ]
+    },
+    {
+      "id": "marie",
+      "name": "Marie Schrader",
+      "aliases": [
+        "Marie"
+      ]
+    },
+    {
+      "id": "mike",
+      "name": "Mike Ehrmantraut",
+      "aliases": [
+        "Mike"
+      ]
+    },
+    {
+      "id": "saul",
+      "name": "Saul Goodman",
+      "aliases": [
+        "Saul"
+      ]
+    },
+    {
+      "id": "lydia",
+      "name": "Lydia Rodarte-Quayle",
+      "aliases": [
+        "Lydia"
+      ]
+    },
+    {
+      "id": "todd",
+      "name": "Todd Alquist",
+      "aliases": [
+        "Todd"
+      ]
+    },
+    {
+      "id": "jack",
+      "name": "Jack Welker",
+      "aliases": [
+        "Jack"
+      ]
+    },
+    {
+      "id": "gomez",
+      "name": "Steven Gomez",
+      "aliases": [
+        "Gomez"
+      ]
+    },
+    {
+      "id": "declan",
+      "name": "Declan",
+      "aliases": [
+        "Declan"
+      ]
+    },
+    {
+      "id": "gretchen",
+      "name": "Gretchen Schwartz",
+      "aliases": [
+        "Gretchen"
+      ]
+    },
+    {
+      "id": "elliott",
+      "name": "Elliott Schwartz",
+      "aliases": [
+        "Elliott"
+      ]
+    }
+  ],
+  "plotlines": [
+    {
+      "id": "empire",
+      "name": "Walt: Empire",
+      "driver": "walt",
+      "goal": "build and control his own drug empire after eliminating Gus",
+      "obstacle": "law enforcement pressure, partner conflicts, cancer return, family resistance",
+      "stakes": "death, family destruction, legacy failure",
+      "type": "serialized",
+      "rank": "A",
+      "nature": "plot-led",
+      "confidence": "solid",
+      "devices": [
+        "dramatic_irony"
+      ],
+      "span": [
+        "S05E01",
+        "S05E02",
+        "S05E03",
+        "S05E04",
+        "S05E05",
+        "S05E06",
+        "S05E07",
+        "S05E08",
+        "S05E09",
+        "S05E10",
+        "S05E11",
+        "S05E12",
+        "S05E13",
+        "S05E14",
+        "S05E15",
+        "S05E16"
+      ]
+    },
+    {
+      "id": "investigation",
+      "name": "Hank: Investigation",
+      "driver": "hank",
+      "goal": "uncover and prosecute Heisenberg's true identity",
+      "obstacle": "personal connection to Walt, lack of official support, limited evidence",
+      "stakes": "career destruction, family betrayal, justice denied",
+      "type": "serialized",
+      "rank": "B",
+      "nature": "plot-led",
+      "confidence": "solid",
+      "devices": [
+        "dramatic_irony"
+      ],
+      "span": [
+        "S05E01",
+        "S05E02",
+        "S05E03",
+        "S05E04",
+        "S05E07",
+        "S05E08",
+        "S05E09",
+        "S05E10",
+        "S05E11",
+        "S05E12",
+        "S05E13",
+        "S05E14"
+      ]
+    },
+    {
+      "id": "guilt",
+      "name": "Jesse: Guilt",
+      "driver": "jesse",
+      "goal": "escape the moral weight of his crimes and find redemption",
+      "obstacle": "Walt's manipulation, blood money, inability to undo the past",
+      "stakes": "sanity, soul, complete moral destruction",
+      "type": "serialized",
+      "rank": "B",
+      "nature": "character-led",
+      "confidence": "solid",
+      "devices": [],
+      "span": [
+        "S05E01",
+        "S05E03",
+        "S05E05",
+        "S05E06",
+        "S05E08",
+        "S05E09",
+        "S05E11",
+        "S05E12",
+        "S05E14",
+        "S05E15",
+        "S05E16"
+      ]
+    },
+    {
+      "id": "protection",
+      "name": "Skyler: Protection",
+      "driver": "skyler",
+      "goal": "protect her children and herself from Walt's criminal world",
+      "obstacle": "Walt's refusal to leave, legal complicity, family loyalty",
+      "stakes": "children's safety, imprisonment, family annihilation",
+      "type": "serialized",
+      "rank": "B",
+      "nature": "character-led",
+      "confidence": "solid",
+      "devices": [],
+      "span": [
+        "S05E01",
+        "S05E03",
+        "S05E04",
+        "S05E08",
+        "S05E10",
+        "S05E11",
+        "S05E12",
+        "S05E13",
+        "S05E14",
+        "S05E15"
+      ]
+    },
+    {
+      "id": "survival",
+      "name": "Mike: Survival",
+      "driver": "mike",
+      "goal": "protect Gus's imprisoned associates and secure his own exit",
+      "obstacle": "frozen accounts, DEA pressure, Walt's recklessness",
+      "stakes": "death, betrayal of loyal men, legacy destruction",
+      "type": "serialized",
+      "rank": "C",
+      "nature": "plot-led",
+      "confidence": "solid",
+      "devices": [],
+      "span": [
+        "S05E02",
+        "S05E03",
+        "S05E04",
+        "S05E06",
+        "S05E07"
+      ]
+    }
+  ],
+  "episodes": [
+    {
+      "episode": "S05E01",
+      "events": [
+        {
+          "event": "Walt, Jesse, and Mike meet at junkyard to discuss laptop threat in APD evidence room",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "jesse",
+            "mike"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Mike wants to flee but Walt insists he has a plan to destroy the evidence",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "mike"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt visits home where backyard is torn apart by investigators",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Skyler is terrified when Walt tells her 'I won' about Fring's murder",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt, Jesse, and Mike rent industrial electromagnet from Old Joe",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse",
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "They mount magnet in truck and drive to APD evidence room exterior wall",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse",
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt and Jesse activate magnet at full power, destroying metal evidence inside",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Truck tips over from magnetic force, trio abandons it and escapes",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "jesse",
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike protests they can't confirm laptop destruction, Walt says 'Because I say so'",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Police discover evidence room wreckage, investigation pivots to mysterious event",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Hank notices broken picture frame revealed hidden Cayman Islands bank account numbers",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Saul reveals DEA seized Ted Beneke's assets after Huell and Kuby pressured him",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "saul",
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler visits hospitalized Ted who broke his neck fleeing Huell and Kuby",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Ted promises terrified Skyler he will say nothing about the money",
+          "storyline": "protection",
+          "function": "resolution",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt recovers ricin cigarette from Saul's office that Huell had lifted from Jesse",
+          "storyline": "guilt",
+          "function": "setup",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt hides real ricin vial behind electrical outlet plate in bedroom",
+          "storyline": "guilt",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt constructs fake ricin cigarette using salt and plants it in Jesse's Roomba",
+          "storyline": "guilt",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse finds fake cigarette, breaks down in tears of relief",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse calls Walt to apologize for accusing him, Walt comforts him",
+          "storyline": "guilt",
+          "function": "resolution",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        }
+      ],
+      "theme": "the price of control",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "protection",
+            "guilt"
+          ],
+          "description": "all storylines explore control through deception — Walt controls through lies, Skyler tries to control damage, Jesse is controlled by Walt's manipulation",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "investigation"
+          ],
+          "description": "Walt's magnet plan inadvertently creates new evidence for Hank's investigation",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "guilt",
+            "empire"
+          ],
+          "description": "audience knows Walt is manipulating Jesse with the fake ricin cigarette while Jesse believes Walt's innocence",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E02",
+      "events": [
+        {
+          "event": "Peter Schuler kills himself with a defibrillator to avoid DEA questioning about Madrigal's ties to Fring",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "guest:schuler"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank and Gomez interrogate Mike about his ties to Fring's operation but lack evidence to hold him",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "gomez",
+            "mike"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt proposes to Mike and Jesse that they restart the meth business as equal partners",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "mike",
+            "jesse"
+          ],
+          "also_affects": [
+            "guilt",
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Mike flatly refuses Walt's partnership proposal, saying he doesn't trust him",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "mike",
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "DEA freezes Fring's offshore accounts used for hazard pay to imprisoned associates",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "guest:dea_agents"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Mike visits imprisoned associates and promises money he cannot deliver",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Lydia presents Mike with a list of eleven people to kill who could implicate her",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "lydia",
+            "mike"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Mike refuses to kill for Lydia and considers killing her instead",
+          "storyline": "survival",
+          "function": "turning_point",
+          "characters": [
+            "mike",
+            "lydia"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Dennis contacts Hank considering cooperation now that his hazard pay is gone",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "guest:dennis"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse argues to Mike that cooking again can generate cash to pay everyone and keep them quiet",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "jesse",
+            "mike"
+          ],
+          "also_affects": [
+            "survival",
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt, Jesse, and Mike formally agree to a three-way partnership at Saul's office",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jesse",
+            "mike",
+            "saul"
+          ],
+          "also_affects": [
+            "survival",
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Mike demands hazard pay for Fring's men comes off the top, Walt reluctantly agrees",
+          "storyline": "survival",
+          "function": "resolution",
+          "characters": [
+            "mike",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Lydia pays Chris Mara to kill ten witnesses plus Mike",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "lydia",
+            "guest:chris"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Chris kills Chow and lures Mike to an ambush, but Mike anticipates and kills Chris",
+          "storyline": "survival",
+          "function": "climax",
+          "characters": [
+            "mike",
+            "guest:chris"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike spares Lydia because Jesse vouches that her Madrigal connections can supply methylamine",
+          "storyline": "survival",
+          "function": "resolution",
+          "characters": [
+            "mike",
+            "lydia",
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the price of loyalty",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "survival",
+            "investigation"
+          ],
+          "description": "all storylines explore loyalty — Walt demanding it from partners, Mike honoring it to Fring's men, Hank's loyalty to justice threatening the network",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "investigation",
+            "empire"
+          ],
+          "description": "Hank interrogates Mike not knowing he's questioning Walt's future partner",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "survival"
+          ],
+          "description": "Mike's need to pay Fring's men drives him to accept Walt's partnership proposal",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E03",
+      "events": [
+        {
+          "event": "Walt moves back into the White family home over Skyler's barely concealed objections",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Saul presents cooking venue options including tortilla and box factories",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "saul",
+            "walt",
+            "jesse",
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike vetoes each venue for security reasons",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "mike"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse suggests mobile cooking inside fumigation-tented houses using Vamonos Pest",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "The partners agree to use Vamonos Pest and meet Todd and the crew",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse",
+            "mike",
+            "guest:todd",
+            "guest:ira"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "The team successfully completes their first mobile cook in a tented house",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jesse",
+            "mike",
+            "guest:todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike presents the revenue split with extensive deductions for hazard pay and overhead",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "mike"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt expresses displeasure at the modest profit shares after deductions",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt tells Jesse about Victor's death as a warning about overstepping",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Marie visits and pushes Skyler to explain her strange behavior",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "marie",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt invites Jesse for beer while Skyler isolates in the bedroom",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse",
+            "skyler"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse tells Walt about breaking up with Andrea to protect her and Brock",
+          "storyline": "guilt",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Skyler tells Walt she is waiting for his cancer to return",
+          "storyline": "protection",
+          "function": "climax",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank and DEA track Fring's money through Madrigal but face bureaucratic delays",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the cost of control",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "protection",
+            "survival"
+          ],
+          "description": "all storylines explore different costs of maintaining control — Walt's empire demands profit margins, Skyler's protection requires emotional endurance, Mike's survival needs financial resources",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "guilt"
+          ],
+          "description": "Walt references Victor's death as a warning to Mike, but Jesse doesn't understand that Walt poisoned Brock, making Jesse's guilt about protecting Andrea tragically ironic",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "survival"
+          ],
+          "description": "Mike's need to pay hazard pay directly conflicts with Walt's empire-building goals, setting up future confrontation",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E04",
+      "events": [
+        {
+          "event": "Skyler buys a birthday cake and arranges family dinner for Walt's 51st birthday",
+          "storyline": "protection",
+          "function": "setup",
+          "characters": [
+            "skyler",
+            "walt",
+            "hank",
+            "marie"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt dominates dinner conversation while Skyler barely functions",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler walks fully clothed into the pool and sinks to the bottom",
+          "storyline": "protection",
+          "function": "turning_point",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank and Marie pull Skyler from the pool",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "marie",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler demands the children leave for their safety, using her breakdown as leverage",
+          "storyline": "protection",
+          "function": "climax",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt refuses to send the children away, arguing no one is in danger",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "protection"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Skyler tells Walt her only weapon is waiting for his cancer to return",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt agrees to send children to Hank and Marie under cover of Skyler needing rest",
+          "storyline": "protection",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt and Jesse continue cooking in fumigated houses with Vamonos Pest crew",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Lydia meets with Hank at DEA, presenting herself as cooperative Madrigal executive",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "lydia",
+            "hank"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Mike discovers DEA tracking device on his car",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "mike"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Mike warns Walt and Jesse that pressure is mounting from surveillance",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "mike",
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt dismisses Mike's concerns, confident in outmaneuvering law enforcement",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt removes his watch and tells Skyler this is just the beginning",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "protection"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the illusion of control versus powerlessness",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "protection",
+            "survival"
+          ],
+          "description": "all storylines explore different forms of control — Walt's overconfidence, Skyler's desperate manipulation, Mike's cautious pragmatism",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "investigation"
+          ],
+          "description": "Lydia feeds information to Hank while secretly working for Walt; Hank doesn't know he's being manipulated",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "protection",
+            "investigation"
+          ],
+          "description": "Hank and Marie don't know the real reason they're taking the children is Walt's criminal activity",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E05",
+      "events": [
+        {
+          "event": "Lydia informs Walt, Jesse, and Mike about a thousand gallons of methylamine being transported by train",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "lydia",
+            "walt",
+            "jesse",
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "The team devises an elaborate plan to rob the train without detection by replacing methylamine with water",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse",
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Todd is brought in as a fourth crew member for the heist",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt, Jesse, and Todd rehearse the train robbery operation",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Kuby stalls his truck on the railroad tracks, forcing the train to stop",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "guest:kuby"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt and Todd connect hoses to the tanker car while Jesse manages the pump system",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "todd",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Engineers radio for a second locomotive to push the stalled truck, creating time pressure",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "guest:engineers"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse barely escapes from under the moving tanker as the train accelerates",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "The crew celebrates successfully stealing all the methylamine they need",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "jesse",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Todd spots Drew Sharp, a boy on a dirt bike who has been watching the heist",
+          "storyline": "guilt",
+          "function": "setup",
+          "characters": [
+            "todd",
+            "guest:drew_sharp"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Todd shoots Drew Sharp dead without hesitation",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "todd"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "twist"
+          ]
+        },
+        {
+          "event": "Jesse screams at Todd in anguished shock over the boy's murder",
+          "storyline": "guilt",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the cost of perfection",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "guilt"
+          ],
+          "description": "both storylines explore how the pursuit of a perfect crime leads to moral corruption and unintended consequences",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "guilt"
+          ],
+          "description": "the successful heist immediately transforms into Jesse's moral crisis when Todd kills the witness",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E06",
+      "events": [
+        {
+          "event": "Walt, Jesse, and Todd dissolve Drew Sharp's body and dirt bike in hydrofluoric acid",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse",
+            "todd"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse is deeply shaken and barely speaks during the cleanup",
+          "storyline": "guilt",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike wants Todd gone as a liability, Walt argues Todd followed orders and they need him",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "mike"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Todd apologizes but shows no real remorse, explaining he acted to protect the operation",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt and Mike reluctantly keep Todd on with a warning",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt",
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse tells Walt he wants out of the business entirely, willing to walk away from millions",
+          "storyline": "guilt",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt delivers monologue about being bought out of Gray Matter for a pittance",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt refuses to let Jesse make the same mistake he made with Gray Matter",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse remains unmoved, saying the money means nothing against what they have done",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike informs Walt and Jesse he also wants out",
+          "storyline": "survival",
+          "function": "turning_point",
+          "characters": [
+            "mike"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Mike proposes Declan's offer to buy their methylamine supply for fifteen million",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "mike"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt objects because selling the methylamine ends his cooking operation",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt meets Declan alone in the desert, surrounded by armed men",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "guest:declan"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt proposes Declan buy out Mike and Jesse but leave Walt his methylamine portion",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "guest:declan"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt forces Declan to acknowledge his reputation by demanding 'Say my name'",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "guest:declan"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Declan concedes and says 'Heisenberg', the deal is struck",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "guest:declan"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse receives five million dollars and walks away",
+          "storyline": "guilt",
+          "function": "resolution",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike receives five million and prepares to leave Albuquerque",
+          "storyline": "survival",
+          "function": "resolution",
+          "characters": [
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt begins cooking with Todd as his new assistant, quality drops without Jesse",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt persists cooking alone, determined to build his empire",
+          "storyline": "empire",
+          "function": "seed",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the cost of ambition",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "guilt",
+            "survival",
+            "legacy"
+          ],
+          "description": "all storylines explore different responses to moral compromise — Walt doubles down on ambition, Jesse seeks escape through conscience, Mike seeks practical exit, Walt's legacy obsession drives his refusal to quit",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "survival",
+            "guilt"
+          ],
+          "description": "the methylamine deal forces all three partners to confront their different priorities and ultimately splits them apart",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E07",
+      "events": [
+        {
+          "event": "Walt cooks with Todd as his new assistant, but Todd's product only reaches 74 percent purity",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt coaches Todd through the cooking process with frustrated patience",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike instructs Saul's paralegal to continue hazard pay distributions to Fring's nine imprisoned associates",
+          "storyline": "survival",
+          "function": "setup",
+          "characters": [
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank and Gomez discover Dan Wachsberger making suspicious deposits into multiple accounts",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "gomez"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "DEA arrests Dan Wachsberger and he agrees to cooperate",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "hank",
+            "gomez"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Mike learns about Dan's arrest and realizes the imprisoned men will flip without hazard payments",
+          "storyline": "survival",
+          "function": "turning_point",
+          "characters": [
+            "mike"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Mike arranges to flee immediately and calls Saul to retrieve his go-bag from the airport",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "mike",
+            "saul"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt volunteers to deliver Mike's go-bag instead of Saul",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt demands the list of Fring's nine associates from Mike, claiming he needs it to arrange their silence",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "mike"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Mike refuses to give Walt the names and tells him he destroyed Fring's perfect operation with his ego",
+          "storyline": "survival",
+          "function": "escalation",
+          "characters": [
+            "mike",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt shoots Mike through the abdomen with Mike's own gun after being refused the names again",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "mike"
+          ],
+          "also_affects": [
+            "survival"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Mike drives away wounded, collapses by the riverbank, and dies telling Walt to shut up",
+          "storyline": "survival",
+          "function": "climax",
+          "characters": [
+            "mike",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt realizes he could have gotten the names from Lydia and stands over Mike's body processing the murder",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the cost of pride",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "survival"
+          ],
+          "description": "both storylines explore how pride and ego destroy carefully built systems and relationships",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "investigation",
+            "empire",
+            "survival"
+          ],
+          "description": "the audience knows Walt and Mike are connected to what Hank is investigating, but Hank doesn't",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "survival"
+          ],
+          "description": "Walt's need for control directly destroys Mike's exit strategy, culminating in murder",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E08",
+      "events": [
+        {
+          "event": "Walt dissolves Mike's body in acid inside a plastic barrel",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt obtains the list of Fring's nine imprisoned associates from Lydia",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "lydia"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt visits Jack Welker and commissions the murder of all nine men plus their lawyer",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jack"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Ten men are stabbed and burned to death across three prisons within two minutes",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank and the DEA are stunned as their entire case evaporates overnight",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt and Todd cook batch after batch in fumigated houses over three months",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Lydia arranges international distribution to the Czech Republic through Madrigal",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "lydia"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler shows Walt the storage unit packed with uncountable money",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Skyler asks Walt how much money is enough",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt visits Jesse and they share an awkward conversation about their old RV",
+          "storyline": "guilt",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt learns from his oncologist that his cancer has returned",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt tells Skyler he is out of the business",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "protection",
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank finds the Leaves of Grass book with Gale's inscription to W.W.",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "callback"
+          ]
+        },
+        {
+          "event": "Hank flashes back to Walt joking that W.W. could stand for Walter White",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashback",
+            "callback"
+          ]
+        },
+        {
+          "event": "Hank sits stunned, finally connecting Walter White to Heisenberg",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "twist"
+          ]
+        }
+      ],
+      "theme": "the illusion of completion",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "legacy",
+            "investigation"
+          ],
+          "description": "all storylines deal with endings that aren't really endings — Walt thinks he's finished, but his past catches up",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "empire",
+            "investigation"
+          ],
+          "description": "Walt believes he's eliminated all threats and can retire safely, while Hank discovers his true identity",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "investigation"
+          ],
+          "description": "Walt's past actions (the Gale book) directly lead to Hank's discovery",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E09",
+      "events": [
+        {
+          "event": "Flash-forward shows Walt's abandoned house vandalized with 'HEISENBERG' graffiti",
+          "storyline": "empire",
+          "function": "seed",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashforward"
+          ]
+        },
+        {
+          "event": "Future Walt retrieves ricin vial from his destroyed home",
+          "storyline": "empire",
+          "function": "seed",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashforward"
+          ]
+        },
+        {
+          "event": "Hank suffers panic attack and crashes SUV after discovering Walt Whitman book",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Marie tends to Hank, who lies about having a dizzy spell",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "marie"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank secretly re-investigates Heisenberg case in his garage",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank connects Walt to lab equipment theft, Gale's murder, and Fring's death",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt works mundane car wash routine with Skyler, pretending normalcy",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "protection"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Lydia begs Walt to resume cooking due to Todd's poor quality product",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "lydia",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt refuses Lydia and tells her never to return",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse attempts to give away blood money to victims' families",
+          "storyline": "guilt",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Saul intercepts the cash and warns Jesse about distributing drug money",
+          "storyline": "guilt",
+          "function": "escalation",
+          "characters": [
+            "saul",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse confronts Saul and Walt, calling the money blood money",
+          "storyline": "guilt",
+          "function": "turning_point",
+          "characters": [
+            "jesse",
+            "walt",
+            "saul"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse directly asks Walt if he killed Mike",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt lies to Jesse that Mike is alive and on the run",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt discovers the Walt Whitman book is missing from bathroom",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt finds GPS tracker under his car",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt confronts Hank directly in his garage",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "hank"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank punches Walt and calls him a monster",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt warns Hank his cancer returned and threatens him to tread lightly",
+          "storyline": "investigation",
+          "function": "cliffhanger",
+          "characters": [
+            "walt",
+            "hank"
+          ],
+          "also_affects": [
+            "empire",
+            "empire"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the inevitable collision of truth and lies",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "investigation",
+            "guilt",
+            "empire",
+            "legacy"
+          ],
+          "description": "all storylines deal with confronting the truth of past actions and their consequences",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "investigation",
+            "empire"
+          ],
+          "description": "the audience knows Walt killed Mike while Jesse suspects but Walt denies it",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "investigation",
+            "empire"
+          ],
+          "description": "Hank's investigation and Walt's criminal empire finally collide in direct confrontation",
+          "subtype": null
+        },
+        {
+          "type": "meta",
+          "lines": [
+            "legacy",
+            "empire"
+          ],
+          "description": "flash-forward shows the ultimate destruction of everything Walt built",
+          "subtype": "flashforward"
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E10",
+      "events": [
+        {
+          "event": "Hank returns to work at the DEA and tries to build a case against Walt without revealing his personal connection",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Hank calls in Jesse for questioning, but Jesse stonewalls completely and says nothing",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "jesse"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Skyler senses danger and drives to the storage unit to load money into her car",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt races to reach the money first, rents a van and loads the barrels himself",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "protection"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt takes the money barrels to the desert near To'hajiilee and buries them",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": [
+            "callback"
+          ]
+        },
+        {
+          "event": "Walt records the coordinates as lottery numbers and tapes the ticket inside the refrigerator",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "The physical labor aggravates Walt's cancer and he collapses in the bathroom",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt tells Skyler the money is safe and hidden when he wakes",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "protection"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Marie confronts Skyler at the White house, having learned the truth from Hank",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "marie",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Marie slaps Skyler and tries to take baby Holly, but Hank intervenes",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "marie",
+            "skyler",
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank realizes he cannot go to the DEA officially because Walt is his brother-in-law",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt tells Skyler that Hank has no real evidence",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Skyler surprises Walt by siding with him out of self-preservation",
+          "storyline": "protection",
+          "function": "turning_point",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler asks Walt if this is over and he assures her it is",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Lydia visits Declan's underground meth lab and declares the quality unacceptable",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "lydia",
+            "declan"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Lydia calls Todd, who arrives with Jack's Aryan Brotherhood crew",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "lydia",
+            "todd",
+            "jack"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jack's men execute Declan and his entire operation in the buried lab",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "jack",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Todd takes over cooking duties and Lydia secures a new supply chain",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "todd",
+            "lydia"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank decides to approach Jesse independently, believing he's the key to building a case outside the system",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the price of loyalty and self-preservation",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "investigation",
+            "protection",
+            "legacy"
+          ],
+          "description": "all three storylines explore characters forced to choose between loyalty and self-preservation — Hank can't use official channels, Skyler sides with Walt to protect herself, Walt hides the money to preserve his legacy",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "investigation",
+            "protection"
+          ],
+          "description": "the audience knows Walt's assurance that 'this is over' is false, while Skyler believes it",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "investigation",
+            "guilt"
+          ],
+          "description": "Hank's decision to approach Jesse independently sets up their alliance against Walt",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E11",
+      "events": [
+        {
+          "event": "Walt and Skyler film a fake confession video framing Hank as Heisenberg",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt and Skyler invite Hank and Marie to dinner at a Mexican restaurant",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler",
+            "hank",
+            "marie"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt slides the DVD confession across the table to Hank",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt",
+            "hank"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank and Marie watch the fake confession video at home",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "hank",
+            "marie"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Marie realizes the medical bill detail gives the lie devastating credibility",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "marie",
+            "hank"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse sits in Saul's office ready to disappear with a new identity",
+          "storyline": "guilt",
+          "function": "setup",
+          "characters": [
+            "jesse",
+            "saul"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Huell pickpockets Jesse's marijuana during the pat-down",
+          "storyline": "guilt",
+          "function": "turning_point",
+          "characters": [
+            "jesse",
+            "guest:huell"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse realizes Huell stole his weed and connects it to the ricin cigarette theft",
+          "storyline": "guilt",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": [
+            "twist"
+          ]
+        },
+        {
+          "event": "Jesse realizes Walt orchestrated Brock's poisoning to manipulate him",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "twist"
+          ]
+        },
+        {
+          "event": "Jesse storms back into Saul's office, beats him, and takes his gun",
+          "storyline": "guilt",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "saul"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse breaks into the White house and douses it with gasoline",
+          "storyline": "guilt",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "protection",
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt arrives home to find the living room soaked in gasoline",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire",
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt lies to Skyler and Walter Jr. about a gas pump malfunction",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "The White family moves to a hotel for safety",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt meets with Saul and instructs him to find Jesse",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "saul"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Saul suggests Jesse needs to be dealt with permanently",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "saul",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt refuses to kill Jesse for now",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank stops Jesse from burning the White house",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "hank",
+            "jesse"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank brings Jesse to the Schrader home",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "jesse"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse agrees to cooperate with Hank against Walt",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "jesse",
+            "hank"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the price of loyalty and betrayal",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "legacy",
+            "investigation",
+            "guilt"
+          ],
+          "description": "all three storylines explore betrayal — Walt betrays Hank with the fake confession, Jesse feels betrayed by Walt's manipulation, Hank is betrayed by his own vulnerability",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "legacy",
+            "protection"
+          ],
+          "description": "the audience knows Walt's gas pump story is a lie while his family believes it",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "investigation",
+            "guilt"
+          ],
+          "description": "Jesse's realization about Walt's manipulation leads directly to his alliance with Hank",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E12",
+      "events": [
+        {
+          "event": "Walt discovers his living room soaked in gasoline from Jesse's break-in",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt fabricates a gas pump story to explain the smell to Skyler and Walter Jr.",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Skyler confronts Walt at the hotel demanding the truth about Jesse",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler coldly suggests Walt should kill Jesse permanently",
+          "storyline": "protection",
+          "function": "turning_point",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Saul advises Walt that Jesse must be sent to Belize",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "saul",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt refuses Saul's advice, insisting he can talk Jesse down",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank intercepts Jesse at the White house and talks him out of burning it down",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "hank",
+            "jesse"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": [
+            "flashback"
+          ]
+        },
+        {
+          "event": "Jesse records his full video testimony detailing two years of crimes with Walt",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "hank"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Gomez expresses skepticism that Jesse's testimony alone will convict Walt",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "gomez",
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank devises a sting operation with Jesse wearing a wire to meet Walt",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse objects that Walt is too smart and the meeting is a death trap",
+          "storyline": "guilt",
+          "function": "escalation",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank privately tells Gomez he doesn't care if Jesse dies at the meeting",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank",
+            "gomez"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jesse panics at the plaza, spots a stranger, and aborts the meeting",
+          "storyline": "guilt",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse calls Walt with a threatening message about getting him where he really lives",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt drives to Jack Welker's compound and asks him to kill Jesse",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jack"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jack agrees to kill Jesse but demands Walt cook three more batches with Todd",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "jack",
+            "walt",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the point of no return",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "protection",
+            "guilt",
+            "investigation"
+          ],
+          "description": "all storylines reach their moral breaking point — Walt ordering Jesse's death, Skyler embracing murder, Jesse threatening Walt, Hank willing to sacrifice Jesse",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "investigation",
+            "empire"
+          ],
+          "description": "the audience knows Hank is using Jesse against Walt while Walt seeks Jesse's death",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "guilt",
+            "investigation"
+          ],
+          "description": "Jesse's moral crisis becomes Hank's investigative weapon",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E13",
+      "events": [
+        {
+          "event": "Jesse and Hank devise a plan to trap Walt by targeting his buried money",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "jesse",
+            "hank"
+          ],
+          "also_affects": [
+            "guilt"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank intimidates Huell with a staged photo of Jesse's fake death",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Huell confirms he helped Walt load seven barrels of cash into a van",
+          "storyline": "investigation",
+          "function": "escalation",
+          "characters": [
+            "guest:huell",
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse sends Walt a fake photo of excavated money barrel with threat to burn it",
+          "storyline": "investigation",
+          "function": "turning_point",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": [
+            "empire",
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt panics at the car wash and races toward the burial site",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt confesses to prison murders, killing Mike, poisoning Brock, and killing Gus while speeding to the desert",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "investigation",
+            "guilt"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Hank records Walt's full confession over the phone",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt arrives at the burial site and realizes the photo was fake",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt calls Jack for backup and gives him the coordinates",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt sees Hank, Gomez, and Jesse and realizes he's been trapped",
+          "storyline": "empire",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt urgently calls Jack to cancel the backup request",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank arrests Walt at gunpoint and reads him his Miranda rights",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank calls Marie and tells her Walt has been arrested and the nightmare is over",
+          "storyline": "investigation",
+          "function": "resolution",
+          "characters": [
+            "hank",
+            "marie"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Jack's armed convoy arrives despite Walt's cancellation",
+          "storyline": "empire",
+          "function": "cliffhanger",
+          "characters": [
+            "guest:jack"
+          ],
+          "also_affects": [
+            "investigation",
+            "protection"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Armed standoff develops between Jack's crew and Hank and Gomez",
+          "storyline": "investigation",
+          "function": "cliffhanger",
+          "characters": [
+            "hank",
+            "gomez",
+            "guest:jack"
+          ],
+          "also_affects": [
+            "empire",
+            "protection"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the inevitability of consequences",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "investigation",
+            "protection"
+          ],
+          "description": "all storylines converge on the moment when Walt's carefully constructed lies finally collapse under the weight of truth",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "investigation",
+            "empire"
+          ],
+          "description": "the audience knows Walt is walking into a trap while he believes he's protecting his money",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "investigation",
+            "protection"
+          ],
+          "description": "all storylines physically converge at the burial site where Walt's empire, Hank's investigation, and the threat to family safety collide",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E14",
+      "events": [
+        {
+          "event": "Flashback shows Walt and Jesse cooking meth in the RV in the desert years earlier",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": [
+            "flashback",
+            "callback"
+          ]
+        },
+        {
+          "event": "Gomez lies dead after the firefight at To'hajiilee",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "gomez"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Hank crawls wounded behind a vehicle, shot in the leg",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt begs Jack to spare Hank, offering all eighty million dollars",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jack"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Hank refuses to beg and tells Walt that Jack made his decision ten minutes ago",
+          "storyline": "investigation",
+          "function": "climax",
+          "characters": [
+            "hank"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jack shoots Hank in the head, killing him",
+          "storyline": "investigation",
+          "function": "resolution",
+          "characters": [
+            "jack",
+            "hank"
+          ],
+          "also_affects": [
+            "empire",
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt collapses face-down in the dirt after Hank's death",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jack's men dig up Walt's money barrels using GPS coordinates",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "jack"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jack's crew takes seven barrels, leaving Walt one at Todd's request",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "jack",
+            "todd"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse is found hiding under Walt's car and dragged out",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "jesse",
+            "jack"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Todd argues Jesse should be kept alive to learn what he told the DEA",
+          "storyline": "guilt",
+          "function": "turning_point",
+          "characters": [
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt tells Jesse he watched Jane die and chose not to intervene",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": [
+            "twist"
+          ]
+        },
+        {
+          "event": "Jesse is taken to Jack's compound and chained in an underground pit",
+          "storyline": "guilt",
+          "function": "resolution",
+          "characters": [
+            "jesse",
+            "jack"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse is forced to cook meth for Todd in captivity",
+          "storyline": "guilt",
+          "function": "seed",
+          "characters": [
+            "jesse",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jack's crew buries Hank and Gomez in the hole where the money was",
+          "storyline": "investigation",
+          "function": "resolution",
+          "characters": [
+            "jack"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt drives through the desert until his car runs out of fuel",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt buys a battered truck from a Navajo man with cash",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "guest:navajo_man"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler hears news of a shooting in the desert and suspects the worst",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt bursts in and orders Skyler and Walter Jr. to pack immediately",
+          "storyline": "protection",
+          "function": "escalation",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Skyler grabs a kitchen knife and slashes at Walt, cutting his hand",
+          "storyline": "protection",
+          "function": "climax",
+          "characters": [
+            "skyler",
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walter Jr. throws himself between his parents and calls 911",
+          "storyline": "protection",
+          "function": "climax",
+          "characters": [
+            "guest:walter_jr",
+            "skyler"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt grabs baby Holly and runs to his truck",
+          "storyline": "protection",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt changes Holly's diaper in a fire station restroom while she cries for mama",
+          "storyline": "protection",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt calls Skyler and performs a vicious tirade to shield her from prosecution",
+          "storyline": "protection",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt leaves Holly at the fire station entrance with a note",
+          "storyline": "protection",
+          "function": "resolution",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Ed Galbraith picks Walt up in a red minivan for his new identity",
+          "storyline": "empire",
+          "function": "seed",
+          "characters": [
+            "walt",
+            "guest:ed_galbraith"
+          ],
+          "also_affects": null,
+          "devices": []
+        }
+      ],
+      "theme": "the cost of choices",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "investigation",
+            "guilt",
+            "protection",
+            "legacy"
+          ],
+          "description": "all storylines culminate in devastating consequences of past choices — Walt's empire crumbles, Hank dies for his pursuit, Jesse faces ultimate betrayal, Skyler loses her family, Walt's legacy is destroyed",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "investigation"
+          ],
+          "description": "the desert confrontation brings Walt's criminal empire and Hank's investigation to their mutual destruction",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "protection",
+            "legacy"
+          ],
+          "description": "Walt's phone call appears cruel but actually protects Skyler, while destroying any remaining family bonds",
+          "subtype": null
+        },
+        {
+          "type": "meta",
+          "lines": [
+            "empire"
+          ],
+          "description": "flashback to the RV cooking scene provides emotional contrast to the present devastation",
+          "subtype": "wraparound"
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E15",
+      "events": [
+        {
+          "event": "Walt steals a Volvo in New Hampshire and drives toward Albuquerque",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt breaks into Elliott and Gretchen's house and waits in the shadows",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt threatens Elliott and Gretchen with fake hitmen to force them to give money to Walt Jr.",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "elliott",
+            "gretchen"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Badger and Skinny Pete are revealed as the fake hitmen with laser pointers",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "guest:badger",
+            "guest:skinny_pete"
+          ],
+          "also_affects": null,
+          "devices": [
+            "twist"
+          ]
+        },
+        {
+          "event": "Walt learns from Badger and Skinny Pete that blue meth is still on the street",
+          "storyline": "guilt",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "guest:badger",
+            "guest:skinny_pete"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt realizes Jesse must be alive and still cooking",
+          "storyline": "guilt",
+          "function": "turning_point",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt approaches Lydia and Todd at their coffee meeting claiming to have a new cooking method",
+          "storyline": "empire",
+          "function": "setup",
+          "characters": [
+            "walt",
+            "lydia",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt slips ricin into Lydia's Stevia packet while she dismisses his offer",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "lydia"
+          ],
+          "also_affects": null,
+          "devices": [
+            "dramatic_irony"
+          ]
+        },
+        {
+          "event": "Walt retrieves his car with the mounted M60 machine gun",
+          "storyline": "empire",
+          "function": "escalation",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt gives Skyler the GPS coordinates of Hank and Gomez's burial site",
+          "storyline": "protection",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "investigation"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt admits he did everything for himself because he liked it and was good at it",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "skyler"
+          ],
+          "also_affects": [
+            "protection"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt looks at Holly sleeping in her crib one last time",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "protection"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the final reckoning",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "legacy",
+            "empire",
+            "protection"
+          ],
+          "description": "all storylines converge on Walt's final acts of control and his attempt to secure what matters to him before death",
+          "subtype": null
+        },
+        {
+          "type": "dramatic_irony",
+          "lines": [
+            "legacy",
+            "empire"
+          ],
+          "description": "the audience knows Walt's elaborate schemes while his victims remain unaware of the true danger",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "legacy",
+            "protection"
+          ],
+          "description": "Walt's confession to Skyler serves both his need for truth and her need for legal protection",
+          "subtype": null
+        }
+      ],
+      "patches": []
+    },
+    {
+      "episode": "S05E16",
+      "events": [
+        {
+          "event": "Walt drives to Jack's compound with the M60 rigged in his trunk",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jack's men search Walt and bring him inside the clubhouse",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jack"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt claims he wants to discuss a deal with Jack",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jack"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jack orders Todd to bring Jesse from the meth lab as proof of enslavement",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "jack",
+            "todd",
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Todd retrieves Jesse, who is emaciated, scarred, and shackled",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "todd",
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt tackles Jesse to shield him and activates the M60 with the key fob",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "guilt",
+            "empire"
+          ],
+          "devices": [
+            "twist"
+          ]
+        },
+        {
+          "event": "The M60 sweeps automatic fire through the clubhouse, killing Jack's men",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Jesse strangles Todd to death with his handcuff chain",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "jesse",
+            "todd"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt shoots the wounded Jack mid-sentence when Jack offers to reveal the money location",
+          "storyline": "empire",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jack"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt slides the pistol to Jesse and tells him to kill Walt",
+          "storyline": "guilt",
+          "function": "climax",
+          "characters": [
+            "walt",
+            "jesse"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse refuses to kill Walt, telling him to do it himself",
+          "storyline": "guilt",
+          "function": "resolution",
+          "characters": [
+            "jesse",
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Jesse escapes in Todd's El Camino, laughing and crying as he drives away",
+          "storyline": "guilt",
+          "function": "resolution",
+          "characters": [
+            "jesse"
+          ],
+          "also_affects": null,
+          "devices": []
+        },
+        {
+          "event": "Walt tells Lydia over the phone that she ingested ricin and will die",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt",
+            "lydia"
+          ],
+          "also_affects": null,
+          "devices": [
+            "callback"
+          ]
+        },
+        {
+          "event": "Walt walks through the meth lab and leaves a bloody handprint on equipment",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        },
+        {
+          "event": "Walt collapses and dies on the lab floor as police arrive",
+          "storyline": "empire",
+          "function": "resolution",
+          "characters": [
+            "walt"
+          ],
+          "also_affects": [
+            "empire"
+          ],
+          "devices": []
+        }
+      ],
+      "theme": "the final reckoning",
+      "interactions": [
+        {
+          "type": "thematic_rhyme",
+          "lines": [
+            "empire",
+            "guilt",
+            "legacy"
+          ],
+          "description": "all three storylines converge on the theme of facing consequences and choosing how to end one's story",
+          "subtype": null
+        },
+        {
+          "type": "convergence",
+          "lines": [
+            "empire",
+            "guilt",
+            "legacy"
+          ],
+          "description": "Walt's final plan simultaneously destroys his enemies, frees Jesse, and completes his transformation",
+          "subtype": null
+        }
+      ],
+      "patches": [
+        {
+          "action": "CHECK_LINE",
+          "target": "investigation",
+          "reason": "Hank's investigation storyline has no events in the finale - it was resolved in previous episodes",
+          "episodes": [
+            "S05E16"
+          ]
+        },
+        {
+          "action": "CHECK_LINE",
+          "target": "protection",
+          "reason": "Skyler's protection storyline has no events in the finale - it was resolved in previous episodes",
+          "episodes": [
+            "S05E16"
+          ]
+        },
+        {
+          "action": "CHECK_LINE",
+          "target": "survival",
+          "reason": "Mike's survival storyline has no events in the finale - it was resolved when Mike was killed",
+          "episodes": [
+            "S05E16"
+          ]
+        }
+      ]
+    }
+  ],
+  "usage": "21 requests, 84,262 input + 29,781 output tokens, ~$0.573"
+}

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Grid + Analytics Color Variants</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 2rem; transition: background 0.2s, color 0.2s; }
+/* Tokyo Night (dark) */
+body.dark { background: #1a1b26; color: #a9b1d6; }
+/* Blue Topaz (light) */
+body.light { background: #eef5fb; color: #2e3338; }
+.toggle { position: fixed; top: 1rem; right: 1rem; padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid; cursor: pointer; z-index: 10; font-size: 0.85rem; }
+.dark .toggle { background: #24283b; color: #a9b1d6; border-color: #3b4261; }
+.light .toggle { background: #fff; color: #4a8cc7; border-color: #c0d5e8; }
+h1 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.dark h1, .dark h2, .dark h3 { color: #c0caf5; }
+.light h1, .light h2, .light h3 { color: #1a2030; }
+.desc { font-size: 0.9rem; margin-bottom: 2rem; line-height: 1.5; }
+.dark .desc { color: #565f89; }
+.light .desc { color: #6b8099; }
+.variant { border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem; }
+.dark .variant { background: #1f2335; border: 1px solid #3b4261; }
+.light .variant { background: #ffffff; border: 1px solid #d0dae5; }
+.variant h2 { font-size: 1.2rem; margin-bottom: 0.25rem; }
+.dark .variant .tag { color: #565f89; }
+.light .variant .tag { color: #8b9eb5; }
+.variant .tag { font-size: 0.75rem; }
+.dark .variant .explanation { color: #787c99; }
+.light .variant .explanation { color: #6b8099; }
+.variant .explanation { font-size: 0.85rem; margin: 0.5rem 0 1.25rem; line-height: 1.5; }
+.views { display: grid; grid-template-columns: 3fr 2fr; gap: 2rem; align-items: start; }
+.views > div { display: flex; flex-direction: column; }
+.grid-mockup, .analytics-mockup { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.view-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; font-weight: 600; }
+.dark .view-label { color: #565f89; }
+.light .view-label { color: #8b9eb5; }
+
+/* Grid mockup */
+.grid-row { display: flex; gap: 4px; align-items: center; flex: 1; }
+.grid-row-label { font-size: 0.7rem; width: 100px; text-align: right; padding-right: 8px; flex-shrink: 0; }
+.grid-cells { display: flex; gap: 4px; flex: 1; height: 100%; }
+.grid-cell { border-radius: 4px; padding: 6px 8px; font-size: 0.65rem; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center; color: #fff; }
+.grid-cell.empty { border: 1px dashed; opacity: 0.3; }
+.dark .grid-cell.empty { border-color: #3b4261; }
+.light .grid-cell.empty { border-color: #c0d5e8; }
+
+/* Analytics mockup */
+.bar-row { display: flex; border-radius: 4px; overflow: hidden; flex: 1; }
+.bar-seg { display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: rgba(255,255,255,0.9); }
+
+/* Legend */
+.legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+.legend-item { display: flex; align-items: center; gap: 0.35rem; font-size: 0.7rem; }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+.dark .legend-label { color: #565f89; }
+.light .legend-label { color: #8b9eb5; }
+
+/* Pros/cons */
+.pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; font-size: 0.8rem; }
+.dark .pros { color: #9ece6a; }
+.light .pros { color: #3a8a50; }
+.dark .cons { color: #f7768e; }
+.light .cons { color: #c04050; }
+.pros-cons ul { padding-left: 1.2rem; }
+.pros-cons li { margin-bottom: 0.25rem; }
+
+/* Variant D: unified table */
+.unified-views { display: grid; grid-template-columns: 3fr 2fr; gap: 0; align-items: start; }
+.unified-table { width: 100%; border-collapse: separate; border-spacing: 3px; }
+.unified-table th { font-size: 0.7rem; font-weight: 400; padding: 4px 6px; text-align: center; }
+.dark .unified-table th { color: #565f89; }
+.light .unified-table th { color: #8b9eb5; }
+.unified-table th.row-label { text-align: right; padding-right: 10px; min-width: 110px; }
+.unified-table td { border-radius: 4px; text-align: center; font-size: 0.75rem; padding: 10px 6px; color: #fff; font-weight: 600; }
+.unified-table td.empty-cell { opacity: 0; }
+.unified-table td.total-cell { font-weight: 400; font-size: 0.7rem; }
+.dark .unified-table td.total-cell { color: #565f89; background: transparent; }
+.light .unified-table td.total-cell { color: #8b9eb5; background: transparent; }
+.unified-table td.diag { opacity: 0.15; }
+.dark .unified-table td.dash { background: #24283b; color: #3b4261; font-weight: 400; }
+.light .unified-table td.dash { background: #e8f0f6; color: #b0c4d8; font-weight: 400; }
+.section-gap { width: 20px; }
+
+/* Grid D */
+.grid-d-mockup { display: flex; flex-direction: column; gap: 3px; }
+.grid-d-row { display: flex; gap: 3px; align-items: stretch; }
+.grid-d-label { font-size: 0.7rem; width: 110px; text-align: right; padding-right: 10px; display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; }
+.grid-d-cells { display: flex; gap: 3px; flex: 1; }
+.grid-d-cell { border-radius: 4px; padding: 8px 6px; font-size: 0.65rem; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center; color: #fff; min-height: 40px; }
+.grid-d-cell.empty { opacity: 0; }
+.grid-d-ep-header { display: flex; gap: 3px; padding-left: 118px; }
+.dark .grid-d-ep-header span { color: #565f89; }
+.light .grid-d-ep-header span { color: #8b9eb5; }
+.grid-d-ep-header span { flex: 1; text-align: center; font-size: 0.65rem; }
+</style>
+</head>
+<body class="dark">
+<button class="toggle" onclick="toggleTheme()">☀ Blue Topaz</button>
+
+<h1>Grid + Analytics: варианты связки цветов</h1>
+<p class="desc">Grid View окрашивает события по <strong>функции</strong> (setup, escalation, climax...). Analytics окрашивает по <strong>плотлайну</strong> (Walt: Empire, Jesse: Survival...). Как их соединить?</p>
+
+<div id="variants"></div>
+
+<script>
+// Monet plotline colors (first 4 for BB)
+const PL = {
+  walt:  '#2a4a80',
+  jesse: '#6a4890',
+  family:'#3a7868',
+  hank:  '#d8c040',
+};
+
+// Functions
+const FN_NAMES = ['setup', 'inciting', 'escalation', 'turning pt', 'crisis', 'climax', 'resolution'];
+
+const VARIANTS = [
+  {
+    name: 'A. Оба из Моне',
+    tag: 'Одна картина — два регистра',
+    explanation: 'Плотлайны = основная палитра Моне. Функции = оттенки из той же картины: туман, охра, тиал, розовый. Grid и Analytics визуально из одного мира.',
+    fnColors: ['#8898b0', '#b89858', '#a8a898', '#6a4890', '#2a4a80', '#c07890', '#3a7868'],
+    plColors: PL,
+    pros: ['Единый визуальный язык', 'Всё "из одной картины"', 'Спокойный, гармоничный'],
+    cons: ['Функции могут сливаться с плотлайнами', 'Мало контраста между setup/escalation', 'Может быть слишком "тихо"'],
+  },
+  {
+    name: 'B. Тёплый / холодный split',
+    tag: 'Плотлайны = холодные, функции = тёплые',
+    explanation: 'Analytics (плотлайны) — холодные Моне: синий, фиолетовый, зелёный. Grid (функции) — тёплые: охра, терракота, золото, розовый. Два вида сразу читаются как разные измерения.',
+    fnColors: ['#a8a090', '#d0a020', '#c08050', '#9050a0', '#b85540', '#c03040', '#5a9878'],
+    plColors: PL,
+    pros: ['Сразу видно что "это функция" vs "это плотлайн"', 'Высокий контраст', 'Тёплые функции хорошо читаются на карточках'],
+    cons: ['Два разных "настроения" на одном сайте', 'Grid выглядит "другим приложением"', 'Сложнее запомнить обе системы'],
+  },
+  {
+    name: 'C. Плотлайн = фон строки, функция = насыщенность',
+    tag: 'Цвет строки + яркость карточки',
+    explanation: 'В Grid View каждая строка (плотлайн) получает свой цвет как фон/бордер. Карточки внутри — оттенки этого же цвета: бледный (setup) → насыщенный (climax). Функция = интенсивность, плотлайн = оттенок.',
+    fnColors: null, // special rendering
+    plColors: PL,
+    pros: ['Один цветовой язык — плотлайн везде = один цвет', 'Нет "второй палитры" для запоминания', 'Grid и Analytics мгновенно связываются'],
+    cons: ['Теряется различение функций по цвету', 'Setup и escalation различаются только яркостью', 'Менее информативно на первый взгляд'],
+  },
+];
+
+// Intensity levels for variant C (setup=0.2 ... climax=1.0)
+const FN_INTENSITY = [0.2, 0.35, 0.45, 0.6, 0.8, 1.0, 0.25];
+
+// Variant D: infoDesign-driven unified layout
+const VARIANT_D = {
+  name: 'D. Убрать stacked bar, два графика как одна таблица',
+  tag: 'По принципам infoDesign: data-ink, параллелизм, прямые подписи',
+  explanation: 'Stacked bar дублирует Span Timeline (те же данные). Убираем. Два оставшихся графика — рядом, строки выровнены, прямые числа, без легенды. Grid View (слева) — функции тёплые (вариант B). Итоги по строкам/столбцам встроены.',
+  // Grid: warm function colors (variant B)
+  fnColors: ['#a8a090', '#d0a020', '#c08050', '#9050a0', '#b85540', '#c03040', '#5a9878'],
+  plColors: PL,
+  // Span Timeline data: plotline × episode (event counts)
+  spanData: [
+    [9, 4, 8, 6, 9, 7, 7],  // Walt: Empire
+    [1, 2, 0, 5, 2, 2, 1],  // Jesse: Survival
+    [1, 3, 5, 2, 3, 2, 3],  // Walt: Family
+    [2, 1, 0, 1, 0, 2, 0],  // Hank: Investigation
+  ],
+  // Convergence: plotline × plotline (directed)
+  convData: [
+    [0, 19, 6, 0],
+    [3, 0, 0, 0],
+    [3, 1, 0, 0],
+    [2, 0, 0, 0],
+  ],
+  pros: ['Максимальный data-ink ratio — нет дублирования', 'Строки параллельны: одна плотлайн = одна высота везде', 'Прямые числа — без легенды, без расшифровки', 'Итоги встроены (Σ строк/столбцов)', 'Grid + Analytics из одного визуального семейства'],
+  cons: ['Теряется stacked bar (пропорции внутри эпизода менее наглядны)', 'Сложнее реализовать идеальное выравнивание Canvas + SVG'],
+};
+
+function hexToRgb(hex) {
+  return [parseInt(hex.slice(1,3),16), parseInt(hex.slice(3,5),16), parseInt(hex.slice(5,7),16)];
+}
+function rgbToHex(r,g,b) {
+  const h = v => Math.round(Math.min(255,Math.max(0,v))).toString(16).padStart(2,'0');
+  return '#'+h(r)+h(g)+h(b);
+}
+function blendToBg(hex, bg, t) {
+  const [r1,g1,b1] = hexToRgb(hex);
+  const [rb,gb,bb] = hexToRgb(bg);
+  return rgbToHex(r1*t+rb*(1-t), g1*t+gb*(1-t), b1*t+bb*(1-t));
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('dark');
+  document.body.classList.toggle('light');
+  const btn = document.querySelector('.toggle');
+  const isDark = document.body.classList.contains('dark');
+  btn.textContent = isDark ? '\u2600 Blue Topaz' : '\u263E Tokyo Night';
+  renderAll();
+}
+
+function renderAll() {
+const root = document.getElementById('variants');
+root.innerHTML = '';
+
+VARIANTS.forEach((v, vi) => {
+  const div = document.createElement('div');
+  div.className = 'variant';
+
+  const isDark = document.body.classList.contains('dark');
+  const bg = isDark ? '#1f2335' : '#ffffff';
+
+  let html = `<h2>${v.name}</h2><span class="tag">${v.tag}</span>
+    <p class="explanation">${v.explanation}</p>
+    <div class="views">`;
+
+  // --- GRID VIEW mockup ---
+  html += '<div><div class="view-label">Grid View (события по функциям)</div><div class="grid-mockup">';
+
+  const plEntries = Object.entries(v.plColors);
+  const plNames = ['Walt: Empire', 'Jesse: Survival', 'Walt: Family', 'Hank: Investigation'];
+  // 7 episodes, show a few events per row
+  const gridData = [
+    [0,1,2,3,4,5,6],  // Walt: all functions
+    [null,0,null,2,3,null,5], // Jesse: gaps
+    [0,2,2,3,null,5,6], // Family
+    [0,null,null,1,null,4,null], // Hank: sparse
+  ];
+
+  for (let r = 0; r < 4; r++) {
+    html += `<div class="grid-row"><div class="grid-row-label">${plNames[r]}</div><div class="grid-cells">`;
+    for (let c = 0; c < 7; c++) {
+      const fnIdx = gridData[r][c];
+      if (fnIdx === null) {
+        html += '<div class="grid-cell empty"></div>';
+      } else {
+        let cellColor;
+        if (v.fnColors === null) {
+          // Variant C: plotline color at function intensity
+          cellColor = blendToBg(plEntries[r][1], bg, FN_INTENSITY[fnIdx]);
+        } else {
+          cellColor = v.fnColors[fnIdx];
+        }
+        html += `<div class="grid-cell" style="background:${cellColor}">${FN_NAMES[fnIdx]}</div>`;
+      }
+    }
+    html += '</div></div>';
+  }
+  html += '</div>';
+
+  // Function legend for A and B
+  if (v.fnColors) {
+    html += '<div class="legend">';
+    FN_NAMES.forEach((fn, i) => {
+      html += `<div class="legend-item"><div class="legend-dot" style="background:${v.fnColors[i]}"></div><span class="legend-label">${fn}</span></div>`;
+    });
+    html += '</div>';
+  } else {
+    html += '<div class="legend"><span class="legend-label" style="font-size:0.75rem">Цвет = плотлайн, яркость = функция (бледный→setup, яркий→climax)</span></div>';
+  }
+  html += '</div>';
+
+  // --- ANALYTICS mockup ---
+  html += '<div><div class="view-label">Analytics (данные по плотлайнам)</div><div class="analytics-mockup">';
+
+  // Stacked bars
+  const barData = [[9,2,1,1],[4,3,2,1],[8,5,0,0],[6,5,2,1],[9,2,3,0],[7,2,2,2],[7,1,3,2]];
+  const plColors = plEntries.map(e => e[1]);
+  barData.forEach(row => {
+    const total = row.reduce((a,b)=>a+b,0);
+    html += '<div class="bar-row">';
+    row.forEach((val, i) => {
+      if (val === 0) return;
+      html += `<div class="bar-seg" style="width:${val/total*100}%;background:${plColors[i]}">${val}</div>`;
+    });
+    html += '</div>';
+  });
+
+  // Plotline legend
+  html += '<div class="legend">';
+  plNames.forEach((name, i) => {
+    html += `<div class="legend-item"><div class="legend-dot" style="background:${plColors[i]}"></div><span class="legend-label">${name}</span></div>`;
+  });
+  html += '</div>';
+
+  html += '</div></div>'; // close analytics + views
+
+  // Pros/cons
+  html += '<div class="pros-cons"><div class="pros"><strong>+</strong><ul>';
+  v.pros.forEach(p => html += `<li>${p}</li>`);
+  html += '</ul></div><div class="cons"><strong>−</strong><ul>';
+  v.cons.forEach(c => html += `<li>${c}</li>`);
+  html += '</ul></div></div>';
+
+  div.innerHTML = html;
+  root.appendChild(div);
+});
+
+// --- VARIANT D: custom render ---
+{
+  const d = VARIANT_D;
+  const div = document.createElement('div');
+  div.className = 'variant';
+  const isDark = document.body.classList.contains('dark');
+  const bg = isDark ? '#1f2335' : '#ffffff';
+
+  const plEntries = Object.entries(d.plColors);
+  const plNames = ['Walt: Empire', 'Jesse: Survival', 'Walt: Family', 'Hank: Investigation'];
+  const plShort = ['W:Emp', 'J:Sur', 'W:Fam', 'H:Inv'];
+  const episodes = ['S01E01','S01E02','S01E03','S01E04','S01E05','S01E06','S01E07'];
+  const plColors = plEntries.map(e => e[1]);
+
+  let html = `<h2>${d.name}</h2><span class="tag">${d.tag}</span>
+    <p class="explanation">${d.explanation}</p>`;
+
+  // --- TOP: Grid View mockup ---
+  html += '<div class="view-label">Grid View (функции тёплые — вариант B)</div>';
+  const gridData = [
+    [0,1,2,3,4,5,6],
+    [null,0,null,2,3,null,5],
+    [0,2,2,3,null,5,6],
+    [0,null,null,1,null,4,null],
+  ];
+  html += '<div class="grid-d-mockup">';
+  html += '<div class="grid-d-ep-header">';
+  episodes.forEach(ep => { html += `<span>${ep}</span>`; });
+  html += '</div>';
+  for (let r = 0; r < 4; r++) {
+    html += `<div class="grid-d-row"><div class="grid-d-label" style="color:${plColors[r]}; font-weight:600">${plNames[r]}</div><div class="grid-d-cells">`;
+    for (let c = 0; c < 7; c++) {
+      const fnIdx = gridData[r][c];
+      if (fnIdx === null) {
+        html += '<div class="grid-d-cell empty"></div>';
+      } else {
+        html += `<div class="grid-d-cell" style="background:${d.fnColors[fnIdx]}">${FN_NAMES[fnIdx]}</div>`;
+      }
+    }
+    html += '</div></div>';
+  }
+  html += '</div>';
+  // Function legend
+  html += '<div class="legend" style="margin-bottom:1.5rem">';
+  FN_NAMES.forEach((fn, i) => {
+    html += `<div class="legend-item"><div class="legend-dot" style="background:${d.fnColors[i]}"></div><span class="legend-label">${fn}</span></div>`;
+  });
+  html += '</div>';
+
+  // --- BOTTOM: Analytics = Span Timeline + Convergence side by side ---
+  html += '<div class="view-label">Analytics (без stacked bar — два графика, строки выровнены)</div>';
+  html += '<div class="unified-views">';
+
+  // Span Timeline table
+  html += '<table class="unified-table"><thead><tr><th class="row-label"></th>';
+  episodes.forEach(ep => { html += `<th>${ep}</th>`; });
+  html += '<th>Σ</th></tr></thead><tbody>';
+  for (let r = 0; r < 4; r++) {
+    html += `<tr><th class="row-label" style="color:${plColors[r]}">${plNames[r]}</th>`;
+    const rowMax = Math.max(...d.spanData[r]);
+    const rowSum = d.spanData[r].reduce((a,b)=>a+b,0);
+    for (let c = 0; c < 7; c++) {
+      const val = d.spanData[r][c];
+      if (val === 0) {
+        html += '<td class="empty-cell"></td>';
+      } else {
+        const t = Math.max(0.3, val / rowMax);
+        const color = blendToBg(plColors[r], bg, t);
+        html += `<td style="background:${color}">${val}</td>`;
+      }
+    }
+    html += `<td class="total-cell">${rowSum}</td></tr>`;
+  }
+  // Totals row
+  html += '<tr><th class="row-label" style="font-size:0.65rem;color:#888">Total</th>';
+  for (let c = 0; c < 7; c++) {
+    const colSum = d.spanData.reduce((s, row) => s + row[c], 0);
+    html += `<td class="total-cell">${colSum}</td>`;
+  }
+  html += '<td class="total-cell"></td></tr>';
+  html += '</tbody></table>';
+
+  // Convergence table
+  html += '<table class="unified-table"><thead><tr><th class="row-label"></th>';
+  plShort.forEach((s, i) => { html += `<th style="color:${plColors[i]}">${s}</th>`; });
+  html += '<th>Σ</th></tr></thead><tbody>';
+  const maxConv = Math.max(...d.convData.flat());
+  for (let r = 0; r < 4; r++) {
+    html += `<tr><th class="row-label" style="color:${plColors[r]}">${plNames[r]}</th>`;
+    const rowSum = d.convData[r].reduce((a,b)=>a+b,0);
+    for (let c = 0; c < 4; c++) {
+      if (r === c) {
+        html += `<td class="diag" style="background:${plColors[r]}"></td>`;
+        continue;
+      }
+      const val = d.convData[r][c];
+      if (val === 0) {
+        html += '<td class="dash">—</td>';
+      } else {
+        // Blend row + col colors, row dominates
+        const [r1,g1,b1] = hexToRgb(plColors[r]);
+        const [r2,g2,b2] = hexToRgb(plColors[c]);
+        const mr = r1*0.7+r2*0.3, mg = g1*0.7+g2*0.3, mb = b1*0.7+b2*0.3;
+        const mixed = rgbToHex(mr,mg,mb);
+        const t = Math.max(0.35, Math.sqrt(val/maxConv));
+        const final = blendToBg(mixed, bg, t);
+        html += `<td style="background:${final}">${val}</td>`;
+      }
+    }
+    html += `<td class="total-cell">→${rowSum}</td></tr>`;
+  }
+  // Column totals
+  html += '<tr><th class="row-label" style="font-size:0.65rem;color:#888"></th>';
+  for (let c = 0; c < 4; c++) {
+    const colSum = d.convData.reduce((s, row) => s + row[c], 0);
+    html += `<td class="total-cell">↓${colSum}</td>`;
+  }
+  html += '<td class="total-cell"></td></tr>';
+  html += '</tbody></table>';
+
+  html += '</div>'; // unified-views
+
+  // Pros/cons
+  html += '<div class="pros-cons"><div class="pros"><strong>+</strong><ul>';
+  d.pros.forEach(p => html += `<li>${p}</li>`);
+  html += '</ul></div><div class="cons"><strong>−</strong><ul>';
+  d.cons.forEach(c => html += `<li>${c}</li>`);
+  html += '</ul></div></div>';
+
+  div.innerHTML = html;
+  root.appendChild(div);
+}
+} // end renderAll
+
+renderAll();
+</script>
+</body>
+</html>
