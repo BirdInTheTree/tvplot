@@ -30,6 +30,13 @@
       <span class="welcome-sep">·</span>
       <a id="btn-skip" class="welcome-link" href="#">Skip to upload &#8594;</a>
     </div>
+
+    <!-- Secondary fallback: explore a pre-analyzed example without running -->
+    <!-- the pipeline. Loaded non-destructively (not saved to Store). -->
+    <div id="welcome-examples" class="welcome-examples">
+      <div class="welcome-examples-label">Or browse an example</div>
+      <div id="welcome-examples-list" class="welcome-examples-list"></div>
+    </div>
   </div>
 </section>
 
@@ -37,6 +44,7 @@
 <section id="screen-grid" class="screen">
   <nav class="toolbar">
     <div class="toolbar-left">
+      <label for="series-select" class="toolbar-select-label">Series</label>
       <select id="series-select" class="toolbar-select"></select>
       <span id="grid-title" class="toolbar-title"></span>
     </div>
@@ -113,6 +121,11 @@
 <!-- Demo data (injected by build.py) -->
 <script id="demo-data" type="application/json">
 /* {{DEMO_DATA}} */
+</script>
+
+<!-- Bundled examples for the welcome-screen picker (injected by build.py) -->
+<script id="examples-data" type="application/json">
+/* {{EXAMPLES_DATA}} */
 </script>
 
 <script>

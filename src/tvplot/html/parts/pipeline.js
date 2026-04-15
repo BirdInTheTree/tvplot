@@ -719,14 +719,18 @@ async function _analyzeSeries(show, season) {
 
   if (!provider || !apiKey) {
     alert('Set your LLM provider and API key first — click "LLM" in the toolbar after this message.');
-    // Bring user straight into settings
+    // Tear down welcome chrome so the settings modal isn't behind it.
     _skipOnboarding();
+    showScreen('welcome');
     setTimeout(_showLLMSettings, 100);
     return;
   }
 
-  // Move from welcome screen into the viewer shell so the progress overlay fits the normal layout
+  // Move from welcome screen into the viewer shell so the progress overlay
+  // fits the normal layout. The grid may be empty (no data yet) — that's
+  // fine, the progress overlay covers it until the pipeline finishes.
   _skipOnboarding();
+  showScreen('grid');
   _showPipelineProgress();
   _updatePipelineProgress('Generating synopses from the model…', 0, 6);
 

@@ -75,6 +75,11 @@ function _updateDarkIcon() {
 
 // --- Demo data ---
 
+// Prefix for transient "browse an example" selections. Such selections
+// are never persisted to Store — they're a read-only preview on top of
+// the bundled JSON fixtures.
+const _EXAMPLE_PREFIX = '__example__:';
+
 function _loadDemoData() {
   const el = document.getElementById('demo-data');
   if (!el || !el.textContent.trim()) return null;
@@ -83,6 +88,18 @@ function _loadDemoData() {
   } catch (e) {
     console.error('Failed to parse demo data:', e);
     return null;
+  }
+}
+
+/** Returns `{key: {label, data}}` for every bundled example, or {}. */
+function _loadExamplesData() {
+  const el = document.getElementById('examples-data');
+  if (!el || !el.textContent.trim()) return {};
+  try {
+    return JSON.parse(el.textContent);
+  } catch (e) {
+    console.error('Failed to parse examples data:', e);
+    return {};
   }
 }
 
@@ -103,16 +120,7 @@ function _populateSeriesDropdown() {
   const currentValue = select.value;
   select.innerHTML = '';
 
-  // Demo option (always available if demo data exists)
-  const demoData = _loadDemoData();
-  if (demoData) {
-    const opt = document.createElement('option');
-    opt.value = '__demo__';
-    opt.textContent = _seriesName(demoData) || 'Demo';
-    select.appendChild(opt);
-  }
-
-  // Saved results from Store
+  // User's saved analyses first — that's what they care about.
   const results = Store.getResults();
   for (const name of Object.keys(results).sort()) {
     const opt = document.createElement('option');
@@ -121,6 +129,34 @@ function _populateSeriesDropdown() {
     select.appendChild(opt);
   }
 
+  // If the user is currently previewing an example (non-destructive),
+  // surface it so the picker reflects reality. Not persisted.
+  if (_currentSeriesName && _currentSeriesName.startsWith(_EXAMPLE_PREFIX)) {
+    const opt = document.createElement('option');
+    opt.value = _currentSeriesName;
+    const examples = _loadExamplesData();
+    const key = _currentSeriesName.slice(_EXAMPLE_PREFIX.length);
+    const label = (examples[key] && examples[key].label) || 'Example';
+    opt.textContent = label + ' (example)';
+    select.appendChild(opt);
+  }
+
+  // Legacy demo slot — only shown when the onboarding animation loaded it.
+  if (_currentSeriesName === '__demo__') {
+    const demoData = _loadDemoData();
+    const opt = document.createElement('option');
+    opt.value = '__demo__';
+    opt.textContent = (_seriesName(demoData) || 'Demo') + ' (demo)';
+    select.appendChild(opt);
+  }
+
+  // Always offer an escape hatch back to the welcome / analyze form.
+  // Using a distinct value so the change handler can route accordingly.
+  const addOpt = document.createElement('option');
+  addOpt.value = '__add__';
+  addOpt.textContent = '+ Analyze another…';
+  select.appendChild(addOpt);
+
   // Restore selection
   if (currentValue && select.querySelector(`option[value="${CSS.escape(currentValue)}"]`)) {
     select.value = currentValue;
@@ -128,14 +164,31 @@ function _populateSeriesDropdown() {
     select.value = _currentSeriesName;
   }
 
-  // Hide dropdown if only one option
-  select.style.display = select.options.length <= 1 ? 'none' : '';
+  // Always visible — the dropdown is the primary way to navigate series.
+  select.style.display = '';
 }
 
 function _switchSeries(name) {
+  // "+ Analyze another…" isn't a series — it's an exit to welcome.
+  if (name === '__add__') {
+    showScreen('welcome');
+    // Keep the dropdown synced to the actual current data so the user
+    // doesn't return to a stale "__add__" selection.
+    const select = document.getElementById('series-select');
+    if (select && _currentSeriesName) select.value = _currentSeriesName;
+    return;
+  }
+
   let data;
+  let isTransient = false;
   if (name === '__demo__') {
     data = _loadDemoData();
+    isTransient = true;
+  } else if (name.startsWith(_EXAMPLE_PREFIX)) {
+    const examples = _loadExamplesData();
+    const key = name.slice(_EXAMPLE_PREFIX.length);
+    data = examples[key] && examples[key].data;
+    isTransient = true;
   } else {
     const results = Store.getResults();
     data = results[name];
@@ -145,8 +198,11 @@ function _switchSeries(name) {
 
   _currentSeriesName = name;
   _currentData = data;
-  Store.saveSetting('lastSeries', name);
+  // Only persist real user analyses as "last viewed". Demo and example
+  // previews are one-shot — we don't want to auto-reopen them next visit.
+  if (!isTransient) Store.saveSetting('lastSeries', name);
 
+  _populateSeriesDropdown();
   _renderCurrentView();
 }
 
@@ -157,9 +213,14 @@ function _renderCurrentView() {
   const analyticsContainer = document.getElementById('analytics-container');
   const gridTitle = document.getElementById('grid-title');
 
-  const displayName = _currentSeriesName === '__demo__'
-    ? (_seriesName(_currentData) || 'Demo')
-    : _currentSeriesName;
+  let displayName;
+  if (_currentSeriesName === '__demo__') {
+    displayName = _seriesName(_currentData) || 'Demo';
+  } else if (_currentSeriesName && _currentSeriesName.startsWith(_EXAMPLE_PREFIX)) {
+    displayName = (_seriesName(_currentData) || 'Example') + ' (example)';
+  } else {
+    displayName = _currentSeriesName;
+  }
 
   if (gridTitle) gridTitle.textContent = displayName;
 
@@ -320,10 +381,17 @@ function _showLLMSettings() {
     const s = document.getElementById('llm-system').value;
     Store.setKey(p, k);
     Store.setSystem(s);
-    const status = document.getElementById('llm-save-status');
-    if (status) {
-      status.style.display = 'inline';
-      setTimeout(() => { status.style.display = 'none'; }, 2000);
+
+    // Close the modal.
+    modalOverlay.classList.add('hidden');
+
+    // If the user has no analyzed series yet (only demo), send them to the
+    // welcome screen so the "Analyze a series" form is front and centre —
+    // otherwise they'd be stuck looking at Breaking Bad demo with no obvious
+    // next step.
+    const hasOwnData = Object.keys(Store.getResults()).length > 0;
+    if (!hasOwnData) {
+      showScreen('welcome');
     }
   });
 
@@ -636,8 +704,13 @@ async function runOnboarding() {
   }
 }
 
+/**
+ * Tear down any in-flight onboarding UI and mark onboarding seen.
+ * Does NOT auto-load the demo — callers decide what to show next.
+ * Used both by the "Skip to upload" link and by _analyzeSeries so the
+ * pipeline progress overlay can sit on top of the regular viewer chrome.
+ */
 function _skipOnboarding() {
-  // Abort running onboarding if any
   if (_onboardingAbort && _onboardingAbort.onAbort) {
     _onboardingAbort.onAbort();
   }
@@ -645,13 +718,10 @@ function _skipOnboarding() {
   _removeCursor();
   _hidePipelineProgress();
   _hideDropZone();
-  // Close modal if open
   const modal = document.getElementById('modal-overlay');
   if (modal) modal.classList.add('hidden');
 
   Store.markOnboardingSeen();
-  _switchSeries('__demo__');
-  _setTab('grid');
 }
 
 // --- Init ---
@@ -721,7 +791,11 @@ function _initApp() {
   if (btnSkip) {
     btnSkip.addEventListener('click', (e) => {
       e.preventDefault();
+      // "Skip to upload" — the name says it all: leave the welcome screen
+      // and open the drop zone so the user can drop their JSON/TXT files.
       _skipOnboarding();
+      showScreen('grid');
+      _showDropZone();
     });
   }
   if (analyzeForm) {
@@ -743,16 +817,19 @@ function _initApp() {
     Store.dismissAIFooter();
   });
 
-  // Populate dropdown and determine initial view
+  // Render the welcome-screen example picker (fallback "browse a bundled
+  // example" section). Built once; list reflects build-time bundling.
+  _renderWelcomeExamples();
+
+  // Populate dropdown (deferred until after we know the current series).
   _populateSeriesDropdown();
 
   const settings = Store.getSettings();
-  const hasSeenOnboarding = Store.hasSeenOnboarding();
   const demoData = _loadDemoData();
   const savedResults = Store.getResults();
-  const hasSavedData = Object.keys(savedResults).length > 0;
 
-  // Handle #demo URL hash — always go to grid
+  // #demo URL hash — force-load the legacy demo (onboarding animation
+  // deep-links here, and it's a handy "show me the UI" shortcut).
   if (demoData && window.location.hash === '#demo') {
     Store.markOnboardingSeen();
     _switchSeries('__demo__');
@@ -760,36 +837,58 @@ function _initApp() {
     return;
   }
 
-  // First visit — show welcome screen
-  if (!hasSeenOnboarding) {
-    showScreen('welcome');
-    return;
-  }
-
-  // Returning visit — go straight to grid
+  // Landing rule: open the user's most-recently-viewed saved series if
+  // we still have it. Otherwise land on the welcome screen. We never
+  // auto-show the bundled demo — the user has no way to know it's not
+  // their data, and the complaint was "stop putting Breaking Bad in my
+  // face". The welcome screen's example picker is the opt-in path.
   let seriesName = settings.lastSeries || null;
+  if (seriesName && !savedResults[seriesName]) seriesName = null;
 
-  // Validate that lastSeries still exists
-  if (seriesName && seriesName !== '__demo__' && !savedResults[seriesName]) {
-    seriesName = null;
-  }
-
-  // Fall back to demo or first saved result
+  // Fall back to the most-recently-saved analysis (by insertion order —
+  // the last key in getResults() is the most recent save).
   if (!seriesName) {
-    if (demoData) {
-      seriesName = '__demo__';
-    } else if (hasSavedData) {
-      seriesName = Object.keys(savedResults).sort()[0];
-    }
+    const keys = Object.keys(savedResults);
+    if (keys.length > 0) seriesName = keys[keys.length - 1];
   }
 
   if (seriesName) {
-    const select = document.getElementById('series-select');
-    if (select) select.value = seriesName;
     _switchSeries(seriesName);
     _setTab('grid');
   } else {
     showScreen('welcome');
+  }
+}
+
+/** Render buttons for each bundled example under the welcome screen. */
+function _renderWelcomeExamples() {
+  const container = document.getElementById('welcome-examples-list');
+  const wrapper = document.getElementById('welcome-examples');
+  if (!container || !wrapper) return;
+
+  const examples = _loadExamplesData();
+  const keys = Object.keys(examples);
+  if (keys.length === 0) {
+    wrapper.classList.add('hidden');
+    return;
+  }
+
+  container.innerHTML = '';
+  for (const key of keys) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'welcome-example-link';
+    btn.textContent = examples[key].label || key;
+    btn.addEventListener('click', () => {
+      // Non-destructive: example data is held only in memory. Mark
+      // onboarding as seen so the user doesn't keep landing on welcome
+      // every refresh, but don't persist lastSeries (the example is
+      // transient — see _switchSeries).
+      Store.markOnboardingSeen();
+      _switchSeries(_EXAMPLE_PREFIX + key);
+      _setTab('grid');
+    });
+    container.appendChild(btn);
   }
 }
 

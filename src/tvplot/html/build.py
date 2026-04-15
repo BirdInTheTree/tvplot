@@ -16,7 +16,15 @@ from pathlib import Path
 _PARTS_DIR = Path(__file__).parent / "parts"
 _SHELL_PATH = _PARTS_DIR / "shell.html"
 _PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
-_DEFAULT_DEMO = Path(__file__).parent.parent.parent.parent / "examples" / "results" / "bb_s01.json"
+_EXAMPLES_DIR = Path(__file__).parent.parent.parent.parent / "examples" / "results"
+_DEFAULT_DEMO = _EXAMPLES_DIR / "bb_s01.json"
+
+# Bundled examples shown on the welcome screen under "Browse an example".
+# Keys match the ids emitted into the HTML (`examples-data` blob).
+_EXAMPLES = {
+    "bb_s01": {"file": "bb_s01.json", "label": "Breaking Bad - Season 1"},
+    "got_s01": {"file": "got_s01.json", "label": "Game of Thrones - Season 1"},
+}
 
 
 def _load_prompts() -> dict[str, dict[str, str]]:
@@ -78,15 +86,30 @@ def build_html(data_path: Path | None = None) -> str:
             js_parts.append(f"// --- {name} ---\n{content}")
     app_js = "\n\n".join(js_parts)
 
-    # Load demo data
+    # Load demo data (legacy single-demo slot — used by the onboarding
+    # animation and the #demo URL hash).
     demo_path = data_path or _DEFAULT_DEMO
     if not demo_path.exists():
         print(f"Warning: data file not found at {demo_path}", file=sys.stderr)
         demo_data = "{}"
     else:
         demo_data = demo_path.read_text(encoding="utf-8")
-        # Validate JSON
-        json.loads(demo_data)
+        json.loads(demo_data)  # validate
+
+    # Bundle every example so the welcome screen can offer a picker.
+    # Stored as one JSON object keyed by example id; the app loads it
+    # lazily and never writes it to Store.
+    examples_blob: dict[str, dict] = {}
+    for key, meta in _EXAMPLES.items():
+        path = _EXAMPLES_DIR / meta["file"]
+        if not path.exists():
+            print(f"Warning: example not found at {path}", file=sys.stderr)
+            continue
+        examples_blob[key] = {
+            "label": meta["label"],
+            "data": json.loads(path.read_text(encoding="utf-8")),
+        }
+    examples_data = json.dumps(examples_blob, ensure_ascii=False)
 
     prompts_blob = json.dumps(_load_prompts(), ensure_ascii=False)
     prompts_js = f"const _PROMPTS = {prompts_blob};"
@@ -95,6 +118,7 @@ def build_html(data_path: Path | None = None) -> str:
     html = html.replace("/* {{STYLE}} */", style)
     html = html.replace("/* {{APP_JS}} */", prompts_js + "\n\n" + app_js)
     html = html.replace("/* {{DEMO_DATA}} */", demo_data)
+    html = html.replace("/* {{EXAMPLES_DATA}} */", examples_data)
 
     return html
 

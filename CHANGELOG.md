@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Changed
+- **Welcome/landing flow in the HTML viewer.** Returning visits no longer auto-open the bundled Breaking Bad demo. Instead, the viewer opens the user's most-recently-viewed saved analysis, or falls back to the welcome screen when nothing is saved. The `#demo` URL hash still force-loads the demo (used by the onboarding animation).
+- **Series picker is a visible control.** Added a "Series" label prefix, a more contrasting border, a chevron affordance, and made the dropdown always visible on the grid/analytics toolbar. A "+ Analyze another…" entry at the bottom routes back to the welcome screen.
+
+### Added
+- **"Browse an example" section on the welcome screen.** Offers Breaking Bad and Game of Thrones (S01) as read-only previews. Both JSON fixtures are embedded into the standalone HTML at build time (`examples/results/{bb_s01,got_s01}.json`). Examples load non-destructively — they never appear in `Store.getResults()` and are not remembered as `lastSeries`.
+
 ### Fixed
 - **Pipeline progress UI no longer looks frozen.** Added a CSS spinner next to the status message, a live `Elapsed MM:SS` counter (updates every second while the overlay is visible), and a `Step N of M` line above the bar. The "Asking Claude for synopses…" text no longer stays visible during the Review-synopses dialog — the progress overlay hides while the review modal is up and reappears with a fresh "Starting pipeline…" message once the user hits Run. Added a grey hint ("Typical run: 2–5 min for a 10-episode season") so long waits don't look like a hang.
 
