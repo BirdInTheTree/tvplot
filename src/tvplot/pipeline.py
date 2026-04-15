@@ -13,7 +13,13 @@ from tvplot.pass1 import extract_plotlines
 from tvplot.pass2 import assign_events, assign_events_batch, assign_events_parallel
 from tvplot.pass3 import review_plotlines
 from tvplot.pass4 import assign_arc_functions
-from tvplot.postprocess import assign_orphan_events, compute_ranks, compute_span, validate_ranks
+from tvplot.postprocess import (
+    assign_orphan_events,
+    compute_ranks,
+    compute_span,
+    dedupe_inciting_incidents,
+    validate_ranks,
+)
 from tvplot.verdicts import apply_verdicts
 
 logger = logging.getLogger(__name__)
@@ -198,8 +204,11 @@ def get_plotlines(
 
     _fire(callback, "on_pass2_complete", breakdowns)
 
-    # Post-processing: assign orphan events, compute span/rank, validate
+    # Post-processing: assign orphan events, dedupe inciting incidents,
+    # compute span/rank, validate. Dedup before span/rank so derived fields
+    # reflect the corrected function labels.
     assign_orphan_events(plotlines, breakdowns)
+    dedupe_inciting_incidents(plotlines, breakdowns)
     compute_span(plotlines, breakdowns)
     compute_ranks(plotlines, breakdowns, context)
     flags = validate_ranks(plotlines, breakdowns)

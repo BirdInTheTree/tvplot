@@ -42,6 +42,7 @@ from tvplot.postprocess import (
     assign_orphan_events,
     compute_ranks,
     compute_span,
+    dedupe_inciting_incidents,
 )
 from tvplot.prompts import load_prompt
 
@@ -523,8 +524,11 @@ def run_narratology(
         compute_ranks(plotlines, breakdowns, context)
         _fire(callback, "pass_completed", 6, verdicts)
 
-    # Orphan cleanup
+    # Orphan cleanup + inciting-incident invariant. Narratology's episode-level
+    # `function` is constrained away from `inciting_incident` by Pass 4's prompt,
+    # so this is usually a no-op — kept for parity with the Hollywood pipeline.
     assign_orphan_events(plotlines, breakdowns)
+    dedupe_inciting_incidents(plotlines, breakdowns)
 
     _fire(callback, "pipeline_completed", None)
     return TVPlotlinesResult(

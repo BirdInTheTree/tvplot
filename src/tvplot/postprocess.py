@@ -83,6 +83,51 @@ def assign_orphan_events(
                     event.plotline_id = best
 
 
+def dedupe_inciting_incidents(
+    plotlines: list[Plotline],
+    episodes: list[EpisodeBreakdown],
+) -> None:
+    """Enforce at most one inciting_incident per plotline (in-place).
+
+    The LLM occasionally emits multiple inciting incidents for the same plotline.
+    Keep the earliest by episode code; downgrade the rest to "escalation" —
+    narratively adjacent and already in the palette.
+
+    Also warns (log-only) when an A-rank plotline's inciting_incident does not
+    sit at the start of that plotline's span. We don't rewrite episode
+    assignments — that would falsify data.
+    """
+    by_plotline: dict[str, list[tuple[str, object]]] = {}
+    for ep in episodes:
+        for event in ep.events:
+            if event.plotline_id and event.function == "inciting_incident":
+                by_plotline.setdefault(event.plotline_id, []).append((ep.episode, event))
+
+    for plotline_id, items in by_plotline.items():
+        items.sort(key=lambda x: x[0])
+        _keep_ep, _keep_ev = items[0]
+        for ep_code, event in items[1:]:
+            event.function = "escalation"
+            logger.info(
+                "Downgraded duplicate inciting_incident in plotline %s, episode %s → escalation",
+                plotline_id, ep_code,
+            )
+
+    # Warn when A-plotline's inciting_incident isn't in the plotline's earliest episode
+    a_plotlines = {p.id for p in plotlines if (p.reviewed_rank or p.computed_rank) == "A"}
+    for plotline_id in a_plotlines:
+        items = by_plotline.get(plotline_id)
+        if not items:
+            continue
+        ii_episode = items[0][0]
+        plotline = next((p for p in plotlines if p.id == plotline_id), None)
+        if plotline and plotline.span and ii_episode != plotline.span[0]:
+            logger.warning(
+                "A plotline %s: inciting_incident is in %s, not at the start of the season",
+                plotline_id, ii_episode,
+            )
+
+
 def compute_weight(
     plotlines: list[Plotline],
     episode: EpisodeBreakdown,

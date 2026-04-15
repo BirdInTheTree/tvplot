@@ -1,7 +1,13 @@
 """Unit tests for post-processing (no LLM calls)."""
 
 from tvplot.models import EpisodeBreakdown, Event, Plotline, SeriesContext
-from tvplot.postprocess import compute_ranks, compute_span, compute_weight, validate_ranks
+from tvplot.postprocess import (
+    compute_ranks,
+    compute_span,
+    compute_weight,
+    dedupe_inciting_incidents,
+    validate_ranks,
+)
 
 
 def _make_plotline(id: str) -> Plotline:
@@ -217,4 +223,52 @@ class TestComputeRanks:
         assert side.computed_rank == "A"
         assert main.computed_rank == "B"
 
+
+class TestDedupeIncitingIncidents:
+    def test_keeps_earliest_downgrades_rest(self):
+        """Three inciting_incidents across S01E01/E03/E05 → only S01E01 keeps it."""
+        line = _make_plotline("a")
+        episodes = [
+            EpisodeBreakdown(episode="S01E01", events=[
+                Event(event="ii1", plotline_id="a", function="inciting_incident", characters=["x"]),
+            ], theme="t"),
+            EpisodeBreakdown(episode="S01E02", events=[], theme="t"),
+            EpisodeBreakdown(episode="S01E03", events=[
+                Event(event="ii2", plotline_id="a", function="inciting_incident", characters=["x"]),
+            ], theme="t"),
+            EpisodeBreakdown(episode="S01E04", events=[], theme="t"),
+            EpisodeBreakdown(episode="S01E05", events=[
+                Event(event="ii3", plotline_id="a", function="inciting_incident", characters=["x"]),
+            ], theme="t"),
+        ]
+        dedupe_inciting_incidents([line], episodes)
+        assert episodes[0].events[0].function == "inciting_incident"
+        assert episodes[2].events[0].function == "escalation"
+        assert episodes[4].events[0].function == "escalation"
+
+    def test_single_inciting_incident_untouched(self):
+        line = _make_plotline("a")
+        episodes = [EpisodeBreakdown(episode="S01E02", events=[
+            Event(event="ii", plotline_id="a", function="inciting_incident", characters=["x"]),
+        ], theme="t")]
+        dedupe_inciting_incidents([line], episodes)
+        assert episodes[0].events[0].function == "inciting_incident"
+
+    def test_per_plotline_isolation(self):
+        """Duplicate inciting_incidents in different plotlines are independent."""
+        a = _make_plotline("a")
+        b = _make_plotline("b")
+        episodes = [
+            EpisodeBreakdown(episode="S01E01", events=[
+                Event(event="e", plotline_id="a", function="inciting_incident", characters=["x"]),
+                Event(event="e", plotline_id="b", function="inciting_incident", characters=["y"]),
+            ], theme="t"),
+            EpisodeBreakdown(episode="S01E02", events=[
+                Event(event="e", plotline_id="a", function="inciting_incident", characters=["x"]),
+            ], theme="t"),
+        ]
+        dedupe_inciting_incidents([a, b], episodes)
+        assert episodes[0].events[0].function == "inciting_incident"
+        assert episodes[0].events[1].function == "inciting_incident"
+        assert episodes[1].events[0].function == "escalation"
 

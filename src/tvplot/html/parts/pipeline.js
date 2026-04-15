@@ -284,6 +284,98 @@ function _computeSpan(plotlines, episodes) {
   }
 }
 
+function _assignOrphanEvents(plotlines, episodes) {
+  // Mirror of postprocess.assign_orphan_events: redistribute events whose
+  // plotline_id is null using character co-occurrence with assigned events.
+  const charPlotlineCounts = new Map();
+  for (const ep of episodes) {
+    for (const ev of ep.events) {
+      if (!ev.plotline_id) continue;
+      for (const char of (ev.characters || [])) {
+        if (!charPlotlineCounts.has(char)) charPlotlineCounts.set(char, new Map());
+        const counter = charPlotlineCounts.get(char);
+        counter.set(ev.plotline_id, (counter.get(ev.plotline_id) || 0) + 1);
+      }
+    }
+  }
+
+  const plotlineIds = new Set(plotlines.map(p => p.id));
+
+  for (const ep of episodes) {
+    for (const ev of ep.events) {
+      if (ev.plotline_id) continue;
+      if (!ev.characters || ev.characters.length === 0) continue;
+
+      const votes = new Map();
+      for (const char of ev.characters) {
+        const counter = charPlotlineCounts.get(char);
+        if (!counter) continue;
+        for (const [pid, count] of counter) {
+          votes.set(pid, (votes.get(pid) || 0) + count);
+        }
+      }
+
+      // Fallback: most common plotline in this episode among already-assigned events
+      if (votes.size === 0) {
+        for (const other of ep.events) {
+          if (other.plotline_id) {
+            votes.set(other.plotline_id, (votes.get(other.plotline_id) || 0) + 1);
+          }
+        }
+      }
+
+      if (votes.size === 0) continue;
+      let best = null;
+      let bestCount = -1;
+      for (const [pid, count] of votes) {
+        if (count > bestCount) { best = pid; bestCount = count; }
+      }
+      if (best && plotlineIds.has(best)) {
+        ev.plotline_id = best;
+      }
+    }
+  }
+}
+
+function _dedupeIncitingIncidents(plotlines, episodes) {
+  // Keep earliest-episode inciting_incident per plotline; downgrade rest to 'escalation'.
+  // Also warn when an A-plotline's inciting_incident is not at the start of its span.
+  const byPlotline = new Map();
+  for (const ep of episodes) {
+    for (const ev of ep.events) {
+      if (ev.plotline_id && ev.function === 'inciting_incident') {
+        if (!byPlotline.has(ev.plotline_id)) byPlotline.set(ev.plotline_id, []);
+        byPlotline.get(ev.plotline_id).push({ episode: ep.episode, event: ev });
+      }
+    }
+  }
+
+  for (const [plotlineId, items] of byPlotline) {
+    items.sort((a, b) => a.episode.localeCompare(b.episode));
+    for (let i = 1; i < items.length; i++) {
+      items[i].event.function = 'escalation';
+      console.info(
+        "Downgraded duplicate inciting_incident in plotline %s, episode %s → escalation",
+        plotlineId, items[i].episode,
+      );
+    }
+  }
+
+  for (const pl of plotlines) {
+    const rank = pl.reviewed_rank || pl.computed_rank;
+    if (rank !== 'A') continue;
+    const items = byPlotline.get(pl.id);
+    if (!items || items.length === 0) continue;
+    const iiEpisode = items[0].episode;
+    if (pl.span && pl.span.length > 0 && iiEpisode !== pl.span[0]) {
+      console.warn(
+        "A plotline %s: inciting_incident is in %s, not at the start of the season",
+        pl.id, iiEpisode,
+      );
+    }
+  }
+}
+
 function _computeRanks(plotlines, episodes, context) {
   // Count events per plotline
   const counts = {};
@@ -581,7 +673,10 @@ async function runPipeline(synopses, seriesName, provider, apiKey, onProgress) {
     });
   }
 
-  // Post-processing: compute span and ranks
+  // Post-processing: redistribute orphans, dedupe inciting incidents,
+  // then compute span/ranks on the corrected data.
+  _assignOrphanEvents(plotlines, episodes);
+  _dedupeIncitingIncidents(plotlines, episodes);
   _computeSpan(plotlines, episodes);
   _computeRanks(plotlines, episodes, context);
 
@@ -1441,6 +1536,8 @@ async function runPipelineNarratology(synopses, seriesName, provider, apiKey, on
     episodes.push({ episode: ep, theme: data.theme || '', events: eventsOut, interactions });
   }
 
+  _assignOrphanEvents(plotlines, episodes);
+  _dedupeIncitingIncidents(plotlines, episodes);
   _computeSpan(plotlines, episodes);
   _computeRanks(plotlines, episodes, context);
 
@@ -1506,6 +1603,8 @@ async function runPipelineNarratology(synopses, seriesName, provider, apiKey, on
       pl.rank = r.rank;
     }
   }
+  _assignOrphanEvents(keptPlotlines, episodes);
+  _dedupeIncitingIncidents(keptPlotlines, episodes);
   _computeSpan(keptPlotlines, episodes);
   _computeRanks(keptPlotlines, episodes, context);
   for (const p of keptPlotlines) p.rank = p.reviewed_rank || p.computed_rank;
