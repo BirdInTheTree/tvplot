@@ -2,7 +2,7 @@
 
 `tvplotlines` uses a third-party LLM — either Claude (Anthropic) or GPT (OpenAI), whichever you configure — to analyse TV-episode synopses. This page is the single source of truth for what that means in practice, who sees what, and which policies apply.
 
-**Publisher:** Alpine Animation (Switzerland) · **Contact:** open an issue at <https://github.com/BirdInTheTree/tvplotlines/issues>
+**Publisher:** Alpine Animation (Switzerland) · **Contact:** <411@alpineanimation.ch> or open an issue at <https://github.com/BirdInTheTree/tvplotlines/issues>
 
 ---
 
@@ -37,7 +37,7 @@ Downstream applications that surface these outputs to other users are responsibl
 
 ## Your rights (Swiss nFADP / EU GDPR)
 
-Because Alpine Animation holds no personal data about you, the usual access / rectification / deletion requests don't have anything to act on here. If Anthropic or OpenAI hold data from your use of their API, those requests go to them, not to us. We'll still help route a request to the right place — open a GitHub issue and we'll point you at the contact channel.
+Because Alpine Animation holds no personal data about you, the usual access / rectification / deletion requests don't have anything to act on here. If Anthropic or OpenAI hold data from your use of their API, those requests go to them, not to us. We'll still help route a request to the right place — write to <411@alpineanimation.ch> (or open a GitHub issue) and we'll point you at the contact channel.
 
 If you believe `tvplotlines` itself — the code, the prompts, the docs — handles data in a way this page doesn't describe, that's a bug: please open an issue so we can either fix the code or fix the page.
 
