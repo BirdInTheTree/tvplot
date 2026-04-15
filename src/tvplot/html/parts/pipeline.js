@@ -726,6 +726,18 @@ async function _analyzeSeries(show, season) {
     return;
   }
 
+  // Protect existing draft — starting a new analysis would silently overwrite
+  // synopses the user already paid for. Ask first.
+  const existingDraft = Store.getSynopsesDraft();
+  if (existingDraft && existingDraft.show && existingDraft.synopses && existingDraft.synopses.length > 0) {
+    const draftLabel = `${existingDraft.show} S${String(existingDraft.season).padStart(2, '0')}`;
+    const replace = window.confirm(
+      `You have unfinished synopses for ${draftLabel} (generated previously at API cost).\n\n` +
+      `Starting a new analysis for ${show} S${String(season).padStart(2, '0')} will replace them. Continue?`,
+    );
+    if (!replace) return;
+  }
+
   // Move from welcome screen into the viewer shell so the progress overlay
   // fits the normal layout. The grid may be empty (no data yet) — that's
   // fine, the progress overlay covers it until the pipeline finishes.
@@ -744,6 +756,11 @@ async function _analyzeSeries(show, season) {
     if (synopses.length === 0) throw new Error('All returned synopses were empty.');
   } catch (err) {
     _hidePipelineProgress();
+    // Return to welcome so the user isn't stranded on an empty grid with a
+    // dropdown whose only option is "+ Analyze another…" (which, being the
+    // current value, no longer fires a `change` event on re-selection).
+    showScreen('welcome');
+    _renderResumeBanner && _renderResumeBanner();
     alert(`Couldn't fetch synopses: ${err.message}`);
     return;
   }
@@ -769,7 +786,13 @@ async function _analyzeSeries(show, season) {
 async function _reviewAndRun(show, season, synopses, provider, apiKey) {
   const confirmed = await _confirmSynopses(show, season, synopses);
   if (!confirmed) {
-    Store.clearSynopsesDraft();
+    // Synopses were generated at API cost — ask to keep by default (OK = save,
+    // Cancel = discard). Safe-by-default: accidental Enter preserves the draft.
+    const save = window.confirm(
+      `Save the generated synopses for ${show} S${String(season).padStart(2, '0')}?\n\n` +
+      `They were produced by a paid LLM call. Saving lets you resume later without regenerating.`,
+    );
+    if (!save) Store.clearSynopsesDraft();
     return;
   }
 

@@ -783,7 +783,14 @@ function _initApp() {
   if (btnTabAnalytics) btnTabAnalytics.addEventListener('click', () => _setTab('analytics'));
 
   if (seriesSelect) {
-    seriesSelect.addEventListener('change', () => _switchSeries(seriesSelect.value));
+    // "+ Analyze another…" is a one-shot action, not a selection — when the
+    // user picks it we reset the value so the next pick always fires `change`
+    // (fixes the case where it was the only option and clicking it was a no-op).
+    seriesSelect.addEventListener('change', () => {
+      const v = seriesSelect.value;
+      if (v === '__add__') seriesSelect.value = _currentSeriesName || '';
+      _switchSeries(v);
+    });
   }
 
   // Export dropdown — all .btn-export-trigger buttons open the shared menu
