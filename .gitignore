@@ -57,7 +57,3 @@ runs/
 
 # Worktrees
 .worktrees/
-
-# Local drafts and one-off scratch (not for the public repo)
-Untitled.md
-compliance/
