@@ -42,6 +42,39 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; b
 }
 .welcome-skip:hover { color: #888; }
 
+/* ── Resume banner (synopses draft survived a previous session) ── */
+.resume-banner {
+  display: flex; align-items: center; gap: 0.6rem;
+  width: min(440px, 90vw); margin-bottom: 1.25rem;
+  padding: 0.6rem 0.8rem;
+  background: #fff8e1; border: 1px solid #f5d67a; border-radius: 8px;
+  font-size: 0.82rem; color: #5c4a10; text-align: left;
+}
+.resume-banner-text { flex: 1 1 auto; }
+.resume-banner-btn {
+  font: inherit; font-size: 0.78rem; padding: 0.3rem 0.7rem;
+  border: 1px solid #d6b24a; border-radius: 6px;
+  background: transparent; color: #5c4a10; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.resume-banner-btn:hover { background: rgba(0,0,0,0.04); }
+.resume-banner-primary {
+  background: #1a1a1a; color: #fafafa; border-color: #1a1a1a;
+}
+.resume-banner-primary:hover { background: #000; border-color: #000; }
+
+:root.dark .resume-banner {
+  background: #2a2518; border-color: #6b5a2a; color: #e8d99a;
+}
+:root.dark .resume-banner-btn {
+  border-color: #6b5a2a; color: #e8d99a;
+}
+:root.dark .resume-banner-btn:hover { background: rgba(255,255,255,0.04); }
+:root.dark .resume-banner-primary {
+  background: #cdd6f4; color: #11111b; border-color: #cdd6f4;
+}
+:root.dark .resume-banner-primary:hover { background: #fff; border-color: #fff; }
+
 /* ── Welcome entry form ── */
 .analyze-form {
   display: flex; gap: 0.5rem; margin-bottom: 2rem;

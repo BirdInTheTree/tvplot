@@ -32,6 +32,21 @@ const Store = {
   markOnboardingSeen: () => localStorage.setItem('tvplot_onboarding_seen', 'true'),
   aiFooterDismissed: () => localStorage.getItem('tvplot_ai_footer_dismissed') === 'true',
   dismissAIFooter: () => localStorage.setItem('tvplot_ai_footer_dismissed', 'true'),
+
+  // Synopses draft — persisted right after LLM generation so a crash, reload,
+  // or accidental tab-close doesn't force the user to pay for regeneration.
+  // Only one draft at a time; a new analysis overwrites any existing draft.
+  getSynopsesDraft: () => {
+    const raw = localStorage.getItem('tvplot_synopses_draft');
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch (e) { return null; }
+  },
+  saveSynopsesDraft: (show, season, synopses) => {
+    localStorage.setItem('tvplot_synopses_draft', JSON.stringify({
+      show, season, synopses, createdAt: Date.now(),
+    }));
+  },
+  clearSynopsesDraft: () => localStorage.removeItem('tvplot_synopses_draft'),
 };
 
 // --- Screen routing ---
@@ -172,6 +187,7 @@ function _switchSeries(name) {
   // "+ Analyze another…" isn't a series — it's an exit to welcome.
   if (name === '__add__') {
     showScreen('welcome');
+    _renderResumeBanner();
     // Keep the dropdown synced to the actual current data so the user
     // doesn't return to a stale "__add__" selection.
     const select = document.getElementById('series-select');
@@ -857,7 +873,48 @@ function _initApp() {
     _setTab('grid');
   } else {
     showScreen('welcome');
+    _renderResumeBanner();
   }
+}
+
+/**
+ * Show the "Resume pending analysis" banner if a synopses draft survives
+ * from a previous session. Only rendered on the welcome screen — if the
+ * user already has a saved series they're landing on the grid, and the
+ * draft will surface next time they hit + Analyze another.
+ */
+function _renderResumeBanner() {
+  const banner = document.getElementById('resume-banner');
+  const text = document.getElementById('resume-banner-text');
+  const resumeBtn = document.getElementById('resume-banner-resume');
+  const discardBtn = document.getElementById('resume-banner-discard');
+  if (!banner || !text || !resumeBtn || !discardBtn) return;
+
+  const draft = Store.getSynopsesDraft();
+  if (!draft || !draft.show || !draft.synopses || draft.synopses.length === 0) {
+    banner.classList.add('hidden');
+    return;
+  }
+
+  const seasonLabel = `S${String(draft.season).padStart(2, '0')}`;
+  text.textContent = `Resume pending analysis: ${draft.show} ${seasonLabel}?`;
+  banner.classList.remove('hidden');
+
+  // Replace nodes to drop any previous listeners (cheap way to avoid
+  // stacking handlers if _renderResumeBanner is called more than once).
+  const freshResume = resumeBtn.cloneNode(true);
+  const freshDiscard = discardBtn.cloneNode(true);
+  resumeBtn.replaceWith(freshResume);
+  discardBtn.replaceWith(freshDiscard);
+
+  freshResume.addEventListener('click', () => {
+    banner.classList.add('hidden');
+    _resumeFromDraft();
+  });
+  freshDiscard.addEventListener('click', () => {
+    Store.clearSynopsesDraft();
+    banner.classList.add('hidden');
+  });
 }
 
 /** Render buttons for each bundled example under the welcome screen. */

@@ -748,30 +748,43 @@ async function _analyzeSeries(show, season) {
     return;
   }
 
+  // Persist the draft BEFORE opening the review modal. This is the whole
+  // point — if the tab reloads or the user hits Cancel by mistake, we
+  // don't want them to pay the LLM again to regenerate these synopses.
+  Store.saveSynopsesDraft(show, season, synopses);
+
   // Hide the progress overlay while the review modal is up — otherwise it
   // sits on top of the dialog showing a stale "Asking Claude…" message, which
   // is what users saw before this fix.
   _hidePipelineProgress();
 
-  // Give user a chance to review/edit synopses before committing to the pipeline
-  const confirmed = await _confirmSynopses(show, season, synopses);
-  if (!confirmed) return;
-  synopses = confirmed;
+  await _reviewAndRun(show, season, synopses, provider, apiKey);
+}
 
-  // Re-show with neutral text so nothing stale leaks through before the
-  // pipeline's own first onProgress call lands.
+// Shared tail used by _analyzeSeries and _resumeFromDraft: review modal,
+// then pipeline. Draft lifecycle:
+//   - cancel in review       → clear (user said "I don't want this")
+//   - pipeline success       → clear
+//   - pipeline failure/throw → keep (user may want to retry without re-paying)
+async function _reviewAndRun(show, season, synopses, provider, apiKey) {
+  const confirmed = await _confirmSynopses(show, season, synopses);
+  if (!confirmed) {
+    Store.clearSynopsesDraft();
+    return;
+  }
+
   _showPipelineProgress();
   _updatePipelineProgress('Starting pipeline…', 1, 6);
 
-  // Kick off the normal pipeline — reuse the 5-pass flow
   try {
-    const result = await runPipeline(synopses, show, provider, apiKey, (message, pass, total) => {
+    const result = await runPipeline(confirmed, show, provider, apiKey, (message, pass, total) => {
       // Shift progress by 1 so synopsis-generation counts as pass 0/6
       _updatePipelineProgress(message, pass + 1, total + 1);
     });
 
     const name = `${show} S${String(season).padStart(2, '0')}`;
     Store.saveResult(name, result);
+    Store.clearSynopsesDraft();
     _populateSeriesDropdown();
     const select = document.getElementById('series-select');
     if (select) select.value = name;
@@ -783,6 +796,28 @@ async function _analyzeSeries(show, season) {
     console.error('Pipeline error:', err);
     alert(`Pipeline failed: ${err.message}`);
   }
+}
+
+// Entry point from the welcome-screen Resume banner. Skips generation —
+// synopses already live in the draft — and goes straight to review + pipeline.
+async function _resumeFromDraft() {
+  const draft = Store.getSynopsesDraft();
+  if (!draft) return;
+
+  const provider = Store.getProvider();
+  const apiKey = Store.getKey();
+  if (!provider || !apiKey) {
+    alert('Set your LLM provider and API key first — click "LLM" in the toolbar after this message.');
+    _skipOnboarding();
+    showScreen('welcome');
+    setTimeout(_showLLMSettings, 100);
+    return;
+  }
+
+  _skipOnboarding();
+  showScreen('grid');
+
+  await _reviewAndRun(draft.show, draft.season, draft.synopses, provider, apiKey);
 }
 
 // Preview & edit modal for the generated synopses. Returns the edited synopses
@@ -818,12 +853,31 @@ function _confirmSynopses(show, season, synopses) {
       resolve(value);
     };
 
-    document.getElementById('analyze-cancel').addEventListener('click', () => close(null));
+    const readEdited = () => Array.from(body.querySelectorAll('textarea[data-episode]')).map(ta => ({
+      episode: ta.dataset.episode,
+      text: ta.value.trim(),
+    })).filter(s => s.text);
+
+    // Keep the persisted draft in sync with in-modal edits so a reload or
+    // crash mid-review doesn't lose the user's corrections.
+    let saveTimer = null;
+    body.querySelectorAll('textarea[data-episode]').forEach(ta => {
+      ta.addEventListener('input', () => {
+        if (saveTimer) clearTimeout(saveTimer);
+        saveTimer = setTimeout(() => {
+          Store.saveSynopsesDraft(show, season, readEdited());
+        }, 500);
+      });
+    });
+
+    document.getElementById('analyze-cancel').addEventListener('click', () => {
+      if (saveTimer) clearTimeout(saveTimer);
+      close(null);
+    });
     document.getElementById('analyze-run').addEventListener('click', () => {
-      const edited = Array.from(body.querySelectorAll('textarea[data-episode]')).map(ta => ({
-        episode: ta.dataset.episode,
-        text: ta.value.trim(),
-      })).filter(s => s.text);
+      if (saveTimer) clearTimeout(saveTimer);
+      const edited = readEdited();
+      Store.saveSynopsesDraft(show, season, edited);
       close(edited);
     });
   });

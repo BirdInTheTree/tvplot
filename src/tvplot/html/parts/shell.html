@@ -17,6 +17,15 @@
     <h1 class="welcome-title">tvplot</h1>
     <p class="welcome-tagline">see the structure of any TV series</p>
 
+    <!-- Resume banner — shown only when a synopses draft survives from a previous
+         session (tab reload, pipeline crash, accidental cancel). Populated by
+         _renderResumeBanner(). -->
+    <div id="resume-banner" class="resume-banner hidden">
+      <span id="resume-banner-text" class="resume-banner-text"></span>
+      <button id="resume-banner-resume" type="button" class="resume-banner-btn resume-banner-primary">Resume</button>
+      <button id="resume-banner-discard" type="button" class="resume-banner-btn">Discard</button>
+    </div>
+
     <form id="analyze-form" class="analyze-form" autocomplete="off">
       <input id="analyze-show" type="text" class="analyze-input analyze-input-show"
              placeholder="Series, e.g. Breaking Bad" required>
