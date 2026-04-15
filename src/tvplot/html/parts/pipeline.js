@@ -599,6 +599,23 @@ async function _handleSynopsisUpload(files) {
 
 // --- Pipeline progress UI ---
 
+// Elapsed-time state. Single setInterval keyed by _progressTimerId; _progressStart
+// holds the ms timestamp when the overlay was last shown.
+let _progressTimerId = null;
+let _progressStart = 0;
+
+function _formatElapsed(ms) {
+  const total = Math.max(0, Math.floor(ms / 1000));
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
+
+function _tickElapsed() {
+  const el = document.getElementById('pipeline-progress-elapsed');
+  if (el) el.textContent = `Elapsed ${_formatElapsed(Date.now() - _progressStart)}`;
+}
+
 function _showPipelineProgress() {
   let overlay = document.getElementById('pipeline-progress');
   if (!overlay) {
@@ -607,28 +624,51 @@ function _showPipelineProgress() {
     overlay.className = 'pipeline-progress-overlay';
     overlay.innerHTML = `
       <div class="pipeline-progress-box">
-        <h3>Running pipeline...</h3>
+        <h3>Running pipeline</h3>
+        <p id="pipeline-progress-step" class="pipeline-progress-step">Preparing…</p>
         <div class="pipeline-progress-bar-container">
           <div id="pipeline-progress-bar" class="pipeline-progress-bar"></div>
         </div>
-        <p id="pipeline-progress-text">Starting...</p>
+        <p class="pipeline-progress-message">
+          <span class="pipeline-progress-spinner" aria-hidden="true"></span>
+          <span id="pipeline-progress-text">Starting…</span>
+        </p>
+        <p id="pipeline-progress-elapsed" class="pipeline-progress-elapsed">Elapsed 00:00</p>
+        <p class="pipeline-progress-hint">Typical run: 2–5 min for a 10-episode season.</p>
       </div>
     `;
     document.body.appendChild(overlay);
   }
   overlay.classList.remove('hidden');
+
+  // Restart the elapsed timer every time the overlay is shown so pauses
+  // (e.g. the synopses review modal) don't leak seconds into the next run.
+  _progressStart = Date.now();
+  if (_progressTimerId !== null) clearInterval(_progressTimerId);
+  _tickElapsed();
+  _progressTimerId = setInterval(_tickElapsed, 1000);
 }
 
 function _updatePipelineProgress(message, pass, total) {
   const text = document.getElementById('pipeline-progress-text');
   const bar = document.getElementById('pipeline-progress-bar');
+  const step = document.getElementById('pipeline-progress-step');
   if (text) text.textContent = message;
   if (bar) bar.style.width = `${(pass / total) * 100}%`;
+  if (step) {
+    // pass==0 is reserved for the synopsis-generation phase that precedes the
+    // pipeline proper — no step number yet.
+    step.textContent = pass > 0 ? `Step ${pass} of ${total}` : 'Preparing synopses';
+  }
 }
 
 function _hidePipelineProgress() {
   const overlay = document.getElementById('pipeline-progress');
   if (overlay) overlay.classList.add('hidden');
+  if (_progressTimerId !== null) {
+    clearInterval(_progressTimerId);
+    _progressTimerId = null;
+  }
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -704,13 +744,20 @@ async function _analyzeSeries(show, season) {
     return;
   }
 
+  // Hide the progress overlay while the review modal is up — otherwise it
+  // sits on top of the dialog showing a stale "Asking Claude…" message, which
+  // is what users saw before this fix.
+  _hidePipelineProgress();
+
   // Give user a chance to review/edit synopses before committing to the pipeline
   const confirmed = await _confirmSynopses(show, season, synopses);
-  if (!confirmed) {
-    _hidePipelineProgress();
-    return;
-  }
+  if (!confirmed) return;
   synopses = confirmed;
+
+  // Re-show with neutral text so nothing stale leaks through before the
+  // pipeline's own first onProgress call lands.
+  _showPipelineProgress();
+  _updatePipelineProgress('Starting pipeline…', 1, 6);
 
   // Kick off the normal pipeline — reuse the 5-pass flow
   try {

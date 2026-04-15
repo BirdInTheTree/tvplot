@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+- **Pipeline progress UI no longer looks frozen.** Added a CSS spinner next to the status message, a live `Elapsed MM:SS` counter (updates every second while the overlay is visible), and a `Step N of M` line above the bar. The "Asking Claude for synopses…" text no longer stays visible during the Review-synopses dialog — the progress overlay hides while the review modal is up and reappears with a fresh "Starting pipeline…" message once the user hits Run. Added a grey hint ("Typical run: 2–5 min for a 10-episode season") so long waits don't look like a hang.
+
 ## 0.2.0 — 2026-04-15
 
 ### Changed — BREAKING
