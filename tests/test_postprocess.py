@@ -5,6 +5,7 @@ from tvplot.postprocess import (
     compute_ranks,
     compute_span,
     compute_weight,
+    dedupe_arc_inciting_incidents,
     dedupe_inciting_incidents,
     validate_ranks,
 )
@@ -271,4 +272,81 @@ class TestDedupeIncitingIncidents:
         assert episodes[0].events[0].function == "inciting_incident"
         assert episodes[0].events[1].function == "inciting_incident"
         assert episodes[1].events[0].function == "escalation"
+
+
+class TestDedupeArcIncitingIncidents:
+    def test_keeps_earliest_plot_fn_inciting_incident(self):
+        """Multiple plot_fn=inciting_incident → only earliest kept."""
+        line = _make_plotline("a")
+        episodes = [
+            EpisodeBreakdown(episode="S01E01", events=[
+                Event(event="e1", plotline_id="a", function="setup",
+                      characters=["x"], plot_fn="inciting_incident"),
+            ], theme="t"),
+            EpisodeBreakdown(episode="S01E03", events=[
+                Event(event="e2", plotline_id="a", function="escalation",
+                      characters=["x"], plot_fn="inciting_incident"),
+            ], theme="t"),
+            EpisodeBreakdown(episode="S01E05", events=[
+                Event(event="e3", plotline_id="a", function="escalation",
+                      characters=["x"], plot_fn="inciting_incident"),
+            ], theme="t"),
+        ]
+        dedupe_arc_inciting_incidents([line], episodes)
+        assert episodes[0].events[0].plot_fn == "inciting_incident"
+        assert episodes[1].events[0].plot_fn == "escalation"
+        assert episodes[2].events[0].plot_fn == "escalation"
+        # event.function left alone — this is about plot_fn only
+        assert episodes[0].events[0].function == "setup"
+
+    def test_single_arc_inciting_incident_untouched(self):
+        line = _make_plotline("a")
+        episodes = [EpisodeBreakdown(episode="S01E02", events=[
+            Event(event="e", plotline_id="a", function="setup",
+                  characters=["x"], plot_fn="inciting_incident"),
+        ], theme="t")]
+        dedupe_arc_inciting_incidents([line], episodes)
+        assert episodes[0].events[0].plot_fn == "inciting_incident"
+
+    def test_arc_dedup_per_plotline_isolation(self):
+        """Duplicate arc inciting_incidents in different plotlines are independent."""
+        a = _make_plotline("a")
+        b = _make_plotline("b")
+        episodes = [
+            EpisodeBreakdown(episode="S01E01", events=[
+                Event(event="e1", plotline_id="a", function="setup",
+                      characters=["x"], plot_fn="inciting_incident"),
+                Event(event="e2", plotline_id="b", function="setup",
+                      characters=["y"], plot_fn="inciting_incident"),
+            ], theme="t"),
+            EpisodeBreakdown(episode="S01E02", events=[
+                Event(event="e3", plotline_id="a", function="escalation",
+                      characters=["x"], plot_fn="inciting_incident"),
+            ], theme="t"),
+        ]
+        dedupe_arc_inciting_incidents([a, b], episodes)
+        assert episodes[0].events[0].plot_fn == "inciting_incident"
+        assert episodes[0].events[1].plot_fn == "inciting_incident"
+        assert episodes[1].events[0].plot_fn == "escalation"
+
+
+class TestProceduralRunnerNotA:
+    """Sanity check that _computeRanks JS port doesn't A-rank runners.
+
+    Python: runner → None regardless of event count. Regression guard.
+    """
+
+    def test_procedural_runner_gets_none_rank(self):
+        ctx = SeriesContext(format="procedural", story_engine="x", genre="drama")
+        runner = _make_plotline_no_rank("bg", ptype="runner")
+        case = _make_plotline_no_rank("case", ptype="case_of_the_week")
+        # runner has the most events but must stay unranked
+        episodes = [
+            _make_episode("S01E01", ["bg", "bg", "bg", "case"]),
+            _make_episode("S01E02", ["bg", "bg", "bg", "case"]),
+        ]
+        compute_span([runner, case], episodes)
+        compute_ranks([runner, case], episodes, ctx)
+        assert runner.computed_rank is None
+        assert case.computed_rank == "A"
 

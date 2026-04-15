@@ -128,6 +128,33 @@ def dedupe_inciting_incidents(
             )
 
 
+def dedupe_arc_inciting_incidents(
+    plotlines: list[Plotline],
+    episodes: list[EpisodeBreakdown],
+) -> None:
+    """Narratology-only: enforce at most one plot_fn inciting_incident per plotline.
+
+    Pass 5 (arc_function) can emit multiple inciting_incidents per plotline's
+    arc. Keep the earliest-episode one; downgrade the rest to ``escalation``
+    on ``plot_fn``. The episode-level ``event.function`` is left alone —
+    this is about the plotline's arc, which lives in ``plot_fn``.
+    """
+    by_plotline: dict[str, list[tuple[str, object]]] = {}
+    for ep in episodes:
+        for event in ep.events:
+            if event.plotline_id and getattr(event, "plot_fn", None) == "inciting_incident":
+                by_plotline.setdefault(event.plotline_id, []).append((ep.episode, event))
+
+    for plotline_id, items in by_plotline.items():
+        items.sort(key=lambda x: x[0])
+        for ep_code, event in items[1:]:
+            event.plot_fn = "escalation"
+            logger.info(
+                "Downgraded duplicate arc inciting_incident in plotline %s, episode %s → escalation",
+                plotline_id, ep_code,
+            )
+
+
 def compute_weight(
     plotlines: list[Plotline],
     episode: EpisodeBreakdown,

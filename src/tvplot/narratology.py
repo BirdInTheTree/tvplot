@@ -42,6 +42,7 @@ from tvplot.postprocess import (
     assign_orphan_events,
     compute_ranks,
     compute_span,
+    dedupe_arc_inciting_incidents,
     dedupe_inciting_incidents,
 )
 from tvplot.prompts import load_prompt
@@ -500,7 +501,10 @@ def run_narratology(
     breakdowns = _pass4_story(show, season, context, plotlines, events_by_ep, config)
     _fire(callback, "pass_completed", 4, breakdowns)
 
-    # Post-processing: compute span + ranks so Pass 5 / Pass 6 see current state
+    # Post-processing: orphan cleanup + dedupe before span/rank so derived
+    # fields reflect the corrected data. Pass 5 / Pass 6 see current state.
+    assign_orphan_events(plotlines, breakdowns)
+    dedupe_inciting_incidents(plotlines, breakdowns)
     compute_span(plotlines, breakdowns)
     compute_ranks(plotlines, breakdowns, context)
 
@@ -519,16 +523,15 @@ def run_narratology(
         for p in plotlines:
             if p.id in ranks and ranks[p.id] in {"A", "B", "C"}:
                 p.reviewed_rank = ranks[p.id]
-        # Recompute span after verdicts
+        # Orphan cleanup + dedupe BEFORE recomputing span/rank so ranks
+        # reflect the orphan-assigned counts (pre-existing ordering bug
+        # flagged by parity audit 2026-04-15).
+        assign_orphan_events(plotlines, breakdowns)
+        dedupe_inciting_incidents(plotlines, breakdowns)
+        dedupe_arc_inciting_incidents(plotlines, breakdowns)
         compute_span(plotlines, breakdowns)
         compute_ranks(plotlines, breakdowns, context)
         _fire(callback, "pass_completed", 6, verdicts)
-
-    # Orphan cleanup + inciting-incident invariant. Narratology's episode-level
-    # `function` is constrained away from `inciting_incident` by Pass 4's prompt,
-    # so this is usually a no-op — kept for parity with the Hollywood pipeline.
-    assign_orphan_events(plotlines, breakdowns)
-    dedupe_inciting_incidents(plotlines, breakdowns)
 
     _fire(callback, "pipeline_completed", None)
     return TVPlotlinesResult(
