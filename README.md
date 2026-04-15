@@ -220,6 +220,15 @@ See [docs/api.md](docs/api.md) for full API reference.
 - **Function** — episode-level role in a plotline arc (setup, inciting_incident, escalation, turning_point, crisis, climax, resolution; narratology adds `recognition`)
 - **Arc function** — season-level role of the same event
 
+## How this uses AI
+
+`tvplotlines` calls either Claude (Anthropic) or GPT (OpenAI) — you pick one per run — to produce its analyses. If your application surfaces this library's output to end users, you're responsible for disclosing the AI involvement to them (EU AI Act Art. 50; Anthropic AUP; OpenAI Usage Policies). The standalone HTML viewer shipped here carries that notice in its footer.
+
+- [`docs/ai-disclosure.md`](docs/ai-disclosure.md) — what gets sent where, and to whom. Alpine Animation (Switzerland) publishes the library and collects **no** data; your API key and inputs travel directly from your machine to the LLM vendor you pick.
+- [`docs/methodology.md`](docs/methodology.md) — plain-language description of how the pipeline decides, what it can't do, and where to find the code for each step.
+
+Outputs are AI-generated and can contain hallucinations. Treat them as a starting point for your own analysis, not a verified source.
+
 ## Citation
 
 ```bibtex

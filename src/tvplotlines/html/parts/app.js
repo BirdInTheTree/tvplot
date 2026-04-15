@@ -30,6 +30,8 @@ const Store = {
   },
   hasSeenOnboarding: () => localStorage.getItem('tvplotlines_onboarding_seen') === 'true',
   markOnboardingSeen: () => localStorage.setItem('tvplotlines_onboarding_seen', 'true'),
+  aiFooterDismissed: () => localStorage.getItem('tvplotlines_ai_footer_dismissed') === 'true',
+  dismissAIFooter: () => localStorage.setItem('tvplotlines_ai_footer_dismissed', 'true'),
 };
 
 // --- Screen routing ---
@@ -731,6 +733,15 @@ function _initApp() {
       _analyzeSeries(show, season);
     });
   }
+
+  // AI-assisted content footer — persistent-dismiss across sessions
+  const aiFooter = document.getElementById('ai-footer');
+  const aiDismiss = document.getElementById('ai-footer-dismiss');
+  if (aiFooter && Store.aiFooterDismissed()) aiFooter.classList.add('hidden');
+  if (aiDismiss) aiDismiss.addEventListener('click', () => {
+    if (aiFooter) aiFooter.classList.add('hidden');
+    Store.dismissAIFooter();
+  });
 
   // Populate dropdown and determine initial view
   _populateSeriesDropdown();
