@@ -73,4 +73,4 @@ See [`ai-disclosure.md`](ai-disclosure.md) for the data-flow details and vendor 
 
 ## Contact for methodology questions
 
-Write to `411 [at] alpineanimation [dot] ch` or open an issue at <https://github.com/BirdInTheTree/tvplotlines/issues>.
+Write to <tvplotlines@alpineanimation.ch> or open an issue at <https://github.com/BirdInTheTree/tvplotlines/issues>.
