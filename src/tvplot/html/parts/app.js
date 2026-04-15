@@ -877,7 +877,11 @@ function _initApp() {
 
   if (seriesName) {
     _switchSeries(seriesName);
-    _setTab('grid');
+    // #analytics deep-link — /plotter-app/analytics/ used to be its own route
+    // in the Svelte app. The redirect shim lands here; open the tab directly
+    // so the URL keeps meaning what it used to.
+    const initialTab = window.location.hash === '#analytics' ? 'analytics' : 'grid';
+    _setTab(initialTab);
   } else {
     showScreen('welcome');
     _renderResumeBanner();
