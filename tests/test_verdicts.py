@@ -1,7 +1,7 @@
 """Tests for verdict validation and safe DROP logic."""
 
-from tvplotlines.models import EpisodeBreakdown, Event, Plotline, Verdict
-from tvplotlines.verdicts import apply_verdicts
+from tvplot.models import EpisodeBreakdown, Event, Plotline, Verdict
+from tvplot.verdicts import apply_verdicts
 
 
 def _make_plotline(id: str, computed_rank: str = "A") -> Plotline:

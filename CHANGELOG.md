@@ -1,6 +1,27 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 — 2026-04-15
+
+### Changed — BREAKING
+- **Package renamed `tvplotlines` → `tvplot`.** PyPI package, import path, CLI command, env vars, and localStorage keys all move. Migration: `pip install tvplot` and replace imports `from tvplotlines …` → `from tvplot …` and CLI invocations `tvplotlines run` → `tvplot run`. Env vars `TVPLOTLINES_OUTPUT_DIR` / `TVPLOTLINES_SYNOPSES_DIR` renamed to `TVPLOT_OUTPUT_DIR` / `TVPLOT_SYNOPSES_DIR`. `tvplotlines 0.1.0` on PyPI will be yanked with a "renamed to tvplot" notice.
+
+### Added
+- **AI-use, privacy, and methodology docs** — `docs/ai-disclosure.md` documents the data flow (nothing reaches Alpine Animation — your inputs and API key travel straight from your machine to the LLM vendor), lists Anthropic's and OpenAI's applicable policies, and records a paper-trail for vendor-policy compliance. `docs/methodology.md` is the plain-language Art. 50 description of how the pipeline decides, what it can't do, and where to read the code. README links both, and the standalone HTML viewer carries a dismissible AI-assisted-content footer.
+- **Narratology pipeline — runnable**. New module `src/tvplot/narratology.py` implements all six passes (context, fabula, actants, story, arc, review). Results are emitted in the existing `TVPlotlinesResult` shape so the HTML viewer renders hollywood and narratology output unchanged. Actants (`who_chases`, `what_they_chase`, `stands_in_the_way`, `who_wins_if_it_works`) map onto `hero`, `goal`, `obstacle`, `stakes`. Pass 5 arc functions land in `Event.plot_fn`. Pass 6 verdicts apply in-place (MERGE/DROP/REASSIGN/REFUNCTION) and reviewed ranks override computed ranks.
+- **Narratology in the browser viewer**. `runPipelineNarratology` in `pipeline.js` mirrors the Python orchestrator, runs all six passes via browser LLM calls (per-episode passes parallelised with `Promise.all`), and produces the same hollywood-compatible shape. `runPipeline` dispatches on the user's system choice. The "Narratology" option in LLM settings is now enabled.
+- **Prompts inlined at build time**. `src/tvplot/html/build.py` reads every `prompts/{hollywood,narratology}/*.md` and injects them into the HTML as a `_PROMPTS` object, so the viewer no longer carries a hardcoded copy that could drift from the source.
+- **"Analyze a series" entry flow** in the HTML viewer. Welcome screen now takes a show name + season; the viewer asks the configured LLM for episode synopses, shows them in an editable preview, then runs the normal pipeline. Download the single HTML and you have an end-to-end app. Fallback — drag-and-drop `.txt` synopses — still works.
+- **Native PDF export** via lazy-loaded jsPDF (CDN). Generates a vector PDF directly from the loaded result: title page, per-plotline sections with actant/story-DNA fields and event lists, and an episode-by-episode appendix. Falls back to the browser print stack if the library can't be fetched (offline).
+- **Knowledge consolidated into the repo**. `3-resources/tvplot/*` → `docs/knowledge/` with `decisions/` (ADR 001-005), `specs/` (architecture, per-pass specs, mas4bw audit), `theory/`, `prompting/`, `results/` (reference BB S01-S05 outputs), `v3_narratology/` (67 evergreen notes across 9 sources), and `archive/` (old autoresearch + plans). Personal artifacts (the book and friends-post) stay in `3-resources/tvplot/`.
+
+### Changed
+- **Prompt layout**: `prompts_en/` → `prompts/hollywood/`. Added `prompts/narratology/` from the former sister project, bundling eight structuralist prompts (context, fabula, actants, story, arc, review, synopses_writer, glossary). `docs/layered-schema.md` documents the shared `base + layers` JSON.
+- **Library API**: `get_plotlines(..., lang=)` replaced by `get_plotlines(..., system=)` (values: `"hollywood"` default, `"narratology"`). `LLMConfig.lang` → `LLMConfig.system`. CLI: `tvplot run --lang` → `--system`; `write-synopses --system` added.
+- Narratology pipeline is not yet runnable — `system="narratology"` raises `NotImplementedError` with a clear message. Prompts are in place; runners come in v2.
+
+### Removed
+- **Russian prompts** (`prompts_ru/`) — out of scope. Will be reintroduced once both analysis systems stabilise in English.
+- Sister repo `tvplot_narratology/` merged into this repo under `src/tvplot/prompts/narratology/`.
 
 ### Added
 - **Pass 4: arc functions** (`plot_fn`) — each event gets a season-arc role alongside its episode function. Pass 4 runs per-plotline, sees episode functions as context.
@@ -15,7 +36,7 @@
 - **CLI**: `--stop-after pass1` saves intermediate JSON, `--resume-from` resumes from it
 - **CLI**: `--output-dir` saves timestamped copy of results
 - **CLI**: `--no-glossary`, `--no-fandom`, `--fandom-wiki` flags for write-synopses
-- **Environment variables**: `TVPLOTLINES_OUTPUT_DIR`, `TVPLOTLINES_SYNOPSES_DIR` — default output locations
+- **Environment variables**: `TVPLOT_OUTPUT_DIR`, `TVPLOT_SYNOPSES_DIR` — default output locations
 - **Rules and formulas reference**: `docs/formulas.md`
 - Chain-of-thought nudge in all prompts before OUTPUT section
 
@@ -56,4 +77,4 @@ Initial open-source release.
 - Multi-season continuity via `prior` parameter
 - Providers: Anthropic (default), OpenAI, Ollama, DeepSeek, Groq, any OpenAI-compatible API
 - Pass 2 modes: parallel, batch (50% cheaper), sequential
-- CLI: `tvplotlines run`
+- CLI: `tvplot run`

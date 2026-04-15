@@ -5,7 +5,9 @@ If you're reading a rule in the code or a prompt and wondering why it's there, t
 **LLM** = the LLM follows this rule from the prompt.
 **Code** = deterministic computation.
 
-Code paths relative to `src/tvplotlines/`.
+Code paths relative to `src/tvplot/`.
+
+The sections below cover the **hollywood** system (5 passes). The **narratology** system is documented in the "Narratology pipeline" section at the end — it reuses the same prompt-loader and model shapes, but has its own six-pass flow.
 
 ---
 
@@ -183,6 +185,28 @@ After verdicts, span recomputes to reflect the changed plotline list.
 
 ---
 
+## Pass 4: Arc Functions
+
+**LLM** assigns each event a season-level role per plotline. **Code** applies the mapping.
+
+### What Pass 4 does
+
+Pass 2 labels events at the **episode** level (function reflects role within one episode). Pass 4 revisits every event from the perspective of its plotline across the **whole season** and assigns `plot_fn`. The same event can be a `climax` in its episode (Pass 2) and an `escalation` in the season arc (Pass 4).
+
+One call per plotline, in parallel.
+
+### Code: application
+
+`pass4.py:assign_arc_functions` · `pipeline.py`
+
+Arc functions are written to `Event.plot_fn`. Texture events (narratology) or events that don't sit in the plotline's arc stay `None`.
+
+### Code: validation
+
+`pass4.py:_validate` — arc function values must come from the function enum (see glossary).
+
+---
+
 ## Pipeline orchestration
 
 ### Execution order
@@ -195,6 +219,7 @@ After verdicts, span recomputes to reflect the changed plotline list.
 4. Post-processing: orphan assignment → span → rank → diagnostics
 5. Pass 3 (skip if `skip_review=True`)
 6. Post-verdict: span recomputes. Rank does not — `computed_rank` is fixed.
+7. Pass 4: arc functions, one call per plotline in parallel.
 
 ### Pass 2 execution modes
 
@@ -207,3 +232,43 @@ After verdicts, span recomputes to reflect the changed plotline list.
 ### Episode ID format
 
 `S{dd}E{dd}` (regex `^S\d{2}E\d{2}$`). Season prefix must match the `season` parameter. Sorted alphabetically before processing.
+
+---
+
+## Narratology pipeline
+
+`narratology.py:run_narratology`
+
+A six-pass alternative to the five-pass hollywood flow. Prompts live under `prompts/narratology/`. Output is mapped into the same `TVPlotlinesResult` shape (actants → hero/goal/obstacle/stakes) so every downstream consumer — the HTML viewer, exports — stays unchanged.
+
+### Passes
+
+| Pass | Role | Calls |
+|------|------|-------|
+| **1 context** | Format, story schema, breach (the canonical violation), genre, protagonists | 1 |
+| **2 fabula** | Per-episode events as state transitions. Every event gets a stable id `{episode}#{nn}` that every later pass references | 1 per episode (parallel) |
+| **3 actants** | Plotlines via Greimas's actant model: `who_chases`, `what_they_chase`, `stands_in_the_way`, `helpers`, `bigger_force`, `who_wins_if_it_works`. The anti-subject test decides when a blocking character deserves their own plotline | 1 |
+| **4 story** | Per-event episode function + direction (improvement/deterioration/neutral); episode theme; interactions between plotlines | 1 per episode (parallel) |
+| **5 arc** | Per-plotline: season-level `arc_function` + `arc_direction`, `kind` (drive vs texture), and the plotline's MRE (most reportable event) | 1 per plotline (parallel) |
+| **6 review** | Verdicts (MERGE/DROP/REASSIGN/REFUNCTION) and ranks (A/B/C) | 1 |
+
+### Glossary
+
+See `src/tvplot/prompts/narratology/glossary.md` for `function` (8 values including `recognition`), `direction` (3), `kind` (2), and the full actant mapping.
+
+### Result shape
+
+Same `TVPlotlinesResult` as hollywood:
+
+- `Plotline.hero` ← `who_chases`
+- `Plotline.goal` ← `what_they_chase`
+- `Plotline.obstacle` ← `stands_in_the_way` joined, fall back to `bigger_force`
+- `Plotline.stakes` ← `If wins: {who_wins_if_it_works}`
+- `Event.function` ← episode-level function
+- `Event.plot_fn` ← arc function (or `None` for texture events)
+
+Pass 6 verdicts apply via `narratology.py:_apply_narratology_verdicts` (event re-point for MERGE, event orphaning for DROP, function change for REFUNCTION, plotline move for REASSIGN). Reviewed ranks override computed ranks.
+
+### Dispatcher
+
+`pipeline.py:get_plotlines` calls `narratology.run_narratology` when `system="narratology"` and the ordinary hollywood flow otherwise. A matching dispatcher in the browser viewer picks between `runPipeline` (hollywood) and `runPipelineNarratology` based on the user's LLM-settings choice.

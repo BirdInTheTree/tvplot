@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from tvplotlines.input import load_synopses_dir
+from tvplot.input import load_synopses_dir
 
 
 @pytest.fixture

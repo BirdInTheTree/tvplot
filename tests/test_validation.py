@@ -2,7 +2,7 @@
 
 import pytest
 
-from tvplotlines.models import (
+from tvplot.models import (
     CastMember,
     EpisodeBreakdown,
     Event,
@@ -10,9 +10,9 @@ from tvplotlines.models import (
     Plotline,
     SeriesContext,
 )
-from tvplotlines.pass0 import _validate as validate_pass0
-from tvplotlines.pass1 import _validate as validate_pass1
-from tvplotlines.pass2 import _validate as validate_pass2
+from tvplot.pass0 import _validate as validate_pass0
+from tvplot.pass1 import _validate as validate_pass1
+from tvplot.pass2 import _validate as validate_pass2
 
 
 # --- Pass 0 ---

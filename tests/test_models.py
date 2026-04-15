@@ -2,7 +2,7 @@
 
 import json
 
-from tvplotlines.models import (
+from tvplot.models import (
     CastMember,
     EpisodeBreakdown,
     Event,

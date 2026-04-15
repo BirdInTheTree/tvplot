@@ -1,7 +1,7 @@
 """Unit tests for post-processing (no LLM calls)."""
 
-from tvplotlines.models import EpisodeBreakdown, Event, Plotline, SeriesContext
-from tvplotlines.postprocess import compute_ranks, compute_span, compute_weight, validate_ranks
+from tvplot.models import EpisodeBreakdown, Event, Plotline, SeriesContext
+from tvplot.postprocess import compute_ranks, compute_span, compute_weight, validate_ranks
 
 
 def _make_plotline(id: str) -> Plotline:
