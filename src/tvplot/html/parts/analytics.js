@@ -196,44 +196,55 @@ function _renderEventsPerEpisode(data, colorMap) {
 
 // --- Chart 2: Function distribution heatmap ---
 
-function _renderFunctionDistribution(data) {
-  const section = _section('How are functions distributed across the season?');
-  const episodes = data.episodes || [];
-
-  if (episodes.length === 0) return section;
-
-  // Compute counts: function × episode
+function _buildFnGrid(data, mode) {
+  // mode: 'episode' → function × episode, 'plotline' → function × plotline
   const grid = {};
   let maxCount = 0;
+  const columns = []; // {key, label}
   for (const fn of _ARC_ORDER) grid[fn] = {};
 
-  for (const ep of episodes) {
-    for (const ev of ep.events || []) {
-      const fn = ev.function || ev.plot_fn;
-      if (!fn || !grid[fn]) continue;
-      grid[fn][ep.episode] = (grid[fn][ep.episode] || 0) + 1;
-      if (grid[fn][ep.episode] > maxCount) maxCount = grid[fn][ep.episode];
+  if (mode === 'plotline') {
+    for (const pl of data.plotlines || []) columns.push({ key: pl.id, label: pl.name || pl.id });
+    for (const ep of data.episodes || []) {
+      for (const ev of ep.events || []) {
+        const fn = ev.plot_fn || ev.function;
+        const plId = ev.plotline_id;
+        if (!fn || !grid[fn] || !plId) continue;
+        grid[fn][plId] = (grid[fn][plId] || 0) + 1;
+        if (grid[fn][plId] > maxCount) maxCount = grid[fn][plId];
+      }
+    }
+  } else {
+    for (const ep of data.episodes || []) columns.push({ key: ep.episode, label: 'E' + _epNum(ep.episode) });
+    for (const ep of data.episodes || []) {
+      for (const ev of ep.events || []) {
+        const fn = ev.plot_fn || ev.function;
+        if (!fn || !grid[fn]) continue;
+        grid[fn][ep.episode] = (grid[fn][ep.episode] || 0) + 1;
+        if (grid[fn][ep.episode] > maxCount) maxCount = grid[fn][ep.episode];
+      }
     }
   }
+  return { grid, maxCount, columns };
+}
 
+function _renderFnTable(grid, maxCount, columns) {
   const table = document.createElement('table');
   table.className = 'ana-heatmap';
 
-  // Header row
   const thead = document.createElement('thead');
   const headerRow = document.createElement('tr');
   const thCorner = document.createElement('th');
   thCorner.textContent = 'Function';
   headerRow.appendChild(thCorner);
-  for (const ep of episodes) {
+  for (const col of columns) {
     const th = document.createElement('th');
-    th.textContent = 'E' + _epNum(ep.episode);
+    th.textContent = col.label;
     headerRow.appendChild(th);
   }
   thead.appendChild(headerRow);
   table.appendChild(thead);
 
-  // Body rows in arc order
   const tbody = document.createElement('tbody');
   for (const fn of _ARC_ORDER) {
     const tr = document.createElement('tr');
@@ -242,12 +253,11 @@ function _renderFunctionDistribution(data) {
     tdLabel.textContent = _ARC_LABELS[fn] || fn;
     tr.appendChild(tdLabel);
 
-    for (const ep of episodes) {
+    for (const col of columns) {
       const td = document.createElement('td');
       td.className = 'ana-heatmap-cell';
-      const count = (grid[fn] && grid[fn][ep.episode]) || 0;
+      const count = (grid[fn] && grid[fn][col.key]) || 0;
       if (count > 0) {
-        // Opacity scales from 0.2 (count=1) to 1.0 (count=maxCount)
         const intensity = maxCount > 1
           ? 0.2 + 0.8 * ((count - 1) / (maxCount - 1))
           : 0.5;
@@ -260,8 +270,50 @@ function _renderFunctionDistribution(data) {
     tbody.appendChild(tr);
   }
   table.appendChild(tbody);
-  section.appendChild(table);
+  return table;
+}
 
+function _renderFunctionDistribution(data) {
+  const section = _section('How are functions distributed across the season?');
+  if ((data.episodes || []).length === 0) return section;
+
+  // Toggle: by episode / by plotline
+  let mode = 'episode';
+  const toggle = document.createElement('div');
+  toggle.className = 'ana-fn-toggle';
+  const btnEp = document.createElement('button');
+  btnEp.textContent = 'by episode';
+  btnEp.className = 'ana-fn-toggle-btn ana-fn-toggle-active';
+  const btnPl = document.createElement('button');
+  btnPl.textContent = 'by plotline';
+  btnPl.className = 'ana-fn-toggle-btn';
+  toggle.appendChild(btnEp);
+  toggle.appendChild(btnPl);
+  section.appendChild(toggle);
+
+  const tableWrap = document.createElement('div');
+  section.appendChild(tableWrap);
+
+  function render() {
+    const { grid, maxCount, columns } = _buildFnGrid(data, mode);
+    tableWrap.innerHTML = '';
+    tableWrap.appendChild(_renderFnTable(grid, maxCount, columns));
+  }
+
+  btnEp.addEventListener('click', () => {
+    mode = 'episode';
+    btnEp.classList.add('ana-fn-toggle-active');
+    btnPl.classList.remove('ana-fn-toggle-active');
+    render();
+  });
+  btnPl.addEventListener('click', () => {
+    mode = 'plotline';
+    btnPl.classList.add('ana-fn-toggle-active');
+    btnEp.classList.remove('ana-fn-toggle-active');
+    render();
+  });
+
+  render();
   return section;
 }
 

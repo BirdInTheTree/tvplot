@@ -494,7 +494,12 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 :root.dark .ana-legend-item { color: #cdd6f4; }
 .ana-legend-swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
 
-/* Chart 2: Function distribution heatmap */
+/* Chart 2: Function distribution toggle + heatmap */
+.ana-fn-toggle { display: flex; gap: 4px; margin-bottom: 1rem; }
+.ana-fn-toggle-btn { padding: 4px 12px; border: 1px solid #ccc; border-radius: 4px; background: transparent; cursor: pointer; font-size: 0.9rem; color: #555; }
+.ana-fn-toggle-btn.ana-fn-toggle-active { background: #333; color: #fff; border-color: #333; }
+:root.dark .ana-fn-toggle-btn { border-color: #555; color: #aaa; }
+:root.dark .ana-fn-toggle-btn.ana-fn-toggle-active { background: #89b4fa; color: #1e1e2e; border-color: #89b4fa; }
 .ana-heatmap { width: 100%; border-collapse: collapse; }
 .ana-heatmap th { font-size: 1rem; font-weight: 500; padding: 8px 10px; text-align: center; color: #666; border-bottom: 1px solid #e5e5e5; }
 .ana-heatmap th:first-child { text-align: left; }
