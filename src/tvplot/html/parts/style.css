@@ -447,6 +447,8 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 
 /* ── Analytics ── */
 #analytics-container { padding: 1.5rem; }
+.ana-stacked-total { text-align: center; font-size: 0.875rem; font-weight: 600; color: #333; margin-bottom: 2px; }
+:root.dark .ana-stacked-total { color: #cdd6f4; }
 .ana-series-header { margin-bottom: 1.5rem; max-width: 1200px; }
 .ana-series-name { font-size: 1.5rem; font-weight: 300; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
 .ana-logline { font-size: 1rem; color: #555; line-height: 1.5; font-style: italic; }

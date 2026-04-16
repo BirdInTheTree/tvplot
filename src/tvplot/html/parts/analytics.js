@@ -79,7 +79,7 @@ function _plotlineNameMap(data) {
 // --- Chart 1: Events per episode (stacked bar) ---
 
 function _renderEventsPerEpisode(data, colorMap) {
-  const section = _section('Сколько событий в каждой серии?');
+  const section = _section('How many events per episode?');
   const episodes = data.episodes || [];
   const plotlines = _sortedPlotlines(data);
   const plNames = _plotlineNameMap(data);
@@ -149,6 +149,12 @@ function _renderEventsPerEpisode(data, colorMap) {
       }
       bar.appendChild(seg);
     }
+    // Total count above the bar
+    const totalLabel = document.createElement('div');
+    totalLabel.className = 'ana-stacked-total';
+    totalLabel.textContent = ep.total;
+    col.appendChild(totalLabel);
+
     col.appendChild(bar);
 
     const label = document.createElement('div');
@@ -182,7 +188,7 @@ function _renderEventsPerEpisode(data, colorMap) {
 // --- Chart 2: Function distribution heatmap ---
 
 function _renderFunctionDistribution(data) {
-  const section = _section('Как функции распределены по сезону?');
+  const section = _section('How are functions distributed across the season?');
   const episodes = data.episodes || [];
 
   if (episodes.length === 0) return section;
@@ -253,7 +259,7 @@ function _renderFunctionDistribution(data) {
 // --- Chart 3: Plotline intersection matrix ---
 
 function _renderIntersectionMatrix(data, colorMap) {
-  const section = _section('Где линии пересекаются?');
+  const section = _section('Where do plotlines intersect?');
   const episodes = data.episodes || [];
   const plotlines = _sortedPlotlines(data);
   const plNames = _plotlineNameMap(data);
@@ -395,7 +401,7 @@ function _renderIntersectionMatrix(data, colorMap) {
 // --- Chart 4: Character event load ---
 
 function _renderCharacterLoad(data) {
-  const section = _section('Кто несёт сюжет?');
+  const section = _section('Who carries the story?');
   const episodes = data.episodes || [];
   const castMap = {};
   for (const c of data.cast || []) castMap[c.id] = c.name;
