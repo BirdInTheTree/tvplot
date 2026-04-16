@@ -446,138 +446,77 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 :root.dark .rank-runner { background: #302040; color: #cba6f7; }
 
 /* ── Analytics ── */
-:root { --ana-tension-0: #f0f0f0; --ana-tension-1: #bae6d1; --ana-tension-2: #f0e68c; --ana-tension-3: #f5b87a; --ana-tension-4: #e87c7c; --ana-tension-5: #d44a7a; }
-
 .ana-series-header { margin-bottom: 1.5rem; max-width: 1200px; }
 .ana-series-name { font-size: 1.5rem; font-weight: 300; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
-.ana-logline { font-size: 0.95rem; color: #555; line-height: 1.5; font-style: italic; }
+.ana-logline { font-size: 1rem; color: #555; line-height: 1.5; font-style: italic; }
 :root.dark .ana-series-name { color: #cba6f7; }
 :root.dark .ana-logline { color: #a6adc8; }
 
 .ana-section { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); max-width: 1200px; }
-.ana-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
-.ana-engine { font-size: 0.9rem; color: #666; margin-bottom: 1rem; padding: 0.5rem 0.75rem; background: #f8f8f8; border-radius: 6px; border-left: 3px solid #2563eb; }
+.ana-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+.ana-empty-note { font-size: 1rem; color: #666; font-style: italic; }
 
-/* Scorecard */
-.ana-scorecard { width: 100%; border-collapse: separate; border-spacing: 0; }
-.ana-scorecard th { text-align: left; font-size: 0.75rem; color: #666; font-weight: 400; padding: 6px 12px; border-bottom: 1px solid #e5e5e5; text-transform: uppercase; letter-spacing: 0.05em; }
-.ana-scorecard td { padding: 8px 12px; font-size: 0.85rem; border-bottom: 1px solid #f0f0f0; }
-.ana-scorecard tr:last-child td { border-bottom: none; }
-.ana-plotline-name { font-weight: 500; }
-.ana-arc-summary { color: #666; font-size: 0.8rem; }
-.ana-scorecard-ep-row th { border-bottom: none; padding-top: 0; }
-.ana-span-labels { display: flex; gap: 2px; margin-bottom: 2px; }
-.ana-span-label { width: 14px; text-align: center; font-size: 0.55rem; color: #999; }
-:root.dark .ana-span-label { color: #6c7086; }
-.ana-span-bar { display: flex; gap: 2px; }
-.ana-span-dot { width: 14px; height: 14px; border-radius: 3px; }
-.ana-span-dot.active { background: #2563eb; opacity: 0.7; }
-.ana-span-dot.inactive { background: #e5e5e5; }
-
-/* Arc Map */
-.ana-legend { display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
-.ana-legend-label { font-size: 0.8rem; color: #666; }
-.ana-legend-hint { font-size: 0.75rem; color: #999; margin-left: 12px; }
-.ana-gradient { display: flex; gap: 2px; }
-.ana-grad-step { width: 28px; height: 14px; border-radius: 2px; }
-.ana-arcmap { display: grid; gap: 3px; }
-.ana-arcmap-header { font-size: 0.8rem; color: #666; text-align: center; padding: 4px; }
-.ana-arcmap-label { font-size: 0.85rem; text-align: right; padding-right: 10px; display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
-.ana-arcmap-cell { border-radius: 6px; min-height: 50px; display: flex; align-items: center; justify-content: center; }
-.ana-arcmap-cell.ana-tension-0 { background: var(--ana-tension-0); }
-.ana-arcmap-cell.ana-tension-1 { background: var(--ana-tension-1); }
-.ana-arcmap-cell.ana-tension-2 { background: var(--ana-tension-2); }
-.ana-arcmap-cell.ana-tension-3 { background: var(--ana-tension-3); }
-.ana-arcmap-cell.ana-tension-4 { background: var(--ana-tension-4); }
-.ana-arcmap-cell.ana-tension-5 { background: var(--ana-tension-5); }
-.ana-arc-circle { border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600; color: #1a1a1a; background: rgba(255,255,255,0.35); }
-.ana-arc-empty { color: #ccc; font-size: 0.8rem; }
-.ana-arcmap-theme-label { font-size: 0.75rem; color: #999; text-align: right; padding-right: 10px; }
-.ana-arcmap-theme { font-size: 0.7rem; color: #999; text-align: center; font-style: italic; }
-
-/* Episode Pulse */
-.ana-pulse-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-.ana-pulse-ep { font-size: 0.85rem; font-weight: 500; width: 35px; text-align: right; flex-shrink: 0; }
-.ana-pulse-wrap { flex: 1; }
-.ana-pulse-bars { display: flex; gap: 2px; height: 28px; }
-.ana-pulse-bar { border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: rgba(0,0,0,0.7); min-width: 14px; background: #2563eb; }
-.ana-pulse-bar:nth-child(2) { background: #f59e0b; }
-.ana-pulse-bar:nth-child(3) { background: #ef4444; color: white; }
-.ana-pulse-bar:nth-child(4) { background: #6b7280; color: white; }
-.ana-pulse-bar:nth-child(5) { background: #8b5cf6; color: white; }
-.ana-pulse-bar:nth-child(6) { background: #10b981; }
-.ana-pulse-total { font-size: 0.8rem; color: #666; width: 30px; text-align: right; flex-shrink: 0; }
-.ana-pulse-theme { display: none; }
-.ana-pulse-legend { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem; font-size: 0.8rem; }
-.ana-pulse-legend-item { display: flex; align-items: center; gap: 4px; }
-:root.dark .ana-pulse-legend-item { color: #cdd6f4; }
-
-/* Convergence */
-.ana-conv-timeline { position: relative; padding-left: 40px; }
-.ana-conv-line { position: absolute; left: 17px; top: 0; bottom: 0; width: 1px; background: #e5e5e5; }
-.ana-conv-group { margin-bottom: 1.25rem; }
-.ana-conv-ep { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; position: relative; }
-.ana-conv-ep::before { content: ''; position: absolute; left: -28px; top: 50%; width: 10px; height: 10px; background: #2563eb; border-radius: 50%; transform: translateY(-50%); }
-.ana-conv-item { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 4px; padding: 6px 8px; border-radius: 6px; background: #f8f8f8; }
-.ana-conv-type { font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; flex-shrink: 0; font-weight: 600; white-space: nowrap; }
-.ana-conv-convergence { background: #fecdd3; color: #be123c; }
-.ana-conv-dramatic_irony { background: #e9d5ff; color: #7c3aed; }
-.ana-conv-thematic_rhyme { background: #cffafe; color: #0e7490; }
-.ana-conv-lines { font-size: 0.8rem; color: #b45309; flex-shrink: 0; min-width: 120px; }
-.ana-conv-desc { font-size: 0.8rem; color: #666; }
-
-/* Character Weight */
-.ana-char-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-.ana-char-name { font-size: 0.85rem; width: 130px; text-align: right; flex-shrink: 0; }
-.ana-char-bar-wrap { flex: 1; height: 24px; }
-.ana-char-bar { height: 100%; border-radius: 4px; background: #2563eb; display: flex; align-items: center; padding-left: 8px; font-size: 0.75rem; font-weight: 600; color: white; }
-.ana-char-dots { display: flex; gap: 3px; width: 50px; flex-shrink: 0; }
-.ana-char-dot { width: 8px; height: 8px; border-radius: 50%; background: #2563eb; }
-
-/* ── Dark analytics (Catppuccin Mocha) ── */
 :root.dark .ana-section { background: #181825; box-shadow: 0 1px 3px rgba(0,0,0,0.5); }
 :root.dark .ana-title { color: #cba6f7; }
-:root.dark .ana-engine { color: #a6adc8; background: #313244; border-left-color: #89b4fa; }
+:root.dark .ana-empty-note { color: #a6adc8; }
 
-:root.dark .ana-scorecard th { color: #a6adc8; border-bottom-color: #45475a; }
-:root.dark .ana-scorecard td { border-bottom-color: #313244; color: #cdd6f4; }
-:root.dark .ana-arc-summary { color: #a6adc8; }
-:root.dark .ana-span-dot.active { background: #89b4fa; }
-:root.dark .ana-span-dot.inactive { background: #45475a; }
+/* Chart 1: Stacked bar — events per episode */
+.ana-stacked-chart { display: flex; gap: 4px; align-items: flex-end; }
+.ana-stacked-yaxis { display: flex; flex-direction: column; justify-content: space-between; height: 300px; flex-shrink: 0; padding-right: 4px; }
+.ana-stacked-ylabel { font-size: 1rem; color: #666; text-align: right; min-width: 2ch; }
+:root.dark .ana-stacked-ylabel { color: #a6adc8; }
+.ana-stacked-bars { display: flex; gap: 4px; flex: 1; align-items: flex-end; }
+.ana-stacked-col { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0; }
+.ana-stacked-bar { width: 100%; display: flex; flex-direction: column; border-radius: 3px 3px 0 0; overflow: hidden; }
+.ana-stacked-seg { display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 600; color: rgba(0,0,0,0.8); min-height: 2px; }
+:root.dark .ana-stacked-seg { color: rgba(0,0,0,0.85); }
+.ana-stacked-xlabel { font-size: 1rem; color: #666; margin-top: 6px; }
+:root.dark .ana-stacked-xlabel { color: #a6adc8; }
 
-:root.dark { --ana-tension-0: #313244; --ana-tension-1: #1e3d2e; --ana-tension-2: #433a2a; --ana-tension-3: #3d2f24; --ana-tension-4: #3d2332; --ana-tension-5: #5c1d3e; }
-:root.dark .ana-arcmap-header { color: #a6adc8; }
-:root.dark .ana-arcmap-label { color: #cdd6f4; }
-:root.dark .ana-arc-circle { color: #cdd6f4; background: rgba(0,0,0,0.25); }
-:root.dark .ana-arc-empty { color: #6c7086; }
-:root.dark .ana-arcmap-theme-label { color: #6c7086; }
-:root.dark .ana-arcmap-theme { color: #6c7086; }
-:root.dark .ana-legend-label { color: #a6adc8; }
-:root.dark .ana-legend-hint { color: #6c7086; }
+.ana-legend-bar { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
+.ana-legend-item { display: flex; align-items: center; gap: 6px; font-size: 1rem; }
+:root.dark .ana-legend-item { color: #cdd6f4; }
+.ana-legend-swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
 
-:root.dark .ana-pulse-ep { color: #cdd6f4; }
-:root.dark .ana-pulse-bar { color: #1e1e2e; background: #89b4fa; }
-:root.dark .ana-pulse-bar:nth-child(2) { background: #f9e2af; color: #1e1e2e; }
-:root.dark .ana-pulse-bar:nth-child(3) { background: #f38ba8; color: #1e1e2e; }
-:root.dark .ana-pulse-bar:nth-child(4) { background: #a6adc8; color: #1e1e2e; }
-:root.dark .ana-pulse-bar:nth-child(5) { background: #cba6f7; color: #1e1e2e; }
-:root.dark .ana-pulse-bar:nth-child(6) { background: #a6e3a1; color: #1e1e2e; }
-:root.dark .ana-pulse-total { color: #a6adc8; }
-:root.dark .ana-pulse-theme { color: #6c7086; }
+/* Chart 2: Function distribution heatmap */
+.ana-heatmap { width: 100%; border-collapse: collapse; }
+.ana-heatmap th { font-size: 1rem; font-weight: 500; padding: 8px 10px; text-align: center; color: #666; border-bottom: 1px solid #e5e5e5; }
+.ana-heatmap th:first-child { text-align: left; }
+:root.dark .ana-heatmap th { color: #a6adc8; border-bottom-color: #45475a; }
+.ana-heatmap td { font-size: 1rem; padding: 8px 10px; text-align: center; }
+.ana-heatmap-label { text-align: left; font-weight: 500; white-space: nowrap; color: #1a1a1a; }
+:root.dark .ana-heatmap-label { color: #cdd6f4; }
+.ana-heatmap-cell { min-width: 40px; }
+.ana-heatmap-filled { background: rgba(37, 99, 235, var(--heat-opacity, 0.3)); font-weight: 600; }
+:root.dark .ana-heatmap-filled { background: rgba(137, 180, 250, var(--heat-opacity, 0.3)); color: #cdd6f4; }
 
-:root.dark .ana-conv-line { background: #45475a; }
-:root.dark .ana-conv-ep { color: #cdd6f4; }
-:root.dark .ana-conv-ep::before { background: #89b4fa; }
-:root.dark .ana-conv-item { background: #313244; }
-:root.dark .ana-conv-convergence { background: #3d2332; color: #f38ba8; }
-:root.dark .ana-conv-dramatic_irony { background: #302040; color: #cba6f7; }
-:root.dark .ana-conv-thematic_rhyme { background: #1e3d3d; color: #94e2d5; }
-:root.dark .ana-conv-lines { color: #f9e2af; }
-:root.dark .ana-conv-desc { color: #a6adc8; }
+/* Chart 3: Plotline intersection matrix */
+.ana-matrix { width: auto; border-collapse: collapse; }
+.ana-matrix th { font-size: 1rem; font-weight: 500; padding: 8px 12px; text-align: center; color: #666; border-bottom: 1px solid #e5e5e5; }
+:root.dark .ana-matrix th { color: #a6adc8; border-bottom-color: #45475a; }
+.ana-matrix td { font-size: 1rem; padding: 8px 12px; text-align: center; }
+.ana-matrix-label { text-align: left; font-weight: 500; white-space: nowrap; color: #1a1a1a; }
+:root.dark .ana-matrix-label { color: #cdd6f4; }
+.ana-matrix-cell { min-width: 48px; }
+.ana-matrix-diag { background: #e5e5e5; }
+:root.dark .ana-matrix-diag { background: #313244; }
+.ana-matrix-filled { background: rgba(139, 92, 246, var(--matrix-opacity, 0.3)); font-weight: 600; }
+:root.dark .ana-matrix-filled { background: rgba(203, 166, 247, var(--matrix-opacity, 0.3)); color: #cdd6f4; }
+.ana-matrix-total { font-size: 1rem; color: #666; font-weight: 400; }
+:root.dark .ana-matrix-total { color: #6c7086; }
+.ana-matrix-total-cell { font-size: 1rem; color: #888; font-weight: 400; white-space: nowrap; }
+:root.dark .ana-matrix-total-cell { color: #6c7086; }
 
-:root.dark .ana-char-name { color: #cdd6f4; }
-:root.dark .ana-char-bar { background: #89b4fa; color: #1e1e2e; }
-:root.dark .ana-char-dot { background: #89b4fa; }
+/* Chart 4: Character event load */
+.ana-charload { max-width: 800px; }
+.ana-charload-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.ana-charload-name { font-size: 1rem; width: 150px; text-align: right; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+:root.dark .ana-charload-name { color: #cdd6f4; }
+.ana-charload-barwrap { flex: 1; height: 26px; }
+.ana-charload-bar { height: 100%; border-radius: 4px; background: #6b7280; min-width: 4px; }
+:root.dark .ana-charload-bar { background: #a6adc8; }
+.ana-charload-count { font-size: 1rem; color: #666; width: 36px; text-align: right; flex-shrink: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+:root.dark .ana-charload-count { color: #a6adc8; }
 
 /* ── Onboarding subtitles ── */
 .onboarding-subtitle {
