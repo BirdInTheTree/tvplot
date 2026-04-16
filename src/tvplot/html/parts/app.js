@@ -152,7 +152,7 @@ function _populateSeriesDropdown() {
     const examples = _loadExamplesData();
     const key = _currentSeriesName.slice(_EXAMPLE_PREFIX.length);
     const label = (examples[key] && examples[key].label) || 'Example';
-    opt.textContent = label + ' (example)';
+    opt.textContent = label;
     select.appendChild(opt);
   }
 
@@ -161,7 +161,7 @@ function _populateSeriesDropdown() {
     const demoData = _loadDemoData();
     const opt = document.createElement('option');
     opt.value = '__demo__';
-    opt.textContent = (_seriesName(demoData) || 'Demo') + ' (demo)';
+    opt.textContent = _seriesName(demoData) || 'Demo';
     select.appendChild(opt);
   }
 
@@ -233,7 +233,7 @@ function _renderCurrentView() {
   if (_currentSeriesName === '__demo__') {
     displayName = _seriesName(_currentData) || 'Demo';
   } else if (_currentSeriesName && _currentSeriesName.startsWith(_EXAMPLE_PREFIX)) {
-    displayName = (_seriesName(_currentData) || 'Example') + ' (example)';
+    displayName = _seriesName(_currentData) || 'Example';
   } else {
     displayName = _currentSeriesName;
   }
