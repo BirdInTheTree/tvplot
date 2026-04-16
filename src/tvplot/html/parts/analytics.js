@@ -396,7 +396,7 @@ function _renderIntersectionMatrix(data, colorMap) {
   }
   const thSends = document.createElement('th');
   thSends.className = 'ana-matrix-total';
-  thSends.textContent = 'Sends';
+  thSends.textContent = 'Affects';
   headerRow.appendChild(thSends);
   thead.appendChild(headerRow);
   table.appendChild(thead);
@@ -432,7 +432,7 @@ function _renderIntersectionMatrix(data, colorMap) {
     // Row total
     const tdTotal = document.createElement('td');
     tdTotal.className = 'ana-matrix-total-cell';
-    tdTotal.textContent = '\u2192 ' + rowTotals[src];
+    tdTotal.textContent = rowTotals[src];
     tr.appendChild(tdTotal);
     tbody.appendChild(tr);
   }
@@ -443,12 +443,12 @@ function _renderIntersectionMatrix(data, colorMap) {
   const footRow = document.createElement('tr');
   const footCorner = document.createElement('td');
   footCorner.className = 'ana-matrix-label';
-  footCorner.textContent = 'Receives';
+  footCorner.textContent = 'Affected';
   footRow.appendChild(footCorner);
   for (const tgt of plIds) {
     const td = document.createElement('td');
     td.className = 'ana-matrix-total-cell';
-    td.textContent = '\u2193 ' + colTotals[tgt];
+    td.textContent = colTotals[tgt];
     footRow.appendChild(td);
   }
   footRow.appendChild(document.createElement('td')); // corner
