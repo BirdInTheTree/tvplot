@@ -60,3 +60,4 @@ runs/
 
 # Claude Code harness (local)
 .claude/
+viewer.html
