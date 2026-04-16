@@ -531,31 +531,14 @@ function _renderCharacterLoad(data) {
 function renderAnalytics(data, container) {
   container.innerHTML = '';
 
-  // Series header
+  // Story engine logline (if present) — series name is in the toolbar dropdown.
   const storyEngine = (data.context || {}).story_engine || '';
-  // Resolve display name: prefer data metadata, fall back to the dropdown's
-  // visible text (not the raw key, which may be __example__:bb_s01).
-  let seriesName = (data.context || {}).show_name || '';
-  if (!seriesName) {
-    const sel = document.getElementById('series-select');
-    if (sel && sel.selectedOptions.length) seriesName = sel.selectedOptions[0].textContent;
-  }
-  if (seriesName || storyEngine) {
-    const header = document.createElement('div');
-    header.className = 'ana-series-header';
-    if (seriesName) {
-      const h1 = document.createElement('h1');
-      h1.className = 'ana-series-name';
-      h1.textContent = seriesName;
-      header.appendChild(h1);
-    }
-    if (storyEngine) {
-      const logline = document.createElement('p');
-      logline.className = 'ana-logline';
-      logline.textContent = storyEngine;
-      header.appendChild(logline);
-    }
-    container.appendChild(header);
+  if (storyEngine) {
+    const logline = document.createElement('p');
+    logline.className = 'ana-logline';
+    logline.style.padding = '0 0 0.5rem';
+    logline.textContent = storyEngine;
+    container.appendChild(logline);
   }
 
   const colorMap = _plotlineColorMap(data);
