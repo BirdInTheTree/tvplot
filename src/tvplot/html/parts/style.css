@@ -451,12 +451,12 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 .ana-stacked-bars-row { align-items: flex-end; }
 .ana-stacked-totals-row { margin-bottom: 4px; }
 .ana-stacked-labels-row { margin-top: 4px; }
-.ana-stacked-total { flex: 1; text-align: center; font-size: 0.875rem; font-weight: 600; color: #333; border-left: 1px solid #ddd; }
+.ana-stacked-total { flex: 1; text-align: center; font-size: 0.875rem; font-weight: 600; color: #333; border-left: 1px solid #bbb; }
 .ana-stacked-total:first-child { border-left: none; }
-:root.dark .ana-stacked-total { border-left-color: #444; }
-.ana-stacked-xlabel { border-left: 1px solid #ddd; }
+:root.dark .ana-stacked-total { border-left-color: #666; }
+.ana-stacked-xlabel { border-left: 1px solid #bbb; }
 .ana-stacked-xlabel:first-child { border-left: none; }
-:root.dark .ana-stacked-xlabel { border-left-color: #444; }
+:root.dark .ana-stacked-xlabel { border-left-color: #666; }
 :root.dark .ana-stacked-total { color: #cdd6f4; }
 .ana-series-header { margin-bottom: 1.5rem; max-width: 1200px; }
 .ana-series-name { font-size: 1.5rem; font-weight: 300; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
@@ -478,9 +478,9 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 .ana-stacked-ylabel { font-size: 1rem; color: #666; text-align: right; min-width: 2ch; }
 :root.dark .ana-stacked-ylabel { color: #a6adc8; }
 .ana-stacked-bars { flex: 1; }
-.ana-stacked-col { flex: 1; min-width: 0; border-left: 1px solid #ddd; }
+.ana-stacked-col { flex: 1; min-width: 0; border-left: 1px solid #bbb; }
 .ana-stacked-col:first-child { border-left: none; }
-:root.dark .ana-stacked-col { border-left-color: #444; }
+:root.dark .ana-stacked-col { border-left-color: #666; }
 .ana-stacked-bars-row .ana-stacked-col { display: flex; flex-direction: column; align-items: center; }
 .ana-stacked-xlabel { flex: 1; }
 .ana-stacked-bar { width: 100%; display: flex; flex-direction: column; border-radius: 3px 3px 0 0; overflow: hidden; }
