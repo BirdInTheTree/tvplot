@@ -1099,7 +1099,7 @@ function _showPipelineProgress() {
           <span id="pipeline-progress-text">Starting…</span>
         </p>
         <p id="pipeline-progress-elapsed" class="pipeline-progress-elapsed">Elapsed 00:00</p>
-        <p class="pipeline-progress-hint">Typical run: 2–5 min for a 10-episode season.</p>
+        <p id="pipeline-progress-hint" class="pipeline-progress-hint">Writing synopses is the longest step — about 1–2 min.</p>
       </div>
     `;
     document.body.appendChild(overlay);
@@ -1302,6 +1302,9 @@ async function _reviewAndRun(show, season, synopses, provider, apiKey) {
 
   _showPipelineProgress();
   _updatePipelineProgress('Starting pipeline…', 1, 6);
+  // Synopses are done — hide the hint about them being slow
+  const hint = document.getElementById('pipeline-progress-hint');
+  if (hint) hint.textContent = 'Analysis takes 2–3 min for a 10-episode season.';
 
   try {
     const result = await runPipeline(confirmed, show, provider, apiKey, (message, pass, total) => {
