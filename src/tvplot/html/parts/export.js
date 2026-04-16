@@ -230,7 +230,34 @@ function _handleExport(format) {
     case 'csv': exportCSV(_currentData); break;
     case 'fdx': exportFDX(_currentData); break;
     case 'pdf': exportPDF(); break;
+    case 'synopses': exportSynopses(_currentData); break;
   }
+}
+
+function exportSynopses(data) {
+  const episodes = data.episodes || [];
+  if (episodes.length === 0) {
+    alert('No episode data to export.');
+    return;
+  }
+  // Extract synopsis text from each episode — stored as the joined event
+  // texts when original synopses aren't preserved, or as .synopsis if present.
+  const entries = [];
+  const ctx = data.context || {};
+  const showName = ctx.series || ctx.show_name || 'Series';
+  for (const ep of episodes) {
+    const text = ep.synopsis || ep.text || (ep.events || []).map(e => e.text || e.event || '').join('\n');
+    if (!text.trim()) continue;
+    entries.push({ name: showName + ' ' + ep.episode + '.txt', text });
+  }
+  if (entries.length === 0) {
+    alert('No synopsis text found in the loaded result.');
+    return;
+  }
+  const zipBytes = _makeZip(entries);
+  const season = ctx.season || 'S01';
+  const safeName = showName.replace(/[^a-zA-Z0-9_-]/g, '_');
+  downloadBlob(new Blob([zipBytes], { type: 'application/zip' }), safeName + '_' + season + '_synopses.zip');
 }
 
 // PDF: generate a data-driven vector PDF via jsPDF, lazily loaded from CDN.
