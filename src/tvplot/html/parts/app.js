@@ -106,6 +106,29 @@ function _loadDemoData() {
   }
 }
 
+/** Resolve internal series key to a human-readable name. */
+function _resolveSeriesDisplayName() {
+  if (!_currentSeriesName || !_currentData) return '';
+  // Try data metadata first
+  const ctx = _currentData.context || {};
+  if (ctx.series && ctx.season) return ctx.series + ' ' + ctx.season;
+  if (ctx.series) return ctx.series;
+  // Example: look up label from bundled examples
+  if (_currentSeriesName.startsWith(_EXAMPLE_PREFIX)) {
+    const examples = _loadExamplesData();
+    const key = _currentSeriesName.slice(_EXAMPLE_PREFIX.length);
+    if (examples[key] && examples[key].label) return examples[key].label;
+  }
+  // Demo: derive from data
+  if (_currentSeriesName === '__demo__') {
+    const demo = _loadDemoData();
+    const name = demo ? _seriesName(demo) : null;
+    return name || 'Demo';
+  }
+  // User-analyzed: the key IS the name
+  return _currentSeriesName;
+}
+
 /** Returns `{key: {label, data}}` for every bundled example, or {}. */
 function _loadExamplesData() {
   const el = document.getElementById('examples-data');
@@ -232,12 +255,8 @@ function _renderCurrentView() {
   // Dropdown already shows the series name — no need to duplicate it.
   if (gridTitle) gridTitle.textContent = '';
 
-  // Update analytics toolbar series name from the dropdown's visible text
   const analyticsName = document.getElementById('analytics-series-name');
-  if (analyticsName) {
-    const sel = document.getElementById('series-select');
-    analyticsName.textContent = (sel && sel.selectedOptions.length) ? sel.selectedOptions[0].textContent : '';
-  }
+  if (analyticsName) analyticsName.textContent = _resolveSeriesDisplayName();
 
   if (_activeTab === 'grid' && gridContainer) {
     renderGrid(_currentData, gridContainer);
