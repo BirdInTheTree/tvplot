@@ -1302,9 +1302,8 @@ async function _reviewAndRun(show, season, synopses, provider, apiKey) {
 
   _showPipelineProgress();
   _updatePipelineProgress('Starting pipeline…', 1, 6);
-  // Synopses are done — hide the hint about them being slow
   const hint = document.getElementById('pipeline-progress-hint');
-  if (hint) hint.textContent = 'Analysis takes 2–3 min for a 10-episode season.';
+  if (hint) hint.style.display = 'none';
 
   try {
     const result = await runPipeline(confirmed, show, provider, apiKey, (message, pass, total) => {
