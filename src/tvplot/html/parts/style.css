@@ -447,7 +447,11 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 
 /* ── Analytics ── */
 #analytics-container { padding: 1.5rem; }
-.ana-stacked-total { text-align: center; font-size: 0.875rem; font-weight: 600; color: #333; margin-bottom: 2px; }
+.ana-stacked-totals-row, .ana-stacked-bars-row, .ana-stacked-labels-row { display: flex; gap: 4px; }
+.ana-stacked-bars-row { align-items: flex-end; }
+.ana-stacked-totals-row { margin-bottom: 4px; }
+.ana-stacked-labels-row { margin-top: 4px; }
+.ana-stacked-total { flex: 1; text-align: center; font-size: 0.875rem; font-weight: 600; color: #333; }
 :root.dark .ana-stacked-total { color: #cdd6f4; }
 .ana-series-header { margin-bottom: 1.5rem; max-width: 1200px; }
 .ana-series-name { font-size: 1.5rem; font-weight: 300; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
@@ -468,8 +472,10 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 .ana-stacked-yaxis { display: flex; flex-direction: column; justify-content: space-between; height: 300px; flex-shrink: 0; padding-right: 4px; }
 .ana-stacked-ylabel { font-size: 1rem; color: #666; text-align: right; min-width: 2ch; }
 :root.dark .ana-stacked-ylabel { color: #a6adc8; }
-.ana-stacked-bars { display: flex; gap: 4px; flex: 1; align-items: flex-end; }
-.ana-stacked-col { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0; }
+.ana-stacked-bars { flex: 1; }
+.ana-stacked-col { flex: 1; min-width: 0; }
+.ana-stacked-bars-row .ana-stacked-col { display: flex; flex-direction: column; align-items: center; }
+.ana-stacked-xlabel { flex: 1; }
 .ana-stacked-bar { width: 100%; display: flex; flex-direction: column; border-radius: 3px 3px 0 0; overflow: hidden; }
 .ana-stacked-seg { display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 600; color: rgba(0,0,0,0.8); min-height: 2px; }
 :root.dark .ana-stacked-seg { color: rgba(0,0,0,0.85); }
@@ -487,7 +493,7 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 .ana-heatmap th:first-child { text-align: left; }
 :root.dark .ana-heatmap th { color: #a6adc8; border-bottom-color: #45475a; }
 .ana-heatmap td { font-size: 1rem; padding: 8px 10px; text-align: center; }
-.ana-heatmap-label { text-align: left; font-weight: 500; white-space: nowrap; color: #1a1a1a; }
+.ana-heatmap td.ana-heatmap-label { text-align: left; font-weight: 500; white-space: nowrap; color: #1a1a1a; }
 :root.dark .ana-heatmap-label { color: #cdd6f4; }
 .ana-heatmap-cell { min-width: 40px; }
 .ana-heatmap-filled { background: rgba(37, 99, 235, var(--heat-opacity, 0.3)); font-weight: 600; }

@@ -124,16 +124,30 @@ function _renderEventsPerEpisode(data, colorMap) {
   const barsWrap = document.createElement('div');
   barsWrap.className = 'ana-stacked-bars';
 
-  for (const ep of epData) {
-    const col = document.createElement('div');
-    col.className = 'ana-stacked-col';
+  // Fixed-height header row for totals — all numbers on one horizontal line
+  const totalsRow = document.createElement('div');
+  totalsRow.className = 'ana-stacked-totals-row';
 
+  const barsRow = document.createElement('div');
+  barsRow.className = 'ana-stacked-bars-row';
+
+  const labelsRow = document.createElement('div');
+  labelsRow.className = 'ana-stacked-labels-row';
+
+  for (const ep of epData) {
+    // Total in header row
+    const totalCell = document.createElement('div');
+    totalCell.className = 'ana-stacked-total';
+    totalCell.textContent = ep.total;
+    totalsRow.appendChild(totalCell);
+
+    // Bar
+    const barWrap = document.createElement('div');
+    barWrap.className = 'ana-stacked-col';
     const bar = document.createElement('div');
     bar.className = 'ana-stacked-bar';
     bar.style.height = (ep.total / maxTotal * CHART_HEIGHT) + 'px';
 
-    // Stack segments bottom-to-top: A-plotline at bottom (first in sorted order)
-    // Flex column-reverse so first child renders at bottom
     for (const pl of plotlines) {
       const count = ep.counts[pl.id] || 0;
       if (count === 0) continue;
@@ -142,28 +156,23 @@ function _renderEventsPerEpisode(data, colorMap) {
       seg.style.flex = count;
       seg.style.background = _plColor(colorMap[pl.id]);
       seg.title = (plNames[pl.id] || pl.id) + ': ' + count;
-      // Show number if segment tall enough
       const segHeight = count / ep.total * (ep.total / maxTotal * CHART_HEIGHT);
-      if (segHeight >= 20) {
-        seg.textContent = count;
-      }
+      if (segHeight >= 20) seg.textContent = count;
       bar.appendChild(seg);
     }
-    // Total count above the bar
-    const totalLabel = document.createElement('div');
-    totalLabel.className = 'ana-stacked-total';
-    totalLabel.textContent = ep.total;
-    col.appendChild(totalLabel);
+    barWrap.appendChild(bar);
+    barsRow.appendChild(barWrap);
 
-    col.appendChild(bar);
-
+    // Episode label
     const label = document.createElement('div');
     label.className = 'ana-stacked-xlabel';
     label.textContent = 'E' + _epNum(ep.code);
-    col.appendChild(label);
-
-    barsWrap.appendChild(col);
+    labelsRow.appendChild(label);
   }
+
+  barsWrap.appendChild(totalsRow);
+  barsWrap.appendChild(barsRow);
+  barsWrap.appendChild(labelsRow);
   chart.appendChild(barsWrap);
   section.appendChild(chart);
 
