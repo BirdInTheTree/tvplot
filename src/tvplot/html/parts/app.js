@@ -195,12 +195,9 @@ function _populateSeriesDropdown() {
   addOpt.textContent = '+ Analyze another…';
   select.appendChild(addOpt);
 
-  // Restore selection
-  if (currentValue && select.querySelector(`option[value="${CSS.escape(currentValue)}"]`)) {
-    select.value = currentValue;
-  } else if (_currentSeriesName) {
-    select.value = _currentSeriesName;
-  }
+  // Restore selection — set value directly, no querySelector (CSS.escape
+  // breaks on the colon in __example__:key).
+  select.value = _currentSeriesName || currentValue || '';
 
   // Always visible — the dropdown is the primary way to navigate series.
   select.style.display = '';
