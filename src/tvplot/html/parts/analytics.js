@@ -443,7 +443,7 @@ function _renderIntersectionMatrix(data, colorMap) {
   const footRow = document.createElement('tr');
   const footCorner = document.createElement('td');
   footCorner.className = 'ana-matrix-label';
-  footCorner.textContent = 'Affected';
+  footCorner.textContent = 'Affected by';
   footRow.appendChild(footCorner);
   for (const tgt of plIds) {
     const td = document.createElement('td');
