@@ -278,17 +278,17 @@ function _renderFunctionDistribution(data) {
   if ((data.episodes || []).length === 0) return section;
 
   // Toggle: by episode / by plotline
-  let mode = 'episode';
+  let mode = 'plotline';
   const toggle = document.createElement('div');
   toggle.className = 'ana-fn-toggle';
-  const btnEp = document.createElement('button');
-  btnEp.textContent = 'by episode';
-  btnEp.className = 'ana-fn-toggle-btn ana-fn-toggle-active';
   const btnPl = document.createElement('button');
   btnPl.textContent = 'by plotline';
-  btnPl.className = 'ana-fn-toggle-btn';
-  toggle.appendChild(btnEp);
+  btnPl.className = 'ana-fn-toggle-btn ana-fn-toggle-active';
+  const btnEp = document.createElement('button');
+  btnEp.textContent = 'by episode';
+  btnEp.className = 'ana-fn-toggle-btn';
   toggle.appendChild(btnPl);
+  toggle.appendChild(btnEp);
   section.appendChild(toggle);
 
   const tableWrap = document.createElement('div');
