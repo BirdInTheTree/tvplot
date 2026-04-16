@@ -232,6 +232,13 @@ function _renderCurrentView() {
   // Dropdown already shows the series name — no need to duplicate it.
   if (gridTitle) gridTitle.textContent = '';
 
+  // Update analytics toolbar series name from the dropdown's visible text
+  const analyticsName = document.getElementById('analytics-series-name');
+  if (analyticsName) {
+    const sel = document.getElementById('series-select');
+    analyticsName.textContent = (sel && sel.selectedOptions.length) ? sel.selectedOptions[0].textContent : '';
+  }
+
   if (_activeTab === 'grid' && gridContainer) {
     renderGrid(_currentData, gridContainer);
   } else if (_activeTab === 'analytics' && analyticsContainer) {
