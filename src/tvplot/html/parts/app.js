@@ -229,15 +229,13 @@ function _renderCurrentView() {
   const analyticsContainer = document.getElementById('analytics-container');
   const gridTitle = document.getElementById('grid-title');
 
-  let displayName;
-  if (_currentSeriesName === '__demo__') {
-    displayName = _seriesName(_currentData) || 'Demo';
-  } else if (_currentSeriesName && _currentSeriesName.startsWith(_EXAMPLE_PREFIX)) {
-    displayName = _seriesName(_currentData) || 'Example';
-  } else {
+  // The dropdown already shows the series name — the grid title only adds
+  // value for user-analyzed series where the dropdown key is a short code.
+  // For examples/demo the dropdown label IS the full name, so skip.
+  let displayName = '';
+  if (_currentSeriesName && !_currentSeriesName.startsWith(_EXAMPLE_PREFIX) && _currentSeriesName !== '__demo__') {
     displayName = _currentSeriesName;
   }
-
   if (gridTitle) gridTitle.textContent = displayName;
 
   if (_activeTab === 'grid' && gridContainer) {
