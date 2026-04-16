@@ -38,7 +38,7 @@ For every event in a plotline, label its function:
 | function            | what it does in the plotline                                                                                                                                                                                                                                                                                                     |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `setup`             | Establishes the starting situation. The world before the story kicks in                                                                                                                                                                                                                                                          |
-| `inciting_incident` | The thing that breaks the starting situation. **Once per plotline across the whole season** — typically in the first episode                                                                                                                                                                                                     |
+| `inciting_incident` | The thing that breaks the starting situation. Once per plotline across the whole season — typically in the first episode. Valid at both episode and season level                                                                                                                                                                     |
 | `recognition`       | The character realizes what happened and decides to act. Only use when this is a separate moment from the inciting incident — e.g., Walt's cancer diagnosis is the inciting incident; deciding to cook meth is the recognition. Most plotlines don't need this — skip it when the disruption and the decision are the same event |
 | `escalation`        | Stakes rise. Can happen many times                                                                                                                                                                                                                                                                                               |
 | `turning_point`     | The direction of the plotline shifts — what looked like a win turns out to be a loss, or vice versa                                                                                                                                                                                                                              |
@@ -53,7 +53,7 @@ Each event gets two function labels:
 
 The two often differ. An event that's the climax of episode 3 might just be an escalation in the season-long story — the plotline is still building.
 
-**Exception**: `inciting_incident` only exists at the season level. A plotline has exactly one inciting incident across the whole season — usually in the early episodes. At the episode level, use `setup` or `escalation` instead.
+A plotline has exactly one inciting incident across the whole season — usually in the early episodes. The same event can carry `inciting_incident` at both episode and season level.
 
 ## direction
 

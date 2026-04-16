@@ -66,7 +66,7 @@ Show context, the full plotline list (from Pass 3), and the events of one episod
 - Every event from the input must appear in `events`. Don't drop, don't merge
 - Reference each event by its `id` (from Pass 2). Do not include `description` in the output — the id is the join key
 - `plotline_id` must reference an existing plotline from Pass 3. If an event doesn't fit any plotline, leave it `null` — Pass 6 will handle orphans
-- `function` is episode-level. **Don't use `inciting_incident`** at this level — that exists only at the season level
+- `function` is episode-level. `inciting_incident` is valid here too — an event can be the inciting incident at both episode and season scope
 - `direction` is from the perspective of the plotline's `who_chases`
 - `also_affects` lists secondary plotlines this event impacts (often with opposite direction). Empty list if none
 - `interactions` only between plotlines that are both active in this episode

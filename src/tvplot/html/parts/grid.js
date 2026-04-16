@@ -106,7 +106,8 @@ function collectFunctions(episodes) {
   const fns = new Set();
   for (const ep of episodes) {
     for (const ev of ep.events || []) {
-      if (ev.function) fns.add(ev.function);
+      const displayFn = ev.plot_fn || ev.function;
+      if (displayFn) fns.add(displayFn);
     }
   }
   return [...fns];
@@ -315,7 +316,8 @@ function _showEventModal(ev, cast) {
     })
     .join(', ');
 
-  const fnLabel = FUNCTION_LABELS[ev.function] || ev.function || '—';
+  const displayFn = ev.plot_fn || ev.function;
+  const fnLabel = FUNCTION_LABELS[displayFn] || displayFn || '—';
 
   body.innerHTML = `
     <div class="detail-field">
@@ -324,7 +326,7 @@ function _showEventModal(ev, cast) {
     </div>
     <div class="detail-field">
       <label>Function</label>
-      <div class="value"><span class="event-card fn-${ev.function}" style="display:inline-block">${fnLabel}</span></div>
+      <div class="value"><span class="event-card fn-${displayFn}" style="display:inline-block">${fnLabel}</span></div>
     </div>
     <div class="detail-field">
       <label>Characters</label>
@@ -447,12 +449,13 @@ function renderGrid(data, container) {
       td.className = events.length > 0 ? 'event-cell' : 'event-cell empty-cell';
 
       for (const ev of events) {
+        const displayFn = ev.plot_fn || ev.function;
         const card = document.createElement('div');
-        card.className = `event-card fn-${ev.function}`;
+        card.className = `event-card fn-${displayFn}`;
         card.textContent = ev.event;
         // Store data for filtering
         card.dataset.characters = (ev.characters || []).join(',');
-        card.dataset.function = ev.function || '';
+        card.dataset.function = displayFn || '';
         card.addEventListener('click', () => _showEventModal(ev, cast));
         td.appendChild(card);
       }
@@ -480,11 +483,12 @@ function renderGrid(data, container) {
       td.className = orphans.length > 0 ? 'event-cell' : 'event-cell empty-cell';
 
       for (const ev of orphans) {
+        const displayFn = ev.plot_fn || ev.function;
         const card = document.createElement('div');
-        card.className = `event-card fn-${ev.function} unassigned-event`;
+        card.className = `event-card fn-${displayFn} unassigned-event`;
         card.textContent = ev.event;
         card.dataset.characters = (ev.characters || []).join(',');
-        card.dataset.function = ev.function || '';
+        card.dataset.function = displayFn || '';
         card.addEventListener('click', () => _showEventModal(ev, cast));
         td.appendChild(card);
       }

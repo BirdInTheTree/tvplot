@@ -237,7 +237,7 @@ def _pass4_story(
                 logger.warning("Pass 4 references unknown event id %s", e["id"])
                 continue
             fn = e.get("function") or "setup"
-            if fn not in _VALID_FUNCTIONS and fn != "inciting_incident":
+            if fn not in _VALID_FUNCTIONS:
                 fn = "setup"
             events_out.append(Event(
                 event=src["description"],
