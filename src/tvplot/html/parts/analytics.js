@@ -466,7 +466,13 @@ function renderAnalytics(data, container) {
 
   // Series header
   const storyEngine = (data.context || {}).story_engine || '';
-  const seriesName = (data.context || {}).show_name || (typeof _currentSeriesName !== 'undefined' ? _currentSeriesName : '') || '';
+  // Resolve display name: prefer data metadata, fall back to the dropdown's
+  // visible text (not the raw key, which may be __example__:bb_s01).
+  let seriesName = (data.context || {}).show_name || '';
+  if (!seriesName) {
+    const sel = document.getElementById('series-select');
+    if (sel && sel.selectedOptions.length) seriesName = sel.selectedOptions[0].textContent;
+  }
   if (seriesName || storyEngine) {
     const header = document.createElement('div');
     header.className = 'ana-series-header';

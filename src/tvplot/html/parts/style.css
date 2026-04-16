@@ -446,6 +446,7 @@ html.dark .export-menu button:hover { background: #2a2a2a; }
 :root.dark .rank-runner { background: #302040; color: #cba6f7; }
 
 /* ── Analytics ── */
+#analytics-container { padding: 1.5rem; }
 .ana-series-header { margin-bottom: 1.5rem; max-width: 1200px; }
 .ana-series-name { font-size: 1.5rem; font-weight: 300; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
 .ana-logline { font-size: 1rem; color: #555; line-height: 1.5; font-style: italic; }
