@@ -30,7 +30,7 @@ _transient_cache: tuple | None = None
 
 # Pricing per million tokens (USD) — updated as of 2026-03
 _PRICING = {
-    "claude-sonnet-4-20250514": {"input": 3.0, "output": 15.0},
+    "claude-sonnet-4-6": {"input": 3.0, "output": 15.0},
     "claude-haiku-4-5-20251001": {"input": 0.80, "output": 4.0},
     "gpt-4o": {"input": 2.50, "output": 10.0},
 }
@@ -112,7 +112,7 @@ class LLMConfig:
         if self.model:
             return self.model
         defaults = {
-            "anthropic": "claude-sonnet-4-20250514",
+            "anthropic": "claude-sonnet-4-6",
             "openai": "gpt-4o",
         }
         # Check known providers
