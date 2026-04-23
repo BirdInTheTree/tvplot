@@ -9,11 +9,11 @@ Turn episode synopses into a writers' room corkboard — story engine, plotlines
 For TV researchers, screenwriters, and anyone building narrative analysis tools or a tv series.
 
 <p align="center">
-  <a href="https://birdinthetree.github.io/plotter-app/">
+  <a href="https://birdinthetree.github.io/tvplot-app/">
     <img src="https://raw.githubusercontent.com/BirdInTheTree/tvplot/main/docs/images/app-screenshot-1.png" alt="tvplot output — plotline×episode grid for Breaking Bad S01">
   </a>
   <br>
-  <strong><a href="https://birdinthetree.github.io/plotter-app/">Try the interactive demo →</a></strong>
+  <strong><a href="https://birdinthetree.github.io/tvplot-app/">Try the interactive demo →</a></strong>
 </p>
 
 A naive LLM prompt covers 5–12% of a season's source material. tvplot covers **78–91%** — by separating *what* the model looks for (narrative theory) from *how* it calculates the results (code).
@@ -49,7 +49,7 @@ Generate a standalone HTML viewer alongside the JSON:
 
 ```bash
 tvplot run mad-men/ --html              # writes mad-men.json + mad-men.html
-tvplot run mad-men/ --html-output viewer.html
+tvplot run mad-men/ --html-output tvplot.html
 ```
 
 Multiple seasons are supported — plotline continuity is tracked across seasons (see [Python API](#python-api)).

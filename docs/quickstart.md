@@ -42,7 +42,7 @@ Produce a standalone HTML viewer alongside the JSON (opens in any browser, no se
 
 ```bash
 tvplot run breaking-bad/ --html                       # writes …/breaking-bad.html
-tvplot run breaking-bad/ --html-output viewer.html    # custom path
+tvplot run breaking-bad/ --html-output tvplot.html    # custom path
 ```
 
 ## Standalone viewer — analyze from the browser
