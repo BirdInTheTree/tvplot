@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Changed
+- **Default Anthropic model: `claude-sonnet-4-20250514` → `claude-sonnet-4-6`.** Old dated model ID returns 404 from the Anthropic API. New default uses the current Sonnet 4.6 short alias in both the Python library (`llm.py`) and the standalone HTML viewer (`pipeline.js`). Pricing table updated. Users with the old model in localStorage are unaffected (override still wins); users on defaults need a hard refresh of the viewer.
 - **Welcome/landing flow in the HTML viewer.** Returning visits no longer auto-open the bundled Breaking Bad demo. Instead, the viewer opens the user's most-recently-viewed saved analysis, or falls back to the welcome screen when nothing is saved. The `#demo` URL hash still force-loads the demo (used by the onboarding animation).
 - **Series picker is a visible control.** Added a "Series" label prefix, a more contrasting border, a chevron affordance, and made the dropdown always visible on the grid/analytics toolbar. A "+ Analyze another…" entry at the bottom routes back to the welcome screen.
 
