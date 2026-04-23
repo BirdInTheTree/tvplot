@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Fixed
+- **Narratology pipeline crash when Pass 1 returns null/non-string protagonists.** Pass 1 occasionally emits `null` entries inside the `protagonists` array; the cast-building loop then called `.toLowerCase()` on `null` and aborted the entire pipeline with `Cannot read properties of null (reading 'toLowerCase')`. The viewer now filters non-string and empty entries before the loop.
+
 ### Changed
 - **Default Anthropic model: `claude-sonnet-4-20250514` → `claude-sonnet-4-6`.** Old dated model ID returns 404 from the Anthropic API. New default uses the current Sonnet 4.6 short alias in both the Python library (`llm.py`) and the standalone HTML viewer (`pipeline.js`). Pricing table updated. Users with the old model in localStorage are unaffected (override still wins); users on defaults need a hard refresh of the viewer.
 - **Welcome/landing flow in the HTML viewer.** Returning visits no longer auto-open the bundled Breaking Bad demo. Instead, the viewer opens the user's most-recently-viewed saved analysis, or falls back to the welcome screen when nothing is saved. The `#demo` URL hash still force-loads the demo (used by the onboarding animation).

@@ -1676,7 +1676,8 @@ async function runPipelineNarratology(synopses, seriesName, provider, apiKey, on
     genre: p1.genre || '',
     is_anthology: !!p1.is_anthology,
   };
-  const protagonists = Array.isArray(p1.protagonists) ? p1.protagonists : [];
+  const protagonists = (Array.isArray(p1.protagonists) ? p1.protagonists : [])
+    .filter(p => typeof p === 'string' && p.trim());
 
   // Pass 2 — fabula (parallel per episode)
   onProgress('Pass 2/6: fabula (events, cast)…', 2, totalPasses);
