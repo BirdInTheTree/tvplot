@@ -273,8 +273,15 @@ function _setTab(tab) {
   if (btnGrid) btnGrid.classList.toggle('btn-nav-active', tab === 'grid');
   if (btnAnalytics) btnAnalytics.classList.toggle('btn-nav-active', tab === 'analytics');
 
-  _renderCurrentView();
+  // Switch screen first so navigation always succeeds even if the renderer
+  // throws on partial/post-failure data — otherwise the user gets trapped on
+  // whatever screen they were on (the click looks dead).
   showScreen(tab === 'grid' ? 'grid' : 'analytics');
+  try {
+    _renderCurrentView();
+  } catch (e) {
+    console.error('Render failed in _setTab:', e);
+  }
 }
 
 // --- JSON import (file input + drag & drop) ---
