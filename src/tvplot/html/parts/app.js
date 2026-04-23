@@ -289,8 +289,14 @@ function _setTab(tab) {
 function _importJSON(file) {
   const reader = new FileReader();
   reader.onload = () => {
+    let data;
     try {
-      const data = JSON.parse(reader.result);
+      data = JSON.parse(reader.result);
+    } catch (err) {
+      alert('Could not parse JSON: ' + err.message);
+      return;
+    }
+    try {
       const name = _seriesName(data) || file.name.replace(/\.json$/i, '');
       Store.saveResult(name, data);
       _populateSeriesDropdown();
@@ -301,7 +307,8 @@ function _importJSON(file) {
       _switchSeries(name);
       _setTab('grid');
     } catch (err) {
-      alert('Invalid JSON file');
+      console.error('Import failed after JSON parse:', err);
+      alert('Could not load this file: ' + err.message + '\n(See DevTools Console for full stack.)');
     }
   };
   reader.readAsText(file);
