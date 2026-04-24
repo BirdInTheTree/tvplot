@@ -422,10 +422,12 @@ function renderGrid(data, container) {
     nameDiv.textContent = pl.name;
     tdPl.appendChild(nameDiv);
 
-    const rankSpan = document.createElement('span');
-    rankSpan.className = `rank-badge rank-${pl.rank.toLowerCase()}`;
-    rankSpan.textContent = pl.rank;
-    tdPl.appendChild(rankSpan);
+    if (pl.rank) {
+      const rankSpan = document.createElement('span');
+      rankSpan.className = `rank-badge rank-${pl.rank.toLowerCase()}`;
+      rankSpan.textContent = pl.rank;
+      tdPl.appendChild(rankSpan);
+    }
 
     // Characters for this plotline
     const plChars = plotlineCharacters(episodes, pl.id);

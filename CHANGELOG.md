@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Fixed
+- **Grid render crash on runner plotlines (`Cannot read properties of null (reading 'toLowerCase')`).** Runners legitimately get `rank = null` from `_computeRanks`, but `renderGrid` unconditionally called `pl.rank.toLowerCase()` on the rank badge, aborting the whole render and leaving the user with an alert and an empty grid right after the pipeline finished. Badge is now skipped when `rank` is null.
 - **Narratology pipeline crash when Pass 1 returns null/non-string protagonists.** Pass 1 occasionally emits `null` entries inside the `protagonists` array; the cast-building loop then called `.toLowerCase()` on `null` and aborted the entire pipeline with `Cannot read properties of null (reading 'toLowerCase')`. The viewer now filters non-string and empty entries before the loop.
 
 ### Changed
